@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isWineOrder"
+            type="Boolean" />
+
+        <variable
+            name="orderType"
+            type="com.albertsons.acupick.data.model.OrderType" />
+
+        <variable
+            name="count"
+            type="int" />
+    </data>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/NunitoSansSemiBold16"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/disabledBackgroundGrey"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/grey_600"
+        app:openPickListCount="@{count}"
+        app:sectionType="@{orderType}"
+        app:isWineOrder="@{isWineOrder}"
+        tools:text="Flash (1)" />
+
+</layout>

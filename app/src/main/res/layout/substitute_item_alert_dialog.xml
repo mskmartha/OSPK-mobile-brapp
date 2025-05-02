@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/rounded_coener_dialog_background"
+        android:minWidth="311dp"
+        android:paddingHorizontal="25dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="32dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_title"
+            style="@style/PoppinsMedium20.Grey700"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{viewData.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Model Header" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitCenter"
+            app:loadImage="@{viewData.imageUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_title"
+            tools:src="@drawable/ic_sent_to_printer" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_description"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_horizontal|top"
+            app:highlightImportantText="@{viewData.body}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_image"
+            tools:text="Please end current pick, finish staging, and prioritize this order." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/positiveButton"
+            style="@style/ButtonPrimary"
+            android:visibility="@{viewData.positiveButtonVisibility}"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+            android:text="@{viewData.positiveButtonText}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_description"
+            tools:text="Positive CTA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/negativeButton"
+            style="@style/ButtonLink"
+            visibilityGoneIfNull="@{viewData.negativeButtonText}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@null"
+            android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+            android:text="@{viewData.negativeButtonText}"
+            android:visibility="@{viewData.negativeButtonVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/positiveButton"
+            app:layout_constraintVertical_bias="0"
+            tools:text="Negative CTA" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

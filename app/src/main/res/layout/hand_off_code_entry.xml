@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/codeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/digit1"
+            style="@style/PinCodeEntry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_border"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/digit2"
+            style="@style/PinCodeEntry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_border"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/digit3"
+            style="@style/PinCodeEntry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_border"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/digit4"
+            style="@style/PinCodeEntry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_border"/>
+
+    </LinearLayout>
+
+</layout>

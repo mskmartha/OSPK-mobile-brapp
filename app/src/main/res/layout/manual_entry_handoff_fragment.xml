@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffViewModel" />
+
+        <variable
+            name="entryParams"
+            type="com.albertsons.acupick.ui.manualentry.ManualEntryHandOffUi" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ScrollView
+            android:id="@+id/manualScroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/continueButton"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/customerOrderNumberTI"
+                    style="@style/TextLayoutNew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="24dp"
+                    android:hint="@string/manual_order_num_hint"
+                    android:theme="@style/TextLayoutNew"
+                    app:errorEnabled="true"
+                    app:errorMessageByInt="@{viewModel.orderNumberTextInputError}"
+                    android:enabled="false"
+                    app:isViewEnabled="@{false}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setStyleByState="@{viewModel.orderNumberEntryText}">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/customerOrderNumberET"
+                        style="@style/NunitoSansRegular14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:text="@={viewModel.orderNumberEntryText}"
+                        android:textColor="@color/grey_600"
+                        tools:hint="@string/order_num" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/toteIdTextInput"
+                    style="@style/TextLayoutNew"
+                    visibilityGoneIfTrue="@{viewModel.isCustomerBagPreference}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:hint="@string/manual_entry_destaging_tote_id"
+                    android:theme="@style/TextLayoutNew"
+                    app:errorEnabled="true"
+                    app:errorMessageByInt="@{viewModel.toteIdTextInputError}"
+                    android:enabled="@{viewModel.isToteEntry == null ? true : viewModel.isToteEntry}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/customerOrderNumberTI"
+                    app:setStyleByState="@{viewModel.toteIdEntryText}">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/toteNumberEditText"
+                        style="@style/NunitoSansRegular14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:text="@={viewModel.toteIdCapText}"
+                        android:textColor="@color/grey_600"
+                        tools:hint="@string/manual_entry_destaging_tote_id" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/bagNumberTextInput"
+                    style="@style/TextLayoutNew"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:hint="@{viewModel.isCustomerBagPreference? @string/manual_bag_hint : @string/manual_entry_loose_item  }"
+                    android:theme="@style/TextLayoutNew"
+                    app:errorEnabled="true"
+                    app:errorMessageByInt="@{viewModel.bagTextInputError}"
+                    android:enabled="@{viewModel.isLooseEntry == null ? true : viewModel.isLooseEntry}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toteIdTextInput"
+                    app:setStyleByState="@{viewModel.bagsEntryText}">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/bagNumberEditText"
+                        style="@style/NunitoSansRegular14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="@={viewModel.bagsEntryText}"
+                        android:textColor="@color/grey_600"
+                        tools:hint="@string/manual_bag_hint" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/continueButton"
+            style="@style/Button.Anchored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:enabled="@{viewModel.continueEnabled}"
+            android:onClick="@{() -> viewModel.onContinueButtonClicked()}"
+            android:text="@string/confirm"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

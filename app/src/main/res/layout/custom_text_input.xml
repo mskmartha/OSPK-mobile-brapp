@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/TextLabelPrimary"
+            android:layout_width="match_parent"
+            app:endIconTint="@null"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_id_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/login_id_accessibility"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textColor="@color/text_input_active_text_state_selector"
+                android:textCursorDrawable="@null"
+                tools:background="@drawable/rounded_corner_edittext_background_default" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/errorImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_red_warning"
+            app:layout_constraintBottom_toBottomOf="@+id/errorTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/errorTv"
+            style="@style/NunitoSansRegular12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/semiDarkRed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/errorImg"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            tools:text="Error Text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

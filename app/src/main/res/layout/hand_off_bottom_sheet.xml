@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffBottomSheetDialogViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dividerGrey"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="48dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomSheetHeader"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="1dp"
+            android:background="@color/white"
+            android:onClick="@{() -> viewModel.onHeaderClicked()}"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/bottomSheetHeaderText"
+                style="@style/NunitoSansBold16.darkBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/complete_handoff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/collapseExpandIcon"
+                android:layout_width="@dimen/standard_icon"
+                android:layout_height="@dimen/standard_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setDrawableByExpanded="@{!viewModel.isExpanded}"
+                tools:src="@drawable/ic_expand" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomSheetBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/bottomSheetHeader">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bottomSheetImage1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/ic_tote_fruit"
+                app:layout_constraintEnd_toStartOf="@id/bottomSheetConnectingDots"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bottomSheetConnectingDots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dots"
+                app:layout_constraintBottom_toBottomOf="@id/bottomSheetImage1"
+                app:layout_constraintEnd_toStartOf="@id/bottomSheetImage2"
+                app:layout_constraintStart_toEndOf="@id/bottomSheetImage1"
+                app:layout_constraintTop_toTopOf="@id/bottomSheetImage1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bottomSheetImage2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_car_bags"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/bottomSheetConnectingDots"
+                app:layout_constraintTop_toTopOf="@id/bottomSheetImage1" />
+
+            <TextView
+                android:id="@+id/bottomSheetBodyText"
+                style="@style/NunitoSansItalic13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:text="@string/complete_handoff_reminder"
+                app:layout_constraintTop_toBottomOf="@id/bottomSheetImage1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bottomSheetCompleteButton"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="28dp"
+                android:enabled="@{viewModel.isCompleteEnabled}"
+                android:onClick="@{() -> viewModel.onCompleteClicked()}"
+                android:text="@string/complete_handoff_cta"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bottomSheetBodyText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

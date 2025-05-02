@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+    <!-- More info at https://developer.android.com/training/articles/security-config.html -->
+    <base-config>
+        <trust-anchors>
+            <certificates src="system" /> <!-- Trust preinstalled CAs -->
+            <certificates
+                src="user"
+                tools:ignore="AcceptsUserCertificates" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.albertsons.acupick.ui.picklistitems.PickListType" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.picklistitems.PickListItemsViewModel" />
+
+        <variable
+            name="fragmentViewLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            visibilityGoneIfTrue="@{!viewModel.isDataLoading()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            visibilityGoneIfTrue="@{viewModel.isDataLoading()}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:isListView="@{viewModel.isListView}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- If user has scanned an item then show overlay to prevent any action unil a tote is scanned -->
+            <View
+                android:id="@+id/enableViews"
+                visibilityGoneIfTrue="@{viewModel.pickListEnabled}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:translationZ="90dp"
+                app:layout_constraintBottom_toBottomOf="@+id/todoItemsRecyclerView"
+                app:layout_constraintEnd_toEndOf="@+id/tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/tabLayout"
+                app:layout_constraintTop_toTopOf="@+id/tabLayout"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                style="@style/Tabs.Default"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:isListView="@{viewModel.isListView}"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/todoItemsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                app:isEmptyStateAndToDoTab="@{(viewModel.isShowingEmptyState &amp;&amp; viewModel.currentTab == PickListType.Todo)}"
+                app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                app:isListView="@{viewModel.isListView}"
+                app:layout_constraintBottom_toTopOf="@+id/scanItemTv"
+                app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                app:layout_constraintVertical_bias="0"
+                app:listType="@{PickListType.Todo}"
+                app:paddingRecyclerview="@{viewModel.isListView}"
+                app:pickListItems="@{viewModel.todoPickList}"
+                app:pickingItems="@{viewModel.todoPickList}"
+                app:selectedItemIndex="@{viewModel.todoSelectedItemIndex}"
+                app:viewModel="@{viewModel}"
+                app:visibilityGoneIfFalse="@{viewModel.currentTab == PickListType.Todo}"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_picklist_item"
+                tools:orientation="horizontal"
+                tools:paddingEnd="29dp"
+                tools:paddingStart="29dp" />
+
+            <include
+                layout="@layout/empty_state_todo_list_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                app:viewModel="@{viewModel}"
+                app:visibilityGoneIfTrue="@{!(viewModel.isShowingEmptyState &amp;&amp; viewModel.currentTab == PickListType.Todo)}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pickedItemsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                app:isListView="@{viewModel.isListView}"
+                app:layout_constraintBottom_toTopOf="@+id/scanItemTv"
+                app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                app:layout_constraintVertical_bias="0"
+                app:listType="@{PickListType.Picked}"
+                app:paddingRecyclerview="@{viewModel.isListView}"
+                app:pickListItems="@{viewModel.pickedPickList}"
+                app:pickingItems="@{viewModel.pickedPickList}"
+                app:selectedItemIndex="@{viewModel.pickedSelectedItemIndex}"
+                app:viewModel="@{viewModel}"
+                app:visibilityGoneIfFalse="@{viewModel.currentTab == PickListType.Picked}"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_picklist_item"
+                tools:orientation="horizontal"
+                tools:paddingEnd="29dp"
+                tools:paddingStart="29dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/shortItemsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                app:isListView="@{viewModel.isListView}"
+                app:layout_constraintBottom_toTopOf="@+id/scanItemTv"
+                app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                app:layout_constraintVertical_bias="0"
+                app:listType="@{PickListType.Short}"
+                app:paddingRecyclerview="@{viewModel.isListView}"
+                app:pickListItems="@{viewModel.shortPickList}"
+                app:pickingItems="@{viewModel.shortPickList}"
+                app:selectedItemIndex="@{viewModel.shortSelectedItemIndex}"
+                app:viewModel="@{viewModel}"
+                app:visibilityGoneIfFalse="@{viewModel.currentTab == PickListType.Short}"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_picklist_item"
+                tools:orientation="horizontal"
+                tools:paddingEnd="29dp"
+                tools:paddingStart="29dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@id/scanItemTv"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.compose.ui.platform.ComposeView
+                    android:id="@+id/chatButtonView"
+                    android:layout_gravity="end|bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:composableName="ChatButtonView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/border"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/scanItemTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/border"
+                app:bottomPrompt="@{viewModel.prompt}"
+                app:isListView="@{viewModel.isListView}"
+                app:isShowingEmptyState="@{viewModel.isShowingEmptyState}"
+                app:layout_constraintBottom_toTopOf="@+id/scanItemTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/scanItemTv"
+                style="@style/NunitoSansRegular16.Grey700"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                app:isListView="@{viewModel.isListView}"
+                app:isShowingEmptyState="@{viewModel.isShowingEmptyState}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:picklistItemsBottomPrompt="@{viewModel.prompt}"
+                tools:text="Please scan the item" />
+
+            <ImageView
+                android:id="@+id/manualEntryIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_keyboard_blue"
+                app:isListView="@{viewModel.isListView}"
+                app:isShowingEmptyState="@{viewModel.isShowingEmptyState}"
+                app:layout_constraintBottom_toBottomOf="@+id/scanItemTv"
+                app:layout_constraintEnd_toEndOf="@+id/scanItemTv"
+                app:layout_constraintTop_toTopOf="@+id/scanItemTv"
+                app:picklistItemsBottomPrompt="@{viewModel.prompt}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            visibilityGoneIfTrue="@{!viewModel.isDataLoading()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

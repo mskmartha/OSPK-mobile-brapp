@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+        <variable
+            name="item"
+            type="com.albertsons.acupick.ui.dialog.OrderedByWeightDialogData" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/startGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/endGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/titleBar"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:background="@color/white"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:constraint_referenced_ids="title, titleIcon"
+            app:flow_horizontalStyle="spread_inside"
+            app:flow_wrapMode="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/NunitoSansBold18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{viewData.title}"
+            android:textColor="@color/grey_700"
+            app:layout_constraintBottom_toBottomOf="@id/titleBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Item orderByWeight"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/titleIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            app:imageResource="@{viewData.titleIcon}"
+            app:layout_constraintBottom_toBottomOf="@id/titleBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/titleBar"
+            />
+
+        <TextView
+            android:id="@+id/orderedAmount"
+            style="@style/NunitoSansSemiBoldItalic12"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/customer_name_background"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingHorizontal="4dp"
+            android:paddingBottom="2dp"
+            app:layout_constraintTop_toBottomOf="@+id/titleBar"
+            app:orderedWeight="@{item.requestedWeight}"
+            app:uom="@{item.uom}"
+            tools:text="Customer ordered 2lbs of this item" />
+
+        <TextView
+            android:id="@+id/text1"
+            style="@style/NunitoSansRegular18.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintEnd_toEndOf="@id/endGuideline"
+            app:layout_constraintStart_toStartOf="@id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@id/orderedAmount"
+            app:scannedWeight="@{item.scannedWeight}"
+            app:uom="@{item.uom}"
+            tools:text="You have scanned 3lbs of" />
+
+        <TextView
+            android:id="@+id/text2"
+            style="@style/NunitoSansBold18.grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-4dp"
+            android:paddingBottom="4dp"
+            android:text="@{item.itemDescription}"
+            app:layout_constraintEnd_toEndOf="@id/endGuideline"
+            app:layout_constraintStart_toStartOf="@id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@id/text1"
+            tools:text="Green Beans" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/itemImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_item_details_empty_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text2"
+            app:loadImage="@{item.imageUrl}"
+            app:placeholderImage="@{@drawable/ic_item_details_empty_image}"
+            tools:src="@drawable/ic_item_details_empty_image" />
+
+        <TextView
+            android:id="@+id/itemName"
+            style="@style/NunitoSansRegular14.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="12dp"
+            android:text="@{item.itemDescription}"
+            app:layout_constraintEnd_toEndOf="@id/endGuideline"
+            app:layout_constraintStart_toEndOf="@id/itemImage"
+            app:layout_constraintTop_toTopOf="@id/itemImage"
+            tools:text="LaCroix Sparkling Water Cherry Lime - 8-12 Fl. Oz." />
+
+        <TextView
+            android:id="@+id/itemPlu"
+            style="@style/NunitoSansBold14.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@{@string/ordered_by_weight_plu(item.plu, item.uom)}"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@id/endGuideline"
+            app:layout_constraintStart_toStartOf="@id/itemName"
+            app:layout_constraintTop_toBottomOf="@id/itemName"
+            tools:text="PLU: 7704 (LB)" />
+
+        <TextView
+            android:id="@+id/text3"
+            style="@style/NunitoSansRegular18.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/ordered_by_weight_if_you_complete"
+            app:layout_constraintEnd_toEndOf="@id/endGuideline"
+            app:layout_constraintStart_toStartOf="@id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@id/itemImage" />
+
+        <TextView
+            android:id="@+id/text4"
+            style="@style/NunitoSansSemiBold18.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ordered_by_weight_are_you_sure"
+            app:layout_constraintEnd_toEndOf="@id/endGuideline"
+            app:layout_constraintStart_toStartOf="@id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@id/text3" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/buttonGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/endGuideline"
+            app:layout_constraintStart_toStartOf="@id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@id/text4">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rePickButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+                android:text="@{viewData.negativeButtonText}"
+                android:textAppearance="@style/NunitoSansBold18"
+                android:textColor="@color/darkBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/completeButton"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/ordered_by_weight_cta_repick" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/completeButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+                android:text="@{viewData.positiveButtonText}"
+                android:textAppearance="@style/NunitoSansBold18"
+                android:textColor="@color/darkBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rePickButton"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/ordered_by_weight_cta_complete" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

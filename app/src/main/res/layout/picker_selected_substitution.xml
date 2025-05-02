@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.substitute.SubstituteViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{()->viewModel.onScanSubstitutionCardClicked()}"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="1dp"
+        app:strokeColor="@color/divider_color"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/suggestedItemImage"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="54dp"
+                android:layout_marginTop="34dp"
+                android:scaleType="centerInside"
+                android:src="@{viewModel.is3p ? @drawable/ic_system_suggested_substituion : @drawable/ic_picker_selected_substitution}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/ic_picker_selected_substitution" />
+
+            <TextView
+                android:id="@+id/suggestedItemDescription"
+                style="@style/NunitoSansRegular14.CoffeeGrey700"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@{viewModel.is3p ? @string/no_substitution_partner_pick : @string/no_substitution_found}"
+                app:layout_constraintBottom_toBottomOf="@+id/suggestedItemImage"
+                app:layout_constraintStart_toEndOf="@+id/suggestedItemImage"
+                app:layout_constraintTop_toTopOf="@+id/suggestedItemImage"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="System suggestions unavailable for this Partner pick order." />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/scanSubstituteItem"
+                style="@style/ButtonLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/scan_substitution"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/suggestedItemImage"
+                tools:text="Substitute an item of your choice" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

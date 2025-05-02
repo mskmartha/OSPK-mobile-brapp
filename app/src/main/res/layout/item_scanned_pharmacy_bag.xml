@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="label"
+            type="String" />
+
+        <variable
+            name="count"
+            type="int" />
+
+        <variable
+            name="totalCount"
+            type="int" />
+
+        <variable
+            name="isVisible"
+            type="boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/location"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@{label}"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="AMA01" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/boxCount"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@{totalCount > 1 ? @string/pharmacy_bag_scan_multiple(count, totalCount) : @string/pharmacy_bag_scan_single(count, totalCount)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibilityGoneIfFalse="@{isVisible}"
+            tools:text="0/1 Bag" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.fieldservices.FieldServicesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.albertsons.acupick.ui.custom.AcuPickScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@+id/startTestButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showScrollIndicator="bottom">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/startGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="24dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/endGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="24dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/authUrlTextInputLayout"
+                    style="@style/TextLayoutNew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:hint="@string/auth_url_hint"
+                    android:theme="@style/TextLayoutNew"
+                    app:setStyleByState="@{viewModel.typedAuthUrl}"
+                    app:isViewEnabled="@{viewModel.typedAuthUrlEnabled}"
+                    app:fieldServiceOperationState="@{viewModel.authUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/authUrlEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textUri"
+                        android:maxLines="1"
+                        android:text="@={viewModel.typedAuthUrl}"
+                        tools:text="https://apim-dev-01.albertsons.com" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/authUrlStatus"
+                    style="@style/NunitoSansRegular12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="16dp"
+                    app:fieldServiceOperationState="@{viewModel.authUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@+id/authUrlTextInputLayout"
+                    tools:drawableLeft="@drawable/ic_confirm_16dp"
+                    tools:drawableTint="@color/statusGreen"
+                    tools:text="Test success!"
+                    tools:textColor="@color/statusGreen" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/apsUrlTextInputLayout"
+                    style="@style/TextLayoutNew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/aps_url_hint"
+                    android:theme="@style/TextLayoutNew"
+                    app:setStyleByState="@{viewModel.typedApsUrl}"
+                    app:isViewEnabled="@{viewModel.typedApsUrlEnabled}"
+                    app:fieldServiceOperationState="@{viewModel.apsUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/authUrlStatus">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/apsUrlEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textUri"
+                        android:maxLines="1"
+                        android:text="@={viewModel.typedApsUrl}"
+                        tools:text="https://apim-dev-01.albertsons.com" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/apsLoadStatus"
+                    style="@style/NunitoSansRegular12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="16dp"
+                    app:fieldServiceOperationState="@{viewModel.apsUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@+id/apsUrlTextInputLayout"
+                    tools:drawableLeft="@drawable/ic_confirm_16dp"
+                    tools:drawableTint="@color/statusGreen"
+                    tools:text="Test success!"
+                    tools:textColor="@color/statusGreen" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/osccUrlTextInputLayout"
+                    style="@style/TextLayoutNew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/oscc_url_hint"
+                    android:theme="@style/TextLayoutNew"
+                    app:setStyleByState="@{viewModel.typedOsccUrl}"
+                    app:isViewEnabled="@{viewModel.typedOsccUrlEnabled}"
+                    app:fieldServiceOperationState="@{viewModel.osccUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/apsLoadStatus">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/osccUrlEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textUri"
+                        android:maxLines="1"
+                        android:text="@={viewModel.typedOsccUrl}"
+                        tools:text="https://apim-dev-01.albertsons.com" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/osccLoadStatus"
+                    style="@style/NunitoSansRegular12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="16dp"
+                    app:fieldServiceOperationState="@{viewModel.osccUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@+id/osccUrlTextInputLayout"
+                    tools:drawableLeft="@drawable/ic_confirm_16dp"
+                    tools:drawableTint="@color/statusGreen"
+                    tools:text="Test success!"
+                    tools:textColor="@color/statusGreen" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/itemProcessorUrlTextInputLayout"
+                    style="@style/TextLayoutNew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/item_processor_url_hint"
+                    android:theme="@style/TextLayoutNew"
+                    app:setStyleByState="@{viewModel.typedItemProcessorUrl}"
+                    app:isViewEnabled="@{viewModel.typedItemProcessorUrlEnabled}"
+                    app:fieldServiceOperationState="@{viewModel.itemProcessorUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/osccLoadStatus">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/itemProcessorUrlEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textUri"
+                        android:maxLines="1"
+                        android:text="@={viewModel.typedItemProcessorUrl}"
+                        tools:text="https://apim-dev-01.albertsons.com" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/itemProcessorStatus"
+                    style="@style/NunitoSansRegular12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="16dp"
+                    app:fieldServiceOperationState="@{viewModel.itemProcessorUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@+id/itemProcessorUrlTextInputLayout"
+                    tools:drawableLeft="@drawable/ic_confirm_16dp"
+                    tools:drawableTint="@color/statusGreen"
+                    tools:text="Test success!"
+                    tools:textColor="@color/statusGreen" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/imageUrlTextInputLayout"
+                    style="@style/TextLayoutNew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/image_url_hint"
+                    android:theme="@style/TextLayoutNew"
+                    app:setStyleByState="@{viewModel.typedImageUrl}"
+                    app:isViewEnabled="@{viewModel.typedImageUrlEnabled}"
+                    app:fieldServiceOperationState="@{viewModel.imageUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@+id/itemProcessorStatus">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/login_id_accessibility"
+                        android:inputType="textUri"
+                        android:maxLines="1"
+                        android:text="@={viewModel.typedImageUrl}"
+                        tools:text="https://images.albertsons-media.com/is/image/ABS/108010222" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/imageLoadStatus"
+                    style="@style/NunitoSansRegular12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="16dp"
+                    app:fieldServiceOperationState="@{viewModel.imageUrlOperationState}"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                    app:layout_constraintStart_toStartOf="@id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@+id/imageUrlTextInputLayout"
+                    tools:drawableLeft="@drawable/ic_confirm_16dp"
+                    tools:drawableTint="@color/statusGreen"
+                    tools:text="Test success!"
+                    tools:textColor="@color/statusGreen" />
+
+                <Space
+                    android:id="@+id/topSuccessImageSpacer"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageLoadStatus" />
+
+                <View
+                    android:id="@+id/white"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    android:visibility="@{viewModel.displayImageVisibility}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/topSuccessImageSpacer" />
+
+                <ImageView
+                    android:id="@+id/imageConnectivityTestImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:importantForAccessibility="no"
+                    android:scaleType="centerInside"
+                    android:visibility="@{viewModel.displayImageVisibility}"
+                    app:picassoCallback="@{viewModel.picassoLoadImageCallback}"
+                    app:imageUrl="@{viewModel.displayedImageUrl}"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topSuccessImageSpacer"
+                    tools:background="@color/colorAccent"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.albertsons.acupick.ui.custom.AcuPickScrollView>
+
+        <!-- FIXME: Use new flat, edge to edge (full bleed) button style -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/startTestButton"
+            style="@style/Button.Anchored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onStartTestCtaClicked()}"
+            android:text="@string/start_test"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

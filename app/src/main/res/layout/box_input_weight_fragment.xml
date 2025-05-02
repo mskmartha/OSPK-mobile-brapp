@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.staging.winestaging.weight.BoxInputWeightViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView37"
+            style="@style/NunitoSansBold18.grey600"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal"
+            android:text="@{@string/input_weight_for(viewModel.label)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Input Weight for Box LL-100101" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cta"
+            style="@style/Button.Anchored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:enabled="@{viewModel.enableConfirmLabel}"
+            android:onClick="@{v -> viewModel.onConfirmClciked()}"
+            android:text="@string/confirm"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/upcTextInput"
+            style="@style/TextLayoutNew"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/wine_box_weight"
+            android:theme="@style/TextLayoutNew"
+            app:errorEnabled="true"
+            android:textSize="12sp"
+            android:fontFamily="@font/nunito_sans_semibold"
+            app:errorTextColor="@color/snackbarError"
+            app:boxStrokeErrorColor="@color/snackbarError"
+            confirmWeightError="@{viewModel.confirmAmountErrorLiveData}"
+            app:isViewEnabled="@{true}"
+            app:errorTextAppearance="@style/NunitoSansRegular12"
+            app:errorIconDrawable="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView37"
+            app:setStyleByState="@{viewModel.weight}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/upcEditText"
+                style="@style/NunitoSansRegular14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:singleLine="true"
+                requestFocus="@{true}"
+                setFilter="@{true}"
+                android:text="@={viewModel.weight}"
+                android:textColor="@color/grey_600"
+                app:layout_constraintTop_toBottomOf="@+id/textView37"
+                tools:hint="Box weight (lb)"
+                tools:layout_editor_absoluteX="55dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

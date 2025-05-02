@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.staging.StagingPart2PagerViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{viewModel.isCurrentOrderMultiSource ? @color/backgroundGrey : @color/white}">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/staging2TabLayout"
+            style="@style/Tabs.Default"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:layoutByTabCount="@{viewModel.tabs.size}"
+            app:layout_constraintBottom_toTopOf="@+id/staging2ViewPager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabInlineLabel="true"
+            app:visibilityGoneIfTrue="@{viewModel.tabs.size == 1 || viewModel.showAnimationBackground}" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/staging2ViewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottomViews"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/staging2TabLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomViews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.albertsons.acupick.ui.custom.AcuPickPromptSnackBar
+                android:id="@+id/promptBar"
+                visibilityGoneIfTrue="@{viewModel.isLoading || viewModel.hideStaticPrompt}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:actionVisible="@{!viewModel.isLoading &amp; !viewModel.hideStaticPrompt}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:setSnackbarAction="@{viewModel.snackbarEvent}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            visibilityGoneIfFalse="@{viewModel.showAnimationBackground}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/staging_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/illustrationImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_staging_complete" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_good_job"
+                    style="@style/PopinsBold28.DarkBrown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/good_job"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/illustrationImage" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/rounded_corner_staging_complete"
+                    android:minHeight="100dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_good_job">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/picklistNumberHeader"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/picklist_number_header"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Pick list #" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/PickListNumber"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.stagingSummary.picklistId}"
+                        app:layout_constraintBottom_toBottomOf="@+id/picklistNumberHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/picklistNumberHeader"
+                        tools:text="#0428" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/pickingAndStagingDurationHeader"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/picking_and_staging_duration_header"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/picklistNumberHeader" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/pickingAndStagingDuration"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.stagingSummary.duration}"
+                        app:layout_constraintBottom_toBottomOf="@+id/pickingAndStagingDurationHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/pickingAndStagingDurationHeader"
+                        tools:text="10m 5s" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/totalItemsHeader"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/total_items_header"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pickingAndStagingDurationHeader"
+                        tools:text="Total Items" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/totalItems"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{viewModel.stagingSummary.totalItems.toString()}"
+                        app:layout_constraintBottom_toBottomOf="@+id/totalItemsHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/totalItemsHeader"
+                        tools:text="3" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/itemsPickedHeader"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/items_picked_header"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/totalItemsHeader" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/itemsPicked"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{viewModel.stagingSummary.pickedItems.toString()}"
+                        app:layout_constraintBottom_toBottomOf="@+id/itemsPickedHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/itemsPickedHeader"
+                        tools:text="1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/itemsOutOfStockHeader"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/items_out_of_stock_header"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemsPickedHeader" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/itemsOutOfStock"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{viewModel.stagingSummary.itemsOutOfStock.toString()}"
+                        app:layout_constraintBottom_toBottomOf="@+id/itemsOutOfStockHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/itemsOutOfStockHeader"
+                        tools:text="2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/itemsSubstitutedHeader"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/items_substituted_header"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemsOutOfStockHeader" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/itemsSubstituted"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{viewModel.stagingSummary.itemsSubstituted.toString()}"
+                        app:layout_constraintBottom_toBottomOf="@+id/itemsSubstitutedHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/itemsSubstitutedHeader"
+                        tools:text="0" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/ButtonPrimary"
+                    android:layout_width="264dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/rounded_corner_lighter_green"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.navigateHome()}"
+                    android:text="@string/back_to_home"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutinfo"
+                    tools:text="@string/back_to_home" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

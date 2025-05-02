@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.staging.UnAssignTotesViewModel" />
+
+        <variable
+            name="fragmentViewLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.albertsons.acupick.ui.custom.StickyScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/orderInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="95dp"
+                    android:background="@color/white"
+                    android:tag="sticky"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/shortOrderNumber"
+                        style="@style/NunitoSansBold20.grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:includeFontPadding="false"
+                        android:text="@{viewModel.shortOrderId}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="DUG08" />
+
+                    <View
+                        android:id="@+id/viewDivider"
+                        android:layout_width="1dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/grey_550"
+                        app:layout_constraintBottom_toBottomOf="@+id/shortOrderNumber"
+                        app:layout_constraintStart_toEndOf="@+id/shortOrderNumber"
+                        app:layout_constraintTop_toTopOf="@+id/shortOrderNumber" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/headerOrderNumber"
+                        style="@style/NunitoSansBold20.grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:includeFontPadding="false"
+                        android:text="@{`#` + viewModel.customerOrderNumber}"
+                        app:layout_constraintStart_toEndOf="@id/viewDivider"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="10042145" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/customerName"
+                        style="@style/NunitoSansSemiBold16.grey700"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:paddingHorizontal="16dp"
+                        android:text="@{viewModel.customerName}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shortOrderNumber"
+                        tools:text="Richard Carter" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--  Chilled -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/chilledBanner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@color/coffeeLighter"
+                    android:paddingHorizontal="16dp"
+                    android:tag="sticky"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/orderInfo"
+                    app:visibilityGoneIfTrue="@{viewModel.chTotes.size()==0}">
+
+                    <ImageView
+                        android:id="@+id/chilledImg"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_chilled"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/NunitoSansBold16.grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/chilled_staging"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/chilledImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chilledRv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chilledBanner"
+                    app:zoneTotes="@{viewModel.chTotes}"
+                    app:viewModel="@{viewModel}"
+                    app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/unassign_tote" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/chilledBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="chilledRv" />
+
+                <!--  Frozen -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/frozenBanner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@color/coffeeLighter"
+                    android:paddingHorizontal="16dp"
+                    android:tag="sticky"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chilledBarrier"
+                    app:visibilityGoneIfTrue="@{viewModel.fzTotes.size() == 0}">
+
+                    <ImageView
+                        android:id="@+id/frozenImg"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_frozen"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/NunitoSansBold16.grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/frozen_staging"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/frozenImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/frozenRv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frozenBanner"
+                    app:zoneTotes="@{viewModel.fzTotes}"
+                    app:viewModel="@{viewModel}"
+                    app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/unassign_tote" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/frozenBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="frozenRv" />
+
+                <!--  Ambient -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ambientBanner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@color/coffeeLighter"
+                    android:paddingHorizontal="16dp"
+                    android:tag="sticky"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frozenBarrier"
+                    app:visibilityGoneIfTrue="@{viewModel.amTotes.size() == 0}">
+
+                    <ImageView
+                        android:id="@+id/ambientImg"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_ambient"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/NunitoSansBold16.grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/ambient_staging"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ambientImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ambientRv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ambientBanner"
+                    app:zoneTotes="@{viewModel.amTotes}"
+                    app:viewModel="@{viewModel}"
+                    app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/unassign_tote" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/ambientBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="ambientRv" />
+
+                <!--  Hot -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/hotBanner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@color/coffeeLighter"
+                    android:paddingHorizontal="16dp"
+                    android:tag="sticky"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ambientBarrier"
+                    app:visibilityGoneIfTrue="@{viewModel.htTotes.size() == 0}">
+
+                    <ImageView
+                        android:id="@+id/hotImg"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_hot"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/NunitoSansBold16.grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/hot_staging"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/hotImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hotRv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hotBanner"
+                    app:zoneTotes="@{viewModel.htTotes}"
+                    app:viewModel="@{viewModel}"
+                    app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/unassign_tote" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrierZone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="chilledBanner,chilledRv,frozenBanner,frozenRv,ambientBanner,ambientRv,hotBanner,hotRv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/completeButton"
+                    style="@style/ButtonPrimary"
+                    android:layout_width="264dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="24dp"
+                    android:text="@string/confirm"
+                    android:onClick="@{() -> viewModel.onConfirmClicked()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/barrierZone"
+                    app:layout_constraintVertical_bias="0"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.albertsons.acupick.ui.custom.StickyScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

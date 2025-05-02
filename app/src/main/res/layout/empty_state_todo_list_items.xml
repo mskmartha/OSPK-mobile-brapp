@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.picklistitems.PickListItemsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/noItemsImageToDo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_no_items" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/noItemsTitle"
+            style="@style/PopinsBold28.DarkBrown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="-8sp"
+            android:text="@string/almost_there"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/noItemsImageToDo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/substitutionStatus"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/empty_white_box"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/noItemsTitle">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/openSubstitutionLabel"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/open_substitutions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/openSubstitutionCount"
+                style="@style/NunitoSansBold14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2sp"
+                android:text="@{viewModel.pendingSubstitutionCount}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/approvedSubstitutionLabel"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/approved_substitutions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/openSubstitutionLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/approvedSubstitutionCount"
+                style="@style/NunitoSansBold14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@{viewModel.approvedSubstitutionCount}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/openSubstitutionLabel"
+                tools:text="2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/declinedSubstitutionLabel"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/declined_out_of_stock_items"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/approvedSubstitutionLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/declinedSubstitutionCount"
+                style="@style/NunitoSansBold14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@{viewModel.declinedOosSubstitutionCount}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/approvedSubstitutionLabel"
+                tools:text="1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/noItemsSecondaryLabel"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="2sp"
+            android:text="@string/you_have_completed_picking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/substitutionStatus" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/printlabel"
+            style="@style/ButtonPrimary.Picking"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:enabled="@{viewModel.printLableButtonEnabled}"
+            android:onClick="@{()->viewModel.onEndPickCtaClicked(true)}"
+            android:text="@{viewModel.printLableText}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/substitutionStatus"
+            tools:text="printLabel" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/NunitoSansRegular12.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            app:visibilityGoneIfFalse="@{!viewModel.printLableButtonEnabled}"
+            android:text="@{viewModel.areAllItemsShortedLiveData ? @string/chat_please_wait_message: @string/chat_timer_message}"
+            app:layout_constraintEnd_toEndOf="@+id/printlabel"
+            app:layout_constraintStart_toStartOf="@+id/printlabel"
+            app:layout_constraintTop_toBottomOf="@+id/printlabel"
+            tools:text="Please wait for the customer to respond \nbefore staging." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/NunitoSansRegular12.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            app:visibilityGoneIfFalse="@{viewModel.printLableButtonEnabled &amp;&amp; viewModel.areAllItemsShortedLiveData}"
+            android:text="@string/early_exit_body"
+            app:layout_constraintEnd_toEndOf="@+id/printlabel"
+            app:layout_constraintStart_toStartOf="@+id/printlabel"
+            app:layout_constraintTop_toBottomOf="@+id/printlabel"
+            tools:text="@string/early_exit_body" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

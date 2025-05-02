@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.destage.reportmissingbag.ReportMissingBagViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/header_background"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:setStorageTypeImg="@{viewModel.reportMissingBagsParams.storageType}" />
+
+            <TextView
+                style="@style/NunitoSansBold16.grey700"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:padding="8dp"
+                android:text="@{viewModel.header}"
+                tools:text="@string/chilled" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:checkedButton="@={viewModel.radioChecked}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:missingItems="@{viewModel.missingItems}" />
+
+        <TextView
+            android:id="@+id/noItemsAvailble"
+            visibilityGoneIfFalse="@{viewModel.missingItems.isEmpty()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:drawableStart="@drawable/ic_info_blue"
+            android:layout_marginStart="16dp"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="26dp"
+            android:text="@{viewModel.getNoMissingItemsText}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header" />
+
+        <TextView
+            android:id="@+id/addLabelsCta"
+            style="@style/ButtonPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="20dp"
+            android:enabled="@{viewModel.radioChecked > 0}"
+            android:onClick="@{() -> viewModel.confirmClicked()}"
+            android:padding="10dp"
+            android:text="@{viewModel.buttonTitle(viewModel.reportMissingBagsParams)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:enabled="false" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

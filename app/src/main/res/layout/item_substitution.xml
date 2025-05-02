@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dbViewModel"
+            type="com.albertsons.acupick.ui.substitute.SubstitutionDbViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="72dp"
+        android:paddingBottom="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/suggestionType"
+            style="@style/NunitoSansRegular12.Black"
+            visibilityGoneIfTrue="@{!dbViewModel.isCustomerChosenItemAvailable}"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="31dp"
+            android:background="@drawable/rounded_corner_light_red"
+            android:gravity="center"
+            android:minWidth="97dp"
+            android:paddingStart="7dp"
+            android:paddingTop="1dp"
+            android:paddingEnd="7dp"
+            android:paddingBottom="1dp"
+            android:text="@string/substitute_suggested_header_customer_chosen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Customer choice" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/substituteItemImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerInside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionType"
+            app:loadImage="@{dbViewModel.substituteImageUrl}"
+            tools:background="@color/colorAccent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/processedQty"
+            style="@style/NunitoSansBold14.StrongGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="31dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="@{dbViewModel.enteredQuantity}"
+            app:layout_constraintBottom_toBottomOf="@+id/substituteItemImage"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="9" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/noBagsIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            visibilityGoneIfTrueOrNull="@{dbViewModel.isCustomerBagPreference}"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_no_bags"
+            app:layout_constraintBottom_toBottomOf="@+id/processedQty"
+            app:layout_constraintStart_toEndOf="@+id/processedQty"
+            app:layout_constraintTop_toTopOf="@+id/processedQty" />
+
+        <TextView
+            android:id="@+id/substituteDescription"
+            style="@style/NunitoSansSemiBold14.Grey600"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@{dbViewModel.substituteDescription}"
+            app:layout_constraintStart_toEndOf="@+id/substituteItemImage"
+            app:layout_constraintTop_toTopOf="@+id/substituteItemImage"
+            tools:text="New York Bakery " />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/scannedWeight"
+            style="@style/NunitoSansBold14.Grey700"
+            visibilityGoneIfFalse="@{dbViewModel.isScannedWeightToShow}"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="47dp"
+            android:text="@{@string/scanned_weight(dbViewModel.scannedWeight)}"
+            app:layout_constraintStart_toEndOf="@+id/substituteItemImage"
+            app:layout_constraintTop_toBottomOf="@+id/substituteDescription"
+            tools:text="Scanned weight: 1.1lbs" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/weightBottomBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="scannedWeight,substituteDescription" />
+
+        <TextView
+            android:id="@+id/substituteUpc"
+            style="@style/ButtonLink14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="2dp"
+            android:onClick="@{()->dbViewModel.onDeleteClicked()}"
+            android:text="@{dbViewModel.viewModel.isIssueScanning ? @string/remove_item : @string/remove_substituted_item}"
+            app:layout_constraintStart_toEndOf="@id/substituteItemImage"
+            app:layout_constraintTop_toBottomOf="@+id/weightBottomBarrier"
+            tools:text="Remove substitution" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

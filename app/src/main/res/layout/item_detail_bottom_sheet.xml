@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.ui.picklistitems.PickListType" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.itemdetails.ItemDetailsViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_top_corners_background"
+        android:scrollbars="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:paddingBottom="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/handle"
+                android:layout_width="56dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_handle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/scanItemTitle"
+                style="@style/PopinsMedium20.DarkBrown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@{viewData.title}"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/handle"
+                app:layout_goneMarginTop="12dp"
+                tools:text="@string/scan_item" />
+
+            <ImageView
+                android:id="@+id/addressPinImage"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_address_pin"
+                app:layout_constraintBottom_toBottomOf="@+id/itemAddress"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/itemAddress" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemAddress"
+                style="@style/NunitoSansBold16.SemiLightBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:onClick="@{() -> viewModel.onLocationClicked()}"
+                android:text="@{viewModel.itemAddress}"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/addressPinImage"
+                app:layout_constraintTop_toBottomOf="@+id/scanItemTitle"
+                tools:text="8-L-01-011" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/pickerItemImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemAddress"
+                app:layout_goneMarginTop="24dp"
+                app:loadImage="@{viewModel.imageUrl}"
+                app:placeholderImage="@{@drawable/ic_item_details_empty_image}"
+                tools:src="@drawable/ic_item_details_empty_image" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/highlight_comments"
+                style="@style/CustomerComment"
+                visibilityGoneIfFalse="@{viewModel.isCustomerCommented}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="15dp"
+                android:lineSpacingExtra="1sp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:minHeight="28dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="4dp"
+                android:onClick="@{() -> viewModel.onCommentClick() }"
+                android:text="@{viewModel.customerComments}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemAddress"
+                app:layout_constraintWidth_default="wrap"
+                tools:text="ipsum dolor sit amet consectetur adipisc nbsnabs" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/qtyContainer"
+                visibilityGoneIfTrue="@{viewModel.isFromSubstitutionFlow || viewModel.isDisplayType3Pw}"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:background="@drawable/rounded_corner_lighter_green"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="6dp"
+                app:layout_constraintBottom_toBottomOf="@+id/pickerItemImage"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/processedQty"
+                    style="@style/NunitoSansBold14.StrongGreen"
+                    processedQty="@{viewModel.processedQty}"
+                    totalQty="@{viewModel.totalQty}"
+                    visibilityGoneIfTrue="@{viewModel.isOrderedByWeight}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingExtra="1sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="0 of 2" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/weight"
+                    style="@style/NunitoSansBold14.StrongGreen"
+                    visibilityGoneIfFalse="@{viewModel.isOrderedByWeight}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.weightString}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2 lbs" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/weightIndicator"
+                visibilityGoneIfFalse="@{viewModel.isShowWeightIndicator}"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="5dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_weighted"
+                app:layout_constraintBottom_toBottomOf="@+id/qtyContainer"
+                app:layout_constraintStart_toEndOf="@+id/qtyContainer"
+                app:layout_constraintTop_toTopOf="@+id/qtyContainer" />
+
+            <TextView
+                android:id="@+id/weightQuantityPWItem"
+                style="@style/NunitoSansBold14"
+                visibilityInvisibleIfFalse="@{viewModel.showWeightIndicator}"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="4dp"
+                android:background="@{viewModel.showError ? @drawable/rounded_corner_yellow : @drawable/rounded_corner_lighter_green}"
+                android:gravity="center"
+                android:paddingHorizontal="12dp"
+                android:textColor="@{viewModel.showError ? @color/grey_700 : @color/strongGreen}"
+                app:fulfilledWeight="@{viewModel.fulfilledWeight}"
+                app:isDisplayType3Enabled="@{viewModel.isDisplayType3Pw}"
+                app:layout_constraintBottom_toBottomOf="@+id/qtyContainer"
+                app:layout_constraintStart_toEndOf="@+id/qtyContainer"
+                app:layout_constraintTop_toTopOf="@+id/qtyContainer"
+                app:layout_goneMarginStart="0dp"
+                app:orderedWeight="@{viewModel.orderedWeight}"
+                app:totalWeight="@{viewModel.totalWeight}"
+                tools:text="0.5 of 2 lb" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierQtyWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="top"
+                app:constraint_referenced_ids="qtyContainer,weightQuantityPWItem" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/shortedType"
+                style="@style/NunitoSansRegular12.Black"
+                visibilityGoneIfFalse="@{viewModel.hasExceptions || viewModel.itemComplete}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_rounded_corner_item_status"
+                android:gravity="center"
+                android:lineSpacingExtra="1sp"
+                android:minHeight="22dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="@{viewModel.status.first}"
+                app:layout_constraintBottom_toTopOf="@+id/barrierQtyWeight"
+                app:layout_constraintStart_toStartOf="@+id/qtyContainer"
+                app:textBackgroundTint="@{viewModel.status.second}"
+                tools:backgroundTint="@color/status_label_bg"
+                tools:text="Out of stock" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pickerDescription"
+                style="@style/NunitoSansBold16.DarkBrown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="-2sp"
+                android:text="@{viewModel.description}"
+                android:textAlignment="textStart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/qtyContainer"
+                tools:text="Gala Apples Prepacked Bag - 3 Lb Gala Apples Prepacked Bag - 3" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pickerPluAndPounds"
+                style="@style/NunitoSansRegular14.DarkBrown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@{viewModel.upc}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pickerDescription"
+                app:layout_goneMarginTop="16dp"
+                tools:text="PLU: 7780 (LB)" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnPLUCta"
+                style="@style/ButtonPrimary"
+                visibilityGoneIfFalse="@{viewModel.showPluCta}"
+                android:layout_width="264dp"
+                android:layout_marginTop="16dp"
+                android:onClick="@{() -> viewModel.onClickPluCta() }"
+                android:text="@{viewModel.pluCtaText}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pickerPluAndPounds"
+                tools:text="@string/select_quantity" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnCompletePickCta"
+                style="@style/ButtonPrimary"
+                android:layout_width="264dp"
+                android:layout_marginTop="16dp"
+                android:enabled="@{viewModel.enableCompletePickButton}"
+                android:onClick="@{() -> viewModel.onCompletePickClicked() }"
+                android:text="@string/complete_pick"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pickerPluAndPounds"
+                app:visibilityGoneIfFalse="@{viewModel.showCompletePickButton}"
+                tools:text="Complete pick" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/pluBtnBarrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="pickerPluAndPounds, btnPLUCta, btnCompletePickCta" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cantFindItem"
+                style="@style/NunitoSansSemiBold16.SemiLightBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:enabled="@{!viewModel.enableCompletePickButton &amp;&amp;!viewModel.isFromSubstitutionFlow &amp;&amp; !viewModel.hideUnpick}"
+                android:onClick="@{()-> viewModel.onLabelClicked()}"
+                android:textColor="@{viewModel.isFromSubstitutionFlow || viewModel.enableCompletePickButton || viewModel.hideUnpick ? @color/semiLightGray : @color/semiLightBlue}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pluBtnBarrier"
+                app:layout_goneMarginTop="16dp"
+                app:setLabel="@{viewModel.pickListType}"
+                app:isRepickOriginalItemAllowed="@{viewModel.shouldRepickOriginalItemAllow}"
+                tools:text="@string/cant_find_item" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                visibilityGoneIfTrue="@{viewModel.pickListType != PickListType.Todo || viewModel.showPluCta }"
+                android:layout_width="32dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="4dp"
+                android:onClick="@{()-> viewModel.onManualEntryButtonClicked()}"
+                android:src="@drawable/ic_keyboard_blue"
+                app:layout_constraintBottom_toBottomOf="@+id/cantFindItem"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cantFindItem" />
+
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/divider_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cantFindItem" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemLocationHeader"
+                style="@style/NunitoSansBold16.DarkBrown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.02"
+                android:maxWidth="240dp"
+                android:text="@string/item_location"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:layout_goneMarginTop="12dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/primaryLocationTitle"
+                style="@style/NunitoSansRegular14.Grey550"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemLocationHeader" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/primaryLocation"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2sp"
+                android:maxLines="1"
+                android:text="@{viewModel.itemAddress}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/primaryLocationTitle"
+                app:layout_goneMarginTop="8dp"
+                tools:text="9-R-01-011" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alternateLocationTitle"
+                style="@style/NunitoSansRegular14.Grey550"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/alternate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/primaryLocation" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondaryLocation"
+                style="@style/NunitoSansRegular14.Grey700"
+                setAlternateLocations="@{viewModel.altLocations}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2sp"
+                android:maxLines="1"
+                app:layout_constraintStart_toStartOf="@+id/alternateLocationTitle"
+                app:layout_constraintTop_toBottomOf="@id/alternateLocationTitle"
+                tools:text="9-R-01-011   9-R-01-012" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/noteLocationTitle"
+                style="@style/NunitoSansRegular14.Grey550"
+                visibilityGoneIfFalse="@{viewModel.enableNoteLocationCta}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/note"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondaryLocation" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/noteLocation"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                visibilityGoneIfFalse="@{viewModel.enableNoteLocationCta}"
+                android:lineSpacingExtra="2sp"
+                android:maxLines="2"
+                android:text='@{"\""+viewModel.locationNoteDetails+"\""}'
+                app:layout_constraintStart_toStartOf="@+id/noteLocationTitle"
+                app:layout_constraintTop_toBottomOf="@id/noteLocationTitle"
+                tools:text="Promo section next to the entrance Promo section next to the entrance" />
+
+            <TextView
+                android:id="@+id/addLocationCta"
+                style="@style/ButtonLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                visibilityGoneIfFalse="@{viewModel.enableAddLocationCta}"
+                android:onClick="@{() -> viewModel.onAddLocationClicked()}"
+                android:text="@string/add_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noteLocation" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/customerInformationContainer"
+                visibilityGoneIfTrue="@{viewModel.isFromSubstitutionFlow}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/addLocationCta">
+
+                <View
+                    android:id="@+id/dividerCustomerInformation"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/customerInformationHeader"
+                    style="@style/NunitoSansSemiBold16.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:letterSpacing="0.02"
+                    android:maxWidth="240dp"
+                    android:text="@string/customer_information"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dividerCustomerInformation"
+                    app:layout_goneMarginTop="12dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/customerTitle"
+                    style="@style/NunitoSansRegular14.Grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/customer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/customerInformationHeader" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/customerName"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@{viewModel.fullContactName}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/customerTitle"
+                    tools:text="R. Carter-Cash" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ebtIndicatior"
+                    visibilityGoneIfFalse="@{viewModel.isEbt}"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="3dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/customerName"
+                    app:layout_constraintStart_toEndOf="@+id/customerName"
+                    app:srcCompat="@drawable/ic_ebt_sub" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/commentsTitle"
+                    style="@style/NunitoSansRegular14.Grey550"
+                    visibilityGoneIfFalse="@{viewModel.isCustomerCommented}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/comments"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/customerName" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/comments"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    visibilityGoneIfFalse="@{viewModel.isCustomerCommented}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@{viewModel.customerComments}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/commentsTitle"
+                    tools:text="ipsum dolor sit amet consectetur adipisc ajbsjabsja jnsjajsn" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

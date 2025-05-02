@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.albertsons.acupick.ui.models.CustomerArrivalStatusUI" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffViewModel" />
+
+        <variable
+            name="fragmentLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topView"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundGrey">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/startGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/endGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/handoffTopView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:fragmentLifecycleOwner="@{fragmentLifecycleOwner}"
+                app:handOffUI="@{viewModel.handOffUI}"
+                app:handOffVerificationState="@{viewModel.handOffVerificationState}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:viewModel="@{viewModel}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

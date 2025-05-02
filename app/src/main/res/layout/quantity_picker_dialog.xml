@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.QuantityPickerDialogViewModel" />
+
+        <variable
+            name="pickerUI"
+            type="com.albertsons.acupick.ui.models.QuantityPickerUI" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="37dp"
+        android:background="@drawable/drawable_radius_4"
+        android:backgroundTint="@color/white"
+        android:paddingVertical="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/pickerItemImage"
+            app:visibilityGoneIfTrue="@{pickerUI.showOriginalItemInfo}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{pickerUI.itemImage}"
+            tools:src="@drawable/ic_item_details_empty_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerDescription"
+            app:visibilityGoneIfTrue="@{pickerUI.showOriginalItemInfo}"
+            style="@style/NunitoSansRegular14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:maxWidth="254dp"
+            android:text="@{pickerUI.itemDescription}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickerItemImage"
+            tools:text="Gala Apples Prepacked Bag - 3 Lb Gala Apples Prepacked Bag - 3" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/type_example_image"
+            android:layout_width="0dp"
+            android:layout_height="84dp"
+            android:layout_marginHorizontal="44dp"
+            android:src="@drawable/scaled_quantity_example"
+            android:scaleType="fitXY"
+            android:layout_marginTop="16dp"
+            visibilityGoneIfFalse="@{pickerUI.shouldShowExampleImage}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pickerDescription"
+            app:layout_constraintBottom_toTopOf="@id/pickerPluAndPounds"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerPluAndPounds"
+            style="@style/NunitoSansBold12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_goneMarginTop="16dp"
+            android:text="@{pickerUI.upcOrPlu}"
+            android:textColor="@color/grey_600"
+            visibilityGoneIfTrue="@{pickerUI.shouldShowExampleImage}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type_example_image"
+            tools:text="PLU: 7780 (LB)" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="28dp"
+            android:background="@color/dividerGrey"
+            visibilityGoneIfFalse="@{pickerUI.shouldShowDivider}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pickerPluAndPounds" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerQuantityHeader"
+            style="@style/NunitoSansSemiBold16"
+            quantityHeaderText="@{viewModel.quantityParams}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_goneMarginTop="12dp"
+            android:layout_marginHorizontal="24dp"
+            android:maxWidth="240dp"
+            android:letterSpacing="0.02"
+            android:textAlignment="center"
+            visibilityGoneIfFalse="@{pickerUI.shouldShowQuantityHeader}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            tools:text="@string/item_detail_weighted_quantity_header"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/quantityCl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:layout_goneMarginTop="32dp"
+            android:background="@drawable/drawable_radius_4"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pickerQuantityHeader">
+
+            <ImageButton
+                android:id="@+id/pluQuantityMinus"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/plu_minus_content_description"
+                android:onClick="@{() -> viewModel.onMinusButtonClicked() }"
+                android:src="@{viewModel.quantity > 0 ? @drawable/ic_minus_enabled : @drawable/ic_minus_disabled}"
+                app:layout_constraintEnd_toStartOf="@id/pluQuantity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_minus_enabled" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/pluQuantity"
+                style="@style/NunitoSansBold.34.Grey600"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:includeFontPadding="false"
+                android:lines="1"
+                android:text="@{Integer.toString(viewModel.quantity)}"
+                app:layout_constraintBottom_toBottomOf="@id/pluQuantityMinus"
+                app:layout_constraintEnd_toStartOf="@+id/pluQuantityPlus"
+                app:layout_constraintStart_toEndOf="@+id/pluQuantityMinus"
+                app:layout_constraintTop_toTopOf="@id/pluQuantityMinus"
+                tools:text="2" />
+
+            <ImageButton
+                android:id="@+id/pluQuantityPlus"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:clickable="@{viewModel.plusEnabled}"
+                android:contentDescription="@string/plu_plus_content_description"
+                android:onClick="@{() -> viewModel.onPlusButtonClicked() }"
+                android:src="@{viewModel.plusEnabled ? @drawable/ic_plus_enabled : @drawable/ic_plus_disabled}"
+                app:layout_constraintBottom_toBottomOf="@id/pluQuantity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pluQuantity"
+                app:layout_constraintTop_toTopOf="@id/pluQuantity"
+                tools:src="@drawable/ic_plus_enabled" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerRequestedCount"
+            style="@style/NunitoSansSemiBoldItalic14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{@string/requested_amount_format(Integer.toString(pickerUI.requestedCount))}"
+            app:layout_constraintEnd_toStartOf="@+id/pickerPickedCount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/quantityCl"
+            tools:text="Requested: 10" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerPickedCount"
+            style="@style/NunitoSansSemiBoldItalic14"
+            visibilityGoneIfFalse="@{pickerUI.enteredQuantityVisible}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{@string/entered_amount_format(Integer.toString(pickerUI.enteredQuantity))}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pickerRequestedCount"
+            app:layout_constraintTop_toBottomOf="@+id/quantityCl"
+            tools:text="Entered: 10" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/continueButton"
+            style="@style/Button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:enabled="@{viewModel.quantity > 0}"
+            android:onClick="@{() -> viewModel.onContinueButtonClicked()}"
+            android:text="@string/manual_plu_cta"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pickerRequestedCount" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

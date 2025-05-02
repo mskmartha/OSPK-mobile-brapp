@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.destage.DestageOrderPagerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/destageOrderPagerTabLayout"
+            style="@style/Tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_height"
+            app:layoutByTabCount="@{viewModel.tabs.size}"
+            app:layout_constraintBottom_toTopOf="@id/destageOrderPagerViewPager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabInlineLabel="true"
+            app:visibilityGoneIfTrue="@{viewModel.tabs.size == 1}" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/destageOrderPagerViewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/destageOrderPagerTabLayout"
+            app:lockViewPager="@{viewModel.lockTab}" />
+
+        <com.albertsons.acupick.ui.custom.AcuPickPromptSnackBar
+            android:id="@+id/promptBar"
+            visibilityGoneIfTrue="@{viewModel.isLoading || viewModel.hideStaticPrompt}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionVisible="@{!viewModel.isLoading &amp; !viewModel.hideStaticPrompt}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:setSnackbarAction="@{viewModel.snackbarEvent}" />
+
+        <com.albertsons.acupick.ui.custom.AcuPickPromptBar
+            android:id="@+id/apPromptBar"
+            visibilityGoneIfTrue="@{viewModel.isLoading || viewModel.hideStaticPrompt || !viewModel.itemRemovalRequired}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:actionVisible="@{viewModel.itemRemovalRequired}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:setPrompt="@{viewModel.staticPrompt}"
+            app:setSnackbarAction="@{viewModel.itemRemovalEvent}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/removeItemsPromptCl"
+            visibilityGoneIfFalse="@{viewModel.itemRemovalRequired}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_corner_8dp_rectangle"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/removeItemInfoStartIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_info_filled"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/removeItemsMessageTv"
+                style="@style/NunitoSansRegular14.White"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="@string/remove_rejected_items_prompt"
+                android:textColor="@color/white"
+                android:textColorHighlight="#00FFFFFF"
+                app:layout_constraintStart_toEndOf="@+id/removeItemInfoStartIv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/removeCtaTV"
+                style="@style/NunitoSansRegular14.White"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.navigateToRemoveItemsFragment()}"
+                android:text="@string/remove"
+                android:textColor="@color/white"
+                android:textColorHighlight="#00FFFFFF"
+                app:layout_constraintStart_toEndOf="@+id/removeItemsMessageTv"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/destageOrderPagerManualEntryFab"-->
+        <!--            visibilityInvisibleIfFalse="@{viewModel.isFabVisible}"-->
+        <!--            android:layout_width="48dp"-->
+        <!--            android:layout_height="48dp"-->
+        <!--            android:layout_gravity="end|bottom"-->
+        <!--            android:layout_marginEnd="16dp"-->
+        <!--            android:layout_marginBottom="64dp"-->
+        <!--            android:background="@drawable/circle"-->
+        <!--            android:backgroundTint="@color/darkBlue"-->
+        <!--            android:contentDescription="@string/manual_entry_content_description"-->
+        <!--            android:onClick="@{() -> viewModel.showPerscriptionPickup ? viewModel.onRxManualEntry() : viewModel.onManualCtaClicked()}"-->
+        <!--            android:src="@drawable/ic_keyboard"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:rippleColor="@color/white"-->
+        <!--            app:tint="@color/white" />-->
+
+        <!--        <com.albertsons.acupick.ui.custom.AcuPickPromptBar-->
+        <!--            android:id="@+id/promptBar"-->
+        <!--            visibilityGoneIfTrue="@{viewModel.isLoading || viewModel.hideStaticPrompt}"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            app:actionVisible="@{viewModel.itemRemovalRequired}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:setPrompt="@{viewModel.staticPrompt}"-->
+        <!--            app:setSnackbarAction="@{viewModel.itemRemovalEvent}" />-->
+
+        <!--        <View-->
+        <!--            android:id="@+id/bottomView"-->
+        <!--            visibilityInvisibleIfFalse="@{viewModel.isConfirmButtonEnabled}"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="72dp"-->
+        <!--            android:background="@color/white"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            style="@style/ButtonPrimary"-->
+        <!--            visibilityInvisibleIfFalse="@{viewModel.isConfirmButtonEnabled}"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_marginHorizontal="48dp"-->
+        <!--            android:onClick="@{()-> viewModel.showPerscriptionPickup ? viewModel.onRxConfirmCtaClick() :viewModel.onConfirmCtaClick()}"-->
+        <!--            android:text="@{viewModel.showPerscriptionPickup ? @string/pharmacy_pickup_button: @string/complete_destaging}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/bottomView"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/bottomView"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/bottomView"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/bottomView"-->
+        <!--            tools:text="Complete Destaging" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

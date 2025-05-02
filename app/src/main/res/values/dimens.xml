@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Images -->
+    <dimen name="standard_icon">24dp</dimen>
+
+    <dimen name="staging_icon_width">30dp</dimen>
+    <dimen name="staging_icon_height">46dp</dimen>
+
+    <!-- Elevations -->
+    <dimen name="store_card_elevation">1dp</dimen>
+    <dimen name="store_card_selected_elevation">0dp</dimen>
+
+    <!-- Percents -->
+    <item name="item_detail_tote_start_vertical_guideline_percent" format="float" type="dimen">.675</item>
+
+    <!--    Search Order margins by state-->
+    <item name="margin_top_clear_visible" format="float" type="dimen">18.0</item>
+    <item name="margin_top_clear_gone" format="float" type="dimen">24.0</item>
+
+    <!-- Swipe Constants  -->
+    <dimen name="swipe_text_size">16sp</dimen>
+    <dimen name="swipe_text_margin">22dp</dimen>
+
+    <!--  Home card text sizes  -->
+    <dimen name="timer_text_size">52.5sp</dimen>
+    <dimen name="arriving_text_size">36sp</dimen>
+
+    <dimen name="inset_drawable_margin_horizontal">@dimen/view_margin</dimen>
+    <dimen name="inset_drawable_margin_vertical">@dimen/view_margin</dimen>
+
+    <!-- Hand Off Overlay Sizes -->
+    <dimen name="hand_off_overlay_text_size">24sp</dimen>
+    <dimen name="hand_off_overlay_icon_size">73dp</dimen>
+    <dimen name="hand_off_overlay_text_top_padding">15dp</dimen>
+    <dimen name="hand_off_overlay_check_width">35dp</dimen>
+    <dimen name="hand_off_overlay_check_height">27dp</dimen>
+    <dimen name="hand_off_overlay_close_dimens">55dp</dimen>
+
+    <!--  Tabs  -->
+    <dimen name="tab_height">40dp</dimen>
+
+    <!-- common dimensions to help ensure consistency (when propogated) -->
+    <dimen name="view_margin">16dp</dimen>
+    <dimen name="detail_dialog_width">312dp</dimen>
+    <dimen name="image_detail_height">100dp</dimen>
+    <dimen name="banner_height">30dp</dimen>
+    <dimen name="default_corner_radius">4dp</dimen>
+
+    <dimen name="drawer_layout_zero_elevation">0dp</dimen>
+    <dimen name="drawer_layout_eight_elevation">8dp</dimen>
+
+    <!-- ID Verificaation Sizes -->
+    <dimen name="id_view_height">220dp</dimen>
+    <dimen name="expanded_bottomsheet_peek_height">570dp</dimen>
+    <dimen name="authcode_bottomsheet_peek_height">525dp</dimen>
+    <dimen name="default_bottomsheet_peek_height">439dp</dimen>
+    <dimen name="actionsheet_peek_height">288dp</dimen>
+
+    <dimen name="twenty_four_dp">24dp</dimen>
+    <dimen name="zero_dp">0dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="actionsheet_peek_height_sub_not_allowed">250dp</dimen>
+
+    <dimen name="home_screen_timer_digit_text">42dp</dimen>
+    <dimen name="home_screen_timer_char_text">32dp</dimen>
+    <dimen name="chat_menu_popup_width">240dp</dimen>
+
+    <dimen name="rx_prescription_container_max_height">216dp</dimen>
+    <dimen name="rx_prescription_return_container_max_height">138dp</dimen>
+</resources>

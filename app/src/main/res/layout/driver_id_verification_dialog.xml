@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/itemImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                app:imageResource="@{viewData.largeImage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/id_verification_image"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@{viewData.body}"
+                dialogBodyStyleType="@{viewData.dialogStyle}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemImage"
+                tools:text="@string/id_verification_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                dialogSecondaryBodyStyleType="@{viewData.dialogStyle}"
+                app:highlightImportantText="@{viewData.secondaryBody}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="@string/id_verification_body" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/positiveButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginEnd="24dp"
+                android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+                android:text="@{viewData.positiveButtonText}"
+                android:textAppearance="@style/NunitoSansBold16"
+                android:textColor="@color/darkBlue"
+                android:visibility="@{viewData.positiveButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/message"
+                tools:text="Continue" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/negativeButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginEnd="30dp"
+                android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+                android:text="@{viewData.negativeButtonText}"
+                android:textAppearance="@style/NunitoSansBold16"
+                android:textColor="@color/darkBlue"
+                android:visibility="@{viewData.negativeButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/positiveButton"
+                app:layout_constraintTop_toBottomOf="@id/message"
+                tools:text="Continue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

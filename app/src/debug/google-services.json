@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "84095879521",
+    "project_id": "gcp-abs-ospk-dev-prj-01",
+    "storage_bucket": "gcp-abs-ospk-dev-prj-01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84095879521:android:51b6bc609adc87bc805d20",
+        "android_client_info": {
+          "package_name": "com.albertsons.acupick.internal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrTlBOAngL4U-akb4mOLmYJzM5Xh7F-5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84095879521:android:254fd714bab5e7d7805d20",
+        "android_client_info": {
+          "package_name": "com.albertsons.acupick.internal.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrTlBOAngL4U-akb4mOLmYJzM5Xh7F-5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="substitutedItem"
+            type="com.albertsons.acupick.data.model.response.SwapItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="72dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/startGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/endGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/substituteItemImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:scaleType="centerInside"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{substitutedItem.imageUrl}"
+            tools:background="@color/colorAccent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/processedQty"
+            style="@style/NunitoSansBold14.StrongGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            android:minWidth="28dp"
+            android:paddingHorizontal="5dp"
+            android:text="@{substitutedItem.quantity}"
+            app:layout_constraintBottom_toBottomOf="@+id/substituteItemImage"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            tools:text="9" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemTote"
+            style="@style/NunitoSansBold14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:drawableStart="@drawable/ic_container_icon"
+            android:drawablePadding="4dp"
+            android:text="@{substitutedItem.containerId}"
+            app:layout_constraintStart_toEndOf="@id/substituteItemImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="APB86" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/substituteDescription"
+            style="@style/NunitoSansSemiBold14.Grey600"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="2"
+            android:text="@{substitutedItem.itemDesc}"
+            app:layout_constraintEnd_toEndOf="@+id/endGuideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/substituteItemImage"
+            app:layout_constraintTop_toBottomOf="@+id/itemTote"
+            tools:text="Alfaro’s Artesano Bakery Bread - 20 oz" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

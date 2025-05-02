@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="swapItem"
+            type="com.albertsons.acupick.data.model.response.SwapItemParams" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_coener_dialog_background"
+        android:minWidth="311dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            style="@style/PoppinsMedium20.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="56dp"
+            android:text="@{viewData.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Remove substitution" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/body"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{viewData.body}"
+            android:visibility="@{viewData.bodyVisibility}"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            android:layout_marginTop="8dp"
+            tools:text="Please remove these items" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/recyclerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintTop_toBottomOf="@+id/body"
+            app:layout_constraintHeight_max="175dp"
+            android:layout_marginTop="8dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/item_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constrainedHeight="true"
+                app:swapSubstitutionItem="@{swapItem.substituteItem}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_remove_substitution"
+                tools:itemCount="3"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/positiveButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> viewModel.onPositiveButtonClick(swapItem.itemIdAndMessageSid)}"
+            android:text="@{viewData.positiveButtonText}"
+            android:visibility="@{viewData.positiveButtonVisibility}"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerLayout"
+            tools:text="Positive CTA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/negativeButton"
+            style="@style/ButtonLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@null"
+            android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+            android:text="@{viewData.negativeButtonText}"
+            android:visibility="@{viewData.negativeButtonVisibility}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/positiveButton"
+            tools:text="Negative CTA" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

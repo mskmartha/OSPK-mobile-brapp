@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/order_verified_message_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_1_dp_card"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp">
+
+                <!--condition to handle the rx items removal and age verification removal in the same section  -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/handOffRestrictions"
+                    style="@style/NunitoSansSemiBold16.grey700"
+                    visibilityGoneIfFalse="@{!(viewModel.isRxDugHandOff &amp;&amp; viewModel.rxRemoveItemsCta)}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/age_verification"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Age Verification" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_info_filled_blue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/handOffRestrictions" />
+
+                <!--condition to handle the rx items removal and age verification removal in the same section  -->
+                <TextView
+                    android:id="@+id/textView38"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{viewModel.isRxDugHandOff &amp;&amp; viewModel.rxRemoveItemsCta ? @string/rx_items_removed_copy : @string/items_removed_copy }"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatImageView"
+                    tools:text="@string/rx_items_removed_copy" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+</layout>

@@ -1,0 +1,40 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">AcuPick</string>
+
+    <!-- wifi analyzer -->
+
+    <!-- settings -->
+    <string name="country_code_key" translatable="false">country_code</string>
+
+    <string name="wifi_band_key" translatable="false">wifi_band</string>
+
+    <string name="scan_speed_key" translatable="false">scan_speed</string>
+    <string name="scan_speed_default" translatable="false">300</string>
+
+    <string name="wifi_throttle_disabled_key" translatable="false">wifi_throttle_disabled_key</string>
+    <bool name="wifi_throttle_disabled_default" translatable="false">false</bool>
+
+    <string name="cache_off_key" translatable="false">cache_off</string>
+    <bool name="cache_off_default" translatable="false">false</bool>
+
+    <string name="sort_by_key" translatable="false">sort_by</string>
+    <string name="group_by_key" translatable="false">group_by</string>
+
+    <string name="wifi_off_on_exit_key" translatable="false">wifi_off_on_exit</string>
+    <bool name="wifi_off_on_exit_default" translatable="false">false</bool>
+
+    <string name="keep_screen_on_key" translatable="false">keep_screen_on</string>
+    <bool name="keep_screen_on_default" translatable="false">false</bool>
+
+    <!-- Wi-Fi band -->
+    <string name="wifi_band_2ghz" translatable="false">2.4 GHz</string>
+    <string name="wifi_band_5ghz" translatable="false">5 GHz</string>
+    <string name="wifi_band_6ghz" translatable="false">6 GHz</string>
+
+    <!-- filter -->
+    <string name="filter_ssid_key" translatable="false">"filter_ssid"</string>
+    <string name="filter_wifi_band_key" translatable="false">"filter_wifi_band"</string>
+    <string name="filter_strength_key" translatable="false">"filter_strength"</string>
+    <string name="filter_security_key" translatable="false">"filter_security"</string>
+
+</resources>

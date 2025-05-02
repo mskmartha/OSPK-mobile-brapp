@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.destage.removeitems.RemoveRejectedItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/footer"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/reject_item_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="18dp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/order_info"
+                            style="@style/NunitoSansBold20.grey600"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="30dp"
+                            android:text="@{@string/remove_item_order_number(viewModel.shortOrderNumber, viewModel.orderNumber)}"
+                            android:textColor="@color/grey_600"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            tools:text="DUG08 | 0428006" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/customer_name"
+                            style="@style/NunitoSansRegular16.Grey700"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="@{viewModel.contactName}"
+                            android:textColor="@color/grey_600"
+                            app:layout_constraintStart_toStartOf="@id/order_info"
+                            app:layout_constraintTop_toBottomOf="@id/order_info"
+                            tools:text="Marcus Alias" />
+
+                        <ImageView
+                            android:id="@+id/no_bags_icon"
+                            visibilityGoneIfTrueOrNull="@{viewModel.isCustomerBagPreference}"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="4dp"
+                            android:src="@drawable/ic_no_bags"
+                            app:layout_constraintBottom_toBottomOf="@+id/customer_name"
+                            app:layout_constraintStart_toEndOf="@+id/customer_name" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/remove_item_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/backgroundGrey"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reject_item_header">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/zone_image"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        app:storageTypeIcon="@{viewModel.storageType}"
+                        android:layout_marginStart="16dp"
+                        tools:src="@drawable/ic_chilled" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/zoneName"
+                        style="@style/NunitoSansBold16.grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:storageTypeLabel="@{viewModel.storageType}"
+                        tools:text="Chilled"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/zoneImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/remove_item_count"
+                    app:rejectedItems="@{viewModel.rejectedItemsDBList}"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_rejected_item" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/remove_item_cta"
+                style="@style/ButtonPrimary"
+                android:layout_width="264dp"
+                android:layout_height="40dp"
+                android:layout_marginVertical="16dp"
+                android:enabled="@{viewModel.removeEnabled}"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.removeItemsClicked()}"
+                android:text="@string/remove_item_cta"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

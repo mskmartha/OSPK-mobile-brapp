@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.QuantityPickerDialogViewModel" />
+
+        <variable
+
+            name="pickerUI"
+            type="com.albertsons.acupick.ui.models.QuantityPickerUI" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        setMinHeightForQuamntityPicker="@{pickerUI.showOriginalItemInfo}"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_top_corners_background"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="56dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/qunatityPickerTitlte"
+            style="@style/PopinsMedium20.DarkBrown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:includeFontPadding="false"
+            android:text="@string/select_quantity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/handle" />
+
+        <include
+            android:id="@+id/view_issue_scanning"
+            layout="@layout/item_quantity_picker_header_for_issue_scanning"
+            visibilityGoneIfTrue="@{!pickerUI.showOriginalItemInfo}"
+            app:issueScanningUI="@{pickerUI.originalItemParams}"
+            app:layout_constraintTop_toBottomOf="@+id/qunatityPickerTitlte" />
+
+        <ImageView
+            android:id="@+id/pickerItemImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="58dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="58dp"
+            android:importantForAccessibility="no"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@id/pickerDescription"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_issue_scanning"
+            app:layout_goneMarginTop="24dp"
+            app:loadImage="@{pickerUI.itemImage}"
+            app:placeholderImage="@{@drawable/ic_item_details_empty_image}"
+            tools:src="@drawable/ic_item_details_empty_image" />
+
+        <ImageView
+            android:id="@+id/noBagsIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            visibilityGoneIfTrueOrNull="@{pickerUI.isCustomerBagPreference}"
+            android:src="@drawable/ic_no_bags"
+            app:layout_constraintBottom_toBottomOf="@+id/pickerItemImage"
+            app:layout_constraintStart_toStartOf="@+id/pickerItemImage"
+            app:layout_constraintEnd_toStartOf="@+id/pickerItemImage"
+            app:layout_constraintTop_toTopOf="@+id/qtyOfTotalContainer" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/qtyOfTotalContainer"
+            visibilityGoneIfTrue="@{pickerUI.isSubstitution || pickerUI.showOriginalItemInfo}"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pickerItemImage"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/processedQty"
+                style="@style/NunitoSansBold14.StrongGreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(pickerUI.enteredQuantity)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/of"
+                style="@style/NunitoSansBold14.StrongGreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="4dp"
+                android:text="@string/item_details_of"
+                app:layout_constraintBaseline_toBaselineOf="@id/processedQty"
+                app:layout_constraintStart_toEndOf="@id/processedQty" />
+
+            <TextView
+                android:id="@+id/totalQty"
+                style="@style/NunitoSansBold14.StrongGreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(pickerUI.requestedCount)}"
+                app:layout_constraintBaseline_toBaselineOf="@id/processedQty"
+                app:layout_constraintStart_toEndOf="@id/of"
+                tools:text="40" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerDescription"
+            style="@style/NunitoSansBold16.DarkBrown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@{pickerUI.itemDescription}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickerItemImage"
+            tools:text="Bounty Select A Size White Double Plus Roll Paper Towels - 8 Count" />
+
+        <TextView
+            android:id="@+id/upc"
+            style="@style/NunitoSansRegular14.DarkBrown"
+            visibilityGoneIfTrue="@{pickerUI.shouldShowExampleImage}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{pickerUI.upcOrPlu}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickerDescription"
+            tools:text="UPC: 400 800 90029" />
+
+        <com.albertsons.acupick.ui.custom.QuantityPickerView
+            android:id="@+id/quantityPicker"
+            android:layout_width="142dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:quantity="@={viewModel.quantity}" />
+
+        <TextView
+            android:id="@+id/continueButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="142dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="40dp"
+            android:enabled="@{viewModel.quantity > 0}"
+            android:onClick="@{() -> viewModel.onContinueButtonClicked()}"
+            android:text="@string/manual_plu_cta"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

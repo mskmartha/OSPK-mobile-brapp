@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.AlternativeLocationViewModel" />
+
+        <variable
+            name="item"
+            type="com.albertsons.acupick.ui.models.AlternativeLocationItem" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/rounded_coener_dialog_background"
+        android:minWidth="311dp"
+        android:paddingBottom="32dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_cancel_thin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:onClick="@{()->viewModel.onItemFoundButtonClicked()}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            style="@style/NunitoSansSemiBold20.Grey700"
+            android:layout_width="267dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@{viewData.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/alternative_locations_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subHeading"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{viewData.body}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="This item may be found at an alternate location:" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/alternativeLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:overScrollMode="never"
+            app:alternativeLocations="@{item.alternativeLocations}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subHeading"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_alternative_location" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/itemImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_card_view_empty_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alternativeLocations"
+            app:loadImage="@{item.imageUrl}"
+            tools:src="@drawable/ic_card_view_empty_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemName"
+            style="@style/NunitoSansSemiBold16.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="24dp"
+            android:text="@{item.itemName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemImage"
+            app:layout_constraintTop_toTopOf="@+id/itemImage"
+            tools:text="LaCroix Sparkling Water Cherry Lime - 8-12 Fl. Oz." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemUpc"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="2dp"
+            android:lineSpacingExtra="2sp"
+            android:text="@{@string/item_details_upc_format(item.upc)}"
+            app:layout_constraintStart_toEndOf="@+id/itemImage"
+            app:layout_constraintTop_toBottomOf="@+id/itemName"
+            tools:text="UPC: 400 800 9002" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/buttonItemFound"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:onClick="@{() -> viewModel.onItemFoundButtonClicked()}"
+            android:text="@string/item_found_button_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemImage"
+            tools:text="@string/item_found_button_text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cantFindItem"
+            style="@style/NunitoSansSemiBold16.Blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:onClick="@{() -> viewModel.onOutOfStockButtonClicked()}"
+            android:text="@{viewData.positiveButtonText}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonItemFound"
+            tools:text="@string/cant_find_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

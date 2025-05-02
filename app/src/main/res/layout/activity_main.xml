@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.MainActivityViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainRoot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:background="@color/white"
+                android:paddingVertical="3dp"
+                app:visibilityGoneIfFalse="@{viewModel.toolBarVisibility}"
+                android:theme="@style/toolbarTheme"
+                app:layout_constraintTop_toTopOf="parent"
+                app:subtitleTextColor="@color/grey_700"
+                app:titleTextColor="@color/grey_700" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbarOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="@+id/toolbar">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/toolbarLeftImage"
+                    visibilityGoneIfNull="@{viewModel.toolbarLeftExtraImage}"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="44dp"
+                    android:src="@{viewModel.toolbarLeftExtraImage}"
+                    android:tint="@color/grey_700"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_dug"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/toolbarLeftExtra"
+                    style="@style/NunitoSansBold14.White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="@{viewModel.toolbarLeftExtra}"
+                    android:textColor="@color/grey_700"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/toolbarLeftImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginStart="48dp"
+                    tools:text="Left Extra"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/toolbarTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans_semibold"
+                    android:text="@{viewModel.toolbarTitle}"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_700"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Title"
+                    tools:visibility="visible" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/toolbarSmallTitle"
+                        style="@style/NunitoSansBold14.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@{viewModel.toolbarTitleBackground}"
+                        android:gravity="center"
+                        android:minWidth="100dp"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="6dp"
+                        android:text="@{viewModel.toolbarSmallTitle}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Small Title"
+                        tools:visibility="visible" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/toolbarRightExtraTop"
+                    style="@style/NunitoSansRegular14.White"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.toolbarRightExtraTop}"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Right Top Extra"
+                    tools:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/toolbarRightExtraBottom"
+                    style="@style/NunitoSansBold14.White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.toolbarRightExtraBottom}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guideline2"
+                    tools:text="Right Bottom Extra"
+                    tools:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/toolbarRightExtra"
+                    style="@style/NunitoSansBold18White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.toolbarExtraRight}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Right Extra"
+                    tools:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/toolbarRightExtraCta"
+                    style="@style/NunitoSansSemiBold16.cattBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:onClick="@{() -> viewModel.onToolbarRightExtraClick()}"
+                    android:text="@{viewModel.toolbarExtraRightCta}"
+                    android:textAppearance="@style/NunitoSansBold16.white"
+                    android:visibility="@{viewModel.toolbarExtraRightCtaVisibility}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Right Extra CTA" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/secondToolbarRightImage"
+                    style="@style/SelectableItem.Foreground"
+                    visibilityGoneIfNull="@{viewModel.toolbarRightExtraSecondImage}"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="12dp"
+                    android:clickable="@{!viewModel.isBlockingUi}"
+                    android:onClick="@{() -> viewModel.onToolbarRightSecondImageClick()}"
+                    android:padding="4dp"
+                    android:src="@{viewModel.toolbarRightExtraSecondImage}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_print"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/firstToolbarRightImage"
+                    style="@style/SelectableItem.Foreground"
+                    visibilityGoneIfNull="@{viewModel.toolbarRightExtraFirstImage}"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="4dp"
+                    android:clickable="@{!viewModel.isBlockingUi}"
+                    android:onClick="@{() -> viewModel.onToolbarRightFirstImageClick()}"
+                    android:padding="4dp"
+                    android:src="@{viewModel.toolbarRightExtraFirstImage}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/secondToolbarRightImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_keyboard"
+                    tools:visibility="visible" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <fragment
+                android:id="@+id/navHostFragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toTopOf="@id/bottomNavContainer"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:navGraph="@navigation/nav_graph"
+                tools:ignore="FragmentTagUsage" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="@id/navHostFragment"
+                app:layout_constraintTop_toTopOf="@id/navHostFragment"
+                app:visibilityGoneIfFalse="@{viewModel.blockUi}" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibilityGoneIfFalse="@{viewModel.isLoading}" />
+
+            <View
+                android:id="@+id/shadow"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@drawable/upward_shadow"
+                app:layout_constraintBottom_toTopOf="@id/bottomNavContainer" />
+
+            <FrameLayout
+                android:id="@+id/bottomNavContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomNav"
+                    style="@style/Widget.Design.BottomNavigationView"
+                    anchorSnackbar="@{viewModel.snackBarEvent}"
+                    isNotAnchored="@{true}"
+                    visibilityGoneIfTrue="@{viewModel.keyboardActive}"
+                    app:clearEvent="@{viewModel.clearSnackBar}"
+                    app:menu="@menu/menu_bottom_nav" />
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navView"
+            style="@style/Widget.Custom.NavigationView"
+            app:menu="@menu/menu_nav_drawer">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="24dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/devOptionsCta"
+                    style="@style/NunitoSansSemiBold14.Blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="34dp"
+                    android:text="@string/dev_options_button"
+                    app:layout_constraintBottom_toTopOf="@+id/buildVersion"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:visibilityGoneIfFalse="@{viewModel.devOptionsEnabled}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/buildVersion"
+                    style="@style/NunitoSansRegular12.Grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/deviceId"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:showAppVersion="@{true}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/deviceId"
+                    style="@style/NunitoSansRegular12.Grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:showDeviceId="@{true}"
+                    tools:text="Device ID" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
+

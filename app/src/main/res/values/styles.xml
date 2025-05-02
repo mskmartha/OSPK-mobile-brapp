@@ -1,0 +1,1189 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.LowerCaseButton</item>
+        <item name="android:textColorHighlight">@color/infoBlue20pct</item>
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
+        <item name="bottomSheetDialogTheme">@style/AppModalBottomSheet</item>
+    </style>
+
+    <style name="AppModalBottomSheet" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheet</item>
+        <item name="android:colorBackground">@color/white</item>
+    </style>
+
+    <style name="ModalBottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="shapeAppearanceOverlay">@style/BottomSheetAppearance</item>
+        <item name="behavior_hideable">true</item>
+        <item name="behavior_draggable">true</item>
+        <item name="behavior_peekHeight">@dimen/default_bottomsheet_peek_height</item>
+    </style>
+
+    <style name="BottomSheetAppearance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">15dp</item>
+        <item name="cornerSizeTopLeft">15dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+<!--  Snackbar  -->
+    <style name="Widget.App.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="actionTextColorAlpha">1</item>
+    </style>
+
+    <style name="Widget.App.SnackbarButton" parent="Widget.MaterialComponents.Button.TextButton.Snackbar">
+        <item name="android:textColor">@color/chilledBlue</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+
+<!--  Toolbar  -->
+    <style name="toolbarTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+
+    </style>
+
+    <!--  Used to override button style in app theme  -->
+    <style name="Widget.AppCompat.Button.LowerCaseButton">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!--    Nav Drawer Styling-->
+    <style name="Widget.Custom.NavigationView" parent="Widget.Design.NavigationView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="itemTextColor">@color/semiLightBlue</item>
+        <item name="itemTextAppearance">@style/NunitoSansSemiBold14</item>
+        <item name="android:background">@color/navBgColor</item>
+        <item name="itemIconPadding">14dp</item>
+        <item name="itemHorizontalPadding">18dp</item>
+    </style>
+
+    <style name="Widget.Design.BottomNavigationView" parent="Widget.Design.NavigationView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">66dp</item>
+        <item name="itemIconTint">@drawable/bottom_nav_selector</item>
+        <item name="itemTextColor">@drawable/bottom_nav_selector</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textSize">9sp</item>
+        <item name="textAllCaps">true</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNavigationView.Active</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomNavigationView.Inactive</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="backgroundColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance" />
+
+    <style name="TextAppearance.BottomNavigationView" />
+
+    <style name="TextAppearance.BottomNavigationView.Inactive">
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="TextAppearance.BottomNavigationView.Active">
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="TextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColor">@color/colorPrimary</item>
+
+    </style>
+
+    <!-- text styles -->
+    <style name="RobotoMedium14">
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">16sp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/white60pct</item>
+    </style>
+
+    <style name="NunitoSansRegular10">
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansRegular12">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansRegular12.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+    <style name="NunitoSansRegular12.Grey500">
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansRegular13">
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="NunitoSansRegular13.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansRegular13.Grey500">
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansRegular14">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansRegular14.Grey550">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="NunitoSansRegular14.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansRegular14.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansRegular14.Coffee">
+        <item name="android:textColor">@color/chat_coffee</item>
+    </style>
+    <style name="NunitoSansRegular14.Grey_49">
+        <item name="android:textColor">@color/grey_49</item>
+    </style>
+    <style name="NunitoSansRegular14.ApprovedGreen">
+        <item name="android:textColor">@color/approved_green</item>
+    </style>
+
+    <style name="NunitoSansRegular14.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansRegular12.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansRegular16.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="NunitoSansRegular16">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansRegular16.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansRegular16.Grey500">
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansRegular16.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansRegular16.DarkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+    <style name="NunitoSansRegular16.CattBlue">
+        <item name="android:textColor">@color/cattBlue</item>
+    </style>
+
+    <style name="NunitoSansItalic12">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_italic</item>
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansItalic11">
+        <item name="android:textSize">11sp</item>
+        <item name="fontFamily">@font/nunito_sans_italic</item>
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansItalic12.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansItalic13">
+        <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/nunito_sans_italic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansItalic14">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_italic</item>
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+    <style name="NunitoSansItalic14.orange">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_bolditalic</item>
+        <item name="android:textColor">@color/darkestOrange</item>
+    </style>
+
+    <style name="NunitoSansBold16Red">
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">19sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/snackbarError</item>
+    </style>
+
+    <style name="NunitoSansBold16Red.ExtraBold">
+        <item name="fontFamily">@font/nunito_sans_extrabold</item>
+    </style>
+
+    <style name="NunitoSansItalic16">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_italic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansItalic18">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito_sans_italic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold">
+        <item name="android:textSize">42sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="NunitoSansBold.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold.34">
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="NunitoSansBold.34.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold13.Blue">
+        <item name="android:textColor">@color/albertsonsBlue</item>
+    </style>
+
+    <style name="NunitoSansRegular18">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansRegular12.grey550">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/chat_toptext</item>
+    </style>
+
+    <style name="NunitoSansRegular12.Red">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/chat_red</item>
+    </style>
+
+    <style name="NunitoSansRegular12.Blue">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/chat_blue</item>
+    </style>
+
+    <style name="NunitoSansRegular18.Grey500">
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansRegular18.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansRegular20">
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">18sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansRegular21">
+        <item name="android:textSize">21sp</item>
+        <item name="lineHeight">18sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="NunitoSansRegular20.Grey500">
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansRegular20.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansRegular20.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansRegular21.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansBold24">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="NunitoSansBold24.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+
+    <style name="NunitoSansBold24.DarkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBold18White">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansBold20White">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansBold20">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansBold20.grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold20Blue">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBold20darkGrey">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansBold18">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="NunitoSansBold18.grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold18.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="NunitoSansBold22">
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBold18.darkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBold16">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold16.darkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBold16.SemiBlue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="NunitoSansBold16.darkRed">
+        <item name="android:textColor">@color/darkRed</item>
+    </style>
+
+    <style name="NunitoSansBold16.verificationRed">
+        <item name="android:textColor">@color/verificationRed</item>
+    </style>
+
+    <style name="NunitoSansBold16.white">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="NunitoSansBold16.grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+    <style name="NunitoSansBold16.statusGreen">
+        <item name="android:textColor">@color/statusGreen</item>
+    </style>
+
+    <style name="NunitoSansBold15">
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold14">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansBold14.Coffee">
+        <item name="android:textColor">@color/chat_coffee</item>
+    </style>
+
+    <style name="NunitoSansBold14.DarkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBold14.DarkBlue.Bold">
+        <item name="android:textColor">@color/darkBlue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NunitoSansBold14.DarkGreen">
+        <item name="android:textColor">@color/darkGreen</item>
+    </style>
+
+    <style name="NunitoSansBold14.DarkRed">
+        <item name="android:textColor">@color/darkRed</item>
+    </style>
+
+    <style name="NunitoSansBold14.Grey500">
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansBold14.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold14.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansBold13">
+        <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/greyWhite</item>
+    </style>
+
+    <style name="NunitoSansBold13.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold12">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/greyWhite</item>
+    </style>
+
+    <style name="NunitoSansBold12.darkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBold28">
+        <item name="android:textSize">28sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+    </style>
+
+    <style name="NunitoSansBold12.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBold12.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansBold12.Greeen">
+        <item name="android:textColor">@color/highlight_green</item>
+    </style>
+
+    <style name="NunitoSansBold12.Red">
+        <item name="android:textColor">@color/error</item>
+    </style>
+
+    <style name="NunitoSansBold12.white">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansBoldItalic12">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_bolditalic</item>
+    </style>
+
+    <style name="NunitoSansBoldItalic12.DarkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBoldItalic12.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansBoldItalic14">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_bolditalic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBoldItalic18">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito_sans_bolditalic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansBoldItalic16">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_bolditalic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.SemiLightBlue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.SemiDarkRed">
+        <item name="android:textColor">@color/semiDarkRed</item>
+    </style>
+
+    <style name="NunitoSansSemiBold18">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBold18.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansSemiBold18.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBold9">
+        <item name="android:textSize">9sp</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/error</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.darkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.cattBlue">
+        <item name="android:textColor">@color/cattBlue</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.white">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.offWhite">
+        <item name="android:textColor">@color/offWhite</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold20.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.verificationRed">
+        <item name="android:textColor">@color/verificationRed</item>
+    </style>
+
+    <style name="PopinsMedium20">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+    <style name="PopinsMedium16">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+    <style name="PopinsMedium16.LighterRed">
+        <item name="android:textColor">@color/lighter_red</item>
+    </style>
+
+    <style name="PopinsMedium18">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="PopinsMedium18.LightBlack">
+        <item name="android:textColor">@color/light_black</item>
+    </style>
+
+    <style name="PopinsMedium20.DarkBrown">
+        <item name="android:textColor">@color/darkBrown</item>
+    </style>
+
+    <style name="PopinsMedium20.coffeeLighter">
+        <item name="android:textColor">@color/coffeeLighter</item>
+    </style>
+
+    <style name="SnackBar">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/offWhite2</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+    </style>
+
+    <style name="SnackBarAction">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/chilledBlue</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.darkGreen">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/darkGreen</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.Grey500">
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansSemiBold22">
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+
+    <style name="NunitoSansSemiBold14.white">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12.Red">
+        <item name="android:textColor">@color/verificationRed</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic12">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibolditalic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic14">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibolditalic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic14.Grey500">
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic14.Grey550">
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic14.Grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic16">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibolditalic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic16.Grey550">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibolditalic</item>
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic20">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibolditalic</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansSemiBoldItalic20DarkBlue">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibolditalic</item>
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansBoldItalic24DarkBlue">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/nunito_sans_bolditalic</item>
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="NunitoSansExtraBold14">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_extrabold</item>
+        <item name="android:textColor">@color/albertsonsBlue</item>
+    </style>
+
+    <style name="NunitoSansBold16.Blue">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/albertsonsBlue</item>
+    </style>
+
+    <style name="NunitoSansExtraBold24">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/nunito_sans_extrabold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansExtraBoldItalic">
+        <item name="fontFamily">@font/nunito_sans_extrabolditalic</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansExtraBoldItalic.24">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="NunitoSansExtraBoldItalic.24.grey600">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansExtraBoldItalic.24.white">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoSansExtraBoldItalic.24.darkBlue">
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+    <style name="PopinsBold36">
+        <item name="android:textSize">36sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="PopinsBold36.DarkestRed">
+        <item name="android:textColor">@color/darkest_red</item>
+    </style>
+    <style name="PopinsBold28">
+        <item name="android:textSize">28sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="PopinsBold24">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="PopinsBold28.DarkBrown">
+        <item name="android:textColor">@color/darkBrown</item>
+    </style>
+
+    <style name="PopinsBold24.DarkRed">
+        <item name="android:textColor">@color/dark_red</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.DarkestOrange">
+        <item name="android:textColor">@color/darkestOrange</item>
+    </style>
+
+    <style name="TabNunitoSansSemiBold">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TabNunitoSansSemiBoldWhite60Pct">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/white60pct</item>
+    </style>
+
+    <style name="TabNunitoSansBoldDarkBlue">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
+    <style name="TabNunitoSansSemiBoldGrey">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="TabNunitoSansRegular">
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textColor">@color/white60pct</item>
+    </style>
+
+    <style name="TabNunitoSansBold">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Tabs" parent="Widget.Design.TabLayout">
+        <item name="android:background">@color/white</item>
+        <item name="elevation">2dp</item>
+        <item name="tabIndicator">@color/darkBlue</item>
+        <item name="tabIndicatorColor">@color/darkBlue</item>
+        <item name="tabIndicatorFullWidth">true</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabMinWidth">140dp</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabSelectedTextColor">@color/darkBlue</item>
+        <item name="tabTextAppearance">@style/NunitoSansSemiBold14</item>
+        <item name="tabTextColor">@color/grey_600</item>
+    </style>
+
+    <style name="Tabs.DarkBlue" parent="Tabs">
+        <item name="android:background">@color/darkBlue</item>
+        <item name="elevation">10dp</item>
+        <item name="tabIndicator">@color/white</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/white60pct</item>
+    </style>
+
+    <style name="Tabs.Default">
+        <item name="android:background">@color/white</item>
+        <item name="elevation">10dp</item>
+        <item name="tabIndicator">@color/darkBrown</item>
+        <item name="tabIndicatorColor">@color/darkBrown</item>
+        <item name="tabSelectedTextColor">@color/darkBrown</item>
+        <item name="tabTextColor">@color/tab_text_state_selector</item>
+        <item name="tabTextAppearance">@style/DefaultTabTextAppearance</item>
+    </style>
+
+    <style name="DefaultTabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:fontFamily">@font/nunito_sans_regular</item>
+    </style>
+
+    <style name="textViewStyledButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:backgroundTint">@color/darkBlue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Selection styles - Use these on non-buttons that are tappable (imageviews, cardviews, viewgroups, etc) to show a ripple -->
+    <style name="SelectableItem">
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- For use on ImageViews/other viewgroups that want to use the standard, view size bounded (likely rectangular) ripple using the default system ripple/highlight color -->
+    <!-- Note that if you can't inherit this style due to the view/layout requiring another style, just manually add the background/focus attributes -->
+    <style name="SelectableItem.Background">
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- For use on ImageViews/other viewgroups that want to use the standard, view size bounded (likely rectangular) ripple using the default system ripple/highlight color -->
+    <!-- Note that if you can't inherit this style due to the view/layout requiring another style, just manually add the foreground/focus attributes -->
+    <style name="SelectableItem.Foreground">
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- For use on ImageViews/other viewgroups that want to have an unbounded circular ripple (outside the bounds of the view) using the default system ripple/highlight color -->
+    <!-- Note that if you can't inherit this style due to the view/layout requiring another style, just manually add the background/focus attributes -->
+    <style name="SelectableItem.CircularBackground">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <!-- For use on ImageViews/other viewgroups that want to have an unbounded circular ripple (outside the bounds of the view) using the default system ripple/highlight color -->
+    <!-- Note that if you can't inherit this style due to the view/layout requiring another style, just manually add the background/focus attributes -->
+    <style name="SelectableItem.CircularForeground">
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <!-- TextLayout Styles -->
+    <!-- Really nice article about styling TextInput Layout https://medium.com/@Dimitris_CBR/material-text-field-proper-theming-fcd393f27d97 -->
+    <style name="TextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <!-- Style attributes -->
+        <item name="boxCornerRadiusTopStart">5dp</item>
+        <item name="boxCornerRadiusBottomStart">5dp</item>
+        <item name="boxCornerRadiusBottomEnd">5dp</item>
+        <item name="hintTextAppearance">@style/InternalHintText</item>
+        <item name="errorTextAppearance">@style/InternalLargeErrorText</item>
+        <item name="android:colorAccent">@color/error</item>
+        <item name="colorError">@color/error</item>
+        <item name="errorIconTint">@color/error</item>
+        <item name="errorTextColor">@color/error</item>
+        <item name="android:textColorHint">@color/hintColor</item>
+        <item name="android:textColorPrimary">@color/grey_600</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeColor">@color/text_input_active_state_selector</item>
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+    // Todo delete old style after all layouts have been updated
+    <style name="TextLayoutNew" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <!-- Style attributes -->
+        <item name="boxCornerRadiusTopStart">5dp</item>
+        <item name="boxCornerRadiusBottomStart">5dp</item>
+        <item name="boxCornerRadiusBottomEnd">5dp</item>
+        <item name="errorTextAppearance">@style/InternalLargeErrorText</item>
+        <item name="android:colorAccent">@color/error</item>
+        <item name="colorError">@color/error</item>
+        <item name="errorIconTint">@color/error</item>
+        <item name="errorTextColor">@color/error</item>
+        <item name="android:textColorPrimary">@color/grey_600</item>
+        <item name="hintTextAppearance">@font/nunito_sans_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeColor">@color/text_input_active_state_selector</item>
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="colorControlActivated">@color/darkBlue</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_dark_blue</item>
+    </style>
+
+    <style name="InternalLargeErrorText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/nunito_sans_regular</item>
+    </style>
+
+    <style name="InternalInputTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="InputTextAppearanceLarger">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="InternalHintText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:backgroundTint">@color/button_background_tint_selector</item>
+        <item name="android:backgroundTintMode">src_in</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textAppearance">@style/NunitoSansBold16</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:padding">13dp</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="cornerRadius">4dp</item>
+    </style>
+
+    <style name="TimedButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textAppearance">@style/NunitoSansBold16</item>
+        <item name="android:padding">13dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+    </style>
+
+    <style name="Button.Anchored">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+    </style>
+
+    <style name="FAB">
+        <item name="android:backgroundTint">@color/darkBlue</item>
+        <item name="borderWidth">0dp</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+    </style>
+
+    <style name="BottomEdgeButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:backgroundTint">@color/square_button_background_selector</item>
+        <item name="android:textAppearance">@style/NunitoSansBold16</item>
+        <item name="android:textColor">@color/square_button_text_selector</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">0dp</item>
+    </style>
+
+
+    <style name="BottomEdgeButtonLighterTint" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:backgroundTint">@color/square_button_light_background_selector</item>
+        <item name="android:textAppearance">@style/NunitoSansBold16</item>
+        <item name="android:textColor">@color/square_button_text_selector</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">0dp</item>
+    </style>
+
+    <style name="BottomEdgeButtonLighterTintBlue" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:backgroundTint">@color/darkBlue</item>
+        <item name="android:textAppearance">@style/NunitoSansBold16</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">0dp</item>
+    </style>
+
+    // Home Screen
+
+    <style name="HomeDeliveryDugFlow">
+        <item name="flow_wrapMode">chain</item>
+        <item name="flow_maxElementsWrap">3</item>
+        <item name="android:layout_marginStart">16dp</item>
+    </style>
+
+    <style name="HomeStatsValue">
+        <item name="android:fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textSize">48dp</item>
+        <item name="android:textColor">@color/grey_600</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    // Pin Code style
+    <style name="PinCodeEntry" parent="NunitoSansRegular20">
+        <item name="android:layout_marginEnd">13dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:enabled">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="TextLabelPrimary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="android:textColorHint">@color/grey_550</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="hintTextColor">@color/coffeeGrey700</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+    </style>
+
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

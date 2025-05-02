@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="orderNumber"
+            type="String" />
+
+        <variable
+            name="customerWaitTime"
+            type="java.time.ZonedDateTime" />
+
+        <variable
+            name="otpCaptureOrBypassTime"
+            type="java.time.ZonedDateTime" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffRxInterstitialViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/grey_frame"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/warm_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/orderNumberText"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/order"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/orderNumberValue"
+            style="@style/NunitoSansSemiBold16.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:text="@{'#' + orderNumber}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#123456" />
+
+        <TextView
+            android:id="@+id/waitTimeText"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/customer_wait_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderNumberText" />
+
+        <TextView
+            android:id="@+id/waitTimeValue"
+            style="@style/NunitoSansSemiBold16.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            app:customerWaitTime="@{customerWaitTime}"
+            app:otpCapturedOrBypassTime="@{otpCaptureOrBypassTime}"
+            app:isDugOrder="@{false}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderNumberValue"
+            tools:text="2m 3s" />
+
+        <TextView
+            android:id="@+id/viewOrderSummaryText"
+            style="@style/NunitoSansSemiBold14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/view_order_smummary"
+            android:onClick="@{() -> viewModel.onViewOrderSummaryClicked(orderNumber)}"
+            android:textColor="@color/cattBlue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/waitTimeValue"
+            tools:text="@string/view_order_smummary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

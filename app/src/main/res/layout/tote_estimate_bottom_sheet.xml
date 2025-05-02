@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetDialogViewModel" />
+
+        <variable
+            name="ambientTote"
+            type="Integer" />
+
+        <variable
+            name="chilledTote"
+            type="Integer" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_top_corners_background"
+        android:minHeight="@dimen/default_bottomsheet_peek_height"
+        android:paddingHorizontal="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="56dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/scanItemTitle"
+            style="@style/PopinsMedium20.DarkBrown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="-6sp"
+            android:text="@{viewData.title}"
+            android:textAlignment="center"
+            android:layout_marginTop="43dp"
+            app:layout_constraintTop_toBottomOf="@+id/handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="You will need\n 4 AM, 2 CH totes" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/totesImage"
+            android:layout_width="173dp"
+            android:layout_height="173dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_tote_estimate_bg"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scanItemTitle">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ic_ambient_tote"
+                style="@style/PopinsMedium20.DarkBrown"
+                visibilityGoneIfFalse="@{ambientTote>0}"
+                android:layout_width="64dp"
+                android:layout_height="56dp"
+                android:background="@drawable/ic_tote_estimate_ambient"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="@{ambientTote.toString()}"
+                tools:text="4" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ic_chilled_tote"
+                style="@style/PopinsMedium20.coffeeLighter"
+                visibilityGoneIfFalse="@{chilledTote>0}"
+                android:layout_width="54dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_tote_estimate_chilled"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="@{chilledTote.toString()}"
+                tools:text="2" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerPluAndPounds"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2sp"
+            android:text="@{viewData.body}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totesImage"
+            tools:text="@string/totes_needed_body" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/ButtonPrimary"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.dismissBottomSheet()}"
+            android:text="@{viewData.positiveButtonText}"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/pickerPluAndPounds"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/got_it" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

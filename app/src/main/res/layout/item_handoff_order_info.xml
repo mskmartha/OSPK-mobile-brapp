@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.ui.models.CustomerArrivalStatusUI" />
+
+        <variable
+            name="handOffUI"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffUI" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dugvehicleNameCL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_1_dp_card"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/labelHandoffDetailsDug"
+                    style="@style/NunitoSansSemiBold16.grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/handoff_details"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/notifyRxPrescriptionNotAvailble"
+                    android:layout_width="match_parent"
+                    android:layout_height="92dp"
+                    android:layout_marginTop="16dp"
+                    visibilityGoneIfFalse="@{viewModel.showPrescriptionUnavailable}"
+                    android:background="@drawable/rounded_corner_card"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelHandoffDetailsDug">
+
+                    <ImageView
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/rx_group">
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_margin="8dp"
+                        style="@style/NunitoSansRegular14.grey700"
+                        android:text="@string/pharmacy_rx_pickup_unavailable_body"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/pickupPersonHeader"
+                    style="@style/NunitoSansRegular12.coffeGray700"
+                    visibilityGoneIfFalse="@{handOffUI.driverName != null}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{handOffUI.driverInfoHeader}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/notifyRxPrescriptionNotAvailble"
+                    tools:text="@string/pick_up_person" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/pickupPersonInfo"
+                    style="@style/NunitoSansRegular16.grey700"
+                    visibilityGoneIfFalse="@{handOffUI.driverName != null}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{handOffUI.driverName}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pickupPersonHeader"
+                    tools:text="G. Kimbal" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrierPickupPerson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="pickupPersonHeader,pickupPersonInfo" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/phoneNumberHeader"
+                    style="@style/NunitoSansRegular12.coffeGray700"
+                    visibilityGoneIfNullOrEmpty="@{handOffUI.phoneNumber}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/phone_number"
+                    app:layout_constraintStart_toStartOf="@+id/barrierPickupPerson"
+                    app:layout_constraintTop_toBottomOf="@+id/notifyRxPrescriptionNotAvailble" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/phoneNumberInfo"
+                    style="@style/NunitoSansRegular16.grey700"
+                    visibilityGoneIfNullOrEmpty="@{handOffUI.phoneNumber}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@{handOffUI.phoneNumber}"
+                    app:layout_constraintStart_toStartOf="@+id/barrierPickupPerson"
+                    app:layout_constraintTop_toBottomOf="@+id/pickupPersonHeader"
+                    tools:text="(933) 522 - 1159" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/spotNumberHeader"
+                    style="@style/NunitoSansRegular12.coffeGray700"
+                    visibilityGoneIfFalse="@{handOffUI.spotNumber != null}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/spot_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pickupPersonInfo" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/spotNumber"
+                    style="@style/NunitoSansRegular16.Grey700"
+                    visibilityGoneIfFalse="@{handOffUI.spotNumber != null}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{handOffUI.spotNumber}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spotNumberHeader"
+                    tools:text="1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/vehicleNameHeader"
+                    style="@style/NunitoSansRegular12.coffeGray700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toEndOf="@+id/spotNumberHeader"
+                    app:layout_constraintTop_toBottomOf="@+id/pickupPersonInfo"
+                    app:layout_goneMarginStart="0dp"
+                    app:vehicleNameHeader="@{handOffUI}"
+                    tools:text="@string/vehicle_information" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/customerCar"
+                    android:layout_width="42dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="3dp"
+                    android:importantForAccessibility="no"
+                    app:dugOrder="@{handOffUI.isDugOrder}"
+                    app:layout_constraintStart_toStartOf="@+id/vehicleNameHeader"
+                    app:layout_constraintTop_toBottomOf="@id/vehicleNameHeader"
+                    app:vehicleImageInfo="@{handOffUI.vehicleImageInfo}"
+                    tools:src="@drawable/ic_sedan" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/vehicleName"
+                    style="@style/NunitoSansRegular16.Grey700"
+                    visibilityGoneIfNullOrBlank="@{handOffUI.vehicleInformation}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11.26dp"
+                    android:text="@{handOffUI.vehicleInformation}"
+                    app:layout_constraintStart_toEndOf="@+id/customerCar"
+                    app:layout_constraintTop_toBottomOf="@id/vehicleNameHeader"
+                    app:layout_goneMarginStart="0dp"
+                    tools:text="Blue Sedan" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrierSpotAndVehicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="spotNumber,vehicleName" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/locationDetailsHeader"
+                    style="@style/NunitoSansRegular12.coffeGray700"
+                    visibilityGoneIfFalse="@{handOffUI.vehicleLocation != null}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/location_details"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/barrierSpotAndVehicle" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/locationDetails"
+                    style="@style/NunitoSansRegular16.Grey700"
+                    visibilityGoneIfFalse="@{handOffUI.vehicleLocation != null}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{handOffUI.vehicleLocation}"
+                    app:layout_constraintStart_toStartOf="@+id/locationDetailsHeader"
+                    app:layout_constraintTop_toBottomOf="@id/locationDetailsHeader"
+                    tools:text="“I’m across the main entrance by the shopping carts in the blue car.”  " />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hasBagPreferenceHeader"
+                    style="@style/NunitoSansRegular12.coffeGray700"
+                    visibilityGoneIfTrue="@{handOffUI.isCustomerBagPreference}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/bag_preference_header"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/locationDetails" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hasBagPreference"
+                    style="@style/NunitoSansRegular16.Grey700"
+                    visibilityGoneIfTrue="@{handOffUI.isCustomerBagPreference}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bag_preference_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hasBagPreferenceHeader"
+                    tools:text="The customer will bring their own bags." />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+
+</layout>

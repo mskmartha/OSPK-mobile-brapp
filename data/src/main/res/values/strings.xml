@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="substitute_no_description">No description available</string>
+    <string name="id_type_drivers_license_server">Drivers License</string>
+    <string name="id_type_drivers_license">Driver\'s License</string>
+    <string name="id_type_state_id">State ID</string>
+    <string name="id_type_passport">Passport</string>
+    <string name="id_type_military_id">Military ID</string>
+    <string name="id_type_other">Other</string>
+</resources>

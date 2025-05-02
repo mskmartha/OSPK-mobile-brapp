@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.staging.print.PrintLabelsViewModel" />
+
+        <variable
+            name="customLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/printLabelButton"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/orderInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="95dp"
+                    android:background="@color/white"
+                    android:tag="sticky"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/shortOrderNumber"
+                        style="@style/NunitoSansBold20.grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:includeFontPadding="false"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="DUG08" />
+
+                    <View
+                        android:id="@+id/viewDivider"
+                        android:layout_width="1dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/grey_550"
+                        app:layout_constraintBottom_toBottomOf="@+id/shortOrderNumber"
+                        app:layout_constraintStart_toEndOf="@+id/shortOrderNumber"
+                        app:layout_constraintTop_toTopOf="@+id/shortOrderNumber" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/headerOrderNumber"
+                        style="@style/NunitoSansBold20.grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:includeFontPadding="false"
+                        app:layout_constraintStart_toEndOf="@id/viewDivider"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="10042145" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/customerName"
+                        style="@style/NunitoSansSemiBold16.grey700"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:paddingHorizontal="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shortOrderNumber"
+                        tools:text="Richard Carter" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/totesListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="true"
+                    android:paddingBottom="16dp"
+                    app:customLifecycleOwner="@{customLifecycleOwner}"
+                    app:isExpanded="@{true}"
+                    app:layout_constraintTop_toBottomOf="@+id/orderInfo"
+                    app:printItems="@{viewModel.printLabelsList}"
+                    tools:itemCount="20"
+                    tools:listitem="@layout/item_print_labels_header" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/printLabelButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="24dp"
+            android:enabled="@{viewModel.printButtonEnabled}"
+            android:onClick="@{() -> viewModel.onPrintLabels()}"
+            android:text="@string/print_labels"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0"
+            tools:visibility="visible" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

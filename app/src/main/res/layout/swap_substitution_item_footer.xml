@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.data.model.response.SubApprovalStatus" />
+
+        <variable
+            name="subApprovalStatus"
+            type="com.albertsons.acupick.data.model.response.SubApprovalStatus" />
+
+        <variable
+            name="isSwapSubstitutionEnabled"
+            type="Boolean" />
+
+        <variable
+            name="fragmentLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+
+        <variable
+            name="declineViewVisibility"
+            type="Boolean" />
+
+        <variable
+            name="approvedViewVisibility"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/approvedTv"
+            style="@style/ButtonApproved"
+            visibilityGoneIfTrue="@{approvedViewVisibility}"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_approved"
+            android:drawablePadding="6dp"
+            android:text="@string/swap_approved"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Approved" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/declinedTv"
+            style="@style/ButtonDeclined"
+            visibilityGoneIfTrue="@{declineViewVisibility}"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="48dp"
+            android:drawableStart="@drawable/ic_declined"
+            android:drawablePadding="6dp"
+            android:text="@string/swap_declined"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/approvedTv"
+            tools:text="Declined" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/swapConfirmButton"
+            style="@style/ButtonPrimaryBlue"
+            visibilityGoneIfFalse="@{isSwapSubstitutionEnabled}"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="12dp"
+            android:text="@{subApprovalStatus != SubApprovalStatus.OUT_OF_STOCK ? @string/swap_substitute : @string/substitute}"
+            app:layout_constraintTop_toBottomOf="@+id/declinedTv"
+            app:layout_goneMarginTop="8dp"
+            tools:layout_goneMarginTop="50dp"
+            tools:layout_marginTop="20dp"
+            tools:text="Swap Substitute"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/backgroundGrey"
+            app:layout_constraintTop_toBottomOf="@id/swapConfirmButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

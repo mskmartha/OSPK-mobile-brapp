@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.albertsons.acupick.data.model.SellByType"/>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.picklistitems.ConfirmAmountViewModel" />
+
+        <variable
+            name="uiData"
+            type="com.albertsons.acupick.ui.models.ConfirmAmountUIData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/expanded_bottomsheet_peek_height"
+        android:background="@drawable/rounded_top_corners_background">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="56dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fixed_item_tool_tip_body"
+            style="@style/PopinsMedium20.DarkBrown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="31dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="@string/net_weight_tool_tip_body"
+            app:layout_constraintTop_toBottomOf="@+id/handle"
+            tools:text="Enter net weight or count listed on the label" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fixed_item_tool_tip_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/net_weight_tool_tip_image_content_description"
+            android:src="@drawable/ps_item_printed_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fixed_item_tool_tip_body" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fixed_item_tool_tip_helper_text"
+            style="@style/NunitoSansRegular10.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/net_weight_tool_tip_secondary_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fixed_item_tool_tip_image" />
+
+
+        <com.albertsons.acupick.ui.util.CustomTextInput
+            android:id="@+id/idTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="31dp"
+            android:layout_marginTop="38dp"
+            confirmAmountError="@{viewModel.confirmAmountErrorLiveData}"
+            app:hint="@{@string/net_weight_count_hint}"
+            app:layout_constraintTop_toBottomOf="@+id/fixed_item_tool_tip_helper_text"
+            app:typedText="@={viewModel.netWeightStateFlow}"
+            app:isFloatingNumber="@{uiData.itemType == SellByType.PriceScaled}"
+            app:requestFocus="@{true}"
+            app:onImeClick="@{viewModel.onContinueClicked}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/continueButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="24dp"
+            android:enabled="@{viewModel.continueEnabledLiveData}"
+            android:onClick="@{() -> viewModel.onContinueClicked()}"
+            android:text="@string/continue_cta"
+            app:layout_constraintTop_toBottomOf="@id/idTextInputLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

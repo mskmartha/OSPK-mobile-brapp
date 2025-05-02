@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+        <variable
+            name="showButtonIcon"
+            type="Boolean" />
+
+    </data>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/rounded_coener_dialog_background"
+            android:minWidth="311dp"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/PoppinsMedium20.Grey700"
+                android:text="@{viewData.title}"
+                android:minHeight="56dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Model Header"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/NunitoSansRegular14.Grey700"
+                app:highlightImportantText="@{viewData.body}"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/item_title"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/item_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="24dp"
+                android:scaleType="fitCenter"
+                app:imageResource="@{viewData.titleIcon}"
+                visibilityGoneIfNull="@{viewData.titleIcon}"
+                app:layout_constraintTop_toBottomOf="@id/item_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:src="@drawable/ic_driver_arrived_notification"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/positiveButton"
+                style="@style/ButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                visibilityGoneIfFalse="@{showButtonIcon}"
+                android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+                android:visibility="@{viewData.positiveButtonVisibility}"
+                android:text="@{viewData.positiveButtonText}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_image"
+                tools:text="Positive CTA" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/negativeButton"
+                style="@style/ButtonLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@null"
+                android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+                android:text="@{viewData.negativeButtonText}"
+                android:visibility="@{viewData.negativeButtonVisibility}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/positiveButton"
+                tools:text="Negative CTA" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

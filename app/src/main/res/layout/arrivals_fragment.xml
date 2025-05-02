@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.ArrivalsViewModel" />
+
+        <variable
+            name="isInProgress"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:isRefreshComplete="@{viewModel.isDataRefreshing}"
+        app:setOnRefresh="@{viewModel}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibilityGoneIfTrue="@{!viewModel.isSkeletonStateShowing}"
+                tools:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLatte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
+                android:src="@drawable/ic_latte"
+                app:isInProgress="@{isInProgress}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showNoOrdersReadyInProgressUi="@{viewModel.showNoOrdersReadyInProgressUi}"
+                app:showNoOrdersReadyUi="@{viewModel.showNoOrdersReadyUi}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/noPicks"
+                style="@style/NunitoSansRegular16.Grey500"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="48dp"
+                android:layout_marginTop="24dp"
+                android:text="@{isInProgress ? viewModel.inProgressNoDataAvailableText : viewModel.pickupReadyNoDataAvailableText}"
+                android:textAlignment="center"
+                app:isInProgress="@{isInProgress}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivLatte"
+                app:showNoOrdersReadyInProgressUi="@{viewModel.showNoOrdersReadyInProgressUi}"
+                app:showNoOrdersReadyUi="@{viewModel.showNoOrdersReadyUi}"
+                tools:text="@string/pickup_ready_order_unavailable" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                style="@style/NunitoSansRegular16.Grey700"
+                android:layout_height="40dp"
+                android:padding="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/search"
+                android:text="@={viewModel.searchQuery}"
+                visibilityGoneIfFalse="@{viewModel.isInternalBuild}"
+                tools:hint="100"
+                android:background="@drawable/rounded_corner_edittext_background_active"
+                tools:visibility="visible"/>
+
+            <com.albertsons.acupick.ui.custom.AcuPickRecyclerView
+                android:id="@+id/arrivalOrdersRv"
+                visibilityGoneIfTrue="@{viewModel.isSkeletonStateShowing}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:paddingTop="16dp"
+                app:isInProgress="@{isInProgress}"
+                app:layout_constraintBottom_toTopOf="@+id/flbeginHandoff"
+                app:layout_constraintTop_toBottomOf="@+id/editText2"
+                app:showScrollIndicator="top"
+                app:sortedItems="@{viewModel.filteredResult}"
+                app:viewModel="@{viewModel}"
+                tools:listitem="@layout/item_arrival_orders" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.compose.ui.platform.ComposeView
+                    android:id="@+id/chatButtonView"
+                    android:layout_gravity="end|bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:composableName="ChatButtonView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/flbeginHandoff"
+                visibilityGoneIfFalse="@{viewModel.showBeginButton}"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/white"
+                app:cardElevation="12dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/beginHandoffButton"
+                    style="@style/ButtonPrimary"
+                    isNotAnchored="@{true}"
+                    visibilityGoneIfFalse="@{viewModel.showBeginButton}"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="48dp"
+                    android:enabled="@{viewModel.beginButtonEnabled}"
+                    android:onClick="@{() -> viewModel.beginHandoff(false)}"
+                    android:text="@{isInProgress ? @string/takeover_handoff_cta : @string/handoff_cta}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:enabled="false"
+                    tools:layout_editor_absoluteX="0dp" />
+
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

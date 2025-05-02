@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.idverification.IdentificationBarcodeScanViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.arrivals.complete.idverification.IdBarcodeScanActivity">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/preview_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/top_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:alpha="0.75"
+                android:background="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/top_guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:alpha="0.75"
+                android:background="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
+
+            <View
+                android:id="@+id/start_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.75"
+                android:background="#000000"
+                app:layout_constraintBottom_toTopOf="@id/bottom_view"
+                app:layout_constraintEnd_toEndOf="@id/start_guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/top_view" />
+
+            <View
+                android:id="@+id/end_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.75"
+                android:background="#000000"
+                app:layout_constraintBottom_toTopOf="@id/bottom_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/end_guideline"
+                app:layout_constraintTop_toBottomOf="@id/top_view" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/barcodeClose"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:onClick="@{() -> viewModel.onCloseButtonClicked()}"
+                android:src="@drawable/ic_cancel_white"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/toolbarTitle"
+                app:visibilityGoneIfTrue="@{viewModel.scanSuccessful}" />
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                style="@style/NunitoSansBold20"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="53dp"
+                android:text="@string/scan_barcode"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@id/top_guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/barcodeManualEntry"
+                style="@style/SelectableItem.Foreground"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="18dp"
+                android:onClick="@{() -> viewModel.onManualEntryClicked()}"
+                android:padding="4dp"
+                android:src="@drawable/ic_keyboard_white"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/toolbarTitle"
+                app:visibilityGoneIfTrue="@{viewModel.scanSuccessful}" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="-1dp"
+                android:contentDescription="@string/scan_the_barcode"
+                android:src="@{viewModel.scanSuccessful ? @drawable/bordered_success_empty_box : @drawable/bordered_empty_box}"
+                app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toTopOf="@id/top_guideline"
+                tools:src="@drawable/bordered_empty_box" />
+
+            <TextView
+                style="@style/NunitoSansSemiBold16.white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="@string/barcode_scanner_directions"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/bottom_view"
+                app:visibilityGoneIfTrue="@{viewModel.scanSuccessful}"
+                tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/barcode_success"
+                style="@style/NunitoSansExtraBoldItalic.24.white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="@string/barcode_scanned_success_call"
+                app:layout_constraintEnd_toStartOf="@id/end_view"
+                app:layout_constraintStart_toEndOf="@id/start_view"
+                app:layout_constraintTop_toTopOf="@id/bottom_view"
+                app:visibilityGoneIfFalse="@{viewModel.scanSuccessful}"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/ic_confirm"
+                android:tint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barcode_success"
+                app:visibilityGoneIfFalse="@{viewModel.scanSuccessful}" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".91" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".08" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/top_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".20" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/bottom_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".59" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</layout>

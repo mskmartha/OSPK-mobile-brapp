@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="com.albertsons.acupick.ui.chat.MessageListViewItem" />
+
+        <import type="android.view.View" />
+
+        <import type="com.albertsons.acupick.data.model.chat.MessageSubType" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:focusableInTouchMode="false">
+
+        <TextView
+            android:id="@+id/message_cas_text"
+            style="@style/NunitoSansBold14.Coffee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:includeFontPadding="false"
+            android:singleLine="false"
+            app:statusTextColor="@{message}"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:maxLength="300"
+            tools:text="@string/chat_substitution_declined"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/message_original_item"
+            style="@style/NunitoSansRegular14.Coffee"
+            android:layout_width="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:includeFontPadding="false"
+            android:singleLine="false"
+            android:text="@{message.customAttributes.orderedItem.orderedItemDescription ?? ``}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_cas_text"
+            android:maxLines="2"
+            tools:text="Daves Killer Bread.... "
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/swap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_original_item"
+            tools:src="@drawable/swap" />
+
+        <TextView
+            android:id="@+id/message_substitution_with"
+            style="@style/NunitoSansRegular14.Coffee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:includeFontPadding="false"
+            android:singleLine="false"
+            android:text="@string/chat_substituted_with"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="@+id/icon"
+            tools:maxLength="300"
+            tools:text="Substuted with"
+            tools:visibility="visible" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/substitutedItemsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:setCasSubItems="@{message.customAttributes.orderedItem.substitutedItems}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_substitution_with" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

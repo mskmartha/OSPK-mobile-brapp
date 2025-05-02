@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="zone"
+            type="com.albertsons.acupick.ui.models.ZonedBagsScannedData" />
+
+        <variable
+            name="location"
+            type="String" />
+
+        <variable
+            name="fragmentViewLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemZone"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{location}"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="AM05" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bagOrToteCountTv"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dividerScannedCount"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginEnd="0dp"
+            app:zonedBagOrToteData="@{zone}"
+            tools:text="2/2 Totes" />
+
+        <View
+            android:id="@+id/dividerScannedCount"
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/grey_550"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/looseCountTv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:zonedData="@{zone}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/looseCountTv"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:zonedLooseData="@{zone}"
+            tools:text="1/1 loose" />
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/bagCount"-->
+        <!--            style="@style/NunitoSansSemiBold16"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            app:destageItem="@{zone}"-->
+        <!--            app:isCurrentZone="@{zone.isActive}"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:text="1 of 4 bags" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/locationTv"-->
+        <!--            style="@style/NunitoSansSemiBold16"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            app:isCurrentZone="@{zone.isActive}"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            android:text="@{location}"-->
+        <!--            android:textAlignment="textEnd"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:text="AM05"-->
+        <!--            tools:visibility="visible" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

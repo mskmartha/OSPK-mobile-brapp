@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/order_verified_message_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:codeVerifiedOrReportLogged="@{viewModel.codeVerifiedOrReportLogged}"
+        app:isAuthDUGEnabled="@{viewModel.handOffUI.handshakeRequired}">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/authenticatedDugLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_1_dp_card"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/labelAuthenticationCode"
+                    style="@style/NunitoSansSemiBold16.grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/authentication_code"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/authCodeInstructions"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="19dp"
+                    android:text="@string/auth_code_instructions"
+                    app:layout_constraintEnd_toStartOf="@+id/authCodeCustomerHand"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelAuthenticationCode" />
+
+                <ImageView
+                    android:id="@+id/authCodeCustomerHand"
+                    android:layout_width="79dp"
+                    android:layout_height="79dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/auth_code_customer_hand"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+</layout>

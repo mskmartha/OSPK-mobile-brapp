@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="com.albertsons.acupick.ui.chat.MessageListViewItem" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.chat.ChatViewModel" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="40dp"
+        android:focusableInTouchMode="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/message_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/incoming_chat_shape"
+            android:focusableInTouchMode="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/incoming_chat_shape">
+
+            <TextView
+                android:id="@+id/message_body"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp"
+                android:singleLine="false"
+                android:text="@{message.body.trim()}"
+                android:textColorLink="@color/black"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginStart="8dp"
+                tools:maxLength="300"
+                tools:text="Please substitute with any other cake with fruit on it if available. "
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/senderName"
+            app:visibilityGoneIfFalse="@{viewModel.isMasterOrderView}"
+            style="@style/NunitoSansRegular12.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="4dp"
+            android:text="@{viewModel.customerName}"
+            android:textColorLink="@color/colorPrimary"
+            app:layout_constraintStart_toEndOf="@+id/time"
+            app:layout_constraintTop_toBottomOf="@+id/message_item"
+            tools:maxLength="300"
+            tools:visibility="visible"
+            tools:text="Austin k"/>
+
+        <TextView
+            android:id="@+id/time"
+            style="@style/NunitoSansRegular12.grey550"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2sp"
+            android:layout_marginTop="4dp"
+            android:text="@{message.formattedTime}"
+            android:textColorLink="@color/colorPrimary"
+            app:layout_constraintStart_toEndOf="@id/senderName"
+            app:layout_constraintTop_toBottomOf="@+id/message_item"
+            tools:maxLength="300"
+            tools:text="12:30 PM"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

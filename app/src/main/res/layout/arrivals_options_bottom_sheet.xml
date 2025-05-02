@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.destage.ArrivalsOptionsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/arrivalPersonIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:onClick="@{()->viewModel.onMarkAsNotHereLabelClicked()}"
+            android:src="@drawable/ic_person_customer"
+            app:layout_constraintBottom_toBottomOf="@+id/option_mark_as_not_here"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/option_mark_as_not_here" />
+
+        <TextView
+            android:id="@+id/option_mark_as_not_here"
+            style="@style/NunitoSansRegular16.semiLightBlue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:onClick="@{()->viewModel.onMarkAsNotHereLabelClicked()}"
+            android:paddingVertical="24dp"
+            android:text="@string/arrival_option_mark_as_not_here"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/arrivalPersonIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/arrivals_not_here_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/coffeeLight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/option_mark_as_not_here" />
+
+        <ImageView
+            android:id="@+id/cancelIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:onClick="@{()->viewModel.cancelClicked()}"
+            android:src="@drawable/ic_cancel_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOptionCancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvOptionCancel" />
+
+        <TextView
+            android:id="@+id/tvOptionCancel"
+            style="@style/NunitoSansRegular16.semiLightBlue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:onClick="@{()->viewModel.cancelClicked()}"
+            android:paddingVertical="24dp"
+            android:text="@string/cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/arrivalPersonIcon"
+            app:layout_constraintTop_toBottomOf="@+id/arrivals_not_here_divider" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

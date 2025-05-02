@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dbViewModel"
+            type="com.albertsons.acupick.ui.staging.print.PrintLabelsSubItemDbViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/printLabelsSubGroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:focusable="true"
+        android:onClick="@{() -> dbViewModel.onSubGroupClicked()}"
+        android:paddingHorizontal="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/checkBox"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/darkBlue"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:isCheckBoxEnabled="@{true}"
+            app:setCheckBoxStates="@{dbViewModel.isChecked}"
+            tools:src="@drawable/ic_checkbox_checked_state" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/labelName"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{dbViewModel.bagOrToteNumber}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/checkBox"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TTA00" />
+
+        <!--<com.google.android.material.textview.MaterialTextView
+            android:id="@+id/scanned"
+            style="@style/NunitoSansRegular14.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:text="@string/scanned"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/labelName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibilityGoneIfFalse="@{dbViewModel.isScanned}" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

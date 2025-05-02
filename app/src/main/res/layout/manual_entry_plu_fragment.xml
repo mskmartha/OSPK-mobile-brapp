@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.manualentry.pick.plu.ManualEntryPluViewModel" />
+
+        <variable
+            name="pagerVm"
+            type="com.albertsons.acupick.ui.manualentry.pick.ManualEntryPagerViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/enter_plu_label"
+                    style="@style/PoppinsMedium20.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/enter_the_plu_number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/manual_entry_label_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_manual_entry_plu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/enter_plu_label" />
+
+                <com.albertsons.acupick.ui.util.CustomTextInput
+                    android:id="@+id/pluTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="31dp"
+                    android:layout_marginTop="16dp"
+                    app:errorDrawable="@{@drawable/ic_red_warning}"
+                    app:errorTextResId="@{viewModel.pluTextInputError}"
+                    app:hint="@{@string/manual_plu_hint}"
+                    app:imeClickEnabled="@{pagerVm.isContinueEnabled}"
+                    app:isEnabled="@{viewModel.isPluEntryEditable}"
+                    app:isLastView="@{true}"
+                    app:isNumber="@{true}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/manual_entry_label_img"
+                    app:maxLength="@{viewModel.manualEntryPLUUI.maxEntryLength}"
+                    app:onImeClick="@{pagerVm.onContinueButtonClicked}"
+                    app:requestFocus="@{pagerVm.isPlu &amp;&amp; viewModel.isPluEntryEditable}"
+                    app:typedText="@={viewModel.pluEntryText}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

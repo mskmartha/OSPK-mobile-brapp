@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.chat.ChatViewModel" />
+
+        <import type="android.text.TextUtils" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messageList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            app:chatViewModel="@{viewModel}"
+            app:layout_constraintBottom_toTopOf="@+id/photo_preview_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:setMessages="@{viewModel.messageItems}"
+            tools:listitem="@layout/chat_incoming_message_item" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            visibilityGoneIfFalse="@{viewModel.isTyping}"
+            app:layout_constraintBottom_toTopOf="@+id/rectangle_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/typing_name"
+                style="@style/NunitoSansBold12.coffeGray700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:text="@{viewModel.customerName}"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginStart="8dp"
+                tools:maxLength="300"
+                tools:text="Grace"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/typing"
+                style="@style/NunitoSansRegular12.coffeGray700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:paddingStart="2dp"
+                android:singleLine="true"
+                android:text="@string/chat_tying"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/typing_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginStart="8dp"
+                tools:maxLength="300"
+                tools:text="is typing..."
+                tools:visibility="visible" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/photo_preview_layout"
+            visibilityGoneIfFalse="@{viewModel.isPhotoPreviewMode}"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/rectangle_1"
+            tools:visibility="gone">
+
+            <View
+                android:id="@+id/image_preview_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="#D9D9D9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/preview_image"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/image_close"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="61dp"
+                    android:layout_marginTop="8dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_preview_close"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/alertMessageContainer"
+            visibilityGoneIfTrue="@{viewModel.hideNetworkAlert}"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_network_error_alert"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/bg_rounded_corner_alert_dove_light"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/infoIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_informational"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/alertMessage"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:gravity="start"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="2sp"
+                    android:minWidth="328dp"
+                    android:text="@string/network_offline_alert_message"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/infoIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Your internet connection is offline." />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/alertCloseIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{()->viewModel.onNetworkAlertCloseCTAClick()}"
+                    android:src="@drawable/ic_vector__stroke_close"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/rectangle_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#D9D9D9"
+            app:layout_constraintBottom_toTopOf="@+id/messageInputLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/messageInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo_preview_layout">
+
+            <ImageButton
+                android:id="@+id/messageAttachmentButton"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/chat_camera"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--            <EditText-->
+            <!--                android:id="@+id/editText"-->
+            <!--                style="@style/NunitoSansRegular16.grey700"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:layout_marginTop="16dp"-->
+            <!--                android:layout_marginEnd="24dp"-->
+            <!--                android:layout_marginBottom="16dp"-->
+            <!--                android:background="@null"-->
+            <!--                android:hint="@string/chat_hint"-->
+            <!--                android:paddingTop="8dp"-->
+            <!--                android:paddingBottom="8dp"-->
+            <!--                android:text="@={viewModel.typedMessage}"-->
+            <!--                android:drawableEnd="@drawable/chat_send"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/send"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/messageAttachmentButton"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editText"
+                style="@style/NunitoSansRegular14.grey700"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:focusableInTouchMode="true"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconDrawable="@{TextUtils.isEmpty(viewModel.typedMessage) ? @drawable/chat_send_disabled : @drawable/chat_send}"
+                app:endIconMode="custom"
+                app:endIconTint="@null"
+                app:endIconTintMode="multiply"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false"
+                app:hintTextColor="@color/grey_550"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/messageAttachmentButton"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/messageInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/chat_hint"
+                    android:padding="0dp"
+                    android:text="@={viewModel.typedMessage}"
+                    app:onActionSend="@{viewModel.sendMessage}"
+                    app:voiceToText="@{viewModel.isVoiceToText}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/send"-->
+            <!--                android:layout_width="24dp"-->
+            <!--                android:layout_height="24dp"-->
+            <!--                android:layout_marginEnd="16dp"-->
+            <!--                android:background="?attr/selectableItemBackgroundBorderless"-->
+            <!--                android:onClick="@{v -> viewModel.sendMessage()}"-->
+            <!--                android:src="@drawable/chat_send"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/editText"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/editText" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

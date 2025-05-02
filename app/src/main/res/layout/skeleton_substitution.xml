@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="activityViewModel"
+            type="com.albertsons.acupick.ui.MainActivityViewModel" />
+
+    </data>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:background="@color/backgroundGrey"
+            android:layout_height="wrap_content">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_container1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/backgroundGrey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setShimmerStartStop="@{activityViewModel.isLoading}"
+                app:shimmer_clip_to_children="true"
+                app:shimmer_direction="left_to_right"
+                app:shimmer_duration="1500"
+                app:shimmer_highlight_color="@color/disabledGrey">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="328dp"
+                    android:layout_height="112dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/drawable_radius_3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        </FrameLayout>
+
+
+</layout>
+

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        app:cardCornerRadius="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/itemImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="22dp"
+                android:scaleType="fitCenter"
+                app:imageResource="@{viewData.largeImage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_rx_staff_member_required"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                style="@style/NunitoSansBold18"
+                android:textColor="@color/darkBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@{viewData.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemImage"
+                tools:text="Pharmacy staff member required" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/message"
+                style="@style/NunitoSansRegular16.Grey600"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                app:highlightImportantText="@{viewData.body}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="In order to pickup a prescription, go to the pharmacy counter where a staff member needs to assist you" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/positiveButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+                android:visibility="@{viewData.positiveButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/message" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/button_text"
+                style="@style/NunitoSansBold16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:text="@{viewData.positiveButtonText}"
+                android:textAppearance="@style/NunitoSansBold18"
+                android:textColor="@color/square_button_text_selector"
+                android:visibility="@{viewData.positiveButtonVisibility}"
+                app:layout_constraintEnd_toEndOf="@id/positiveButton"
+                app:layout_constraintStart_toStartOf="@id/positiveButton"
+                app:layout_constraintTop_toTopOf="@id/positiveButton"
+                app:layout_constraintBottom_toBottomOf="@id/positiveButton"
+                tools:text="Confirm" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

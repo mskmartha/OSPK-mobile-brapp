@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.substitute.SubstituteViewModel" />
+
+        <variable
+            name="fragmentViewLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/snackbarPrompt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView"
+                    visibilityGoneIfFalse="@{viewModel.isFFC}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/warm_background"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/doveLight"
+                    app:strokeWidth="1dp"
+                    tools:visibility="visible">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/image"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_info"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@drawable/ic_info" />
+
+                        <TextView
+                            android:id="@+id/message"
+                            style="@style/NunitoSansRegular14.Grey700"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:lineSpacingExtra="2sp"
+                            android:text="@string/substitue_with_ffc"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/image"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@string/substitue_with_ffc" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/requestedItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+                    <ImageView
+                        android:id="@+id/itemImage"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:importantForAccessibility="no"
+                        android:scaleType="centerInside"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loadImage="@{viewModel.imageUrl}"
+                        app:placeholderImage="@{@drawable/ic_item_details_empty_image}"
+                        tools:srcCompat="@drawable/ic_card_view_empty_image" />
+
+                    <TextView
+                        android:id="@+id/totalQty"
+                        style="@style/NunitoSansBold12.StrongGreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corner_lighter_green"
+                        android:gravity="center"
+                        android:minWidth="28dp"
+                        android:minHeight="22dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        app:isDisplayType3PW="@{viewModel.isDisplayType3PW}"
+                        app:isOrderedByWeight="@{viewModel.isOrderedByWeight}"
+                        app:requestedWeightAndUnits="@{viewModel.requestedWeightAndUnits}"
+                        app:remainingQtyCount="@{viewModel.remainingQtyCount}"
+                        app:remainingWeight="@{viewModel.remainingWeight}"
+                        app:layout_constraintBottom_toBottomOf="@+id/itemImage"
+                        app:layout_constraintStart_toStartOf="@+id/itemImage"
+                        tools:text="9 lbs" />
+
+                    <ImageView
+                        android:id="@+id/noBagsIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        visibilityGoneIfTrueOrNull="@{viewModel.isOriginalItemCBP}"
+                        android:layout_marginStart="4dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_no_bags"
+                        app:layout_constraintBottom_toBottomOf="@+id/totalQty"
+                        app:layout_constraintStart_toEndOf="@+id/totalQty"
+                        app:layout_constraintTop_toTopOf="@+id/totalQty" />
+                    <TextView
+                        android:id="@+id/description"
+                        style="@style/NunitoSansSemiBold14.Grey700"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="52dp"
+                        android:maxHeight="40dp"
+                        android:text="@{viewModel.description}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/itemImage"
+                        app:layout_constraintTop_toBottomOf="@+id/itemPrice"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        app:layout_goneMarginTop="18dp"
+                        tools:text="Estroven Dietary Supplement Menopause Relief...- 30 Count" />
+
+                    <TextView
+                        android:id="@+id/itemPrice"
+                        style="@style/NunitoSansBold14.Grey700"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="18dp"
+                        android:text="@{viewModel.price}"
+                        app:layout_constraintStart_toEndOf="@+id/itemImage"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="$33.32" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+
+                    android:id="@+id/substituteSuggestionContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/requestedItem">
+
+                    <include
+                        android:id="@+id/substitutionNotAllowedItemCard"
+                        layout="@layout/no_substitute_item_card"
+                        visibilityGoneIfTrue="@{!viewModel.isSubstitutionNotAllowed}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:viewModel="@{viewModel}" />
+
+                    <!--ACURED_REDESIGN Will remove commented code after QA testing-->
+                    <!-- <include
+                         android:id="@+id/substitutionByPickerChoiceItemCard"
+                         layout="@layout/picker_selected_substitution"
+                         visibilityGoneIfTrue="@{!viewModel.isSubstitutionByPickerChoice()}"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginHorizontal="16dp"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent"
+                         app:viewModel="@{viewModel}" />-->
+                    <include
+                        android:id="@+id/substitutionByPickerChoiceItemCard"
+                        layout="@layout/picker_selected_substitution"
+                        visibilityGoneIfTrue="@{!viewModel.isSuggestedItemVisible}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:viewModel="@{viewModel}" />
+
+                    <include
+                        android:id="@+id/suggestedItemCard"
+                        layout="@layout/substitute_suggested_item_card"
+                        visibilityGoneIfTrue="@{ (!viewModel.isCustomerChosenItemAvailable &amp;&amp; !viewModel.isSystemSuggestedItemAvailable) || viewModel.isFromSwapSubstitution}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:viewModel="@{viewModel}" />
+
+                    <include
+                        android:id="@+id/swapSubstitutionItemCard"
+                        layout="@layout/swap_substitute_item_card"
+                        visibilityGoneIfTrue="@{ !viewModel.isFromSwapSubstitution }"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:viewModel="@{viewModel}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/otherOption"
+                    style="@style/ButtonLink14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:enabled="@{viewModel.isFromSwapSubstitution? false : true}"
+                    android:textColor="@{viewModel.isFromSwapSubstitution ? @color/semiLightGray : @color/semiLightBlue}"
+                    android:onClick="@{() -> viewModel.onOtherOptionsClicked()}"
+                    android:text="@string/other_option"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/substituteSuggestionContainer"
+                    tools:text="Other options" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/customerNameLabel"
+                    style="@style/NunitoSansRegular14.Grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/customer_label"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/otherOption" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/customerName"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@{viewModel.customerName}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/customerNameLabel"
+                    tools:text="R. Carter-Cash" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ebtIndicatior"
+                    visibilityGoneIfFalse="@{viewModel.showCustomerType}"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/customerName"
+                    app:layout_constraintStart_toEndOf="@+id/customerName"
+                    app:layout_constraintTop_toBottomOf="@id/customerNameLabel"
+                    app:setCustomerTypeSubIcon="@{viewModel.customerTypeIcon}"
+                    app:setSubCattEnabled="@{viewModel.isCattEnabled}"
+                    tools:srcCompat="@drawable/ebt_icon" />
+
+                <TextView
+                    android:id="@+id/customerNotes"
+                    style="@style/NunitoSansRegular14.Grey550"
+                    visibilityGoneIfFalse="@{viewModel.isCustomerCommented}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/comment_label"
+                    app:layout_constraintTop_toBottomOf="@id/customerName" />
+
+
+                <TextView
+                    android:id="@+id/customerComments"
+                    style="@style/CustomerComment"
+                    visibilityGoneIfFalse="@{viewModel.isCustomerCommented}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="@{viewModel.customerComments}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/customerNotes"
+                    app:layout_constraintWidth_default="wrap"
+                    tools:text="Only use customer suggested item " />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@id/snackbarPrompt"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/chatButtonView"
+                android:layout_gravity="end|bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:composableName="ChatButtonView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/snackbarPrompt"
+            visibilityGoneIfTrue="@{viewModel.isSubstitutionNotAllowed &amp;&amp; !viewModel.isFromSwapSubstitution}"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/border"
+                app:layout_constraintBottom_toTopOf="@+id/scanItemTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/scanItemTv"
+                style="@style/NunitoSansRegular16.Grey700"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:picklistItemsBottomPrompt="@{viewModel.prompt}"
+                tools:text="Please scan the substitution" />
+
+            <ImageView
+                android:id="@+id/manualEntryIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="@{viewModel.isManualEnabled}"
+                android:importantForAccessibility="no"
+                android:onClick="@{() -> viewModel.onManualEntryButtonClicked()}"
+                android:src="@drawable/ic_keyboard_blue"
+                app:layout_constraintBottom_toBottomOf="@+id/scanItemTv"
+                app:layout_constraintEnd_toEndOf="@+id/scanItemTv"
+                app:layout_constraintTop_toTopOf="@+id/scanItemTv"
+                app:picklistItemsBottomPrompt="@{viewModel.prompt}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

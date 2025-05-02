@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        Note that the design/layout/styles/textAppearance/etc is not necessarily representative of the normal way the UI is developed in the project since this is a DEV/QA facing screen.
+        Also, note that you should never hardcode text on production screens and always use strings resources!
+    -->
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.devoptions.DevOptionsViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
+
+                <!-- ENVIRONMENT SECTION START -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/apsEnvironmentSwitcherInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="APS Environment Switcher"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/apsEnvironmentSwitcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:imeOptions="actionNext"
+                        android:onDismiss="@{() -> viewModel.onApsEnvironmentDropdownDismissed()}"
+                        android:onItemClick="@{(parent, view, position, id) -> viewModel.onApsEnvironmentChanged(position)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        app:entries="@{viewModel.apsEnvironmentNames}"
+                        app:initialSelection="@{viewModel.apsEnvironmentSpinnerPosition}"
+                        tools:ignore="LabelFor"
+                        tools:text="STG" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/authEnvironmentSwitcherInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Auth Environment Switcher"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/apsEnvironmentSwitcherInputLayout"
+                    tools:ignore="HardcodedText">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/authEnvironmentSwitcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:imeOptions="actionNext"
+                        android:onDismiss="@{() -> viewModel.onAuthEnvironmentDropdownDismissed()}"
+                        android:onItemClick="@{(parent, view, position, id) -> viewModel.onAuthEnvironmentChanged(position)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        app:entries="@{viewModel.authEnvironmentNames}"
+                        app:initialSelection="@{viewModel.authEnvironmentSpinnerPosition}"
+                        tools:ignore="LabelFor"
+                        tools:text="STG" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/configEnvironmentSwitcherInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Config Environment Switcher"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/authEnvironmentSwitcherInputLayout"
+                    tools:ignore="HardcodedText">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/configEnvironmentSwitcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:imeOptions="actionNext"
+                        android:onDismiss="@{() -> viewModel.onConfigEnvironmentDropdownDismissed()}"
+                        android:onItemClick="@{(parent, view, position, id) -> viewModel.onConfigEnvironmentChanged(position)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        app:entries="@{viewModel.configEnvironmentNames}"
+                        app:initialSelection="@{viewModel.configEnvironmentSpinnerPosition}"
+                        tools:ignore="LabelFor"
+                        tools:text="STG" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/osccEnvironmentSwitcherInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="OSCC Environment Switcher"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/configEnvironmentSwitcherInputLayout"
+                    tools:ignore="HardcodedText">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/osccEnvironmentSwitcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:imeOptions="actionNext"
+                        android:onDismiss="@{() -> viewModel.onOsccEnvironmentDropdownDismissed()}"
+                        android:onItemClick="@{(parent, view, position, id) -> viewModel.onOsccEnvironmentChanged(position)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        app:entries="@{viewModel.osccEnvironmentNames}"
+                        app:initialSelection="@{viewModel.osccEnvironmentSpinnerPosition}"
+                        tools:ignore="LabelFor"
+                        tools:text="STG" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/itemProcessorEnvironmentSwitcherInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Item Processor Environment Switcher"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/osccEnvironmentSwitcherInputLayout"
+                    tools:ignore="HardcodedText">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/itemProcessorEnvironmentSwitcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:imeOptions="actionNext"
+                        android:onDismiss="@{() -> viewModel.onItemProcessorEnvironmentDropdownDismissed()}"
+                        android:onItemClick="@{(parent, view, position, id) -> viewModel.onItemProcessorEnvironmentChanged(position)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        app:entries="@{viewModel.itemProcessorEnvironmentNames}"
+                        app:initialSelection="@{viewModel.itemProcessorEnvironmentSpinnerPosition}"
+                        tools:ignore="LabelFor"
+                        tools:text="STG" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:id="@+id/screenFlow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    app:constraint_referenced_ids="selectedEnvironmentInfoTitle,currentEnvironmentBaseApsUrlTitle,currentEnvironmentBaseApsUrlValue,currentEnvironmentBaseAuthUrlTitle,currentEnvironmentBaseAuthUrlValue,currentEnvironmentBaseConfigUrlTitle,currentEnvironmentBaseConfigUrlValue,currentEnvironmentBaseItemProcessorUrlTitle,currentEnvironmentBaseItemProcessorUrlValue,appInfoSectionDivider,appInfoSectionTitle,appVersionNameTitle,appVersionNameValue,appVersionCodeTitle,appVersionCodeValue,applicationIdTitle,applicationIdValue,buildIdentifierTitle,buildIdentifierValue,extraFunctionalitySectionDivider,miscellaneousSectionTitle,autoChooseLastSiteToggle,onlineInMemoryPickListStateToggle,leakCanaryToggle, rxFeatureToggle, cattFeatureToggle, bagBypassFeatureToggle, autoLogoutTime,forceCrashCta"
+                    app:flow_maxElementsWrap="1"
+                    app:flow_verticalStyle="packed"
+                    app:flow_wrapMode="chain"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/itemProcessorEnvironmentSwitcherInputLayout" />
+
+                <TextView
+                    android:id="@+id/selectedEnvironmentInfoTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="Selected Environment Info"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/currentEnvironmentBaseApsUrlTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Base APS URL"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/currentEnvironmentBaseApsUrlValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="16dp"
+                    android:text="@{viewModel.baseApsUrl}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textIsSelectable="true"
+                    tools:ignore="MissingConstraints"
+                    tools:text="https://base-aps-url.foo.com" />
+
+                <TextView
+                    android:id="@+id/currentEnvironmentBaseAuthUrlTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Base Auth URL"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/currentEnvironmentBaseAuthUrlValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="16dp"
+                    android:text="@{viewModel.baseAuthUrl}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textIsSelectable="true"
+                    tools:ignore="MissingConstraints"
+                    tools:text="https://base-auth-url.foo.com" />
+
+                <TextView
+                    android:id="@+id/currentEnvironmentBaseConfigUrlTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Base Config URL"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/currentEnvironmentBaseConfigUrlValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="16dp"
+                    android:text="@{viewModel.baseConfigUrl}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textIsSelectable="true"
+                    tools:ignore="MissingConstraints"
+                    tools:text="https://base-config-url.foo.com" />
+
+                <TextView
+                    android:id="@+id/currentEnvironmentBaseItemProcessorUrlTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Base Item Processor URL"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/currentEnvironmentBaseItemProcessorUrlValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="16dp"
+                    android:text="@{viewModel.baseItemProcessorUrl}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textIsSelectable="true"
+                    tools:ignore="MissingConstraints"
+                    tools:text="https://base-itemProcessor-url.foo.com" />
+                <!-- ENVIRONMENT SECTION END -->
+
+                <!-- FEATURE FLAG SECTION START -->
+                <!-- FEATURE FLAG SECTION END -->
+
+                <!-- APP INFO START -->
+                <View
+                    android:id="@+id/appInfoSectionDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/appInfoSectionTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="App Info"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/appVersionNameTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Version Name"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/appVersionNameValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="@{viewModel.appVersionName}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textIsSelectable="true"
+                    tools:ignore="MissingConstraints"
+                    tools:text="10.1.3" />
+
+                <TextView
+                    android:id="@+id/appVersionCodeTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:text="Version Code"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/appVersionCodeValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="@{viewModel.appVersionCode}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textIsSelectable="true"
+                    tools:ignore="MissingConstraints"
+                    tools:text="1001030" />
+
+                <TextView
+                    android:id="@+id/applicationIdTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:text="Application ID"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/applicationIdValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="@{viewModel.appId}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textIsSelectable="true"
+                    tools:ignore="MissingConstraints"
+                    tools:text="com.example.foo" />
+
+                <TextView
+                    android:id="@+id/buildIdentifierTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:text="Build Identifier"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/buildIdentifierValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="16dp"
+                    android:text="@{viewModel.buildIdentifier}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textIsSelectable="true"
+                    tools:ignore="MissingConstraints"
+                    tools:text="171" />
+                <!-- APP INFO END -->
+
+                <!-- EXTRA FUNCTIONALITY START -->
+                <View
+                    android:id="@+id/extraFunctionalitySectionDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorPrimary"
+                    android:paddingTop="16dp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/miscellaneousSectionTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="Misc Functionality"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/autoChooseLastSiteToggle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.autoChooseLastSite}"
+                    android:onCheckedChanged="@{(switch, checked) -> viewModel.onAutoChooseLastSiteToggled(checked)}"
+                    android:text="Automatically Choose Previous Site"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/onlineInMemoryPickListStateToggle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.useOnlineInMemoryPickListState}"
+                    android:onCheckedChanged="@{(switch, checked) -> viewModel.onOnlineInMemoryPickListStateToggled(checked)}"
+                    android:text="Online In Memory Pick List State"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/leakCanaryToggle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.useLeakCanary}"
+                    android:onCheckedChanged="@{(switch, checked) -> viewModel.onLeakCanaryToggled(checked)}"
+                    android:text="Leak Canary"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/rxFeatureToggle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.rxFeatureToggle}"
+                    android:onCheckedChanged="@{(switch, checked) -> viewModel.onRxFeatureToggled(checked)}"
+                    android:text="RX Enabled"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/cattFeatureToggle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.cattFeatureToggle}"
+                    android:onCheckedChanged="@{(switch, checked) -> viewModel.onCattFeatureToggled(checked)}"
+                    android:text="CATT Enabled"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/bagBypassFeatureToggle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.bagBypassFeatureToggle}"
+                    android:onCheckedChanged="@{(switch, checked) -> viewModel.onBagBypassFeatureToggled(checked)}"
+                    android:text="Bag Bypass Enabled"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/autoLogoutTime"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Auth Logout Time in Minutes"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    tools:ignore="HardcodedText,MissingConstraints">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoLogoutTimeSwitcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:imeOptions="actionNext"
+                        android:onDismiss="@{() -> viewModel.onAutoLogoutDismissed()}"
+                        android:onItemClick="@{(parent, view, position, id) -> viewModel.onAutoLogoutChanged(position)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        app:entries="@{viewModel.autoLogoutTimes}"
+                        app:initialSelection="@{viewModel.defaultAutoLogoutPosition}"
+                        tools:ignore="LabelFor"
+                        tools:text="Minutes" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/forceCrashCta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onForceCrashCtaClicked()}"
+                    android:text="Force Crash"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+                <!-- EXTRA FUNCTIONALITY END -->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/restartFab"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:contentDescription="Restart"
+            android:onClick="@{() -> viewModel.onRestartCtaClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_restart_black_24dp"
+            app:tint="@color/white"
+            tools:ignore="HardcodedText" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

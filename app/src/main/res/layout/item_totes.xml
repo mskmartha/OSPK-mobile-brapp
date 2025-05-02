@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <data>
+
+        <import type="com.albertsons.acupick.data.model.StorageType" />
+
+        <variable
+            name="isExpanded"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="totesUi"
+            type="com.albertsons.acupick.ui.totes.TotesUi" />
+
+        <variable
+            name="totesEstimate"
+            type="com.albertsons.acupick.data.model.ToteEstimate" />
+
+        <variable
+            name="isVisible"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isMfcOrder"
+            type="java.lang.Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/header_background">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/customerNameInfo"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@color/coffeeLighter"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/customerName"
+                style="@style/NunitoSansSemiBold16.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@+id/ebtCircle"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Justin Herbert" />
+
+            <ImageView
+                android:id="@+id/ebtCircle"
+                visibilityGoneIfFalse="@{totesUi.isEbt}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_ebt_sub"
+                app:layout_constraintBottom_toBottomOf="@+id/customerName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/customerName"
+                app:layout_constraintTop_toTopOf="@+id/customerName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toteHeaderCL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="100dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customerNameInfo"
+            app:setRadiusByExpanded="@{isExpanded}">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/orderNumHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/order_number_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Order #" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/orderNo"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{totesUi.orderNumber}"
+                app:layout_constraintBottom_toBottomOf="@+id/orderNumHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/orderNumHeader"
+                tools:text="0428001" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/picklistNumberHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/picklist_number_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orderNumHeader"
+                tools:text="Pick list #" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/PickListNumber"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{totesUi.pickNumber}"
+                app:layout_constraintBottom_toBottomOf="@+id/picklistNumberHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/picklistNumberHeader"
+                tools:text="0428" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pickListTypeHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/picklist_type_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picklistNumberHeader" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pickListType"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/pickListTypeHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pickListTypeHeader"
+                app:setOrderType="@{totesUi.orderType}"
+                tools:text="REGULAR" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/stageByTimeHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/stage_by_time_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pickListTypeHeader"
+                tools:text="Stage by Time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/stageByTime"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{totesUi.stageByTime}"
+                app:layout_constraintBottom_toBottomOf="@+id/stageByTimeHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/stageByTimeHeader"
+                tools:text="12 AM" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalItemsHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/total_items_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stageByTimeHeader"
+                tools:text="Total Items" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalItems"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/totalItemsHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/totalItemsHeader"
+                app:totalItems="@{totesUi}"
+                tools:text="18" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemTypesHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/item_types_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalItemsHeader"
+                tools:text="Item types" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/itemTypesHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/itemTypesHeader">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/amImg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_ambient"
+                    app:itemTypeImage="@{totesUi}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:storageType="@{StorageType.AM}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/amQty"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    app:itemTypeCount="@{totesUi}"
+                    app:layout_constraintBottom_toBottomOf="@+id/amImg"
+                    app:layout_constraintStart_toEndOf="@+id/amImg"
+                    app:layout_constraintTop_toTopOf="@+id/amImg"
+                    app:storageType="@{StorageType.AM}"
+                    tools:text="1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/chImg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/ic_chilled"
+                    app:itemTypeImage="@{totesUi}"
+                    app:layout_constraintStart_toEndOf="@+id/amQty"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:storageType="@{StorageType.CH}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/chQty"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    app:itemTypeCount="@{totesUi}"
+                    app:layout_constraintBottom_toBottomOf="@+id/chImg"
+                    app:layout_constraintStart_toEndOf="@+id/chImg"
+                    app:layout_constraintTop_toTopOf="@+id/chImg"
+                    app:storageType="@{StorageType.CH}"
+                    tools:text="1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/fzImg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/ic_frozen"
+                    app:itemTypeImage="@{totesUi}"
+                    app:layout_constraintStart_toEndOf="@+id/chQty"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:storageType="@{StorageType.FZ}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fzQty"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    app:itemTypeCount="@{totesUi}"
+                    app:layout_constraintBottom_toBottomOf="@+id/fzImg"
+                    app:layout_constraintStart_toEndOf="@+id/fzImg"
+                    app:layout_constraintTop_toTopOf="@+id/fzImg"
+                    app:storageType="@{StorageType.FZ}"
+                    tools:text="1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/htImg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/ic_hot"
+                    app:itemTypeImage="@{totesUi}"
+                    app:layout_constraintStart_toEndOf="@+id/fzQty"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:storageType="@{StorageType.HT}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/htQty"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    app:itemTypeCount="@{totesUi}"
+                    app:layout_constraintBottom_toBottomOf="@+id/htImg"
+                    app:layout_constraintStart_toEndOf="@+id/htImg"
+                    app:layout_constraintTop_toTopOf="@+id/htImg"
+                    app:storageType="@{StorageType.HT}"
+                    tools:text="1" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--To show required tote types for MFC order-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mfcTotesHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/tote_types"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemTypesHeader"
+                android:visibility="gone"
+                tools:text="Number of totes" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mfcTotesEstimate"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                app:setToteEstimate="@{totesEstimate}"
+                app:layout_constraintBottom_toBottomOf="@+id/mfcTotesHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mfcTotesHeader"
+                android:visibility="gone"
+                tools:text="2" />
+            <!--End-->
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/toteTypeBottomBarrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="mfcTotesHeader,itemTypesHeader" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totesInUseHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="7dp"
+                android:text="@string/totes_in_use_header"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toteTypeBottomBarrier" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/numberOfTotesHeader"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                app:setToteTypeHeaderInfo="@{isMfcOrder}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemTypesHeader"
+                app:visibilityGoneIfFalse="@{isVisible}"
+                tools:text="Number of totes" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/numberOfTotes"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                app:setToteType="@{totesUi.totesSubUi}"
+                app:isMfcOrder="@{isMfcOrder}"
+                app:setToteCount="@{totesUi.numberOfTotes}"
+                app:layout_constraintBottom_toBottomOf="@+id/numberOfTotesHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/numberOfTotesHeader"
+                app:visibilityGoneIfFalse="@{isVisible}"
+                tools:text="2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.ui.models.CustomerArrivalStatusUI" />
+
+        <import type="com.albertsons.acupick.ui.arrivals.destage.DetailsHeaderUi" />
+
+        <import type="com.albertsons.acupick.ui.arrivals.destage.DestageOrderViewModel" />
+
+        <variable
+            name="detailsHeaderUi"
+            type="com.albertsons.acupick.ui.arrivals.destage.DetailsHeaderUi" />
+
+        <variable
+            name="destageOrderViewModel"
+            type="com.albertsons.acupick.ui.arrivals.destage.DestageOrderViewModel" />
+        <variable
+            name="isRxDug"
+            type="boolean" />
+
+        <variable
+            name="isComplete"
+            type="boolean" />
+
+        <variable
+            name="notScannedCount"
+            type="int" />
+
+        <variable
+            name="isMfcSite"
+            type="boolean" />
+
+        <variable
+            name="bagBypassEnabled"
+            type="boolean" />
+
+        <variable
+            name="hasLooseItem"
+            type="boolean" />
+
+        <variable
+            name="rxDetailsOne"
+            type="com.albertsons.acupick.ui.models.RxBagUI" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="16dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/totesAndBags"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderDetailsShortOrderNumber"
+            style="@style/NunitoSansBold24.DarkBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@{detailsHeaderUi.shortOrderNumber}"
+            android:textColor="@color/darkBlue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="DUG08" />
+
+        <ImageView
+            android:id="@+id/giftIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            visibilityGoneIfFalse="@{detailsHeaderUi.isGift}"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_gift"
+            app:layout_constraintBottom_toBottomOf="@+id/orderDetailsShortOrderNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/orderDetailsShortOrderNumber" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderDetailsName"
+            style="@style/NunitoSansBold18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@{detailsHeaderUi.contactName}"
+            android:textColor="@color/darkBlue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/orderDetailsShortOrderNumber"
+            tools:text="Rosanne Carter - Cash" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/customerBagPreference"
+            visibilityGoneIfTrue="@{detailsHeaderUi.isCustomerBagPreference}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/orderDetailsName"
+            app:layout_constraintStart_toEndOf="@+id/orderDetailsName"
+            app:layout_constraintTop_toTopOf="@id/orderDetailsName"
+            app:srcCompat="@drawable/ic_no_bags" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderDetailsHead"
+            style="@style/NunitoSansBold12.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/order_details_order_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderDetailsName"
+            tools:text="ORDER: " />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderDetailsOrderNo"
+            style="@style/NunitoSansRegular12.Grey600"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{detailsHeaderUi.customerOrderNumber}"
+            app:layout_constraintBottom_toBottomOf="@id/orderDetailsHead"
+            app:layout_constraintStart_toEndOf="@+id/orderDetailsHead"
+            app:layout_constraintTop_toTopOf="@id/orderDetailsHead"
+            tools:text="0428001" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/regulatedAlertIcon"
+            visibilityGoneIfTrue="@{isRxDug}"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:src="@{detailsHeaderUi.showRegulatedError == true ? @drawable/ic_alert : @drawable/ic_confirm}"
+            android:tint="@{detailsHeaderUi.showRegulatedError == true ? @color/error : @color/statusGreen}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/orderDetailsOrderNo"
+            tools:src="@drawable/ic_confirm"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderDetailsRegulatedItems"
+            style="@style/NunitoSansBold14"
+            visibilityGoneIfTrue="@{isRxDug}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{detailsHeaderUi.showRegulatedError == true ? @string/restricted_items : @string/no_restricted_items}"
+            android:textColor="@{detailsHeaderUi.showRegulatedError == true ? @color/error : @color/statusGreen}"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/regulatedAlertIcon"
+            app:layout_constraintStart_toEndOf="@+id/regulatedAlertIcon"
+            app:layout_constraintTop_toTopOf="@id/regulatedAlertIcon"
+            app:layout_goneMarginStart="0dp"
+            app:setRegulatedStyling="@{detailsHeaderUi.showRegulatedError}"
+            tools:text="@string/restricted_items"
+            tools:textColor="@color/statusGreen" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/re_print_gift"
+            style="@style/NunitoSansSemiBold16.SemiLightBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            visibilityGoneIfFalse="@{detailsHeaderUi.isGift &amp;&amp; !isRxDug}"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:onClick="@{()-> destageOrderViewModel.rePrintGiftButtonPressed()}"
+            android:text="@string/re_print_gift_note"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regulatedAlertIcon" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rxOrdersContainer"
+            visibilityGoneIfFalse="@{isRxDug}"
+            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/orderDetailsHead"
+            app:layout_constraintTop_toBottomOf="@id/re_print_gift">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rxOneHeader"
+                style="@style/NunitoSansBold12.Grey700"
+                visibilityGoneIfNullOrEmpty="@{rxDetailsOne.bagNumber}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/rx_one_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rxOneBarcode"
+                style="@style/NunitoSansRegular12"
+                visibilityGoneIfNullOrEmpty="@{rxDetailsOne.bagNumber}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:text="@{rxDetailsOne.bagNumber.toString()}"
+                app:layout_constraintStart_toEndOf="@id/rxOneHeader"
+                app:layout_constraintTop_toTopOf="@+id/rxOneHeader"
+                tools:text="RX1234567890123" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/complete_cta"
+            style="@style/NunitoSansBold12.Grey600"
+            visibilityInvisibleIfFalse="@{isComplete &amp;&amp; !isRxDug}"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/completed"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/giftIcon"
+            app:layout_goneMarginStart="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/not_scanned_cta"
+            style="@style/NunitoSansBold12.Red"
+            visibilityGoneIfNullOrLessThanOne="@{notScannedCount}"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="textEnd"
+            app:bagBypassEnabled="@{bagBypassEnabled}"
+            app:hasLooseItem="@{hasLooseItem}"
+            app:isCustomerBagPreference="@{detailsHeaderUi.isCustomerBagPreference}"
+            app:isMfcSite="@{isMfcSite}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/complete_cta"
+            app:layout_goneMarginStart="0dp"
+            app:notScannedCount="@{notScannedCount}"
+            tools:text="Not scanned: 2 bags" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/timer"
+            style="@style/NunitoSansBold12"
+            visibilityGoneIfFalse="@{detailsHeaderUi.customerArrivalStatusUI == CustomerArrivalStatusUI.ARRIVED}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_goneMarginStart="0dp"
+            app:onStartTimer="@{detailsHeaderUi.onStartTimer}"
+            app:startTimer="@{detailsHeaderUi.startTime}"
+            tools:text="10m 30s" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

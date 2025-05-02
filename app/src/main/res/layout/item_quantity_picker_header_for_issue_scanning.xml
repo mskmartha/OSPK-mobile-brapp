@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="issueScanningUI"
+            type="com.albertsons.acupick.ui.models.OriginalItemParams" />
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/qunatityPickerTitlte"
+    android:layout_marginTop="24dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ordered_item_title"
+        style="@style/NunitoSansSemiBold12.grey700"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:maxLines="2"
+        android:text="@string/ordered_item"
+        tools:text="Ordered item" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/orderItemContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/ordered_item_title">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ordered_item_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{issueScanningUI.itemImage}"
+            tools:src="@drawable/ic_acu_logo_fade_grey" />
+
+        <TextView
+            android:id="@+id/ordered_qty"
+            style="@style/NunitoSansBold12.StrongGreen"
+            android:layout_width="28dp"
+            android:layout_height="22dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            android:text="@{issueScanningUI.orderedQty.toString()}"
+            app:layout_constraintBottom_toBottomOf="@+id/ordered_item_image"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ordered_item_name"
+            style="@style/NunitoSansSemiBold14.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:maxLines="3"
+            android:text="@{issueScanningUI.itemDesc}"
+            app:layout_constraintBottom_toBottomOf="@+id/ordered_item_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ordered_item_image"
+            app:layout_constraintTop_toTopOf="@+id/ordered_item_image"
+            tools:text="This is Item name text ." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <View
+        android:id="@+id/handle"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/border_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/orderItemContainer"
+       />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

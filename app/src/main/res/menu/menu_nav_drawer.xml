@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/changeStore"
+        android:actionLayout="@layout/change_store_fragment"
+        android:icon="@drawable/ic_nav_store"
+        android:title="@string/change_store_nav" />
+
+    <item
+        android:id="@+id/restartApp"
+        android:icon="@drawable/ic_nav_refresh"
+        android:title="@string/app_restart_nav" />
+
+    <item
+        android:id="@+id/signOut"
+        android:icon="@drawable/ic_nav_signout"
+        android:title="@string/sign_out_nav" />
+
+</menu>

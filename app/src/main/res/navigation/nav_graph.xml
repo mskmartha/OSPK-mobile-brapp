@@ -1,0 +1,1258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <!--
+    Use popUpTo/popUpToInclusive to remove fragment from backstack when moving forwards
+    See https://proandroiddev.com/android-navigation-component-tips-tricks-implementing-splash-screen-f0f5ce046a09 and https://developer.android.com/guide/navigation/navigation-navigate#pop
+    -->
+    <action
+        android:id="@+id/action_to_pickListItemsFragment"
+        app:destination="@id/pickListItemsFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/action_to_wineStagingFragment"
+        app:destination="@+id/wineStagingFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/action_to_wineStaging2Fragment"
+        app:destination="@+id/wineStaging2Fragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/action_to_boxInputWeightFragment"
+        app:destination="@+id/boxInputWeightFragment"
+        app:popUpTo="@id/wineStaging2Fragment"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/action_to_wineStaging3Fragment"
+        app:destination="@+id/wineStaging3Fragment" />
+
+    <action
+        android:id="@+id/action_to_prescriptionReturnFragment"
+        app:destination="@+id/prescriptionReturnFragment"
+        app:popUpToInclusive="false"/>
+
+    <action
+        android:id="@+id/action_to_chatFragment"
+        app:destination="@id/chatFragment" />
+
+    <action
+        android:id="@+id/action_to_stagingFragment"
+        app:destination="@id/stagingScope"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/action_to_handOffFragment"
+        app:destination="@id/handOffScope" />
+
+    <action
+        android:id="@+id/action_to_reportMissignBagsFragment"
+        app:destination="@id/reportMissingBagFragment" />
+    <action
+        android:id="@+id/actionToDestageOrder"
+        app:destination="@id/destageOrderScope" />
+
+    <action
+        android:id="@+id/action_to_remove1PLRejectedFragment"
+        app:destination="@id/rejected1PLItemScope"
+         />
+
+    <action
+        android:id="@+id/action_pickListFragment_to_stagingFragment"
+        app:destination="@id/stagingScope"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/action_to_homeFragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_stagingPart2Fragment_to_addBagsFragment"
+        app:destination="@id/addBagsFragment" />
+
+    <action
+        android:id="@+id/action_to_manualEntryHandOffFragment"
+        app:destination="@id/manualEntryHandOffFragment"
+        app:popUpTo="@id/destageOrderFragment" />
+
+    <action
+        android:id="@+id/action_to_verificationCodeToolTipFragment"
+        app:destination="@id/verificationCodeToolTipFragment"
+        app:popUpTo="@id/handOffFragment" />
+
+    <action
+        android:id="@+id/action_to_bagsPerTempZoneFragment"
+        app:destination="@id/bagsPerTempZoneFragment"
+        app:popUpTo="@id/handOffFragment" />
+
+    <action
+        android:id="@+id/action_to_manualEntryHandOffMfcFragment"
+        app:destination="@id/manualEntryHandOffMfcFragment"
+        app:popUpTo="@id/destageOrderFragment" />
+
+    <action
+        android:id="@+id/action_to_manualEntryStagingFragment"
+        app:destination="@id/manualEntryStagingFragment"
+        app:popUpTo="@id/stagingPart2Fragment" />
+
+    <action
+        android:id="@+id/action_to_manualEntryWineStagingFragment"
+        app:destination="@id/manualEntryStagingFragment"
+        app:popUpTo="@id/stagingPart2Fragment" />
+
+    <action
+        android:id="@+id/action_to_manualEntryStagingMfcFragment"
+        app:destination="@id/manualEntryStagingMfcFragment"
+        app:popUpTo="@id/stagingPart2Fragment" />
+
+
+    <action
+        android:id="@+id/action_to_updateCustomerMarkArrivedFragment"
+        app:destination="@id/updateCustomerChangeStatusFragment"
+        app:popUpTo="@id/destageOrderFragment" />
+
+    <action
+        android:id="@+id/action_to_updateCustomerAddFragment"
+        app:destination="@id/updateCustomerAddFragment"
+        app:popUpTo="@id/destageOrderFragment" />
+
+    <action
+        android:id="@+id/action_to_arrivalsPagerFragment"
+        app:destination="@id/arrivalsPagerFragment" />
+
+    <action
+        android:id="@+id/action_handOffFragment_to_handOffRxInterstitialFragment"
+        app:destination="@+id/handOffRxInterstitialFragment" />
+
+    <action
+        android:id="@+id/action_handoff_to_orderSummary"
+        app:destination="@id/orderSummaryFragment" />
+
+    <action
+        android:id="@+id/action_handoff_to_swapSubstitution"
+        app:destination="@id/swapSubstitutionFragment" />
+
+    <action
+        android:id="@+id/action_arrivalsPagerFragment_to_pickListItemsFragment"
+        app:destination="@id/pickListItemsFragment"
+        app:popUpTo="@id/arrivalsPagerFragment"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/action_picklistPagerFragment_to_pickListItemsFragment"
+        app:destination="@id/pickListItemsFragment"
+        app:popUpTo="@id/pickListPagerFragment"
+        app:popUpToInclusive="false" />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.albertsons.acupick.ui.splash.SplashFragment"
+        android:label="Splash"
+        tools:layout="@layout/splash_fragment">
+        <!--         Using popUpTo/popUpToInclusive to remove splash from backstack (see note at top of file for more info) -->
+        <action
+            android:id="@+id/action_splashFragment_to_storesFragment"
+            app:destination="@id/storeSelectionFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.albertsons.acupick.ui.auth.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/login_fragment">
+        <!-- Using popUpTo/popUpToInclusive to remove splash from backstack (see note at top of file for more info) -->
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_devOptionsFragment"
+            app:destination="@id/devOptionsFragment" />
+
+        <action
+            android:id="@+id/action_pickListItemsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+
+        <action
+            android:id="@+id/action_substituteFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_fieldServicesFragment"
+            app:destination="@id/fieldServicesFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_storesFragment"
+            app:destination="@id/storeSelectionFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_arrivalsOrderPagerFragment"
+            app:destination="@id/arrivalsPagerFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_toLoginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_to_devOptionsFragment"
+        app:destination="@id/devOptionsFragment" />
+    <fragment
+        android:id="@+id/fieldServicesFragment"
+        android:name="com.albertsons.acupick.ui.fieldservices.FieldServicesFragment"
+        android:label=""
+        tools:layout="@layout/field_services_fragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.albertsons.acupick.ui.home.HomeFragment"
+        android:label=""
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_pickListItemsFragment"
+            app:destination="@id/pickListItemsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_homeFragment_to_stagingFragment"
+            app:destination="@id/stagingScope"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_homeFragment_to_arrivalsResultDetailsFragment"
+            app:destination="@id/destageOrderScope" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.albertsons.acupick.ui.chat.ChatFragment"
+        android:label=""
+        tools:layout="@layout/home_fragment">
+        <argument
+            android:name="orderNumber"
+            app:argType="string" />
+        <argument
+            android:name="convetsationId"
+            app:argType="string" />
+        <argument
+            android:name="fulfullmentOrderNumber"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_chatFragment_to_substituteFragment"
+            app:destination="@id/substituteFragment"
+            app:popUpTo="@id/chatFragment"
+            app:popUpToInclusive="false"/>
+
+        <action
+            android:id="@+id/action_chatFragment_to_quickTaskFragment"
+            app:destination="@id/quickTaskPagerFragment"
+            app:popUpTo="@id/chatFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/devOptionsFragment"
+        android:name="com.albertsons.acupick.ui.devoptions.DevOptionsFragment"
+        android:label="DevOptionsFragment"
+        tools:layout="@layout/dev_options_fragment" />
+
+    <fragment
+        android:id="@+id/wineStagingFragment"
+        android:name="com.albertsons.acupick.ui.staging.winestaging.WineStagingFragment"
+        android:label=""
+        tools:layout="@layout/wine_staging_fragment">
+        <argument
+            android:name="wineStagingParams"
+            app:argType="com.albertsons.acupick.ui.staging.winestaging.WineStagingParams" />
+
+        <action
+            android:id="@+id/action_wineStagingFragment_to_wineStaging2Fragment"
+            app:destination="@id/wineStaging2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wineStaging2Fragment"
+        android:name="com.albertsons.acupick.ui.staging.winestaging.weight.WineStaging2Fragment"
+        android:label=""
+        tools:layout="@layout/wine_staging_fragment">
+        <argument
+            android:name="boxUiData"
+            android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.ui.staging.winestaging.BoxUiData"
+            app:nullable="true" />
+        <argument
+            android:name="wineStagingParams"
+            android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.ui.staging.winestaging.WineStagingParams"
+            app:nullable="true" />
+        <argument
+            android:name="shouldShowPrintReminder"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+        <action
+            android:id="@+id/action_wineStaging2Fragment_to_boxInputWeightFragment"
+            app:destination="@id/boxInputWeightFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wineStaging3Fragment"
+        android:name="com.albertsons.acupick.ui.staging.winestaging.WineStaging3Fragment"
+        android:label=""
+        tools:layout="@layout/wine_staging3_fragment">
+        <argument
+            android:name="boxUiData"
+            android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.ui.staging.winestaging.BoxUiData"
+            app:nullable="true" />
+        <argument
+            android:name="wineStagingParams"
+            app:argType="com.albertsons.acupick.ui.staging.winestaging.WineStagingParams" />
+        <argument
+            android:name="shouldShowPrintReminder"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_wineStaging3Fragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportMissingBagFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.destage.reportmissingbag.ReportMissingBagFragment"
+        android:label=""
+        tools:layout="@layout/report_missing_bag_fragment">
+        <argument
+            android:name="reportMissingBagsParams"
+            app:argType="com.albertsons.acupick.ui.arrivals.destage.reportmissingbag.ReportMissingBagsParams"/>
+    </fragment>
+    <fragment
+        android:id="@+id/boxInputWeightFragment"
+        android:name="com.albertsons.acupick.ui.staging.winestaging.weight.BoxInputWeightFragment"
+        android:label=""
+        tools:layout="@layout/box_input_weight_fragment">
+        <argument
+            android:name="weight"
+            app:argType="string" />
+
+        <argument
+            android:name="boxLabel"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderSummaryFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.complete.OrderSummaryFragment"
+        android:label=""
+        tools:layout="@layout/order_summary_fragment">
+        <argument
+            android:name="orderSummaryArg"
+            app:argType="com.albertsons.acupick.ui.arrivals.complete.OrderSummaryArg"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/swapSubstitutionFragment"
+        android:name="com.albertsons.acupick.ui.swapsubstitution.SwapSubstitutionFragment"
+        android:label=""
+        tools:layout="@layout/order_summary_fragment">
+        <argument
+            android:name="swapSubstitutionArg"
+            app:argType="com.albertsons.acupick.data.model.response.SwapSubstitutionArg"/>
+        <action
+            android:id="@+id/action_to_swapSubstitution"
+            app:destination="@id/swapSubstitutionFragment" />
+
+        <action
+            android:id="@+id/action_swapSubstitutionFragment_to_substituteFragment"
+            app:destination="@id/substituteFragment"
+            app:popUpTo="@id/pickListItemsFragment"
+            app:popUpToInclusive="false"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/prescriptionReturnFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnFragment"
+        android:label=""
+        tools:layout="@layout/prescription_return_fragment">
+        <argument
+            android:name="erId"
+            app:argType="string" />
+
+        <argument
+            android:name="prescriptionReturnData"
+            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
+            android:defaultValue="@null"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickListItemsFragment"
+        android:name="com.albertsons.acupick.ui.picklistitems.PickListItemsFragment"
+        android:label=""
+        tools:layout="@layout/pick_list_items_fragment">
+        <argument
+            android:name="activityId"
+            app:argType="string" />
+        <argument
+            android:name="orderNumber"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="endPick"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <argument
+            android:name="toteEstimate"
+            app:argType="com.albertsons.acupick.data.model.ToteEstimate"
+            android:defaultValue="@null"
+            app:nullable="true"/>
+        <argument
+            android:name="navigateToChat"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_pickListItemsFragment_to_itemDetailsFragment"
+            app:destination="@id/itemDetailsFragment" />
+        <action
+            android:id="@+id/action_pickListItemsFragment_to_totesFragment"
+            app:destination="@id/totesFragment" />
+        <action
+            android:id="@+id/action_pickListItemsFragment_to_manualEntryPagerFragment"
+            app:destination="@id/manualEntryScope" />
+        <action
+            android:id="@+id/action_pickListItemsFragment_to_stagingFragment"
+            app:destination="@id/stagingScope"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_pickListItemsFragment_to_substituteFragment"
+            app:destination="@id/substituteFragment"
+            app:popUpTo="@id/pickListItemsFragment"
+            app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_pickListItemsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_pickListItemsFragment_to_confirmAmountFragment"
+            app:destination="@id/confirmAmountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmAmountFragment"
+        android:name="com.albertsons.acupick.ui.picklistitems.ConfirmAmountFragment"
+        android:label=""
+        tools:layout="@layout/confirm_amount_fragment">
+        <argument
+            android:name="uiData"
+            app:argType="com.albertsons.acupick.ui.models.ConfirmAmountUIData" />
+
+        <action
+            android:id="@+id/action_confirmAmountFragment_to_netWeightToolTipFragment"
+            app:destination="@id/netWeightToolTipFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/netWeightToolTipFragment"
+        android:name="com.albertsons.acupick.ui.picklistitems.NetWeightToolTipFragment"
+        android:label=""
+        tools:layout="@layout/net_weight_tool_tip_fragment" />
+    <fragment
+        android:id="@+id/totesFragment"
+        android:name="com.albertsons.acupick.ui.totes.TotesFragment"
+        android:label=""
+        tools:layout="@layout/totes_fragment">
+        <argument
+            android:name="picklistid"
+            app:argType="string" />
+        <argument
+            android:name="toteEstimate"
+            app:argType="com.albertsons.acupick.data.model.ToteEstimate"
+            android:defaultValue="@null"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_totesFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_totesFragment_to_stagingFragment"
+            app:destination="@id/stagingScope"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemDetailsFragment"
+        android:name="com.albertsons.acupick.ui.itemdetails.ItemDetailsFragment"
+        android:label=""
+        tools:layout="@layout/item_details_fragment">
+        <argument
+            android:name="itemDetailsParams"
+            app:argType="com.albertsons.acupick.ui.itemdetails.ItemDetailsParams" />
+        <action
+            android:id="@+id/action_itemDetailsFragment_to_substituteFragment"
+            app:destination="@id/substituteFragment"
+            app:popUpTo="@id/pickListItemsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/metricsFragment"
+        android:name="com.albertsons.acupick.ui.metrics.MetricsFragment"
+        android:label="Metrics"
+        tools:layout="@layout/metrics_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.albertsons.acupick.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/settings_fragment" />
+
+    <fragment
+        android:id="@+id/arrivalsPagerFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.ArrivalsPagerFragment"
+        android:label=""
+        tools:layout="@layout/arrivals_pager_fragment">
+        <argument
+            android:name="tabPosition"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <argument
+            android:name="is1Pl"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+        <argument
+            android:name="actId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+
+
+        <action
+            android:id="@+id/action_to_remove1PLHandoffFragment"
+            app:destination="@id/handoff1plFragment"
+            />
+
+    </fragment>
+
+    <navigation
+        android:id="@+id/manualEntryScope"
+        app:startDestination="@+id/manualEntryBottomSheet">
+
+        <argument
+            android:name="manualEntryParams"
+            app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryPickParams" />
+
+        <argument
+            android:name="entryType"
+            app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryType" />
+
+        <dialog
+            android:id="@+id/manualEntryBottomSheet"
+            android:name="com.albertsons.acupick.ui.manualentry.pick.ManualEntryBottomSheet"
+            tools:layout="@layout/manual_entry_bottomsheet">
+
+            <argument
+                android:name="manualEntryParams"
+                app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryPickParams" />
+
+            <argument
+                android:name="entryType"
+                app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryType" />
+
+        </dialog>
+
+        <fragment
+            android:id="@+id/manualEntryPagerFragment"
+            android:name="com.albertsons.acupick.ui.manualentry.pick.ManualEntryPagerFragment"
+            android:label=""
+            tools:layout="@layout/manual_entry_pager_fragment">
+            <argument
+                android:name="manualEntryParams"
+                app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryPickParams" />
+
+            <argument
+                android:name="entryType"
+                app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryType" />
+
+            <action
+                android:id="@+id/action_manualEntryPagerFragment_to_confirmAmountFragment"
+                app:destination="@id/confirmAmountFragment"
+                app:launchSingleTop="true"
+                app:popUpToInclusive="true" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/manualEntryWeightFragment"
+            android:name="com.albertsons.acupick.ui.manualentry.pick.weight.ManualEntryWeightFragment"
+            android:label=""
+            tools:layout="@layout/manual_entry_weight_fragment" />
+
+        <fragment
+            android:id="@+id/manualEntryPluFragment"
+            android:name="com.albertsons.acupick.ui.manualentry.pick.plu.ManualEntryPluFragment"
+            android:label=""
+            tools:layout="@layout/manual_entry_plu_fragment" />
+
+        <fragment
+            android:id="@+id/manualEntryUpcFragment"
+            android:name="com.albertsons.acupick.ui.manualentry.pick.upc.ManualEntryUpcFragment"
+            android:label=""
+            tools:layout="@layout/manual_entry_upc_fragment" />
+
+    </navigation>
+
+    <fragment
+        android:id="@+id/manualEntryHandOffFragment"
+        android:name="com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffFragment"
+        android:label=""
+        tools:layout="@layout/manual_entry_handoff_fragment">
+        <argument
+            android:name="manualEntryParams"
+            app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryHandoffParams" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/manualEntryHandOffMfcFragment"
+        android:name="com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffMfcFragment"
+        android:label=""
+        tools:layout="@layout/manual_entry_handoff_mfc_fragment">
+        <argument
+            android:name="manualEntryParams"
+            app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryHandoffParams" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/manualEntryStagingFragment"
+        android:name="com.albertsons.acupick.ui.manualentry.handoff.ManualEntryStagingFragment"
+        android:label=""
+        tools:layout="@layout/manual_entry_staging_fragment">
+        <argument
+            android:name="manualEntryParams"
+            app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryStagingParams" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/manualEntryStagingMfcFragment"
+        android:name="com.albertsons.acupick.ui.manualentry.handoff.ManualEntryStagingMfcFragment"
+        android:label=""
+        tools:layout="@layout/manual_entry_staging_mfc_fragment">
+        <argument
+            android:name="manualEntryParams"
+            app:argType="com.albertsons.acupick.ui.manualentry.ManualEntryStagingParams" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.albertsons.acupick.ui.profile.ProfileFragment"
+        android:label=""
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/storeSelectionFragment"
+        android:name="com.albertsons.acupick.ui.storelist.StoreSelectionFragment"
+        android:label=""
+        tools:layout="@layout/stores_fragment">
+        <action
+            android:id="@+id/action_storeSelectionFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/storeSelectionFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_storesFragment_to_arrivalsOrderPagerFragment"
+            app:destination="@id/arrivalsPagerFragment"
+            app:popUpTo="@id/storeSelectionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeStoreFragment"
+        android:name="com.albertsons.acupick.ui.storelist.ChangeStoreFragment"
+        android:label=""
+        tools:layout="@layout/stores_fragment">
+        <action
+            android:id="@+id/action_changeStoreFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/storeSelectionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickListPagerFragment"
+        android:name="com.albertsons.acupick.ui.picklists.PickListPagerFragment"
+        android:label=""
+        tools:layout="@layout/pick_list_pager_fragment" />
+    <fragment
+        android:id="@+id/pickListsFragment"
+        android:name="com.albertsons.acupick.ui.picklists.open.OpenPickListsFragment"
+        android:label="Pick Lists"
+        tools:layout="@layout/pick_lists_fragment">
+        <action
+            android:id="@+id/action_pickListsFragment_to_pickListItemsFragment"
+            app:destination="@id/pickListItemsFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <!--Master-order-view UI navigation start-->
+    <fragment
+        android:id="@+id/quickTaskPagerFragment"
+        android:name="com.albertsons.acupick.ui.swapsubstitution.QuickTaskPagerFragment"
+        android:label=""
+        tools:layout="@layout/quick_task_pager_fragment" >
+        <argument
+            android:name="customerName"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_quickTaskPagerFragment_to_substituteFragment"
+        app:destination="@id/substituteFragment"
+        app:popUpTo="@id/pickListItemsFragment"
+        app:popUpToInclusive="false"
+        />
+    <fragment
+        android:id="@+id/quickTaskFragment"
+        android:name="com.albertsons.acupick.ui.swapsubstitution.myitems.QuickTaskMyItemsFragment"
+        android:label="My items"
+        tools:layout="@layout/quick_task_fragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/quickTaskOtherShoppersItemsFragment"
+        android:name="com.albertsons.acupick.ui.swapsubstitution.otherShoppersItems.QuickTaskOtherShoppersItemsFragment"
+        android:label="Other shoppers item"
+        tools:layout="@layout/quick_task_fragment">
+
+    </fragment>
+
+<!--    Master-order-view UI navigation end-->
+    <fragment
+        android:id="@+id/teamPickListsFragment"
+        android:name="com.albertsons.acupick.ui.picklists.team.TeamPickListsFragment"
+        android:label="TeamPickListsFragment"
+        tools:layout="@layout/pick_lists_fragment">
+        <action
+            android:id="@+id/action_teamPickListsFragment_to_pickListItemsFragment"
+            app:destination="@id/pickListItemsFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/itemPhotoDialog"
+        android:name="com.albertsons.acupick.ui.itemphoto.ItemPhotoDialog"
+        android:label="ItemPhotoDialog" />
+
+    <action
+        android:id="@+id/action_global_changeStoreFragment"
+        app:destination="@id/changeStoreFragment"
+        app:popUpTo="@id/changeStoreFragment"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/substituteFragment"
+        android:name="com.albertsons.acupick.ui.substitute.SubstituteFragment"
+        android:label=""
+        tools:layout="@layout/substitute_fragment">
+        <argument
+            android:name="substituteParams"
+            app:argType="com.albertsons.acupick.ui.substitute.SubstituteParams" />
+        <action
+            android:id="@+id/action_substituteFragment_to_manualEntryPickFragment"
+            app:destination="@id/manualEntryScope"
+            app:popUpTo="@id/substituteFragment" />
+        <action
+            android:id="@+id/action_substituteFragment_to_totesFragment"
+            app:destination="@id/totesFragment" />
+        <action
+            android:id="@+id/action_substituteFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+
+    <navigation
+        android:id="@+id/stagingScope"
+        app:startDestination="@id/stagingFragment">
+
+        <argument
+            android:name="activityId"
+            app:argType="string" />
+        <argument
+            android:name="isPreviousPrintSuccessful"
+            app:argType="boolean" />
+        <argument
+            android:name="shouldClearData"
+            app:argType="boolean" />
+
+        <fragment
+            android:id="@+id/stagingFragment"
+            android:name="com.albertsons.acupick.ui.staging.StagingPagerFragment"
+            tools:layout="@layout/staging_pager_fragment">
+            <argument
+                android:name="activityId"
+                app:argType="string" />
+            <argument
+                android:name="isPreviousPrintSuccessful"
+                app:argType="boolean" />
+            <argument
+                android:name="orderNumber"
+                android:defaultValue=""
+                app:argType="string" />
+            <argument
+                android:name="shouldClearData"
+                app:argType="boolean" />
+
+            <!--  TODO - Can we make global action to get back to home fragment....?         -->
+            <action
+                android:id="@+id/action_stagingFragment_to_homeFragment"
+                app:destination="@id/homeFragment"
+                app:popUpTo="@id/homeFragment"
+                app:popUpToInclusive="false" />
+            <action
+                android:id="@+id/action_stagingFragment_to_stagingPart2Fragment"
+                app:destination="@id/stagingPart2Fragment" />
+
+            <action
+                android:id="@+id/action_stagingFragment_to_printLabelsFragment"
+                app:destination="@id/printLabelFragment"
+                app:popUpTo="@id/stagingFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/stagingPart2Fragment"
+            android:name="com.albertsons.acupick.ui.staging.StagingPart2PagerFragment"
+            android:label="">
+            <argument
+                android:name="stagingPart2Params"
+                app:argType="com.albertsons.acupick.ui.staging.StagingPart2Params" />
+            <!--  TODO - Can we make global action to get back to home fragment....?         -->
+            <action
+                android:id="@+id/action_stagingPart2Fragment_to_homeFragment"
+                app:destination="@id/homeFragment"
+                app:popUpTo="@id/homeFragment"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_stagingPart2Fragment_to_destageOrderFragment"
+                app:destination="@id/destageOrderScope"
+                app:popUpTo="@id/homeFragment"
+                app:popUpToInclusive="false" />
+            <!--  TODO - Can we make a copy of destination to keep connection in this graph?         -->
+            <action
+                android:id="@+id/action_stagingPart2Fragment_to_manualEntryStagingFragment"
+                app:destination="@id/manualEntryStagingFragment" />
+            <action
+                android:id="@+id/action_stagePart2Fragment_to_UnassignTotesFragment"
+                app:destination="@id/unAssignTotesFragment" />
+            <action
+                android:id="@+id/action_stagingPart2Fragment_to_pickListSummaryFragment"
+                app:destination="@id/picklistSummaryFragment" />
+            <action
+                android:id="@+id/action_stagingPart2Fragment_to_printLabelsFragment"
+                app:destination="@id/printLabelFragment"
+                app:popUpTo="@id/stagingPart2Fragment" />
+        </fragment>
+
+    </navigation>
+
+    <fragment
+        android:id="@+id/unAssignTotesFragment"
+        android:name="com.albertsons.acupick.ui.staging.UnAssignTotesFragment"
+        android:label=""
+        tools:layout="@layout/unassign_totes_fragment">
+        <argument
+            android:name="unAssignTotesParams"
+            app:argType="com.albertsons.acupick.ui.staging.UnAssignToteParams" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/picklistSummaryFragment"
+        android:name="com.albertsons.acupick.ui.staging.PicklistSummaryFragment"
+        android:label=""
+        tools:layout="@layout/item_totes">
+        <argument
+            android:name="picklistid"
+            app:argType="long" />
+        <argument
+            android:name="customerordernumber"
+            app:argType="string" />
+    </fragment>
+    
+    <fragment
+        android:id="@+id/printLabelFragment"
+        android:name="com.albertsons.acupick.ui.staging.print.PrintLabelsFragment"
+        android:label="">
+
+        <argument
+            android:name="activityId"
+            app:argType="string" />
+
+        <argument
+            android:name="isCustomerPreferBag"
+            app:argType="boolean" />
+
+        <argument
+            android:name="printLabelUi"
+            app:argType="com.albertsons.acupick.ui.staging.print.PrintLabelUi" />
+
+    </fragment>
+
+    <navigation
+        android:id="@+id/handOffScope"
+        app:startDestination="@id/handOffFragment">
+        <argument
+            android:name="handOffArgData"
+            app:argType="com.albertsons.acupick.ui.arrivals.complete.HandOffArgData" />
+        <argument
+            android:name="isFromNotification"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <argument
+            android:name="isFromPartialPrescriptionReturn"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+        <argument
+            android:name="pickedBagNumbers"
+            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
+            android:defaultValue="@null"
+            app:nullable="true" />
+        <fragment
+            android:id="@+id/handOffFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.complete.HandOffPagerFragment"
+            android:label=""
+            tools:layout="@layout/hand_off_pager_fragment">
+            <argument
+                android:name="handOffArgData"
+                app:argType="com.albertsons.acupick.ui.arrivals.complete.HandOffArgData"/>
+            <argument
+                android:name="isFromNotification"
+                android:defaultValue="false"
+                app:argType="boolean" />
+            <argument
+                android:name="isFromPartialPrescriptionReturn"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+            <argument
+                android:name="pickedBagNumbers"
+                app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
+                android:defaultValue="@null"
+                app:nullable="true" />
+            <action
+                android:id="@+id/action_handOffFragment_to_verificationIdTypeFragment"
+                app:destination="@id/verificationIdTypeFragment" />
+            <action
+                android:id="@+id/action_handOffFragment_to_handOffInterstitialFragment"
+                app:destination="@id/handOffInterstitialFragment" />
+
+            <action
+                android:id="@+id/action_handOffFragment_to_handOffRxInterstitialFragment"
+                app:destination="@+id/handOffRxInterstitialFragment" />
+
+            <action
+                android:id="@+id/action_handOffFragment_to_arrivalsOrdersPagerFragment"
+                app:destination="@id/arrivalsPagerFragment"
+                app:popUpTo="@id/arrivalsPagerFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/verificationIdTypeFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.complete.VerificationIdTypeFragment"
+            tools:layout="@layout/verification_id_type_fragment">
+            <argument
+                android:name="orderNumber"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_to_identificationBarcodeScanFragment"
+                app:destination="@id/identificationBarcodeScanFragment" />
+            <action
+                android:id="@+id/action_to_verificationManualEntryFragment"
+                app:destination="@id/verificationManualEntryFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/identificationBarcodeScanFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.complete.idverification.IdentificationBarcodeScanFragment"
+            tools:layout="@layout/identification_barcode_scan_fragment">
+            <argument
+                android:name="orderNumber"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_to_verificationManualEntryFragment"
+                app:destination="@id/verificationManualEntryFragment"
+                app:popUpTo="@id/verificationIdTypeFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/verificationManualEntryFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.complete.VerificationManualEntryFragment"
+            tools:layout="@layout/verification_manual_entry_fragment">
+            <argument
+                android:name="orderNumber"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_to_identificationBarcodeScanFragment"
+                app:destination="@id/identificationBarcodeScanFragment"
+                app:popUpTo="@id/verificationIdTypeFragment" />
+            <action
+                android:id="@+id/action_to_customerSignatureFragment"
+                app:destination="@id/customerSignatureFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/customerSignatureFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.complete.CustomerSignatureFragment"
+            tools:layout="@layout/customer_signature_fragment">
+            <argument
+                android:name="orderNumber"
+                app:argType="string" />
+        </fragment>
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/destageOrderScope"
+        app:startDestination="@id/destageOrderFragment">
+        <argument
+            android:name="activityList"
+            android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.ui.arrivals.SelectedActivities"
+            app:nullable="true" />
+        <argument
+            android:name="customerData"
+            android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.ui.models.CustomerData"
+            app:nullable="true" />
+        <argument
+            android:name="isFromNotification"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <fragment
+            android:id="@+id/destageOrderFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.destage.DestageOrderPagerFragment"
+            android:label=""
+            tools:layout="@layout/destage_order_pager_fragment">
+            <argument
+                android:name="activityList"
+                android:defaultValue="@null"
+                app:argType="com.albertsons.acupick.ui.arrivals.SelectedActivities"
+                app:nullable="true" />
+            <argument
+                android:name="customerData"
+                android:defaultValue="@null"
+                app:argType="com.albertsons.acupick.ui.models.CustomerData"
+                app:nullable="true" />
+
+            <argument
+                android:name="orderNumber"
+                android:defaultValue=""
+                app:argType="string" />
+            <argument
+                android:name="isFromNotification"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+            <action
+                android:id="@+id/action_destageOrderFragment_to_removeRejectedItemsFragment"
+                app:destination="@id/removeRejectedItemsFragment" />
+
+        </fragment>
+
+
+        <fragment
+            android:id="@+id/removeRejectedItemsFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.destage.removeitems.RemoveRejectedItemFragment">
+            <argument
+                android:name="ui"
+                android:defaultValue="@null"
+                app:argType="com.albertsons.acupick.ui.models.RemoveRejectedItemUiData"
+                app:nullable="true" />
+            <argument
+                android:name="storageType"
+                app:argType="string" />
+        </fragment>
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/rejected1PLItemScope"
+        app:startDestination="@id/remove1PLRejectedFragment">
+        <argument
+            android:name="rejectedItems"
+            android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.data.model.response.Remove1PLItemsResponseDto"
+            app:nullable="true" />
+        <fragment
+            android:id="@+id/remove1PLRejectedFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.destage.removeitems.RemoveRejected1PLFragment"
+            tools:layout="@layout/remove_rejected_1pl_fragment"
+            >
+            <argument
+                android:name="rejectedItems"
+                android:defaultValue="@null"
+                app:argType="com.albertsons.acupick.data.model.response.Remove1PLItemsResponseDto"
+                app:nullable="true" />
+            <action
+                android:id="@+id/action_to_remove1PLRejectedItemsFragment"
+                app:destination="@id/remove1PLRejectedItemsFragment"
+                />
+            <action
+                android:id="@+id/action_to_remove1PLHandoffFragment"
+                app:destination="@id/handoff1plFragment"
+                app:popUpTo="@id/arrivalsPagerFragment"
+                app:popUpToInclusive="true"/>
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/remove1PLRejectedItemsFragment"
+            android:name="com.albertsons.acupick.ui.arrivals.destage.removeitems.RemoveRejected1PLItemsFragment"
+            tools:layout="@layout/remove_rejected_1pl_item_fragment"
+            >
+            <argument
+                android:name="rejectedItemsByZone"
+                android:defaultValue="@null"
+                app:argType="com.albertsons.acupick.data.model.response.RejectedItemsByZone"
+                app:nullable="true" />
+
+            <argument
+                android:name="vanId"
+                android:defaultValue=""
+                app:argType="string" />
+
+            <action
+                android:id="@+id/action_to_arrivalsOrdersPagerFragment"
+                app:destination="@id/arrivalsPagerFragment"
+                app:popUpTo="@id/arrivalsPagerFragment"
+                app:popUpToInclusive="true"/>
+        </fragment>
+
+    </navigation>
+
+    <fragment
+        android:id="@+id/handoff1plFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.destage.removeitems.Handoff1PLFragment"
+        tools:layout="@layout/remove_1pl_handoff_fragment"
+        >
+        <argument
+            android:name="totalOrderCount"
+            android:defaultValue="1"
+            app:argType="integer" />
+        <argument
+            android:name="removedItemsCount"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="misplacedItemsCount"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <argument
+            android:name="handOffInterstitialParamsList"
+            app:argType="com.albertsons.acupick.data.model.HandOff1PLInterstitialParams" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateCustomerChangeStatusFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.destage.updatecustomers.changestatus.ChangeCustomerStatusFragment"
+        android:label=""
+        tools:layout="@layout/update_customer_change_status_fragment" />
+
+    <fragment
+        android:id="@+id/updateCustomerAddFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.destage.updatecustomers.add.AddCustomerFragment"
+        android:label=""
+        tools:layout="@layout/update_customer_add_customer_fragment">
+
+        <argument
+            android:name="assignedCount"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/handOffInterstitialFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.complete.HandOffInterstitialFragment"
+        android:label="HandOffInterstitialFragment">
+        <argument
+            android:name="isFromNotification"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <argument
+            android:name="handOffInterstitialParamsList"
+            app:argType="com.albertsons.acupick.data.model.HandOffInterstitialParamsList" />
+        <argument
+            android:name="orderSummaryParamsList"
+            app:argType="com.albertsons.acupick.data.model.OrderSummaryParamsList"/>
+        <action
+            android:id="@+id/action_handOffInterstitialFragment_to_arrivalsOrdersPagerFragment"
+            app:destination="@id/arrivalsPagerFragment"
+            app:popUpTo="@id/arrivalsPagerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/handOffRxInterstitialFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.complete.HandOffRxInterstitialFragment"
+        android:label="HandOffRxInterstitialFragment">
+        <argument
+            android:name="handOffInterstitialParamsList"
+            app:argType="com.albertsons.acupick.data.model.HandOffInterstitialParamsList" />
+        <argument
+            android:name="handOffAction"
+            app:argType="com.albertsons.acupick.data.model.HandOffAction" />
+
+        <argument
+            android:name="pickedBagNumbers"
+            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
+            android:defaultValue="@null"
+            app:nullable="true" />
+        <argument
+            android:name="orderSummaryParamsList"
+            app:argType="com.albertsons.acupick.data.model.OrderSummaryParamsList"/>
+        <action
+            android:id="@+id/action_handOffInterstitialFragment_to_prescriptionReturnFragment"
+            app:destination="@id/prescriptionReturnFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addBagsFragment"
+        android:name="com.albertsons.acupick.ui.staging.AddBagsFragment"
+        android:label=""
+        tools:layout="@layout/add_bags_fragment">
+        <argument
+            android:name="addBagsUiData"
+            app:argType="com.albertsons.acupick.ui.staging.AddBagsUiData" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/verificationCodeToolTipFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.complete.VerificationCodeToolTipFragment"
+        android:label="" />
+    <fragment
+        android:id="@+id/bagsPerTempZoneFragment"
+        android:name="com.albertsons.acupick.ui.arrivals.complete.BagsPerTempZoneFragment"
+        android:label="">
+        <argument
+            android:name="bagsPerTempZoneParams"
+            app:argType="com.albertsons.acupick.ui.arrivals.complete.BagsPerTempZoneParams" />
+    </fragment>
+</navigation>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="568dp"
+        android:paddingBottom="30dp"
+        android:minHeight="@dimen/default_bottomsheet_peek_height"
+        android:background="@drawable/rounded_top_corners_background">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="56dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/manualEntryFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="568dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/handle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

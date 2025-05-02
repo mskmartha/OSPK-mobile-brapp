@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="totesSubUI"
+            type="com.albertsons.acupick.ui.totes.TotesSubUi" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:paddingVertical="7dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/storageTypeIcon"
+            visibilityGoneIfNull="@{totesSubUI}"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toteNumber"
+            app:setStorageTypeImg="@{totesSubUI.storageType}"
+            tools:src="@drawable/ic_ambient" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/toteNumber"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{totesSubUI.containerId}"
+            app:layout_constraintBottom_toBottomOf="@+id/storageTypeIcon"
+            app:layout_constraintStart_toEndOf="@+id/storageTypeIcon"
+            app:layout_constraintTop_toTopOf="@id/storageTypeIcon"
+            tools:text="TTE06" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemsInTote"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{ @plurals/tote_items_plural(totesSubUI.numberOfItemsInTote, totesSubUI.numberOfItemsInTote) }"
+            app:layout_constraintBottom_toBottomOf="@+id/storageTypeIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/storageTypeIcon"
+            tools:text="13 items" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

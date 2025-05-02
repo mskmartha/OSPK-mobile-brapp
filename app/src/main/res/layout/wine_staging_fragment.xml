@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.staging.winestaging.WineStagingViewModel" />
+
+        <variable
+            name="fragmentLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/disabledBackgroundGrey">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/orderNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/NunitoSansBold20.grey600"
+            android:textStyle="bold"
+            android:text="@{String.format(@string/wine_toolbar_title_format, viewModel.shortOrderNumber, viewModel.longOrderNumber)}"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/orderNumber"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="4dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="18dp"
+            style="@style/NunitoSansRegular18.Grey500"
+            android:text="@{viewModel.customerName}"/>
+
+        <TextView
+            android:id="@+id/bottleCount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/rounded_corner_blue"
+            style="@style/NunitoSansBold14.DarkBlue"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            android:text="@{@plurals/wine_bottle_count(viewModel.pickedUpBottles, viewModel.pickedUpBottles)}"
+            tools:text="7 bottles"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="0dp"
+            app:boxSizeItems="@{viewModel.boxSizeUiItems}"
+            app:fragmentLifecycleOwner="@{fragmentLifecycleOwner}"
+            app:layout_constraintBottom_toTopOf="@id/cta"
+            app:layout_constraintTop_toBottomOf="@+id/header"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cta"
+            style="@style/Button.Anchored"
+            android:enabled="@{viewModel.isCtaEnabled}"
+            android:onClick="@{() -> viewModel.printBoxLabelsClicked()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/print_box_labels"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="headerItem"
+            type="com.albertsons.acupick.ui.staging.print.PrintLabelsHeaderItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chilledBanner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/coffeeLighter"
+        android:paddingHorizontal="16dp"
+        android:tag="sticky">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/chilledImg"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setStorageTypeImg="@{headerItem.headerUi.storageType}"
+            tools:src="@drawable/ic_chilled" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/NunitoSansBold16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{headerItem.headerUi.nameOrType}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/chilledImg"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Zone name" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

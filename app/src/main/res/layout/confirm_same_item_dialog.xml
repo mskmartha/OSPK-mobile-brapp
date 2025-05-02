@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+        <View
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/albertsonsBlue"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            style="@style/NunitoSansBold18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:gravity="center_vertical"
+            android:text="@{viewData.title}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/titleBar"
+            app:layout_constraintEnd_toStartOf="@id/titleIcon"
+            app:layout_constraintStart_toStartOf="@id/titleBar"
+            app:layout_constraintTop_toTopOf="@id/titleBar"
+            tools:text="Item Scan Issue" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/titleIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:importantForAccessibility="no"
+            android:visibility="@{viewData.titleIconVisibility}"
+            app:imageResource="@{viewData.titleIcon}"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title"
+            app:tint="@color/white"
+            tools:srcCompat="@drawable/ic_alert" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/message"
+            style="@style/NunitoSansRegular16.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/item_scan_same_warning"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleBar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/itemInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@id/positiveButton"
+            app:layout_constraintTop_toBottomOf="@id/message">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/itemImage"
+                android:layout_width="124dp"
+                android:layout_height="124dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{viewData.imageUrl}"
+                tools:src="@drawable/ic_card_view_empty_image" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemDescription"
+                style="@style/NunitoSansRegular16.Grey600"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:lineSpacingMultiplier="0.85"
+                android:scrollHorizontally="false"
+                android:text="@{viewData.body}"
+                app:layout_constraintBottom_toTopOf="@id/upcOrPlu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemImage"
+                app:layout_constraintTop_toTopOf="@id/itemImage"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Item Name here Item Name here Item Name here " />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/upcOrPlu"
+                style="@style/NunitoSansBold14.Grey600"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="start"
+                android:text="@{viewData.secondaryBody}"
+                app:layout_constraintBottom_toBottomOf="@id/itemImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemImage"
+                app:layout_constraintTop_toBottomOf="@+id/itemDescription"
+                tools:text="UPC: 400 800 9002" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="-6dp"
+                android:layout_marginTop="24dp"
+                android:buttonTint="@color/darkBlue"
+                android:checked="@={viewModel.checkBoxChecked}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemImage"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/checkBoxConfirmation"
+                    style="@style/NunitoSansRegular18.Grey600"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/item_scan_same_confirmation"
+                    android:onClick="@{() -> checkBox.performClick()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/checkBox"
+                    app:layout_constraintTop_toTopOf="@id/checkBox" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/negativeButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+            android:text="@{viewData.negativeButtonText}"
+            android:textAppearance="@style/NunitoSansBold18"
+            android:textColor="@color/darkBlue"
+            android:visibility="@{viewData.negativeButtonVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/positiveButton"
+            app:layout_constraintTop_toTopOf="@id/positiveButton"
+            tools:text="Negative CTA" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/positiveButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:enabled="@{viewModel.checkBoxChecked}"
+            android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+            android:text="@{viewData.positiveButtonText}"
+            android:textAppearance="@style/NunitoSansBold18"
+            android:textColor="@color/square_button_text_selector"
+            android:visibility="@{viewData.positiveButtonVisibility}"
+            app:layout_constraintTop_toBottomOf="@id/itemInfo"
+            app:layout_constraintEnd_toEndOf="@id/itemInfo"
+            tools:text="Positive CTA" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

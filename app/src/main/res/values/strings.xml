@@ -1,0 +1,1937 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">AcuPick</string>
+    <string name="ok">OK</string>
+
+    <!-- Splash -->
+
+    <!-- Login -->
+    <string name="login_id_hint">Employee ID/Username</string>
+    <string name="login_id_accessibility">Employee ID or Username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_password_accessibility">Password</string>
+    <string name="login_button">Sign In</string>
+    <string name="user_name_error">The username entered doesn\'t match our records.</string>
+    <string name="password_error">The password entered doesn\'t match our records.</string>
+    <string name="incorrect_credentials_error">Incorrect credentials</string>
+
+    <!-- Navigation Drawer -->
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Sign Out</string>
+    <string name="logout_confirmation">Are you sure you want to sign out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Logout -->
+    <string name="offline_logout_warning_title">Offline Alert</string>
+    <string name="offline_logout_warning_body">You are currently offline. Connect to Wi-Fi to sign out (optional).</string>
+    <string name="offline_logout_warning_sign_out">Sign Out Anyway</string>
+
+    <!-- Field Services -->
+    <string name="reset">Reset</string>
+    <string name="start_test">Start Test</string>
+    <string name="auth_url_hint">Auth URL</string>
+    <string name="aps_url_hint">(APS) URL</string>
+    <string name="oscc_url_hint">OSCC URL</string>
+    <string name="item_processor_url_hint">Item Processor URL</string>
+    <string name="image_url_hint">Image URL</string>
+    <string name="test_failure">Test Failure</string>
+    <string name="test_success">Test success!</string>
+
+    <!-- Home -->
+    <string name="build_version">Version %s%s</string>
+    <string name="device_id">Device ID %s</string>
+    <string name="dev_options_button">Dev Options</string>
+    <string name="app_restart_button">Restart</string>
+    <string name="hello_associate_name">"Hello, %s"</string>
+    <string name="hello_again_next_pick">"Hello again!  Here’s your next pick%s."</string>
+    <string name="hello_again_flash">"Hello again! Please start this Flash order."</string>
+    <string name="hello_continue_pick">Please continue your current task!</string>
+    <string name="here_is_your_next_pick">Here\'s your next pick!</string>
+    <string name="there_is_no_task_right_now">There\'s no task for you right now!</string>
+    <string name="we_are_still_loading_the_order">We are still loading the order</string>
+    <string name="we_are_loading_the_order">We are loading the order ...</string>
+    <string name="just_a_few_more_seconds">Just a few more seconds ...</string>
+    <string name="there_are_no_orders_available_at_this_time">There are no orders available at this time. </string>
+    <string name="continue_staging_order">Next, let\'s start staging your order.</string>
+    <string name="here_is_your_next_task">Here’s your next task!</string>
+    <string name="customer_is_here_for_the_order">Your customer\'s here for their order!</string>
+    <string name="deliver">DEL</string>
+    <string name="continue_picking">Continue Picking</string>
+    <string name="continue_picking_home_cta">Continue picking</string>
+    <string name="stage_order">Stage Order</string>
+    <string name="start_staging">Start staging</string>
+    <string name="start_picking">Start picking</string>
+    <string name="dug">DUG\u0020</string>
+    <string name="wine_shipping">SHP</string>
+    <string name="threepl">3PL\u0020</string>
+    <string name="onePl">FLEET</string>
+    <string name="one_pl_van_number">1PL %s\u0020</string>
+    <string name="one_pl_collect_gift_notes_title">Collect %s gift notes</string>
+    <string name="one_pl_gift_note_body">Attach gift notes to the matching orders before handoff</string>
+    <string name="one_pl_gift_note_secondary_body">To re-print or view gift notes please check the web dashboard</string>
+    <plurals name="one_pl_collect_gift_notes_title">
+        <item quantity="one">Collect %s gift note</item>
+        <item quantity="other">Collect %s gift notes</item>
+    </plurals>
+    <plurals name="one_pl_print_gift_notes_cta">
+        <item quantity="one">Print %s Gift Note</item>
+        <item quantity="other">Print %s Gift Notes</item>
+    </plurals>
+    <string name="partnerpick_order">Partner pick</string>
+    <string name="all_order">All</string>
+    <string name="flash_order">Flash</string>
+    <string name="express_order">Express</string>
+    <string name="standard_order">Standard</string>
+    <plurals name="number_of_order_plural">
+        <item quantity="one">%s Order</item>
+        <item quantity="other">%s Orders</item>
+    </plurals>
+    <plurals name="cap_items_plural">
+        <item quantity="one">%s Item</item>
+        <item quantity="other">%s Items</item>
+    </plurals>
+    <string name="reshop">Reshop</string>
+    <string name="prep_not_ready">Prep Not Ready</string>
+    <string name="home_begin_handoff">Begin handoff</string>
+    <string name="home_arriving_in">Arriving in</string>
+    <string name="home_on_their_way">On their way</string>
+    <string name="home_customer_waiting">"Hi there!  A customer is waiting."</string>
+    <string name="home_customer_waiting_format">%1$s has arrived!</string>
+    <string name="home_customer_arriving_format">%1$s is close by!</string>
+    <string name="home_arrived_and_waiting">Arrived <b>and</b> Waiting</string>
+    <string name="order_number_value">Order #%s</string>
+    <string name="remove_unwanted_items_by">Remove unwanted items by</string>
+    <string name="number_unwanted_items">%s unwanted items</string>
+
+
+    <!-- Stores -->
+    <string name="store_format">Store #%1$s</string>
+
+    <!-- Wine -->
+    <string name="shipping_order_warning">Shipping Order Warning</string>
+    <string name="shipping_order_warning_body">This is your final chance to pick as this is a shipping order. Would you still like to mark this item as out of stock?</string>
+
+    <!-- Arrivals -->
+    <string name="in_progress_orders">In Progress</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="search_button">Search Button</string>
+    <string name="pickup_ready_order_unavailable">There are no pickup ready orders available at this time.</string>
+    <string name="one_pl_pickup_ready_order_unavailable">There are no 1PL orders ready for handoff at this time. </string>
+    <string name="in_progress_order_unavailable">There are no in progress orders available at this time.</string>
+    <string name="one_pl_in_progress_order_unavailable">There are no 1PL in-progress orders available at this time.</string>
+    <string name="or_search_by">Or search by</string>
+    <string name="clear_all">Clear All</string>
+    <string name="clear">Clear</string>
+    <string name="destaging_dialog_title">Walk out customer\'s order</string>
+    <string name="destaging_dialog_body">Your <b>DUG</b> customer has arrived, so please head out to the parking lot and handoff their groceries.</string>
+    <string name="complete_destaging">Complete de-staging</string>
+    <plurals name="rejected_items_plural">
+        <item quantity="one">%d unwanted Item</item>
+        <item quantity="other">%d unwanted Items</item>
+    </plurals>
+    <plurals name="rejected_1pl_items_plural">
+        <item quantity="one">Unwanted item (%d)</item>
+        <item quantity="other">Unwanted items (%d)</item>
+    </plurals>
+    <string name="rejected_ambient_items">Unwanted ambient items</string>
+    <string name="rejected_hot_items">Unwanted hot items</string>
+    <string name="rejected_frozen_items">Unwanted frozen items</string>
+    <string name="rejected_chilled_items">Unwanted chilled items</string>
+    <string name="remove_items_body">%s has %s unwanted items in %s zone. Please continue to remove these items.</string>
+    <string name="info_snack_orders_allowed_for_batch_handoff">Only %s orders allowed for batch hand off.</string>
+    <string name="arrival_status_arrived">Arrived</string>
+    <string name="arrival_status_on_their_way">On their way</string>
+    <string name="arrival_status_arriving_in_time">Arriving in %s min</string>
+    <string name="arrival_option_mark_as_not_here">Mark as not here</string>
+    <string name="arriving_in_min">Arriving in %s min</string>
+    <string name="is_less_than_one_minute_away">Is less than 1 min away</string>
+    <string name="no_rejected_items">No rejected items</string>
+    <string name="please_complete_handoff_to_proceed">Please complete handoff to proceed</string>
+    <string name="rejected_item_complete_handoff_cta">Complete handoff</string>
+    <string name="unwanted_items_count">unwanted items(%s)</string>
+
+    <!-- Arrivals Results -->
+    <string name="no_orders_found">No Orders Found</string>
+    <string name="order_number_hint">Order #</string>
+    <string name="next_button">Next Button</string>
+    <string name="details">Details</string>
+    <string name="search_order_text_header">ORDER: </string>
+    <string name="order_number_format">Order: %s</string>
+    <string name="status_format">Status: %s</string>
+    <string name="customer_name_format">Customer Name: %s</string>
+    <string name="pickup_ready">Pick-Up Ready</string>
+    <string name="stage_by_format">Stage By: %s</string>
+    <string name="tote_number_format">Tote Number: %s</string>
+    <string name="staging_area_format">Staging Area: %s</string>
+    <string name="searched_params_format"> for %s</string>
+    <string name="not_found_format">"%s" not found</string>
+    <string name="pick_window_format">%s-%s</string>
+    <string name="customer_arrived_format">Arrived (%d)</string>
+    <string name="customer_arriving_format">Arriving (%d)</string>
+    <string name="customer_en_route_format">En Route (%d)</string>
+    <string name="customer_pickup_ready_format">Pick-Up Ready (%d)</string>
+    <string name="picker_name_unclaimed">NOT STARTED</string>
+    <string name="handoff_cta">Begin handoff</string>
+    <string name="takeover_handoff_cta">Takeover handoff</string>
+    <string name="non_arrived_handoff_warning">You cannot begin this handoff until the customer has arrived.</string>
+    <string name="non_arrived_handoff_cta">MARK AS ARRIVED</string>
+    <string name="swipe_make_arrived_cta">Arrived</string>
+    <string name="swipe_make_non_arrived_cta">Not here</string>
+    <string name="status_pill_in_progress">in-progress</string>
+    <string name="status_pill_not_started">not started</string>
+
+    <plurals name="search_results_plural">
+        <item quantity="one">%d result</item>
+        <item quantity="other">%d results</item>
+    </plurals>
+    <plurals name="ready_pick_up_plural">
+        <item quantity="one">%d result for \"Pick-Up Ready\"</item>
+        <item quantity="other">%d results for \"Pick-Up Ready\"</item>
+    </plurals>
+
+    <!-- Confirm Orders-->
+    <string name="no_restricted_items">No restricted items</string>
+    <string name="not_applicable">N/A</string>
+    <string name="tote_total_format">TOTAL TOTES: %d</string>
+    <string name="pick_up">Pick Up</string>
+    <string name="restricted_items">Restricted items</string>
+    <string name="restricted_item">%s restricted items</string>
+    <string name="empty_state_text">Pick is currently %s.</string>
+    <string name="order_details_order_header">ORDER: </string>
+    <string name="bags_total">TOTAL: %d</string>
+    <string name="bag_count_multiple_bags_format">%d of %s</string>
+    <plurals name="bag_count_plural">
+        <item quantity="one">%d Bag</item>
+        <item quantity="other">%d Bags</item>
+    </plurals>
+    <plurals name="bag_loose_count_plural">
+        <item quantity="one">%d Bag | %d Loose</item>
+        <item quantity="other">%d Bags | %d Loose</item>
+    </plurals>
+    <plurals name="tote_count_plural_lowercase">
+        <item quantity="one">%d tote</item>
+        <item quantity="other">%d totes</item>
+    </plurals>
+    <plurals name="reshop_tote_count_plural_lowercase">
+        <item quantity="one">%d reshop tote</item>
+        <item quantity="other">%d reshop totes</item>
+    </plurals>
+    <string name="scan_bags_prompt">Please scan a bag or loose item</string>
+    <string name="scan_pharmacy_arrival_label">Scan pharmacy arrival label</string>
+    <string name="scan_a_new_bag">Scan a new bag</string>
+    <string name="order_details_exit_title">Abandon handoff</string>
+    <string name="order_details_exit_body">Are you sure you want to abandon this handoff?\n\n No progress will be saved.\n Please manually stage any bags that are not in staging locations
+        .</string>
+    <string name="order_details_prescription_exit_body">Are you sure you want to abandon this handoff? You must immediately return prescriptions to the pharmacy before picking another order.</string>
+    <string name="order_details_prescription_abandon_exit_body">You must immediately return prescriptions to the pharmacy before handing groceries to the customer.</string>
+    <string name="timer_format">%1$dm %2$ds</string>
+    <string name="arriving_soon">Arriving Soon</string>
+    <string name="bags_scanned">SCANNED:</string>
+    <string name="success_item_scanned_format">Bag%s scanned</string>
+    <string name="success_bag_scanned_into_zone_format">Bag %1$s scanned into Zone %2$s</string>
+    <string name="success_tote_scanned_into_zone_format">Tote %1$s scanned into Zone %2$s</string>
+    <string name="success_bag_scanned_out_of_zone_format">Bag%1$s scanned out of Zone %2$s</string>
+    <string name="success_bag_scanned_out_format">Bag%1$s successfully scanned out</string>
+    <string name="success_box_scanned_out_format">Box %1$s successfully scanned</string>
+    <string name="scan_totes_prompt">Scan a tote</string>
+    <string name="order_complete_prompt">De-staging is complete for this order</string>
+    <string name="remove_rejected_items_prompt">Please remove unwanted items.</string>
+    <string name="remove"><u>Remove</u></string>
+    <string name="success_tote_scanned_out_format">Tote %1$s scanned out of %2$s</string>
+    <string name="scan_bags_dialog_title">Scan bags</string>
+    <string name="scan_bags_dialog_body">Please scan all bags for all zones before proceeding. This action will be recorded.</string>
+    <string name="order_issue_dialog_title">Indicate order issue</string>
+    <string name="bag_labels_missing">Bag labels missing</string>
+    <string name="bags_missing">Bags missing</string>
+    <string name="scan_totes_dialog_title">Scan tote labels</string>
+    <string name="scan_totes_dialog_body">Please scan all tote labels for all zones before proceeding. This action will be recorded.</string>
+    <string name="mfc_order_issue_dialog_title">Indicate order issue</string>
+    <string name="tote_labels_missing">Tote labels missing</string>
+    <string name="totes_missing">Totes missing</string>
+    <string name="bag_scan_skipped">Bag scan skipped: %d</string>
+    <string name="tote_scan_skipped">Tote scan skipped: %d</string>
+    <plurals name="bags_plural">
+        <item quantity="one">%d bag</item>
+        <item quantity="other">%d bags</item>
+    </plurals>
+    <plurals name="totes_plural">
+        <item quantity="one">%d tote</item>
+        <item quantity="other">%d totes</item>
+    </plurals>
+    <string name="frozen">frozen</string>
+    <string name="chilled">chilled</string>
+    <string name="ambient">ambient</string>
+    <string name="hot">hot</string>
+    <string name="complete_order_issue_dialog_title">Complete order issue</string>
+    <string name="complete_order_issue_dialog_body">Are you sure you want to record %1$s not scanned from %2$s? This action will be recorded and all remaining bags will be de-staged.</string>
+    <string name="complete_order_issue_mfc_dialog_body">Are you sure you want to record %1$s not scanned from %2$s? This action will be recorded.</string>
+    <string name="associated_zone_title">What zone is this bag associated with?</string>
+    <string name="associated_mfc_zone_title">What zone is this tote associated with?</string>
+    <string name="confirm_order_customer_already_added_title">Customer already added</string>
+    <string name="confirm_order_customer_already_added_body">%s has already been added to your handoff.</string>
+
+    <!-- PickLists -->
+    <string name="continue_order_title">Continue in progress pick</string>
+    <string name="continue_order_body">Your current pick is in progress and not complete. Please continue picking.</string>
+    <string name="continue_cta">Continue</string><!-- can't use continue as the key name as it is a reserved java keyword -->
+    <string name="tab_open">Open</string>
+    <string name="tab_in_progress">In Progress</string>
+    <string name="stage_by"><b>Stage</b> by</string>
+    <string name="stage_in">Stage in</string>
+    <string name="due_in">Due in</string>
+    <string name="due">Due</string>
+    <string name="due_in_days">%d Days</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="open">Open</string>
+    <string name="select_picklist_confirmation_dialog_body">Are you sure you want to start picking?</string>
+    <string name="select_team_picklist_confirmation_dialog_title">Transfer Pick</string>
+    <string name="select_team_picklist_confirmation_dialog_body">Are you sure you want to transfer this pick and start picking?</string>
+    <string name="select_team_picklist_reassign_confirmation_dialog_title">Transfer Picklist</string>
+    <string name="select_team_picklist_reassign_confirmation_dialog_body">Are you sure you want to take over this picklist from %1$s and start staging?</string>
+    <string name="continue_in_progress_pick_title">Continue in progress pick</string>
+    <string name="continue_in_progress_pick_message">Your current pick is in progress. Please end your pick before attempting to change stores.</string>
+    <string name="cancel">Cancel</string>
+    <string name="start">Start</string>
+    <string name="user_comments_content_description">User Comments</string>
+    <string name="no_user_comments">No customer notes</string>
+    <string name="start_picking_format">Start Pick %s</string>
+    <string name="zone_image">zone image</string>
+    <string name="pick_item_ambient_accessibility">order contains ambient items icon</string>
+    <string name="pick_item_chilled_accessibility">order contains chilled items icon</string>
+    <string name="pick_item_frozen_accessibility">order contains frozen items icon</string>
+    <string name="pick_item_chilled_char">CH</string>
+    <string name="pick_item_ambient_char">AM</string>
+    <string name="pick_item_frozen_char">FZ</string>
+    <string name="order_format">Order:\n%s</string>
+    <string name="sent_to_printer_totes">Sent To Printer</string>
+    <string name="find_your_printer_totes">Find your staging printer to collect your tote labels.</string>
+    <string name="picks_unavailable">No picks are available.\nPlease try again later.</string>
+    <string name="there_are_no_picklists_available">There are no pick lists \navailable at this time.</string>
+    <string name="handoffs_unavailable">No handoffs are available.\nPlease try again later.</string>
+    <string name="picks_unavailable_mfc">There are no express pick lists available at this time.  Please check Pickerman for other pick list information.</string>
+    <string name="flash_header_format">Flash (%d)</string>
+    <string name="express_standard_header">Standard &amp; Express (%d)</string>
+    <string name="express_standard_header_wine">Standard (%d)</string>
+    <string name="pick_card_format">%1s (%2s)</string>
+
+    <string name="order_num">Order Number</string>
+    <plurals name="items_plural">
+        <item quantity="one">Item</item>
+        <item quantity="other">Items</item>
+    </plurals>
+
+    <!-- PickList Items -->
+    <string name="substitute">Substitute</string>
+    <string name="substituted">Substituted</string>
+    <string name="substitue_different_item">Substitute a different item</string>
+    <string name="substitue_with_ffc">Please substitute with items from the FFC or extended aisles only.</string>
+    <string name="do_not_substitute">Do not Substitute</string>
+    <string name="completed">Completed</string>
+    <string name="short_word">Short</string>
+    <string name="partially_picked">Partially picked</string>
+    <string name="partially_substituted">Partially substituted</string>
+    <string name="end_pick">End pick</string>
+    <string name="exit_pick">Exit pick</string>
+    <string name="complete_pick">Complete pick</string>
+    <string name="totes">Totes</string>
+    <string name="batch">Batch</string>
+    <string name="please_scan_the_item">Please scan the item</string>
+    <string name="scan_upc_item">Scan the UPC</string>
+    <string name="scan_barcode">Scan the barcode</string>
+    <string name="continue_pick_scan_barcode">Complete pick or continue scanning</string>
+    <string name="barcode_scanned_success_call">Barcode Scanned!</string>
+    <string name="scan_the_barcode">Scan the barcode</string>
+    <string name="signature_acknowledge">The undersigned swears  or affirms that s/he is 21 years of age or older and acknowledges delivery, receipt and acceptance of this order, including any alcoholic liquor, tobacco product or other age-restricted items, and further acknowledges that no age-restricted items included in this order were purchased for the personal use of or consumption by a minor.</string>
+    <plurals name="scan_weighed_item_plural">
+        <item quantity="one">Weigh item and scan barcode</item>
+        <item quantity="other">Weigh items and scan barcode</item>
+    </plurals>
+    <string name="substitute_scanned_ffc_error">Item scanned is not in the FFC or extended aisles</string>
+    <string name="substitute_entered_ffc_error">Item entered is not in the FFC or extended aisles</string>
+    <string name="substitute_scanned_bpn_error">Item scanned cannot be used as a substitute for Partner Pick order</string>
+    <string name="substitute_entered_bpn_error">Item entered cannot be used as a substitute for Partner Pick order</string>
+    <string name="scan_weighed_item">Please weigh and scan the item</string>
+    <string name="enter_each_item">Tap keyboard to enter PLU #</string>
+    <string name="enter_amount_for_plu_format">Enter amount for PLU: %1$s</string>
+    <string name="scan_to_new_tote">Scan a new tote</string>
+    <string name="scan_specific_tote_format">Scan tote %1$s\nor a new tote</string>
+    <string name="wrong_item_scanned">Wrong item scanned</string>
+    <string name="issue_scanning_an_item">Issue scanning an item?</string>
+    <string name="wrong_substitution_scanned">Wrong substitution scanned</string>
+    <string name="wrong_tote_scanned">Wrong tote scanned</string>
+    <string name="requested_already_fulfilled">Requested is already fulfilled</string>
+    <string name="tote_already_assigned_error">Tote already assigned</string>
+    <string name="tote_scanned_format">Tote %1$s successfully scanned</string>
+    <string name="tote_scanned_format_redesign">Tote %1$s scanned</string>
+    <string name="item_scanned_upc_format">UPC: %1$s successfully scanned</string>
+    <string name="item_scanned_plu_format">PLU: %1$s successfully scanned</string>
+    <string name="item_scanned_weight_format">Item %1$s successfully scanned</string>
+    <string name="location_scanned_format">%s successfully scanned</string>
+    <string name="item_entered_upc_format">UPC: %1$s successfully entered</string>
+    <string name="item_entered_plu_format">PLU: %1$s successfully entered</string>
+    <string name="item_scanned_price_weighted_format">%1$s lbs of the item picked</string>
+    <string name="item_scanned_price_weighted_format_location_updated">%1$s lbs of the item picked. Location updated!</string>
+    <string name="item_entered_weight_format">Item %1$s successfully entered</string>
+    <string name="enter_plu_number">Enter PLU number</string>
+    <string name="no_item_scanned">No item scanned</string>
+    <string name="no_tote_scanned">No tote scanned</string>
+    <string name="heavy_pw_item_scan">Scan is not accepted, too heavy.</string>
+    <string name="heavy_pw_display_type_3_item_scan">Scan is too heavy, the maximum total weight is %s lbs.</string>
+    <string name="error_in_quantity_item_scan">Error computing quantity</string>
+    <string name="scan_quantity_exceeded">Scan exceeds requested quantity</string>
+    <string name="enter">ENTER</string>
+    <string name="added_to_tote_format">Added to tote %1$s</string>
+    <string name="tote_added_to_short_order_format">Tote %1$s added to %2$s</string>
+    <string name="manual_entry_content_description">Manual Entry</string>
+    <string name="customer_preference">Customer Preference</string>
+    <string name="ellipsis_character">…</string>
+    <string name="pick_list_item_delivery_icon_description">Delivery type Icon</string>
+    <string name="end_pick_title">Picking Complete</string>
+    <string name="end_pick_body">Start the staging process by placing labels on the totes.</string>
+    <string name="end_pick_button">Print Labels</string>
+    <string name="early_exit_title">No Staging Needed</string>
+    <string name="early_exit_body">Due to exceptions on this pick list, \nstaging is not necessary.</string>
+    <string name="early_exit_button">Exit Pick</string>
+    <string name="container_reassignment_title">Reassign this tote?</string>
+    <string name="container_reassignment_body">This tote is associated with another order. Do you want to reassign this tote?</string>
+    <string name="container_cannot_reassign_title">Something went wrong</string>
+    <string name="container_cannot_reassign_body_primary">Scan item into a different tote.</string>
+    <string name="container_cannot_reassign_body_secondary">"The tote can't be used for this order as it wasn't released from the same order picked previously. (Error Code: 30)"</string>
+    <string name="end_pick_exceptions_title">End Pick with Exceptions</string>
+    <string name="end_pick_confirmation_title">End pick</string>
+    <string name="end_pick_confirmation_body">Would you like to end this pick list?</string>
+    <string name="end_pick_confirmation_postive_button">Confirm</string>
+    <plurals name="end_pick_exceptions_body_plural">
+        <item quantity="one">%s item is remaining in this pick list.  Are you sure you want to end picking?</item>
+        <item quantity="other">%s items are remaining in this pick list.  Are you sure you want to end picking?</item>
+    </plurals>
+    <string name="dialog_secondary_body_action_cannot_be_undone">This action cannot be undone.</string>
+    <!-- FIXME: Swap out placeholder with approved copy -->
+    <string name="item_location_fallback_aisle">Aisle</string>
+    <string name="item_location_fallback_side">Side</string>
+    <string name="item_location_fallback_bay">Bay</string>
+    <string name="item_location_fallback_level">Level</string>
+    <string name="uom_default">lb</string>
+    <string name="item_complete">Item Complete!</string>
+    <string name="item_complete_substituted">Substituted</string>
+    <string name="un_assign_success_format">You have been un-assigned from pick list %1$s</string>
+    <string name="un_assign_failure_format">Un-assigning from pick list %1$s failed.</string>
+    <string name="item_location_produce">Produce</string>
+    <string name="complete_pick_error_title">Unable to Complete Pick</string>
+    <string name="complete_pick_error_body">Tap End Pick to try again.</string>
+    <string name="pick_list_order_number_title">ORDER:</string>
+    <string name="pick_list_items_tab_todo_format">%1$s To-Do</string>
+    <string name="pick_list_items_tab_picked_format">%1$s Picked</string>
+    <string name="pick_list_items_tab_short_format">%1$s Short</string>
+    <string name="no_todos">You have no to-do items.</string>
+    <string name="no_picked">No items have been picked.</string>
+    <string name="no_shorted">No items have been shorted.</string>
+    <string name="item_scanning_issue">Item Scan Issue</string>
+    <string name="item_scan_same_warning">Confirm that the item you are scanning is <b>the same</b> as the <b>customer\'s selected item</b> below.</string>
+    <string name="item_scan_same_confirmation">Confirm Same Item</string>
+    <string name="issue_reported">Issue Reported</string>
+    <string name="undo">Undo</string>
+    <string name="issue_report_confirmation">Thank you for reporting your issue. %1$s has been successfully scanned.</string>
+    <string name="ordered_by_weight_too_light">Item weight is too light</string>
+    <string name="ordered_by_weight_too_heavy">Item weight is too heavy</string>
+    <string name="ordered_by_weight_customer_ordered">Customer ordered %s of this item</string>
+    <string name="ordered_by_weight_you_have_scanned">You have scanned %s of</string>
+    <string name="ordered_by_weight_plu">PLU: %s (%s)</string>
+    <string name="ordered_by_weight_if_you_complete">If you complete this item, you can\'t short or substitute the rest.</string>
+    <string name="ordered_by_weight_are_you_sure">Are you sure you want to complete this item?</string>
+    <string name="ordered_by_weight_cta_repick">Re-pick</string>
+    <string name="ordered_by_weight_cta_complete">Complete</string>
+    <string name="weigh_item_and_scan_barcode">Weigh item and scan printed barcode</string>
+    <string name="barcode_scanner_directions">Hold the camera up to the barcode on\nthe back of the ID.</string>
+
+    <!-- Item Details -->
+    <string name="comments_format">%1$s</string>
+    <string name="dash">-</string>
+    <string name="fallback_short_exception_copy">Unknown short reason</string>
+    <string name="only_use_suggested_substitution">Only use the substitution item below, thanks</string>
+    <string name="same_size_diff_brand">Same size, different brand</string>
+    <string name="same_brand_diff_size">Same brand, different size</string>
+    <string name="not_allowed">No substitution</string>
+    <string name="not_substitution_label">The customer requested no substitutions.</string>
+    <string name="not_substitution_dialog_title">The customer requested no substitutions</string>
+    <string name="number_short_format">%1$s short</string>
+    <string name="item_details_scans">Scans &amp; Exceptions</string>
+    <string name="item_details_locations">Item Locations</string>
+    <string name="item_details_unpick">Unpick</string>
+    <string name="item_details_no_of_items"># Items</string>
+    <string name="item_details_upc_or_plu">UPC or PLU</string>
+    <string name="item_details_tote_hash">Tote #</string>
+    <string name="item_details_upc_format">UPC: %s</string>
+    <string name="item_details_slu_format">SLU: %s</string>
+    <string name="item_details_plu_format">PLU: %1$s</string>
+    <string name="item_details_plu_weighted_format">PLU: %1$s (%2$s)</string>
+    <string name="item_detail_weighted_quantity_header">How many did you weigh?</string>
+    <string name="item_detail_eaches_quantity_header">How many did you pick?</string>
+    <string name="item_detail_totaled_quantity_header">Confirm Net Wt./Ct. listed on the label.</string>
+    <string name="item_details_sub">Sub</string>
+    <string name="item_details_pick_number">Pick:</string>
+    <string name="item_details_order_number">Order:</string>
+    <string name="item_details_primary_header">Primary:</string>
+    <string name="item_details_alternative_header">Alternative:</string>
+    <string name="close">Close</string>
+    <string name="item_details_1_item">1</string>
+    <string name="item_details_of">of</string>
+    <string name="item_details_undo_title">Unpick Item</string>
+    <string name="item_details_undo_short_title">Are you sure you want to move this item?</string>
+    <string name="item_details_undo_short_body">This item will be moved back to the To-do tab.</string>
+    <string name="item_details_undo_body">Are you sure you want to unpick this item?</string>
+    <string name="item_details_undo_error">Error undoing one or more picks.</string>
+    <string name="item_details_no_scans">There are no scans or exceptions.</string>
+    <string name="item_details_auto_short_toast">Items you have unpicked have been automatically shorted.</string>
+    <string name="item_details_short_error_title">Cannot Short Item</string>
+    <string name="item_details_short_error_body">We were unable to automatically short the item you just unpicked.</string>
+
+    <!-- Manual Entry -->
+    <string name="manual_upc_hint">UPC</string>
+    <string name="manual_barcode_hint">Barcode</string>
+    <string name="manual_bag_hint">Bag #</string>
+    <string name="manual_box_hint">Box #</string>
+    <string name="manual_upc_error">Invalid UPC #</string>
+    <string name="manual_plu_hint">PLU</string>
+    <string name="manual_upc_tab_text">UPC</string>
+    <string name="manual_plu_tab_text">PLU</string>
+    <string name="manual_weight_tab_text">Weight</string>
+    <string name="manual_plu_error">Invalid PLU #</string>
+    <string name="manual_plu_quantity_prompt">Enter number of items picked.</string>
+    <string name="manual_plu_cta">Continue</string>
+    <string name="manual_weight_hint">Net Weight</string>
+    <string name="manual_weight_error">Weight must be between .01 and 99.99 lbs.</string>
+    <string name="manual_handoff_zone_hint">Zone #</string>
+    <string name="manual_handoff_zone_number">Zone number</string>
+    <string name="manual_handoff_zone_error">Invalid Zone #</string>
+    <string name="manual_order_num_hint">Order #</string>
+    <string name="manual_order_num_error">Invalid Order #</string>
+    <string name="manual_handoff_bags_hint">Bag or loose item number</string>
+    <string name="manual_handoff_bags_error">Invalid Bag number</string>
+    <string name="manual_handoff_box_error">Invalid Box #</string>
+    <string name="manual_handoff_tote_id_hint">Tote or Reshop Tote ID</string>
+    <string name="manual_handoff_tote_id_error">Invalid Tote ID</string>
+    <string name="requested_amount_format">Requested: %s</string>
+    <string name="entered_amount_format">Entered: %s</string>
+    <string name="scanned_amount_format">Scanned: %s</string>
+    <string name="mfc_manual_entry_tool_tip_text_one">To manually enter a tote, enter the last 8 digits of the Tote ID.</string>
+    <string name="mfc_manual_entry_tool_tip_lottie_description_one">Tote ID on a normal tote label</string>
+    <string name="mfc_manual_entry_tool_tip_text_two">Or to manually enter a reshop tote, enter the 6 digit code found on the Reshop Tote Label.</string>
+    <string name="mfc_manual_entry_tool_tip_lottie_description_two">Tote ID on a reshop tote label</string>
+    <string name="mfc_manual_entry_staging_hint">Last 8 Digits of Tote ID</string>
+    <string name="handoff_hot_char">HT</string>
+    <string name="handoff_chilled_char">CH</string>
+    <string name="handoff_item_ambient_char">AM</string>
+    <string name="handoff_item_frozen_char">FZ</string>
+
+    <!-- Tote -->
+    <string name="tote">Tote</string>
+    <string name="totes_format">%s Totes</string>
+    <string name="items_format">%s items</string>
+    <string name="item">Item</string>
+    <string name="storage_type_ambient">Ambient</string>
+    <string name="storage_type_chilled">Chilled</string>
+    <string name="storage_type_frozen">Frozen</string>
+    <string name="storage_type_hot">Hot</string>
+    <string name="storage_type_rx_dug">Pharmacy</string>
+    <string name="no_totes_scanned">No totes scanned</string>
+    <plurals name="tote_items_plural">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
+    <plurals name="tote_count_plural">
+        <item quantity="one">%d Tote</item>
+        <item quantity="other">%d Totes</item>
+    </plurals>
+    <plurals name="orders_count_plural">
+        <item quantity="one">%1$d Order</item>
+        <item quantity="other">%1$d Orders</item>
+    </plurals>
+
+    <!-- Substitute -->
+    <string name="substitute_by_upc">Substitute by UPC</string>
+    <string name="substitute_by_weight">Substitute by Weight</string>
+    <string name="substitute_by_plu">Substitute by PLU</string>
+    <string name="substitute_by_plu_text">Tap keyboard to enter PLU #</string>
+    <string name="substitute_divider_text">substitute with</string>
+    <plurals name="substituted_amount_format">
+        <item quantity="one">Substituted: %d item</item>
+        <item quantity="other">Substituted: %d items</item>
+    </plurals>
+    <string name="substitute_no_image">No Image Available</string>
+    <string name="substitute_scan_item">Scan substitution item</string>
+    <string name="substitute_scan_another">Scan another or tap Complete</string>
+    <string name="substitute_enter_item">Enter PLU # &amp; quantity of items</string>
+    <string name="substitute_enter_another">Enter another or tap Complete</string>
+    <string name="substitute_complete_confirmation_dialog_title">Complete Substitution</string>
+    <string name="substitute_complete_confirmation_dialog_body">Are you sure you want to complete substituting?</string>
+    <string name="substitute_exit_body">Are you sure you want to exit? Your substitution will not be saved.</string>
+    <string name="substitute_exit_title">Exit substitution</string>
+    <string name="substitute_suggested_header">System Suggested</string>
+    <string name="substitute_suggested_header_customer_chosen">Customer Choice</string>
+    <string name="substitute_substituted_items">Substituted items</string>
+    <string name="substitute_instruction_upc">Please scan the substitution</string>
+    <string name="substitute_instruction_weighted">Weigh the substitution and scan</string>
+    <string name="substitute_instruction_each">Enter the substitution’s PLU number</string>
+    <string name="substitute_suggested_item_not_chosen_dialog_title">Enter the reason the suggested substitution is not being picked</string>
+    <string name="substitute_chosen_item_not_chosen_dialog_title">Enter the reason the customer chosen substitution is not being picked</string>
+    <string name="substitute_suggested_not_chosen_reason_2">Recommended item is irrelevant</string>
+    <string name="substitute_suggested_not_chosen_reason_3">Poor item quality</string>
+    <string name="substitute_suggested_item_not_chosen_dialog_choice_1">Yes</string>
+    <string name="substitute_suggested_item_not_chosen_dialog_choice_2">No</string>
+    <string name="substitute_delete_item_dialog_title">Would you like to delete this substitution?</string>
+    <string name="substitute_delete_item_dialog_body_format">Are you sure you want to delete %s?</string>
+    <string name="substitute_customer_selection_alert_title">The customer requested \na specific substitute</string>
+    <string name="substitute_customer_selection_alert_message">This is the <b>customer’s chosen substitution</b>. Please pick this item <b>only</b>.</string>
+    <string name="customer_chosen_sub">Customer chosen substitution</string>
+    <string name="substitute_customer_notes">Customer notes</string>
+    <string name="substitute_no_notes">No notes available</string>
+
+
+    <!-- RX DUG -->
+    <string name="rx_dug_code_unavailable_choice_one">Customer is unable to provide code.</string>
+    <string name="rx_dug_code_unavailable_choice_two">Picked up by someone else.</string>
+    <string name="rx_dug_code_cancel">Re-enter code</string>
+    <string name="rx_dug_code_unavailable_header">Why is the code unavailable?</string>
+    <string name="rx_dug_code_do_not_handoff_prescription_warning">The code entered did not match!</string>
+    <string name="rx_dug_code_warning_header">Do not handoff prescription</string>
+    <string name="rx_dug_code_warning_body">Without a valid verification code, you must deliver only the groceries to the customer and return the prescription to the pharmacy.</string>
+    <string name="rx_dug_code_invalid_code_warning_body">Without a valid verification code, you must deliver only the groceries to the customer and return the prescription to the pharmacy.</string>
+    <string name="rx_dug_code_warning_question">Are you sure you want to continue?</string>
+    <string name="rx_dug_restage_warning_body">If you restage this order, you must immediately return prescriptions to the pharmacy before picking another order.</string>
+    <string name="rx_dug_code_continue_positive_button">Continue</string>
+    <string name="rx_dug_invalid_code_remove_items">Please remove the prescription bag to complete handoff.</string>
+    <string name="rx_dug_handoff_remove_and_confirm_handoff_button">Remove and Confirm Handoff</string>
+    <string name="rx_dug_pharmacy_staff_member_required_dialog_title">Pharmacy staff member required</string>
+    <string name="rx_dug_pharmacy_staff_member_required_dialog_body">In order to pickup a prescription, go to the pharmacy counter where a staff member needs to assist you.</string>
+    <string name="rx_dug_pharmacy_issue_dialog_title">Report issue</string>
+    <string name="rx_dug_pharmacy_issue_dialog_body">Please indicate the pharmacy issue:</string>
+    <string name="rx_dug_pharmacy_issue_dialog_choice_one">Pharmacy staff is not\npresent</string>
+    <string name="rx_dug_pharmacy_issue_dialog_choice_two">Pharmacy system cannot\nprocess</string>
+    <string name="rx_dug_pharmacy_issue_dialog_choice_one_value">Pharmacy Staff is not present.</string>
+    <string name="rx_dug_pharmacy_issue_dialog_choice_two_value">Pharmacy system cannot process.</string>
+    <string name="rx_dug_pharmacy_issue_dialog_choice_positive_action">Continue Handoff</string>
+    <string name="rx_dug_abandon_handoff_return_prescriptions_title">Return Prescriptions</string>
+    <string name="rx_dug_abandon_handoff_return_prescriptions_body">Return Prescriptions</string>
+    <string name="rx_dug_prescription_return_to_pharmacy">Return prescription to pharmacy</string>
+    <string name="rx_dug_rx_not_premitted_in_batch_title">RX not permitted for batch</string>
+    <string name="rx_dug_rx_not_premitted_in_batch_body">&#160;cannot be included in a batch handoff due to a prescription add-on. Please abandon this batch to continue handoff.</string>
+    <string name="rx_one_header">RX1:</string>
+    <string name="rx_removal_formatting">RX-%1$s</string>
+    <string name="rx_bag_scanned_successfully_format">RX%s bag successfully scanned</string>
+    <string name="rx_bag_error_already_scanned">RX%s bag already scanned</string>
+    <string name="rx_wrong_item_scanned">Wrong item scanned</string>
+    <string name="rx_order_prescription">RX%s: %s</string>
+    <string name="rx_order_numbers">RX orders (%s)</string>
+    <string name="rx_abandon_partial_pescription_pickup">Abandon partial prescription pickup</string>
+
+
+
+    <!-- Miscellaneous -->
+    <!-- Navigation -->
+    <string name="bottom_nav_home">HOME</string>
+    <string name="bottom_nav_pick">PICK LISTS</string>
+    <string name="bottom_nav_arrivals">ARRIVALS</string>
+    <string name="bottom_nav_metrics">Metrics</string>
+    <string name="refresh">Refresh</string>
+    <string name="pick_history">Pick History</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="open_orders">Open Orders</string>
+    <string name="hand_offs">Pick-Up Ready</string>
+    <string name="app_restart">Restart App</string>
+    <string name="change_store">Change Store</string>
+    <string name="search">Search</string>
+    <string name="ellipsis">…</string>
+
+    <!-- Toolbar -->
+    <string name="title_item_details">Item details</string>
+    <string name="toolbar_title_home">Home</string>
+    <string name="toolbar_stage_by">Stage By</string>
+    <string name="toolbar_stage_by_format">Stage by %1$s</string>
+    <string name="toolbar_stage_in_format">Stage in %1$s</string>
+    <string name="toolbar_staging_past_due_format">Past due %1$s</string>
+    <string name="toolbar_stage_by_staging_format">Stage by %1$s</string>
+    <string name="toolbar_home_store">Store %s</string>
+    <string name="toolbar_title_search_order_results">Search Results</string>
+    <string name="toolbar_title_pick_lists_items">Pick List Items</string>
+    <string name="toolbar_title_manual_entry">Manual Entry</string>
+    <string name="toolbar_title_tote_id_tool_tip">Tote IDs</string>
+    <string name="toolbar_title_profile">Profile</string>
+    <string name="toolbar_title_select_location">Select Location</string>
+    <string name="toolbar_title_destage_order">Destage order</string>
+    <string name="toolbar_title_substitute">Substitute item</string>
+    <string name="toolbar_title_field_services_test_connectivity">Test Connectivity</string>
+    <string name="toolbar_title_rx_dug">Prescription Pickup</string>
+    <string name="toolbar_title_signature">Signature</string>
+    <string name="toolbar_due_tomorrow">Due Tomorrow</string>
+    <string name="toolbar_due_in_days">Due in %1$d Days</string>
+
+    <!-- Staging -->
+    <plurals name="staging_totes_plural">
+        <item quantity="one">%1$d Tote</item>
+        <item quantity="other">%1$d Totes</item>
+    </plurals>
+    <plurals name="staging_bags_plural">
+        <item quantity="one">%1$d Bag / Loose</item>
+        <item quantity="other">%1$d Bags / Loose</item>
+    </plurals>
+    <string name="staging_total_items">Total Items Picked:</string>
+    <string name="staging_add_bag_label">Add bag label</string>
+    <string name="staging_loose_item_label">Add loose item label</string>
+    <string name="staging_reprint_bag_labels">Reprint bag labels</string>
+    <string name="staging_reprint_tote_labels">Reprint tote labels</string>
+    <string name="staging_unassign_tote">Unassign tote</string>
+    <string name="staging_picklist_summary">Picklist summary</string>
+    <plurals name="staging_items_plural">
+        <item quantity="one">%1$d Item</item>
+        <item quantity="other">%1$d Items</item>
+    </plurals>
+    <string name="staging_stage_totes">Stage Totes</string>
+    <string name="staging_zone">Zone</string>
+    <string name="staging_tote">Tote #</string>
+    <string name="staging_items"># Items</string>
+    <string name="staging_bags"># Bags</string>
+    <string name="bag_count_label">Bags</string>
+    <string name="staging_exceptions">Exceptions</string>
+    <string name="staging_subsitutions">Substitutions:</string>
+    <string name="staging_cart_full">Cart Full:</string>
+    <string name="staging_oos">OOS:</string>
+    <string name="staging_prep_not_ready">Prep Not Ready:</string>
+    <string name="staging_stage">Stage</string>
+    <string name="confirm">Confirm</string>
+    <string name="complete_bag_count">Complete bag count</string>
+    <string name="complete_count">Complete count</string>
+    <string name="confirm_customers">Confirm Customers</string>
+    <string name="prepare_to_stage">Prepare to Stage</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="got_it">Got it</string>
+    <string name="count_bags">Bags</string>
+    <string name="loose">Loose</string>
+    <string name="sent_to_printer">Sent to printer</string>
+    <string name="labels_printing">Labels printing</string>
+    <string name="find_your_printer_bags">Find your printer to collect your bag labels.</string>
+    <string name="try_again">Try Again</string>
+    <!-- TODO: FIXME change to correct title/body for error/complete -->
+    <string name="staging_server_error">Server Error</string>
+    <string name="staging_server_body_error">Unable to complete staging, please try again.</string>
+    <string name="staging_complete_title">Staging Complete</string>
+    <string name="staging_complete_body">Staging successfully completed</string>
+    <string name="staging_order_taken_dialog_title">Pick List Claimed</string>
+    <string name="staging_order_taken_dialog_body">%1$s has claimed this pick list. Please start your next order.</string>
+    <string name="staging_taken_over_no_user_name">Another picker</string>
+    <string name="staging_something_went_wrong">Unable to load staging information. Please try again</string>
+    <string name="staging_exit">Exit staging</string>
+    <string name="wifi_error_title">Out of Wifi Range</string>
+    <string name="wifi_error_body">Move closer to a wifi hotspot and please try again.</string>
+    <string name="reload">Reload</string>
+    <!-- TODO: FIXME get approved copy(this is new to everyone) -->
+    <string name="attempt_to_reload">Something went wrong loading the data. Please try to reload.</string>
+    <string name="stage_by_sentence_format">Stage by %s</string>
+    <string name="stage_sentence_format">Stage %s</string>
+    <string name="print_labels">Print labels</string>
+    <string name="print_shipping_label_title">%s Shipping Label in Queue</string>
+    <string name="print_bag_labels_title">Reprint labels</string>
+    <string name="print_tote_labels_title">Print Tote Labels</string>
+    <string name="done">Done</string>
+    <string name="labels_printing_title">Labels printing</string>
+    <string name="labels_printing_bags_body">Find your staging printer to collect your bag labels.</string>
+    <string name="labels_printing_shipping_labels_body">Shipping label creation may take up to 20 seconds. Please attach printed labels to boxes and begin staging.</string>
+    <string name="scanned">Scanned</string>
+    <string name="proceed">Proceed</string>
+    <string name="select_order_restage_title">What customer would you like to restage?</string>
+    <string name="restage_order_reason_title"><![CDATA[Why do you need to restage\n%s?]]></string>
+    <string name="staging_dummy_container_foramt">%sDUMMY</string>
+    <string name="staging_driver_arrived_dialog_title">Driver Warning</string>
+    <string name="flash_order_staging_driver_arrived_dialog_body">Your driver has arrived. Please handoff this flash order.</string>
+    <string name="partnerpick_order_staging_driver_arrived_dialog_body">Your driver has arrived. Please handoff this PartnerPick order.</string>
+    <string name="staging_driver_arrived_dialog_positive_button">Handoff</string>
+    <string name="staging_driver_arrived_dialog_negative_button">Stage Order</string>
+    <string name="please_only_enter_loose_item_count_for_oversized_items">Please only enter loose item count for oversized items.</string>
+
+    <!-- Staging Part 2 -->
+    <string name="complete_stage">Complete staging</string>
+    <plurals name="bag_and_loose_count_plural">
+        <item quantity="one">%d bag / loose</item>
+        <item quantity="other">%d bags / loose</item>
+    </plurals>
+    <plurals name="bags_count_plural">
+        <item quantity="one">%d Bag</item>
+        <item quantity="other">%d Bags</item>
+    </plurals>
+    <plurals name="loose_count_plural">
+        <item quantity="one">%d Loose</item>
+        <item quantity="other">%d Loose</item>
+    </plurals>
+    <string name="tote_out_of_count">%d/%d Tote</string>
+    <string name="totes_out_of_count">%d/%d Totes</string>
+    <string name="loose_out_of_count">%d/%d Loose</string>
+    <string name="bagOutOf">%d/%d Bag</string>
+    <string name="bagsOutOf">%d/%d Bags</string>
+    <string name="toteOutOf">%d/%d Tote</string>
+    <string name="totesOutOf">%d/%d Totes</string>
+    <string name="looseOutOf">%d/%d Loose Item</string>
+    <string name="bagOrLooseOutOf">%d/%d Bag | %d/%d Loose Item</string>
+    <string name="bagsOrLooseOutOf">%d/%d Bags | %d/%d Loose Item</string>
+    <string name="toteOrLooseOutOf">%d/%d Totes | %d/%d Loose Items</string>
+    <string name="scanned_format">SCANNED: %d</string>
+    <string name="total_format">TOTAL: %d</string>
+    <string name="proportion_marker_format">%d/%d</string>
+    <string name="prompt_scan_zone">Scan a zone</string>
+    <string name="prompt_scan_tote">Scan a tote</string>
+    <string name="prompt_scan_location">Scan a staging location to begin</string>
+    <string name="prompt_scan_zone_to_begin">Scan a zone to begin</string>
+    <string name="prompt_scan_specific_location_to_begin_format">Scan location %s to begin</string>
+    <string name="prompt_please_scan_location">Please scan location</string>
+    <string name="prompt_scan_specific_zone_to_begin_format">Scan zone %s to begin</string>
+    <string name="prompt_scan_a_bag_into_zone_format">Scan a bag into Zone %s</string>
+    <string name="prompt_please_scan_bag_or_location">Please scan bag or location</string>
+    <string name="prompt_scan_a_new_tote_or_zone">Scan a new tote or zone</string>
+    <string name="prompt_scan_a_box_label">Scan a box label</string>
+    <string name="prompt_scan_a_location">Please scan location</string>
+    <string name="prompt_scan_a_existing_location">Please scan existing location</string>
+    <string name="prompt_scan_a_location_or_tote">Please scan location or tote</string>
+    <string name="prompt_scan_a_tote_in_location">Scan tote in location %s</string>
+    <string name="prompt_please_scan_pallet">Please scan pallet</string>
+    <string name="prompt_please_scan_tote">Please scan tote</string>
+    <string name="prompt_scan_a_box">%s successfully scanned</string>
+    <string name="prompt_return_label">Return label successfully scanned</string>
+    <string name="prompt_box_scanned">%s Box</string>
+    <string name="prompt_closed_pallet">Pallet closed. Scan an open pallet to continue.</string>
+
+    <string name="prompt_scan_item_or_zone">Scan bag or zone</string>
+    <string name="prompt_complete_stage">Unassign tote or complete stage</string>
+    <string name="error_scan_zone_first">Zone must be scanned first</string>
+    <string name="error_zone_not_scanned">Zone not scanned</string>
+    <string name="error_tote_not_scanned">Tote not scanned</string>
+    <string name="error_no_bag_scanned">No bag scanned</string>
+    <string name="error_no_tote_scanned">No tote scanned</string>
+    <string name="no_bag_or_zone_scanned">No bag or zone scanned</string>
+    <string name="no_tote_or_zone_scanned">No tote or zone scanned</string>
+    <string name="error_item_not_in_order">Bag scanned not part of order</string>
+    <string name="error_box_not_in_order">Box scanned not part of order</string>
+    <string name="error_tote_not_in_order">Tote scanned not part of order</string>
+    <string name="error_zone_not_in_order">Zone scanned not part of order</string>
+    <string name="error_all_bags_destaged">All bags have been destaged</string>
+    <string name="error_bag_already_scanned_format">Bag%s already scanned</string>
+    <string name="error_tote_already_scanned_format">Tote %s already scanned</string>
+    <string name="error_wrong_zone_format">Bag %s scanned to wrong zone</string>
+    <string name="error_loose_wrong_zone_format">Loose %s scanned to wrong zone</string>
+    <string name="error_wrong_box_zone_format">Box %s scanned to wrong zone</string>
+    <string name="error_wrong_zone_format_tote">Tote %s scanned to wrong zone</string>
+    <string name="error_item_already_scanned_zone_format">%s already scanned to Zone %s</string>
+    <string name="error_item_already_scanned_location_format">%s already scanned to Location %s</string>
+    <string name="error_item_already_scanned_format">%s already scanned to Zone %s</string>
+    <string name="error_wrong_location">Wrong location!</string>
+    <string name="error_wrong_zone_scanned">Wrong zone scanned</string>
+    <string name="success_zone_scanned">Zone %s scanned</string>
+    <string name="success_location_scanned">Location %s scanned</string>
+    <string name="unassign_tote">Unassign Tote</string>
+    <string name="unassign_tote_instruction">Check a tote to unassign it from this order.</string>
+    <string name="find_your_printer_bag_labels">Find your printer to collect your bag labels.</string>
+    <string name="find_your_additional_labels">Find your staging printer to collect your additional bag labels.</string>
+    <string name="no_zones_scanned">No bags scanned into zones </string>
+    <string name="bag_moved_format">%s moved to zone %s</string>
+    <string name="bag_id_format">Bag %s</string>
+    <string name="box_id_format">Box %s</string>
+    <string name="tote_id_format">Tote %s</string>
+    <string name="add_bag_labels">Add bag labels</string>
+    <string name="add_loose_labels">Add loose labels</string>
+    <string name="see_exisiting_location_title">Go to existing location</string>
+    <string name="see_existing_direction_location_title">Stage in the same location if possible</string>
+    <string name="max_locations_reached_title">Max loctions reached</string>
+    <string name="part_of_the_order_staged_in_other_location_error_body">Part of the order has been staged in location %s. Please stage in the same location.</string>
+    <string name="part_of_the_order_direction_staged_in_other_location_error_body">Part of the order has been staged in location <b>%s.</b></string>
+    <string name="max_staging_location">Order has been partially staged in location %1$s, plus 3 other locations. Please stage in %1$s or see staging information on the web dashboard for alternatives.</string>
+    <string name="location_full_cta">Location full</string>
+    <string name="location_is_full_cta">Location is full</string>
+    <string name="scan_existing_location">Scan existing location</string>
+    <string name="got_it_cta">Got it</string>
+    <string name="marked_as_arrived">Marked as arrived</string>
+    <string name="add_customer">Add customer</string>
+    <string name="existing_scanned_location">Existing Location: %s</string>
+
+    <!-- Store List -->
+    <string name="select_store_title">Select store</string>
+    <string name="stores_select_location">Please select a location</string>
+    <string name="change_store_section_header">Available stores</string>
+    <string name="change_store_search_hint">Search for a store</string>
+    <string name="select_store_search_hint">Enter store location</string>
+    <string name="select_store_button_text">Select Store</string>
+
+    <!-- Socket Timeout -->
+    <string name="timeout_title">Something went wrong</string>
+    <string name="timeout_body">Please try again. %s</string>
+
+    <!-- ErOrderStatus -->
+    <string name="er_status_unassigned">unassigned</string>
+    <string name="er_status_pick_up_ready">pick-up ready</string>
+    <string name="er_status_pick_in_progress">in progress</string>
+    <string name="er_status_unavailable">unavailable</string>
+
+    <!-- Short -->
+    <string name="short_item_why_label_dialog">Why do you need to short this item?</string>
+    <string name="short_item_why_label">Choose why you need to short this item.</string>
+    <string name="short_out_of_stock">Out of stock</string>
+    <string name="short_tote_full">Tote full</string>
+    <string name="short_tray_full">Tray full</string>
+    <string name="short_prep_not_ready">Prep not ready</string>
+    <string name="short_complete">Complete</string>
+    <string name="short_item">Short Item</string>
+    <string name="short_sub_body">Are you sure you want to short this item? Customer has requested a substitution for this item.</string>
+    <string name="short_cta">Short</string>
+    <string name="short_success">Successfully shorted item</string>
+    <string name="short_retry">Retry</string>
+    <string name="partnerpick_warning_title">PartnerPick Warning</string>
+    <string name="partnerpick_order_title">PartnerPick Order</string>
+    <string name="partnerpick_out_of_stock_warning_body">This is your final chance to pick the item as this is a PartnerPick order.  Would you still like to mark the item as out of stock?</string>
+    <string name="partnerpick_prep_not_ready_warning_body">This is your final chance to pick the item as this is a PartnerPick order.  Would you still like to mark the item as prep not ready?</string>
+    <string name="partnerpick_order_finish_staging_this_dialog_body">You need to finish staging this pick list before you can begin the incoming PartnerPick order.</string>
+    <string name="partnerpick_order_end_this_pick_dialog_body">Would you like to end this pick list to address the incoming order? You will need to finish staging your pick list before you can begin
+        the PartnerPick order.</string>
+    <string name="partnerpick_order_end_your_pick_dialog_body">Would you like to end your current pick list to address the incoming order? You will need to finish staging your pick list before you can begin the PartnerPick order.</string>
+    <string name="partnerpick_order_finish_staging_your_dialog_body">You need to finish staging your pick list before you can begin the incoming flash order.</string>
+    <string name="partnerpick_order_driver_arrived_notification_body">Skip staging and begin handoff for this PartnerPick order.</string>
+    <string name="partnerpick_order_driver_arriving_notification_body">Please be ready to hand off this PartnerPick order.</string>
+
+    <!-- Flash -->
+    <string name="flash_order_warning_title">Flash Order Warning</string>
+    <string name="flash_order_out_of_stock_body">This is your final chance to pick or substitute as this is a flash order. Would you still like to mark this item as out of stock?</string>
+    <string name="flash_order_out_of_stock_no_sub_body">This is your final chance to pick as this is a flash order. Would you still like to mark this item as out of stock?</string>
+    <string name="flash_order_prep_not_ready_body">This is your final chance to pick or substitute as this is a flash order. Would you still like to mark this item as prep not ready?</string>
+    <string name="flash_order_prep_not_ready_no_sub_body">This is your final chance to pick as this is a flash order. Would you still like to mark this item as prep not ready?</string>
+    <string name="flash_order_driver_arrived_notification_title">Driver arrived</string>
+    <string name="flash_order_driver_arriving_notification_title">Driver warning</string>
+    <string name="flash_order_driver_arrived_notification_body">Skip staging and begin handoff for this Flash order.</string>
+    <string name="flash_order_driver_arriving_notification_body">Please be ready to hand off this Flash order.</string>
+    <string name="flash_order_continue_staging_button">Continue staging</string>
+    <string name="flash_order_continue_to_handoff">Handoff Order</string>
+    <string name="flash_order_dialog_title">Flash order</string>
+    <string name="flash_order_finish_staging_this_dialog_body">You need to finish staging this pick list before you can begin the incoming flash order.</string>
+    <string name="flash_order_finish_staging_your_dialog_body">You need to finish staging your pick list before you can begin the incoming flash order.</string>
+    <string name="flash_order_end_this_pick_dialog_body">Would you like to end this pick list to address the incoming order? You will need to finish staging your pick list before you can begin the flash order.</string>
+    <string name="flash_order_end_your_pick_dialog_body">Would you like to end your current pick list to address the incoming order? You will need to finish staging your pick list before you can begin the flash order.</string>
+    <string name="flash_order_notification_title">%s, you have a Flash Order</string>
+    <string name="flash_order_notification_negative_cta_text">Decline</string>
+    <string name="flash_order_assigned_pick_notification_body">Please prioritize this Flash Order now.</string>
+    <string name="flash_order_end_pick_notification_body">Please end current pick, finish staging, and prioritize this order.</string>
+    <string name="flash_order_finish_staging_notification_body">Please complete staging and prioritize this order.</string>
+    <string name="flash_order_finish_handoff_notification_body">Please finish your handOff and prioritize this order..</string>
+    <string name="flash_order_assigned_pick_notification_begin_button_text">Start picking Flash Order</string>
+    <string name="flash_order_end_pick_notification_begin_button_text">Accept Flash Order</string>
+    <string name="flash_order_finish_staging_notification_begin_button_text">Accept Flash Order</string>
+    <string name="flash_order_finish_handoff_notification_begin_button_text">Accept Flash Order</string>
+
+    <!-- EBT -->
+    <string name="ebt_warning_notification_title">Price sensitive order</string>
+    <string name="ebt_warning_notification_body">Attention! This is an EBT order.</string>
+    <string name="ebt_warning_notification_sub_bullet">If substituting, ensure new items are comparable in price to the original item.</string>
+    <string name="ebt_warning_notification_weighted_bullet">For weighted items, stay close to the ordered quantity.</string>
+
+    <!-- No Bags -->
+    <string name="no_bags_title">Please do not use bags for this order.</string>
+    <string name="no_bags_body">Items that have the no bag icon/indicator above will not use bags.</string>
+    <string name="no_bags_batch_title">Please do not use bags for some items.</string>
+    <string name="no_bags_batch_body">Items that have the no bag icon/indicator above will not use bags.</string>
+    <string name="no_bags_title_with_customer_name">Please remove bags for %s.</string>
+    <string name="no_bags_body_with_customer_name">%s will bring their own bags.</string>
+    <string name="all_bags_removed_title">All bags removed</string>
+    <string name="confirm_removal_of_bags">Please confirm removal of bags for %s order.</string>
+
+    <!-- EBT No Bags -->
+    <string name="ebt_no_bags_title">Price sensitive EBT order and do not bag</string>
+    <string name="ebt_no_bags_body">Please do not use bags for some of the items</string>
+
+    <!-- Hand off -->
+    <string name="mark_as_complete_x_of_y_format">Mark as complete (%d of %d)</string>
+    <string name="mark_as_complete">Mark as complete</string>
+    <string name="begin_age_verification">Begin age verification</string>
+    <string name="confirm_handoff">Confirm handoff</string>
+    <string name="complete">Complete</string>
+    <string name="complete_staging">Complete Staging</string>
+    <string name="hand_off_order">Order</string>
+    <string name="description">Description</string>
+    <string name="date_of_birth_ghost_text">MM-DD-YYYY</string>
+    <string name="first_and_last_name_ghost_text">First and last name</string>
+    <string name="hand_off_check_id_text">Please check this users ID</string>
+    <string name="hand_off_remove_items_text">Please remove the following items to complete or tap Restage Order to cancel</string>
+    <string name="hand_off_restage_order">Restage Order</string>
+    <string name="id_checked_format">Confirm order with customer or driver.</string>
+    <string name="confirm_hand_off_title">Handoff</string>
+    <string name="success">Success!</string>
+    <string name="delivery_acceptance_form">Delivery Acceptance Form</string>
+    <string name="type">TYPE:</string>
+    <string name="bag_loose">BAGS/LOOSE:</string>
+    <string name="bags_per_temp_zone_title"> %1$s Bags/Loose</string>
+    <string name="bags_and_loose_count"> %1$s Bags | %2$s Loose</string>
+    <string name="view_bags_cta">View Bags Per Temp Zone</string>
+    <string name="customer_orders">%1$s ORDERS!</string>
+    <string name="phone">Phone:</string>
+    <string name="driver_phone">Driver Phone:</string>
+    <string name="location">Location:</string>
+    <string name="driver">Driver:</string>
+    <string name="vehicle">Vehicle:</string>
+    <string name="provider">Provider:</string>
+    <string name="code_unavailable">Code unavailable</string>
+    <string name="invalid_code">Invalid code</string>
+    <string name="verify_code">Verify code</string>
+    <string name="id_unavailable">ID unavailable</string>
+    <string name="verification_code_hint">Verification Code</string>
+    <string name="verifying_code">Verifying customer code…</string>
+    <string name="please_wait">Please wait</string>
+    <string name="order_verified">Order verified!</string>
+    <string name="order_report_logged">Customer unable to provide code.</string>
+    <string name="order_report_logged_unavailable_code">A report has been created and logged for unavailable code. Please proceed to hand off order.</string>
+    <string name="order_report_logged_unavailable_code_rx_dug">A report has been created and logged for unavailable code. Please proceed to deliver only the groceries to the customer and return the prescription to the pharmacy.</string>
+    <string name="order_report_logged_invalid_code">A report has been created and logged for invalid code. Please proceed to hand off order.</string>
+    <string name="order_report_logged_invalid_code_rx_dug">A report has been created and logged for invalid code. Please proceed to deliver only the groceries to the customer and return the prescription to the pharmacy.</string>
+    <string name="auth_code_instructions">Ask customer for 4-digit code found on their app, email, or SMS messages.</string>
+    <string name="age_verification_instructions">Please verify that the photo ID matches the pickup person.</string>
+    <string name="enter_auth_code">Enter the 4 digit verification code for %1$s</string>
+    <string name="why_restage">Why do you need to restage?</string>
+    <string name="customer_not_here">Customer not here</string>
+    <string name="customer_id_invalid">Customer ID invalid</string>
+    <string name="other">Other</string>
+    <plurals name="restricted_items_plural">
+        <item quantity="one">%1$d Restricted Item</item>
+        <item quantity="other">%1$d Restricted Items</item>
+    </plurals>
+    <string name="handoff_reassign_title">Take Handoff</string>
+    <string name="handoff_reassign_body">Handoff is in progress by %1$s. Are you sure you want to take this handoff?</string>
+    <string name="issues_scanning_out_order">Issues scanning out order?</string>
+    <plurals name="not_scanned_plural">
+        <item quantity="one">Not scanned: %d bag</item>
+        <item quantity="other">Not scanned: %d bags</item>
+    </plurals>
+    <string name="scan_error_bag">Wrong item scanned - Please scan a bag</string>
+    <string name="scan_error_tote">Wrong item scanned - Please scan a tote</string>
+    <string name="info_not_available">N/A</string>
+    <string name="customer_arrived_notification_title">Customer Arrived</string>
+    <string name="customer_arrived_notification_body">Urgent! %s has been waiting over 4 minutes for their order. Please start this handoff right away.</string>
+    <string name="dasher_arrived_notification_title">%s Driver Arrived</string>
+    <string name="dasher_arrived_notification_body">Urgent! %1s has been waiting over 4 minutes to pick up %2s\'s order. Please start this handoff right away.</string>
+    <string name="continue_to_handoff_button_cta">Hand off</string>
+    <string name="complete_handoff">Complete Handoff</string>
+    <string name="complete_handoff_reminder">Before completing, be sure the order is in the vehicle. The customer will be notified that you have handed off their groceries to them.</string>
+    <string name="complete_handoff_cta">Complete and Notify Customer</string>
+    <string name="complete_handoff_report_logged">Report Logged for Verification Code!</string>
+
+    <string name="mark_as_misplaced">Mark as misplaced</string>
+    <string name="item_marked_as_misplaced">Item Marked as Misplaced</string>
+    <string name="report_misplaced_item_dialog_title">Report misplaced item</string>
+    <string name="report_misplaced_item_dialog_body">You are about to report a misplaced item for this order. Please be sure that the item is absent from bags destaged.</string>
+    <string name="report_misplaced_item_dialog_positive_button">Report Item</string>
+
+    <string name="auth_code_invalid_dialog_title">Verification failed</string>
+    <string name="auth_code_invalid_dialog_body">The code entered did not match!</string>
+    <string name="auth_code_invalid_secondary_body">Try entering the code again or proceed to hand off and a report will be automatically logged.</string>
+    <string name="auth_code_invalid_postive_button">Re-enter code</string>
+    <string name="auth_code_invalid_negative_button">Report &amp; handoff</string>
+
+    <string name="auth_code_unavailable_dialog_title">Please report the reason why verification code is not available.</string>
+    <string name="auth_code_unavailable_reason_unable">Customer is unable to provide code.</string>
+    <string name="auth_code_unavailable_reason_alt_pickup">Picked up by someone else.</string>
+
+    <string name="pick_up_person">Pickup person</string>
+    <string name="phone_number">Phone number</string>
+    <string name="delivery_driver">Delivery driver</string>
+    <string name="vehicle_information">Vehicle information</string>
+    <string name="spot_number">Spot number</string>
+    <string name="location_details">Location details</string>
+    <string name="wait_time_countdown">Wait time %1$dm %2$ds</string>
+    <string name="delivery_instructions">Delivery instructions</string>
+    <string name="add_customer_to_handoff">Add customer to handoff</string>
+    <string name="no_customer_available_add_customer">There are no customers available for handoff at this time.</string>
+
+    <!-- Hand-off Interstitial -->
+    <string name="interstitial_trouble">We\'re having trouble connecting to WiFi.\nPlease try moving to another location.</string>
+    <string name="interstitial_action_completed">Handoff \n completed!</string>
+    <string name="rxinterstitial_action_completed">Grocery \n Handoff Completed</string>
+    <string name="interstitial_action_canceled">Handoff canceled!</string>
+    <string name="interstitial_customer_complete">Customer Complete</string>
+    <string name="interstitial_reconnect_wifi">Reconnecting to Wifi...</string>
+
+    <!--    Update Customer-->
+    <string name="add_to_handoff">Add to handoff</string>
+    <string name="mark_as_arrived">Mark as arrived</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="update_customer_empty_text_add">There are no customers available for handoff at this time</string>
+    <string name="update_customer_empty_text_marked">There are no customers available to be marked arrived at this time</string>
+    <plurals name="add_to_handoff_snackbar_prompt_plural_format">
+        <item quantity="one">%1$s has been added to your handoff</item>
+        <item quantity="other">%1$s and %2$s have been added to your handoff.</item>
+    </plurals>
+    <plurals name="marked_as_arrived_snackbar_prompt_plural_format">
+        <item quantity="one">%2$s has been marked as arrived</item>
+        <item quantity="other">%2$s and %1$d other customers have been marked as arrived.</item>
+    </plurals>
+    <string name="max_assigned_title">Cannot add Customer</string>
+    <string name="max_assigned_body">You may not exceed 3 customers per handoff.</string>
+
+    <!-- Hot Items -->
+    <string name="staging_wrong_hot_zone_bag_and_item_count_title">Hot Items Alert</string>
+    <string name="staging_wrong_hot_zone_bag_and_item_count_body">The number of bags and loose items should equal the number of Hot Zone items. Please recount.</string>
+    <string name="hot_item_reminder_title">Hot Item Bag Reminder</string>
+    <string name="hot_item_reminder_body">%1$s entered for Hot Zone items.\n\nPlease confirm you have bagged the items before completing handoff.</string>
+    <plurals name="hot_item_reminder_piece">
+        <item quantity="one">%1$s has %2$d bag</item>
+        <item quantity="other">%1$s has %2$d bags</item>
+    </plurals>
+    <string name="hot_item_reminder_body_piece_two">%1$s and %2$s</string>
+    <string name="hot_item_reminder_body_piece_three">%1$s, %2$s, and %3$s</string>
+
+    <!-- Alternative Location -->
+    <string name="alternative_locations_title">Alternate location</string>
+    <string name="item_found_button_text">Item found</string>
+    <string name="alternative_locations_static_message">This item may be at one of the following locations.</string>
+
+    <!-- Notifications-->
+    <string name="notification_channel_name_picking_high">High picking notifications</string>
+    <string name="notification_channel_name_picking_default">Default picking notifications</string>
+    <string name="notification_channel_name_arrival_high">High arrival notifications</string>
+    <string name="notification_channel_name_arrival_default">Default arrival notifications</string>
+    <string name="notification_channel_name_chat_default">Chat notifications</string>
+    <string name="notification_channel_name_chat_picker_default">Chat picker notifications</string>
+    <string name="notification_channel_name_dismiss">Dismiss notifications</string>
+
+    <string name="notification_title_arriving">%1$s is nearby</string>
+    <string name="notification_title_arrived_1">%1$s has arrived</string>
+    <string name="notification_title_arrived_2">%1$s is waiting</string>
+    <string name="notification_title_arrived_3">Handoff %1$s now</string>
+
+    <string name="notification_body_arriving">Prepare customer for arrival.</string>
+    <string name="notification_body_arrived_1">It\'s time to start the handoff.</string>
+    <string name="notification_body_arrived_2">Customer is waiting for their order.</string>
+    <string name="notification_body_arrived_3">Final warning to handoff order.</string>
+
+    <string name="notification_title_picking_1">A %s order is ready to be picked</string>
+    <string name="notification_title_picking_2">A %s order needs to be started</string>
+    <string name="notification_title_picking_3">Pick this %s order now</string>
+
+    <string name="notification_body_picking_1">Please stage this order by %1$s</string>
+    <string name="notification_body_picking_2">Order needs to be staged by %1$s</string>
+    <string name="notification_body_picking_3">Final warning to stage by %1$s</string>
+
+    <string name="notification_title_flash">flash</string>
+    <string name="notification_title_partnerpick">PartnerPick</string>
+
+    <string name="empty" />
+    <string name="error">Error</string>
+
+    <string name="notification_cta_begin_handoff">Begin Handoff</string>
+    <string name="notification_cta_begin_order">Begin Order</string>
+
+    <string name="notifications_to_complete_handoff_title">Complete Handoff</string>
+    <string name="notifications_to_complete_handoff_body">You cannot add another order until you complete this handoff.</string>
+    <string name="handoff_full_dialog_title">Handoff Full</string>
+    <string name="handoff_full_dialog_body">You cannot add more than 3 orders to this handoff. Please complete this handoff first.</string>
+    <string name="handoff_not_available_title">Handoff in progress </string>
+    <string name="handoff_not_available_body">%1$s has already started this handoff. Please continue your task. Thank you.</string>
+    <string name="handoff_not_available_body_generic">The order you are trying to handoff has already been started by a different runner.</string>
+    <string name="handoff_inprogress_title">Handoff assignment in progress </string>
+    <string name="handoff_inprogress_body">Please continue your task. Thank you.</string>
+
+    <!-- Digitized Age Verifciation -->
+    <string name="of_age_verification_title">Of-Age Associate Required</string>
+    <string name="of_age_verification_body">Order contains restricted items that require an of-age associate to perform the handoff.</string>
+    <string name="of_age_verification_secondary_body">Confirm that you are an of-age associate to handoff this order or cancel for another associate to complete.</string>
+    <string name="id_verification_title">Visually Verify Driver\'s ID!</string>
+    <string name="id_verification_title_dug">Visually Verify Pickup Person\'s ID!</string>
+    <string name="id_verification_title_bold">visually verify</string>
+    <string name="id_verification_body">Please compare and verify that the\n photo ID matches the driver.</string>
+    <string name="id_verification_body_dug">Please compare and verify that the\n photo ID matches the pickup person.</string>
+    <string name="photo_id_verification_body_dug">Please verify that the photo ID matches the pickup person.</string>
+    <string name="pickup_driver_first_last_name_hint">First and Last Name</string>
+    <string name="pickup_person_dob_hint">Date of Birth</string>
+    <string name="pickup_person_id_number_hint">ID #</string>
+    <string name="select_id_type">Select an ID type:</string>
+    <string name="id_type_drivers_license">Driver\'s License</string>
+    <string name="id_type_state_id">State ID</string>
+    <string name="id_type_passport">Passport</string>
+    <string name="id_type_military_id">Military ID</string>
+    <string name="id_type_other">Other</string>
+    <string name="select_id_type_title">Select ID Type</string>
+    <string name="select_id_type_dug_subtitle">Select pickup person\'s ID</string>
+    <string name="select_id_type_3pl_subtitle">Select driver\'s ID</string>
+    <string name="verification_title">Verification</string>
+    <string name="verification_instructions">Enter pickup person %s information</string>
+    <string name="verification_id_type">Selected ID:</string>
+    <string name="verification_driver">Enter driver\'s %s information</string>
+    <string name="verification_pickup_person_cta">Verify pickup person\'s age</string>
+    <string name="id_type">ID type</string>
+    <string name="verification_driver_cta">Verify driver\'s age</string>
+    <string name="save_cta">Save</string>
+    <string name="verification">Verification</string>
+    <string name="enter_pickup_person_information">Enter pickup person information</string>
+    <string name="dob_error">Invalid DOB Format. Please follow the MM-DD-YYYY format.</string>
+    <string name="pickup_person_id_unavailable">ID Unavailable</string>
+    <string name="pickup_person_info_text">After visually verifying the pickup person\'s ID, enter their name, date-of-birth, and ID information below.</string>
+    <string name="driver_info_text">After visually verifying the driver\'s ID, enter their name, date-of-birth, and ID information below.</string>
+    <string name="pickup_person_info_text_bold">After visually verifying the pickup person\'s ID</string>
+    <string name="driver_info_text_bold">After visually verifying the driver\'s ID</string>
+    <string name="invalid_dob_modal_title">Invalid date of birth</string>
+    <string name="invalid_dob_modal_primary_copy">The age verification has failed and a report will be logged.</string>
+    <string name="remove_items_copy">Please remove the restricted items to complete handoff.</string>
+    <string name="remove_restricted_items_copy">Remove the following items</string>
+    <string name="invalid_dob_postive_button">Report and remove items</string>
+    <string name="formatted_regulated_item">%s - %s</string>
+    <string name="invalid_dob_negative_button">Re-enter ID</string>
+    <string name="items_removed_cta">Remove items</string>
+    <string name="rx_items_removed_cta">Rx remove items</string>
+    <string name="cancel_cta">Cancel</string>
+    <string name="items_removed_copy">Age could not be verified, all restricted items have been removed.</string>
+    <string name="rx_items_removed_copy">Rx items removed.</string>
+    <string name="drivers_age_verified">Driver\'s age verified</string>
+    <string name="age_verification">Age verification</string>
+    <string name="order_verification">Order verification</string>
+    <string name="formatted_verification_code">Verification code not required for this %1$s %2$s order.</string>
+    <string name="pickup_persons_age_verified">Age verified</string>
+    <string name="obtain_signature_modal_header">Obtain signature</string>
+    <string name="obtain_signature_modal_body_dug">Please hand device to pickup person and ask for their signature.</string>
+    <string name="obtain_signature_modal_body_3pl">Please hand device to driver and ask for their signature.</string>
+
+    <!-- Customer Approved Subs -->
+    <string name="remove_item_header">Remove items</string>
+    <string name="remove_item_cta">Remove</string>
+    <string name="remove_item_count">Items To Remove (%d)</string>
+    <string name="remove_item_order_number">%1$s | %2$s</string>
+    <string name="remove_weighted_item_unit">%1$s lbs</string>
+    <string name="remove_all_rejected_items_title">All items remove</string>
+    <string name="remove_all_rejected_items_body">Please confirm removal of items to continue to de-staging.</string>
+    <string name="remove_backout_title">Are you sure?</string>
+    <string name="remove_backout_body">Are you sure you want to exit? Exiting will lose your progress.</string>
+
+    <!-- Customer Approved Subs for 1PL-->
+    <string name="order_label">Order</string>
+    <string name="remove_item_1pl_order_number">%1$s</string>
+    <string name="remove_items_prior_to_deprturer">Remove items prior to departure</string>
+    <string name="items_removed">Items removed</string>
+    <string name="title_handoff">Handoff\ncompleted!</string>
+    <string name="number_of_orders">Number of orders</string>
+    <string name="title_misplaced_items">Misplaced items</string>
+    <string name="cancel_1pl_handoff_title">Go back to Arrival?</string>
+    <string name="cancel_1pl_handoff_body">This action will abandon your\ncurrent progress for this task.</string>
+    <string name="van_label">%1$s Driver</string>
+
+    <!-- Wine Shipping -->
+    <string name="box_size_header">Step %d / 3</string>
+    <string name="box_size_subheader">Stage boxes</string>
+    <string name="box_weight_subheader">Weigh boxes and enter weight</string>
+    <string name="wine_box_size_xs">X-Small</string>
+    <string name="wine_box_size_ss">Small</string>
+    <string name="wine_box_size_mm">Medium</string>
+    <string name="wine_box_size_ll">Large</string>
+    <string name="wine_box_size_xl">X-Large</string>
+    <string name="wine_box_count_xs">1 bottle</string>
+    <string name="wine_box_count_ss">2-3 bottles</string>
+    <string name="wine_box_count_mm">4-6 bottles</string>
+    <string name="wine_box_count_ll"> 7-9 bottles</string>
+    <string name="wine_box_count_xl">10-12 bottles</string>
+    <string name="print_box_labels">Print box labels</string>
+    <string name="print_shipping_labels">Print shipping labels</string>
+    <string name="retrieve_shipping_labels">Retrieve Shipping Labels</string>
+    <plurals name="retrieve_shipping_labels_body">
+        <item quantity="one">%d shipping label awaiting at printer. Please attach it to box to complete staging.</item>
+        <item quantity="other">%d shipping labels awaiting at printer. Please attach them to boxes to complete staging.</item>
+    </plurals>
+
+    <string name="wine_toolbar_title_format">SHP%s | %s</string>
+    <string name="wine_enter">Enter</string>
+    <string name="wine_weight">Weight</string>
+    <string name="wine_box">Box</string>
+    <string name="wine_box_weight">Box Weight (lb)</string>
+    <plurals name="wine_bottle_count">
+        <item quantity="one">%d Bottle</item>
+        <item quantity="other">%d Bottles</item>
+    </plurals>
+    <plurals name="wine_box_count">
+        <item quantity="one">%d Box</item>
+        <item quantity="other">%d Boxes</item>
+    </plurals>
+    <string name="input_weight">Input Weight</string>
+    <string name="input_weight_for">Input Weight for Box %s</string>
+    <string name="input_weight_lb">%s lb</string>
+    <string name="input_weight_enter">Enter</string>
+    <string name="box_label_modal_header">Box Labels Printing</string>
+    <string name="box_no_boxes_scanned">No boxes scanned</string>
+    <plurals name="box_label_modal_body">
+        <item quantity="one">%1$d box label printing. Please attach\nprinted label to box and package\nwine.</item>
+        <item quantity="other">%1$d box labels printing. Please attach\nprinted labels to box and package\nwine.</item>
+    </plurals>
+    <plurals name="box_shipping_label_modal_header">
+        <item quantity="one">Creating %1$d Shipping Label</item>
+        <item quantity="other">Creating %1$d Shipping Labels</item>
+    </plurals>
+    <string name="box_shipping_label_modal_body">Shipping label creation may take\nup to 20 seconds. Please attach printed labels to boxes and begin staging.\n\nIf labels do not print, skip to
+        apply them later.</string>
+    <string name="skip">Skip</string>
+    <string name="box_too_heavy">Amount entered is too heavy</string>
+    <string name="box_too_light">Amount entered is too light</string>
+    <plurals name="box_count_header_plural">
+        <item quantity="one">%d Box</item>
+        <item quantity="other">%d Boxes</item>
+    </plurals>
+    <!-- Error Messages -->
+    <string name="open_pick_list_assign_error_body">This Pick List has been assigned to another picker. Please select a new Pick List.</string>
+    <string name="reassigned_error_body">This Pick List has been re-assigned to another picker. Please select a new Pick List.</string>
+    <string name="plu_minus_content_description">Subtract 1 from quantity</string>
+    <string name="plu_plus_content_description">Add 1 to quantity</string>
+    <string name="no_stores_assigned_title">No Stores Assigned</string>
+    <string name="no_stores_assigned_body">There are currently no stores assigned to you.</string>
+    <string name="no_stores_match_search">No stores match your search criteria</string>
+    <string name="hand_off_already_assigned_title">Handoff Taken Over</string>
+    <string name="hand_off_already_assigned_body">This order has been taken over by another associate for Handoff.</string>
+    <string name="hand_off_batch_already_assigned_body">Orders has been taken over by another associate.</string>
+    <string name="hand_off_already_assigned_body_with_order_number">This order %s has been taken over by another associate for Handoff.</string>
+    <string name="hand_off_batch_already_assigned_body_with_oder_number">Orders %s has been taken over by another associate.</string>
+    <string name="handofff_cancellation_error">Error cancelling handoff</string>
+    <string name="canceled_title">Customer Order Canceled</string>
+    <string name="picklist_single_canceled_body">This Pick List has been canceled. Please select a new Pick List.</string>
+    <string name="handoff_single_canceled_body">Handoff has been canceled. Please select a new Handoff.</string>
+    <string name="picklist_batch_canceled_body">A customer order has been canceled. Items not yet picked have been removed.</string>
+    <string name="handoff_batch_canceled_body">A customer order has been canceled. Please complete handoff for other customers.</string>
+    <string name="staging_single_canceled_body">This order has been canceled. Please select a new Pick List.</string>
+    <string name="staging_batch_canceled_body">A customer order has been canceled. Please complete staging the other customers.</string>
+    <string name="order_not_available_title">Order Not Available</string>
+    <string name="order_not_available_body_generic">The order you were trying to begin has already been started by a different picker.</string>
+    <string name="order_not_available_body_format">The order you were trying to begin has already been started by %1$s.</string>
+    <string name="flash_order_not_available_body_format">The flash order you are trying to begin has already been started by %1$s.</string>
+    <string name="partnerpick_order_not_available_body_format">The PartnerPick order you are trying to begin has already been started by %1$s.</string>
+    <string name="incorrect_item_scanned">The UPC is incorrect. Please ask the department clerk for a scannable barcode.</string>
+    <string name="incorrect_item_weighted">The UPC for the scanned item is incorrect. Please scan another item.</string>
+
+    <!-- Bag Bypass -->
+    <string name="bag_bypass_missing_bag_label_title">Missing bag label</string>
+    <string name="bag_bypass_missing_tote_label_title">Missing tote label</string>
+    <string name="bag_bypass_missing_bag_title">Missing bag</string>
+    <string name="bag_bypass_missing_tote_title">Missing tote</string>
+    <string name="bag_label_prefix">Bag label %s</string>
+    <string name="bag_prefix">Bag %s</string>
+    <string name="tote_label_prefix">Tote label %s</string>
+    <string name="tote_prefix">Tote  %s</string>
+    <string name="loose_item_prefix">Loose item %s</string>
+    <string name="loose_item_label_prefix">Loose item label %s</string>
+    <string name="report_bag_label_missing">Report bag label missing</string>
+    <string name="report_tote_label_missing">Report tote label missing</string>
+    <string name="report_bag_label_missing_body">Are you sure you want to record 1 bag label missing from the %s temp zone? This action will be recorded.</string>
+    <string name="report_tote_label_missing_body">Are you sure you want to record 1 tote label missing from the %s temp zone? This action will be recorded.</string>
+    <string name="report_loose_item_label_missing_body">Are you sure you want to record 1 loose item label missing from the %s temp zone? This action will be recorded.</string>
+    <string name="report_bag_missing">Report bag missing</string>
+    <string name="report_tote_missing">Report tote missing</string>
+    <string name="report_bag_missing_body">Are you sure you want to record 1 bag missing from the %s temp zone? This action will be recorded.</string>
+    <string name="report_tote_missing_body">Are you sure you want to record 1 tote missing from the %s temp zone? This action will be recorded.</string>
+    <string name="report_loose_item_missing_body">Are you sure you want to record 1 loose item missing from the %s temp zone? This action will be recorded.</string>
+    <plurals name="missing_bag_header_plural">
+        <item quantity="one">%s Bag</item>
+        <item quantity="other">%s Bags</item>
+    </plurals>
+    <plurals name="missing_tote_header_plural">
+        <item quantity="one">%s Tote</item>
+        <item quantity="other">%s Totes</item>
+    </plurals>
+    <plurals name="missing_bag_label_header_plural">
+        <item quantity="one">%s Bag Label</item>
+        <item quantity="other">%s Bag Labels</item>
+    </plurals>
+    <plurals name="missing_tote_label_header_plural">
+        <item quantity="one">%s Tote Label</item>
+        <item quantity="other">%s Tote Labels</item>
+    </plurals>
+
+    <!-- Error Messages -->
+    <!-- TODO: FIXME change to correct title/body -->
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="something_wrong_body">An error occurred. Please try again.</string>
+
+    <string name="something_wrong_body_with_type_api_error">TYPE: API Response Error</string>
+    <string name="something_wrong_body_with_source_backend">SOURCE: Backend</string>
+    <string name="something_wrong_body_with_http_code_format">HTTP CODE: %1$s</string>
+    <string name="something_wrong_body_with_server_code_format">SERVER CODE: %1$s</string>
+    <string name="something_wrong_body_with_server_message_format">MESSAGE: %1$s</string>
+
+    <string name="something_wrong_body_with_type_network_error">TYPE: Network Error</string>
+    <string name="something_wrong_body_with_source_device">SOURCE: Device</string>
+    <string name="something_wrong_body_with_cause_format">CAUSE: %1$s</string>
+    <string name="something_wrong_body_with_additional_info_timeout_error">ADDITIONAL INFO: Possible timeout or connection issue</string>
+    <string name="something_wrong_body_with_additional_info_vpn_error">ADDITIONAL INFO: Possible VPN connection issue</string>
+
+    <string name="sync_failed">Sync Failed</string>
+    <string name="sync_failed_body">Items scanned while app was offline will need to be scanned again.</string>
+    <string name="tap_end_pick">Picking is complete</string>
+    <string name="staging_complete">Staging Complete! </string>
+    <string name="substitution_not_allowed_title">Do not substitute</string>
+    <string name="substitution_not_allowed_body">This customer has requested no substitutions for this item.</string>
+    <string name="override_substitution_title">No Substitutions Requested</string>
+    <string name="override_substitution_body">This customer did not request substitutions for this item. Would you like to substitute anyway?</string>
+    <string name="invalid_tote_scanned">No tote scanned</string>
+    <string name="arrivals">Arrivals</string>
+    <string name="one_pl_arrivals">1PL Arrivals</string>
+    <string name="one_pl_remove_items_info">Please remove unwanted items before truck departure.</string>
+    <string name="invalid_bag_scanned">Invalid bag scanned</string>
+    <string name="error_printing_labels">Error printing labels!</string>
+
+    <!-- TODO: FIXME change to user friendly versions when they are ready -->
+    <!--    ServerErrorCodeDto Messages-->
+    <string name="server_error_13">No container tracking for this containerId</string>
+    <string name="server_error_14">Container is already added for -%1$d</string>
+    <string name="server_error_15">Container-%1$d is already associated with another enRef-%1$d</string>
+    <string name="server_error_16">Activity for actId &amp; container for  not linked</string>
+    <string name="server_error_17">Can\'t release container from activity as items present</string>
+    <string name="server_error_18">Container activity %1$s cannot be added as it is canceled.</string>
+
+    <string name="server_error_19_scan">Container activity  cannot be scanned as it is in different status-%1$s.</string>
+    <string name="server_error_19_unscan">Container activity  cannot be unscanned as it is in %1$s status.</string>
+
+    <string name="server_error_20_invalid_user">Either no or invalid user provided to assign activity.</string>
+    <string name="server_error_20_already_assigned">Different user already assigned with no permission to replace.</string>
+
+    <string name="server_error_21">Not all quantity got picked.</string>
+
+    <string name="server_error_22_no_match">Item id %1$s does not match with item activity id %1$s</string>
+    <string name="server_error_22_not_found">ItemActivity not found for item id -%1$s</string>
+
+    <string name="server_error_23_picked">Picked qty is greater than remaining qty for actId-5 and itemAct -%1$s.</string>
+    <string name="server_error_23_shorted">Shorted qty is greater than remaining qty</string>
+    <string name="server_error_23_undo_picked">Undo qty is greater than picked qty</string>
+    <string name="server_error_23_undo_exception">Undo qty is greater than exception qty</string>
+
+    <string name="server_error_24">Container does not exist.</string>
+    <string name="server_error_25">No shortage reason code found for this code value.</string>
+    <string name="server_error_26">Container already belong to different Er.</string>
+    <string name="server_error_27">SyncOfflinePickingReq is null</string>
+    <string name="server_error_28">Not all operations are for activity id-%1$s</string>
+
+    <string name="server_error_31">Scanned tote has AM items. Cannot add FZ items to it.</string>
+    <string name="server_error_44">OTP does not match for activity id -%1$d</string>
+    <string name="server_error_54">No activity found with activity id -%1$d</string>
+    <string name="server_error_55">Item Activity for id %1$d is canceled.</string>
+    <string name="server_error_56">No upc master available for the site id &amp; upc found</string>
+    <string name="server_error_57">session user id and activity assigned user id not match for activity %1$d</string>
+    <string name="server_error_60">No active zebra printer present for site id %1$s</string>
+    <string name="server_error_61">Cannot connect to ip address: {%1$s} and Device port: {%1$s}</string>
+    <string name="search_order_ready_fail_toast">Failed to refresh data</string>
+    <string name="hot_zones_info_text">For hot items, enter the number of bags that will be used at handoff</string>
+    <string name="alt_location_not_available">Not Available</string>
+    <string name="pastDue">Past due</string>
+    <string name="email_emaple_body">Check-in early to get your order when you arrive. Please park in a DriveUp &amp; Go™ spot, where an associate will greet you. To receive your order, present
+        this code: <span style="background-color:#ffe606">0337</span></string>
+    <string name="email_example_code">0337</string>
+    <string name="pickup_address_example"><u>4440 Tassajara Rd Dublin, CA 94568</u></string>
+    <string name="text_example_snippet">Safeway: Your order is ready and can be picked up anytime before 8PM. Check in early: http://safewayqa.onelink.me/ZdH8/1jfzt7wd . Park
+        in a
+        DriveUp &amp; Go
+        spot. An Associate will bring out your order once you’ve checked in. Show your code 0337 to receive your order.</string>
+    <string name="locating_the_verification_code">Locating the verification code</string>
+    <string name="code_explaner">When the customer receives a 4-digit verification code, they can locate it three different ways, email, text and in app.
+
+        \n \n Below are examples of each with the code
+        highlighted in yellow:</string>
+    <string name="email">Email</string>
+    <string name="name_example">Hi Gabrielle,</string>
+    <string name="body_email_example_one">Your order is ready for pickup!</string>
+    <string name="check_in_now">Check-In Now</string>
+    <string name="order_number_example">Order # 30034322</string>
+    <string name="pickup_date_time"><![CDATA[Pickup Date & Time]]></string>
+    <string name="tuesday_8_27_2021">Tuesday, 8/27/2021</string>
+    <string name="_1_pm_8_pm">1 PM - 8 PM</string>
+    <string name="pickup_address">Pickup Address</string>
+    <string name="purchase_summary">Purchase Summary</string>
+    <string name="final_total_27_27">Final Total: $27.27</string>
+    <string name="total_savings_6_50">Total Savings: $6.50</string>
+    <string name="text">Text</string>
+    <string name="in_app">In App</string>
+    <string name="app_example_header"><![CDATA[DriveUp & Go Pickup]]></string>
+    <string name="associate_is_getting_your_order">Associate is getting your order</string>
+    <string name="we_appreciate_your_patience">We appreciate your patience.</string>
+    <string name="show_code_through_window_to_associate">Show code through window to associate.</string>
+    <string name="please_have_your_trunk_open_for_contact_free_loading_we_may_call_you_to_coordinate_pickup">Please have your trunk open for contact-free loading. We may call you to coordinate pickup.</string>
+    <string name="your_wait_time_could_be_up_to_5_minutes_we_appreciate_your_patience">Your wait time could be up to 5 minutes, we appreciate your patience.</string>
+
+    <string name="confirm_amount_toolbar_title">Confirm Amount</string>
+    <string name="confirm_amount_instructions">Confirm Net Wt./Ct. listed\non the label.</string>
+    <string name="net_weight_count_hint">Net Weight/Count</string>
+    <string name="confirm_amount_partial_pick_warning">Heads up! A partial pick will result if less\nthan %1$s%2$s is entered.</string>
+    <string name="entered_amount_entered_weight">Entered: %1$s%2$s</string>
+    <string name="confirm_amount_requested_weight">Requested: %1$s%2$s</string>
+    <string name="confirm_amount_too_light_error_msg">Amount entered is too light, consider substituting or shorting.</string>
+    <string name="confirm_amount_too_heavy_error_msg">Amount entered is too heavy, check with department.</string>
+    <string name="quantity_entered_exceeds_max_limit">Quantity entered exceeds the max limit.</string>
+    <string name="amount_entered_is_invalid">Amount entered is invalid.</string>
+
+    <string name="fit_weight">%1$s of %2$s lbs</string>
+    <string name="net_weight_tool_tip_toolbar_title">Net Wt./Ct.</string>
+    <string name="net_weight_tool_tip_body">Enter net weight or count listed on the label</string>
+    <string name="net_weight_tool_tip_image_content_description">fixed item tool tip image</string>
+    <string name="net_weight_tool_tip_secondary_text">General Net Wt./Ct location on the printed label</string>
+
+    <!-- Item Detail Bottom Sheets -->
+    <string name="cant_find_item">Can\'t find item</string>
+    <string name="un_pick">Unpick</string>
+    <string name="item_location">Item location</string>
+    <string name="primary">Primary</string>
+    <string name="alternate">Alternate</string>
+    <string name="customer_information">Customer information</string>
+    <string name="customer">Customer</string>
+    <string name="comments">Comments</string>
+    <string name="alternateLocations">%1$s   %2$s</string>
+    <string name="purchasedQty_of_totalQty">%1$s of %2$s</string>
+    <string name="scan_item">Scan item</string>
+    <string name="scan_weighed_item_title">Weigh and scan item</string>
+    <string name="select_quantity">Select quantity</string>
+    <string name="scan_a_new_tote">Scan a new tote</string>
+    <string name="scan_a_new_tote_description">Please place the item into the tote\nonce scanned.</string>
+    <string name="purchasedQty_of_totalQty_collected">%1$s collected!</string>
+    <plurals name="collect_n_tote_labels">
+        <item quantity="one">Collect and attach %1$s tote label</item>
+        <item quantity="other">Collect and attach %1$s tote labels</item>
+    </plurals>
+    <string name="collect_and_attach_tote_labels">Collect and attach\ntote labels</string>
+    <string name="find_the_printer_to_collect_your_tote_labels">Find the printer to collect your tote\nlabels.</string>
+    <string name="start_bag_count">Start bag count</string>
+    <string name="more_locations">+ more locations</string>
+
+    <!--Redesign Navigation View resource-->
+    <string name="sign_out_nav">Sign out</string>
+    <string name="app_restart_nav">Restart app</string>
+    <string name="change_store_nav">Change store</string>
+
+    <string name="chip_label">%1$s (%2$d)</string>
+    <string name="pick_list_toolbar_title">Pick lists</string>
+    <string name="quantity_zero">0</string>
+    <string name="ambient_staging">Ambient</string>
+    <string name="chilled_staging">Chilled</string>
+    <string name="frozen_staging">Frozen</string>
+    <string name="hot_staging">Hot</string>
+    <string name="rx_staging">Pharmacy</string>
+    <string name="staging_label_tote">Tote</string>
+    <string name="staging_label_bag">Bag</string>
+    <string name="staging_label_loose_item">Loose Item</string>
+    <string name="staging_label_loose_item_outside_of_totes">Loose item outside of totes</string>
+    <string name="location_label">Location</string>
+    <string name="label_label">Label</string>
+    <string name="pallet_label">Pallet</string>
+    <string name="scan_label">Scan</string>
+    <string name="pharmacy_title">Pharmacy</string>
+    <string name="pharmacy_arrival_label_prompt">Scan pharmacy arrival label</string>
+    <string name="pharmacy_return_label_prompt">Scan pharmacy return label</string>
+    <string name="pharmacy_scan_bag_prompt">Scan prescription bag</string>
+    <string name="no_location_scanned">No location scanned</string>
+    <string name="no_return_barcode_scanned">No return barcode scanned</string>
+    <string name="pharmacy_error_location_not_scanned">No location scanned</string>
+    <string name="pharmacy_error_return_label_not_scanned">No return barcode scanned</string>
+    <string name="pharmacy_error_item_already_scanned_format">Bag01 already scanned</string>
+    <string name="pharmacy_success_bag_scanned_out_format">Bag01 successfully scanned</string>
+    <string name="pharmacy_bag_not_scanned">Bag not scanned</string>
+    <string name="pharmacy_location_label_no">Pharmacy location label number</string>
+    <string name="pharmacy_return_label_no">Pharmacy return label number</string>
+    <string name="pharmacy_rx_bag_label_no">RX bag label number</string>
+    <string name="pharmacy_rx_report_issue">Report issue</string>
+    <string name="pharmacy_rx_pickup_unavailable_body">Notify customer that the prescription pickup was not availalble and to please contact pharmacy directly.</string>    <string name="pharmacy_staff_required">Pharmacy staff member required</string>
+    <string name="pharmacy_return_prescription">Return prescriptions</string>
+    <string name="pharmacy_return_prescription_title">Prescription return</string>
+    <string name="pharmacy_return_prescription_header">Prescription \nreturned</string>
+    <string name="partial_prescription_returned">Partial prescription returned</string>
+    <string name="pharmacy_bag_scan_single">%d/%d Bag</string>
+    <string name="pharmacy_bag_scan_multiple">%d/%d Bags</string>
+    <string name="pharmacy_arrival_label_error">Invalid location number</string>
+    <string name="pharmacy_return_label_error">Invalid return barcode number</string>
+    <string name="pharmacy_pickup_button">Confirm prescription pick up</string>
+    <string name="pharmacy_add_on_title">Prescription add-on</string>
+    <string name="pharmacy_add_on_body">After de-staging  %1$s’s groceries, head to the pharmacy to pick up their prescription.</string>
+    <string name="pharmacy_bagscan_before_arrival_label">Pharmacy arrival label not scanned</string>
+    <string name="pharmacy_grocery_hand_off_complete">Grocery handoff \n completed</string>
+    <string name="pharmacy_grocery_hand_off_complete_body">Go to the Pharmacy to return the prescription</string>
+    <string name="pharmacy_return">RETURN</string>
+    <string name="add_another_substitution">Add another substitution</string>
+    <string name="confirm_substitution">Confirm substitution</string>
+    <string name="ordered_item">Ordered item</string>
+    <plurals name="substitute_item_label">
+        <item quantity="one">Substituted item</item>
+        <item quantity="other">Substituted items</item>
+    </plurals>
+    <string name="substitution_complete">Substitution complete!</string>
+    <string name="print_tote_labels">Print tote labels</string>
+    <string name="almost_there">Almost there!</string>
+    <string name="you_have_completed_picking">You\'ve completed picking</string>
+    <string name="comment_label">Comment</string>
+    <string name="customer_label">Customer</string>
+    <string name="substitute_different_item">Substitute a different item</string>
+    <string name="recommended">Recommended</string>
+    <string name="other_option">Other options</string>
+    <string name="no_substitution_found">No recommended substitution found.</string>
+    <string name="no_substitution_partner_pick">System suggestions unavailable for this Partner pick order.</string>
+    <string name="scan_substitution">Substitute an item of your choice</string>
+    <string name="scan_substitution_label">Please scan your substitution.</string>
+
+    <!-- Pick List Info Screen -->
+    <string name="pick_list_info_header">Picklist Info</string>
+    <string name="order_number_header">Order #</string>
+    <string name="picklist_number_header">Pick list #</string>
+    <string name="picklist_type_header">Pick list type</string>
+    <string name="stage_by_time_header">Stage by time</string>
+    <string name="total_items_header">Total items</string>
+    <string name="item_types_header">Item types</string>
+    <string name="totes_in_use_header">Tote in use</string>
+    <string name="number_of_totes_header">Number of totes</string>
+    <string name="tote_types">Tote types</string>
+
+    <string name="regular_order">Regular</string>
+
+    <string name="enter_the_upc_number">Enter the UPC number</string>
+    <string name="enter_the_plu_number">Enter the PLU number</string>
+    <string name="enter_plu_number_and_weight">Enter PLU number and weight</string>
+    <string name="alternate_location_subheading">This item may be found at an alternate location:</string>
+    <string name="next_order">Next order</string>
+
+    <string name="do_you_want_to_mark_this_item_as_out_of_stock">Do you want to mark this item as out of stock?</string>
+    <string name="the_item_has_been_market_out_of_stock">Item marked out of stock.</string>
+    <string name="the_item_has_been_marked_out_of_stock_customer_notified">Item marked out of stock and customer has been notified.</string>
+    <string name="mark_as_tote_full">Do you want to mark this item as tote full?</string>
+    <string name="tote_full_confirmation_dialog_body">This item will be moved to a new picklist.</string>
+    <string name="mark_as_not_ready">Do you want to mark this item as prep not ready?</string>
+    <string name="prep_not_ready_confirmation_dialog_body">This item will be moved to a \"Prep not ready\" picklist.</string>
+
+    <string name="good_job">Good job!</string>
+    <string name="picking_and_staging_duration_header">Picking &amp; staging duration</string>
+    <string name="items_picked_header">Items picked</string>
+    <string name="items_out_of_stock_header">Items out of stock</string>
+    <string name="items_substituted_header">Items substituted</string>
+    <string name="back_to_home">Back to home</string>
+    <string name="number_format">#%1$s</string>
+    <string name="substitution_reason_description">Please mark the reason for substituting a different item.</string>
+    <string name="customer_choosen_substitution_reason_description">Please mark the reason why the customer selected substitute is not being picked.</string>
+    <string name="override_substitution">Why are you substituting with a different item?</string>
+    <string name="system_suggestion_out_of_stock">Recommended item out of stock</string>
+    <string name="customer_selected_out_of_stock">Customer choice out of stock</string>
+    <string name="substitute_reason_price_high">Price difference is too high</string>
+
+    <string name="move_to_picklist">Move to To-do list</string>
+    <string name="find_the_printer_to_collect_your_bag_and_loose_labels">Find the printer to collect your bag and loose item labels</string>
+    <string name="attach_bag_label">Attach labels to bags and loose items</string>
+    <string name="staging_collect_and_attach_bag_labels">Collect and attach\nbag labels</string>
+    <string name="staging_collect_and_attach_tote_and_loose_labels">Collect and attach tote and\nloose item labels</string>
+    <string name="find_the_printer_to_collect_your_bags_and_loose_item_labels">Find the printer to collect your bags and loose items labels.</string>
+    <string name="find_the_printer_to_collect_your_tote_and_loose_item_labels">Find the printer to collect your tote and loose items labels.</string>
+    <string name="collect_labels">Collect labels</string>
+    <string name="collect_tote_labels">Collect tote labels</string>
+    <string name="bag_number">Bag Number</string>
+    <string name="picking_group_header_substitutions">Substitutions</string>
+    <string name="location_number">Location Number</string>
+    <string name="remove_substituted_item">Remove substitution</string>
+    <string name="do_not_substitute_dialog_body">Please do not pick a substitute.</string>
+    <string name="ebt_warning_title">Price sensitive EBT order</string>
+    <string name="substitute_customer_selection_alert_description">Please substitute with this item only.</string>
+
+    <string name="select_unpick_items">Select items to unpick</string>
+    <string name="unpick_action_can_not_be_undone">Unpick action cannot be undone.</string>
+    <string name="all_scans_must_be_unpicked">Items of this type must be unpicked together. This action cannot be undone.</string>
+    <string name="unpick_alert_message_pw_item">All items must be unpicked together. Unpick action cannot be undone.</string>
+    <string name="select_all">Select all</string>
+
+    <plurals name="items_moved_to_picklist">
+        <item quantity="one">%s item have been moved</item>
+        <item quantity="other">%s items have been moved</item>
+    </plurals>
+
+    <plurals name="items_moved_to_todo">
+        <item quantity="one">%s item has moved to To-do list</item>
+        <item quantity="other">%s items has moved to To-do list</item>
+    </plurals>
+
+    <string name="successfully_scanned">Successfully scanned!</string>
+    <string name="substitution_deleted">Substitution successfully deleted</string>
+    <string name="substitution_completed">Item successfully substituted</string>
+    <string name="substitution_completed_customer_notified">Item successfully substituted and customer has been notified.</string>
+    <plurals name="tote_full">
+        <item quantity="one">%s item marked as “Tote full”</item>
+        <item quantity="other">%s items marked as “Tote full”</item>
+    </plurals>
+    <plurals name="prep_not_ready">
+        <item quantity="one">%s item marked as “Prep not ready”</item>
+        <item quantity="other">%s items marked as “Prep not ready”</item>
+    </plurals>
+
+    <string name="item_picked">Item picked!</string>
+    <plurals name="number_of_items_picked">
+        <item quantity="one">%s item picked</item>
+        <item quantity="other">%s items picked</item>
+    </plurals>
+    <plurals name="number_of_items_picked_location_updated">
+        <item quantity="one">%s item picked. Location updated!</item>
+        <item quantity="other">%s items picked. Location updated!</item>
+    </plurals>
+
+    <string name="open_orders_home">Open orders</string>
+    <string name="pickup_ready_home">Pickup ready</string>
+    <string name="item_complete_picked">Item complete!</string>
+    <string name="ok_cta">Ok</string>
+    <string name="scan_different_substitution">Please scan your substitution of choice.</string>
+
+    <string name="please_enter_count_for_bags_and_loose_items">Please enter count for bags and loose items for %s zone.</string>
+    <string name="please_scan_location_to_continue">Please Scan location to continue</string>
+    <string name="please_scan_bag_or_location_to_continue">Please Scan bag or location to continue</string>
+    <string name="yesterdays_order">Yesterday’s order</string>
+    <string name="item_out_of_stock">Item out of stock</string>
+    <string name="substituted_with">Substituted with</string>
+    <string name="out_of_Stock">Out of stock</string>
+    <string name="susbtitutions">Substitutions</string>
+    <string name="approved_substitutions">Approved substitutions</string>
+    <string name="declied_sub">Declined substitutions</string>
+    <string name="declined_subtitle">Declined substitutions</string>
+    <string name="remaining_items">Fulfilled items</string>
+    <string name="order_summary">Order summary</string>
+    <string name="payment_complete_message">Final receipt has already been sent to the customers email and available in the app.</string>
+    <string name="payment_not_complete_without_sub_message">Final receipt will be sent to customer within 5 minutes after handoff.</string>
+    <string name="payment_complete_partner_pick_message">Price and receipt will be provided to the customer by %s</string>
+    <string name="dollar_format">$%s</string>
+    <string name="view_details">View details</string>
+    <string name="view_order_smummary">View order summary</string>
+    <string name="number_of_loose_items">%s Loose Item</string>
+    <string name="handoff_details">Handoff details</string>
+    <string name="authentication_code">Authentication code</string>
+    <string name="number_of_loose">%s Loose</string>
+
+    <!-- Issue Scanning flow -->
+    <string name="have_trouble_scanning">Having trouble scanning?</string>
+    <string name="would_you_like_to_report_item_scanning_issue">Would you like to report an item scanning issue?</string>
+    <string name="confirm_same_item">Confirm same item</string>
+    <string name="is_the_item_you_are_picking_the_same_customer_requsted">Is the item you are picking the same item the customer requested?</string>
+    <string name="select_specific_item_to_report_issue_scan">Select the specific item to report a scanning issue</string>
+    <string name="select_specific_item_to_report_issue_scan_body">Please tap on the specific item in the pick list and scan the barcode again.</string>
+    <string name="confirm_pick">Confirm pick</string>
+    <string name="continue_scanning">Continue scanning</string>
+    <string name="remove_item">Remove item</string>
+    <string name="issue_scanning_completed">Thank you for reporting your scanning issue. The item has been picked.</string>
+    <string name="issue_scanning_completed_customer_notified">Scanning issue reported. Item picked and customer has been notifiied.</string>
+    <string name="issue_scanning_remove_item_dialog_title">Would you like to delete this item?</string>
+    <string name="exit_issue_scanning_dialog_title">Exit issue scanning</string>
+    <string name="exit_issue_scanning_dialog_body">Are you sure you want to exit? Your pick will not be saved. </string>
+    <string name="issue_reported_label">Issue reported</string>
+    <string name="please_scan_your_item">Please scan your item.</string>
+    <string name="issue_report_header">Issue scanning reports</string>
+    <string name="requested_weight">Requested weight: %1$slbs</string>
+    <string name="scanned_weight">Scanned weight: %1$slbs</string>
+    <string name="issue_scanning_alert_instruction">Please continue scanning until you have reached the requested quantity.</string>
+
+    <!-- Pre Pick -->
+    <string name="pick_later_label">Pick later</string>
+    <string name="the_item_has_been_marked_pick_later">The item has been saved for picking later.</string>
+    <string name="pre_pick">Pre Pick</string>
+    <!-- Pre-Pick order -->
+    <string name="save_this_item_for_later">Save this item for later</string>
+    <string name="save_this_item_for_later_description">As this is a Pre Pick order, we will mark this item for a later pick.</string>
+
+    <string name="fulfillment_one_pl">1PL</string>
+    <string name="fulfillment_three_pl">3PL</string>
+    <string name="fulfillment_dug">DUG</string>
+
+    <string name="system_suggested">System suggested</string>
+    <string name="bulk_variant_title">Select the variant picked</string>
+
+    <!-- DUG 2.0 Interjection -->
+    <string name="dug_interjection_notification_title">%s has arrived and is waiting</string>
+    <string name="dug_interjection_assigned_handoff_notification_body">%s, please prioritize this handoff. It’s time to start this task.</string>
+    <string name="dug_interjection_skip_picking_notification_body">%s, your current task will be paused and will not affect your picks per hour.</string>
+    <string name="dug_interjection_skip_staging_notification_body">%s, please complete staging and start this handoff task.</string>
+    <string name="dug_interjection_inprogress_destaging_notification_body">Please add this handoff task to your current task.</string>
+    <string name="begin_handoff_now">Begin handoff now</string>
+    <string name="add_to_current_handoff">Add to current handoff</string>
+    <string name="dug_arrival_interjection_timer_format">Wait time: %1$dm %2$ds</string>
+    <string name="batch_failure_message_for_rx_order">Unable to add to batch order.</string>
+    <string name="batch_handoff_assigned">%s was added to your batch handoff.</string>
+    <string name="start_handoff">Start handoff now</string>
+
+    <string name="totes_needed_title_both_am_and_ch">You will need\n %1$s AM, %2$s CH totes</string>
+    <string name="tote_type_needed_both_am_and_ch">AM (%1$d), CH (%2$d)</string>
+    <string name="tote_types_needed_title_am">AM (%1$d)</string>
+    <string name="tote_types_needed_title_ch">CH (%1$d)</string>
+
+    <plurals name="totes_needed_title_am">
+        <item quantity="one">You will need\n %1$d AM tote</item>
+        <item quantity="other">You will need\n %1$d AM totes</item>
+    </plurals>
+    <plurals name="totes_needed_title_ch">
+        <item quantity="one">You will need\n %1$d CH tote</item>
+        <item quantity="other">You will need\n %1$d CH totes</item>
+    </plurals>
+    <string name="totes_needed_body">Please prep the totes and start picking</string>
+    <string name="staging_scan_error">Scan error</string>
+    <string name="staging_scan_error_body">Please scan again to continue.</string>
+    <string name="scan_again">Scan again</string>
+
+    <string name="chat_hint">Type a message…</string>
+    <string name="chat_tying">is typing…</string>
+    <string name="message_Notification_title">Message from %1$s</string>
+    <string name="initial">[%1$s]</string>
+    <string name="todays_time">Today at %1$s</string>
+    <string name="chat_retry">Try again</string>
+    <string name="chat_message_not_sent">Message not sent</string>
+    <string name="chat_system_message_oos">%1$s Qty: %2$d for $%3$s is unavailable</string>
+    <string name="chat_system_message_oos_without_price">%1$s Qty: %2$d is unavailable</string>
+    <string name="chat_system_message_sub_swap">%1$s Qty: %2$d </string>
+    <string name="chat_system_message_sub_swap_with_price">&#160; for $%1$s substituted with</string>
+    <string name="chat_system_message_sub_swap_without_price">&#160; substituted with</string>
+    <string name="chat_system_message_sub_swap_items">%1$s Qty: %2$d</string>
+    <string name="chat_system_message_sub_swap_items_with_price">&#160; for $%1$s </string>
+    <string name="chat_and">&#160; and</string>
+    <string name="chat_initialization_failed">Chat initialization failed</string>
+    <string name="chat_initialization_failed_body">An error occurred while initializing the chat. Please restart the app at a spot where the store WiFi network is strong.</string>
+    <string name="chat_image_preview_text">Here are some other options.</string>
+    <string name="chat_timer">%1$sm %2$ss until staging</string>
+    <string name="chat_timer_exit">%1$sm %2$ss until exit pick</string>
+    <string name="chat_timer_message">Please wait for the customer to respond \nbefore staging.</string>
+    <string name="chat_please_wait_message">Please wait for the customer to respond \nbefore exiting.</string>
+    <string name="chat_block_staging_message">Please respond to the customer’s message before staging.</string>
+    <string name="chat_typing_message">Please wait for the customer to finish their message.</string>
+    <string name="chat_customer_typing_message">Customer is typing</string>
+    <string name="go_to_chat">Go to chat</string>
+    <string name="chat_substitution_title_message">Let me know if you\'d like something else.</string>
+    <string name="chat_oos_title_message">Item is unavailable. Would you like something else?</string>
+    <string name="chat_substituted_with">substituted with</string>
+    <string name="chat_substitution_declined">Substitution declined</string>
+    <string name="chat_substitution_approved">Substitution approved</string>
+    <string name="chat_substitution_oos_decline">%1$s was substituted</string>
+    <string name="chat_other_shoppers_item">Other shopper\’s item</string>
+    <string name="chat_other_shoppers_item_body">You can\’t make changes to items in other shoppers\’ picklists.</string>
+    <string name="chat_sender_you">You</string>
+    <string name="chat_picker_joined">%1$s joined the chat.</string>
+    <string name="chat_picker_left">%1$s has left the chat.</string>
+    <string name="chat_picker_left_body">Please review the chat history and make changes to any of the open items if needed.</string>
+    <string name="chat_picker_joined_title">Shopper %1$s joined the chat</string>
+    <string name="chat_picker_joined_body">%1$s is also picking this order and will be using the same chat window.</string>
+    <string name="chat_picker_left_title">Shopper %1$s left the chat</string>
+    <string name="chat_picker_notification_left_body">Please review the chat history and make changes to %1$s\’s open items if needed.</string>
+    <string name="chat_camera_error">Camera Error</string>
+    <string name="chat_camera_feature_disabled">The Camera is not setup correctly on this device. Please report an incident.</string>
+    <string name="open_chats">Open chats</string>
+
+    <!-- Swap substitution -->
+    <string name="pending_substitution">Pending substitutions (%d)</string>
+    <string name="approved_substitutions_swap">Approved substitutions (%d)</string>
+    <string name="declined_substitutions_swap">Declined substitutions (%d)</string>
+    <string name="out_of_stock_items">Out of stock items (%d)</string>
+    <string name="swap_substitute">Swap substitute</string>
+    <string name="swap_approved">Approved</string>
+    <string name="swap_declined">Declined</string>
+    <string name="swap_dollar_format">$%s ea</string>
+    <string name="remove_substitution_body">Please remove these items from tote</string>
+    <string name="swap_substitute_exit_dialog_body">Are you sure you want to cancel this substitution? You will have to pick the item again in the To-do tab.</string>
+    <string name="swap_substitute_cancelled_message">Substitution cancelled. The item has been moved back to the To-do list.</string>
+    <plurals name="remove_substitution_body">
+        <item quantity="one">Please remove this item.</item>
+        <item quantity="other">Please remove these items.</item>
+    </plurals>
+    <plurals name="items_removed_from_substitution">
+        <item quantity="one">%s item have been removed.</item>
+        <item quantity="other">%s items have been removed. </item>
+    </plurals>
+    <string name="swap_substitution_card_label">You are currently swapping a substitution. Please substitute with the customer’s requested item only.</string>
+    <string name="short_item_dialog_body_text">Customer will be notified \nimmediately.</string>
+    <string name="network_offline_alert_message">Your internet connection is offline.</string>
+
+    <string name="open_actions_remaining">Open actions remaining</string>
+    <string name="end_pick_dialog_body">Before moving on to staging, please  make sure all customer requests and questions have been resolved.</string>
+    <string name="review_chat">Review chat</string>
+    <string name="continue_to_staging">Continue to staging</string>
+    <string name="open_substitutions">Open substitutions</string>
+    <string name="declined_out_of_stock_items">Declined/Out of stock items</string>
+    <string name="error_message_entered_weight_too_heavy">Too heavy</string>
+    <string name="error_message_description_entered_weight_too_heavy">Net weight is too heavy, the maximum total weight allowed is %s lbs</string>
+
+   <!-- Missing Item Location-->
+    <string name="where_you_find">Where did you find it?</string>
+    <string name="others_locate_the_item">Your input will help others locate the item.</string>
+    <string name="digit_location_code">"Enter 9-digit Location code "</string>
+    <string name="enter_valid_location">"Please enter a valid location code."</string>
+    <string name="where_to_find_location_code">"Where to find location code "</string>
+    <string name="describe_the_location_optional">Describe the location (optional)</string>
+    <string name="e_g_near_left_entrance">E.g., Near left entrance</string>
+    <string name="not_now">Not now</string>
+    <string name="find_the_location_code">Where to find the \n location code</string>
+    <string name="the_9_digit_location_code_apperars">The 9-digit location code apperars to \n the left of the item price</string>
+    <string name="add_location">Add location</string>
+    <string name="item_location_added">Item location added!</string>
+    <string name="item_complete_location_updated">Item complete. Location updated!</string>
+    <string name="item_location_added_offline">Item location will be added if valid when device goes online!</string>
+    <string name="note">Note</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="more_info">More info</string>
+
+    <!-- Customer Bag Preference-->
+    <string name="report_missing_tote">Report missing tote</string>
+    <string name="report_missing_bag">Report missing bag</string>
+    <string name="report_missing_tote_label">Report missing tote label</string>
+    <string name="report_missing_bag_label">Report missing bag label</string>
+    <string name="report_losse_item_missing">Report loose item missing</string>
+    <string name="report_losse_item_label_missing">Report loose item label missing</string>
+   <!-- we are making some words in a string bold by using SppnableStringBuilder, Please check the ViewBindingAdapters.KT class,setSpannableText() method before changing the
+   below string.
+    -->
+    <string name="scan_tote_no_bags_description">Please place the item into \n the tote and do not use bags.</string>
+    <string name="do_not_use_bags">do not use bags.</string>
+    <string name="report_missing_tote_and_loose_item">Missing loose item label</string>
+    <string name="bag_preference_header">Bag preference</string>
+    <string name="bag_preference_description">The customer will bring their own bags.</string>
+    <plurals name="destaging_tote_loose_count_plural_uppercase">
+        <item quantity="one">%d Tote | Loose</item>
+        <item quantity="other">%d Totes | Loose</item>
+    </plurals>
+    <string name="scan_totes_loose_item_prompt">Scan a tote or loose item</string>
+    <string name="success_loose_bag_scanned_out_format">Loose%1$s successfully scanned out</string>
+    <string name="success_loose_bag_scanned_out_of_zone_format">Loose%1$s scanned out of Zone %2$s</string>
+    <string name="error_loose_bag_already_scanned_format">Loose%s already scanned</string>
+    <string name="error_loose_item_not_in_order">Loose item scanned not part of order</string>
+    <string name="scan_error_tote_loose_item">Wrong item scanned - Please scan a tote/looseItem</string>
+    <string name="manual_entry_loose_item">Loose Item Number</string>
+    <string name="success_non_mfc_tote_scanned_out_format">Tote%1$s scanned out of Zone %2$s</string>
+    <string name="error_non_mfc_tote_already_scanned_format">Tote%s already scanned</string>
+    <string name="manual_entry_destaging_tote_id">Tote Number</string>
+    <string name="manual_handoff_loose_item_error">Invalid loose item #</string>
+    <string name="report_missing_loose_item">Missing loose item</string>
+    <string name="tote_loose_item_scan_skipped">Tote/Loose item scan skipped: %d</string>
+    <string name="report_missing_loose_item_btn">Report missing loose item</string>
+    <string name="report_missing_loose_item_label_btn">Report missing loose item label</string>
+    <string name="no_loose_item_missing">There are no missing loose items</string>
+    <string name="no_totes_item_missing">There are no missing totes</string>
+    <string name="no_bags_item_missing">There are no missing bags</string>
+    <string name="handoff_completed">Handoff completed!</string>
+    <string name="order">Order #</string>
+    <string name="customer_wait_time">Customer wait time</string>
+    <string name="driver_wait_time">Driver wait time</string>
+    <string name="my_items">My items</string>
+    <string name="other_shoppers_item">Other shoppers’ items</string>
+    <string name="empty_view_state_label_other_shoppers_item">There are no items from other shoppers at this time.</string>
+    <string name="swap_substitution_error_dialog_title">Unable to edit %s\'s item</string>
+    <string name="swap_substitution_error_dialog_description">You can’t make changes to this item right now—another shopper is still picking their items.</string>
+    <string name="empty_view_state_label_my_shoppers_item">There are no substitutions on this order yet.</string>
+    <string name="concurrent_substitution_error_dialog_title">Item already substituted</string>
+    <string name="concurrent_substitution_error_dialog_body">Another shopper already made a substitution for this item. Please remove your item.</string>
+    <string name="remove_your_item">Please remove your item.</string>
+    <string name="repick_original_item_cta">Re-pick original item</string>
+    <string name="repick_original_item_scan_hint">Please scan with the ordered item</string>
+    <string name="wait_time">Wait time</string>
+    <string name="print_gift_note">Print gift note</string>
+    <string name="collect_gift_note">Collect gift note</string>
+    <string name="gift_note_to">To: %s</string>
+    <string name="gift_note_from">From: %s</string>
+    <string name="no_network_try_again">No network. Try again</string>
+    <string name="gift_confirmation">Please confirm that you have left the gift note for %s with the order.</string>
+    <plurals name="gift_confirmation_count">
+        <item quantity="one">Please confirm that you have left the gift note for %s order</item>
+        <item quantity="other">Please confirm that you have left the gift note for %s orders</item>
+    </plurals>
+    <string name="re_print_gift_note">Re-print gift note</string>
+    <string name="to">To:</string>
+    <string name="from">From:</string>
+    <string name="error_print_gift">Printing failed. Please re-print</string>
+    <string name="image_content_description">Item image</string>
+    <string name="image_chat_buble_content_description">Chat buble</string>
+    <string name="end_pick_reason_dialog_title">Why do you want to end pick?</string>
+    <string name="picking_another_order">Picking another priority order</string>
+    <string name="handoff_customer">Handoff for another customer</string>
+
+</resources>

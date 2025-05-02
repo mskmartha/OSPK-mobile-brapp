@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.ui.models.CustomerArrivalStatusUI" />
+
+        <variable
+            name="dbViewModel"
+            type="com.albertsons.acupick.ui.arrivals.ArrivalsResultsItemDbViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pickupResultsCl"
+        android:layout_width="match_parent"
+        android:layout_height="151dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:onClickListener="@{() -> dbViewModel.onItemClick()}"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/cbArrival"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:importantForAccessibility="no"
+            app:isDisabled="@{dbViewModel.isDisabled}"
+            app:isSelectedCheckBox="@{dbViewModel.isChecked}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_checkbox_unchecked" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickupCustomerName"
+            style="@style/NunitoSansSemiBold16.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{dbViewModel.item.name}"
+            app:layout_constraintEnd_toStartOf="@id/partnerName"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@+id/cbArrival"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginStart="0dp"
+            tools:text="Roseanne Carter-Cash" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderDetailsOrderNo"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:is1Pl="@{dbViewModel.is1pl}"
+            app:item="@{dbViewModel.item}"
+            app:layout_constraintStart_toEndOf="@+id/cbArrival"
+            app:layout_constraintTop_toBottomOf="@+id/pickupCustomerName"
+            app:layout_goneMarginStart="0dp"
+            tools:text="#0428001" />
+
+        <ImageView
+            visibilityGoneIfFalse="@{dbViewModel.item.containsRegulatedItem}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_regulated_item_warning"
+            app:layout_constraintStart_toEndOf="@+id/orderDetailsOrderNo"
+            app:layout_constraintTop_toBottomOf="@+id/pickupCustomerName" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fullfillment_icon"
+            style="@style/NunitoSansBold12"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="17dp"
+            app:fullFillmentType="@{dbViewModel.item.fulfillment}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_arrivals_fullfillment_dug" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/partnerName"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfTrue="@{dbViewModel.item.source == null &amp;&amp; dbViewModel.item.fulfillmentResId == null}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18.5dp"
+            android:layout_marginEnd="8dp"
+            app:fulfillmentResId="@{dbViewModel.item.fulfillmentResId}"
+            app:layout_constraintEnd_toStartOf="@id/fullfillment_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:partnerName="@{dbViewModel.item.source}"
+            app:is1pl="@{dbViewModel.is1pl}"
+            tools:text="Doordash" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/toteCount"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfNullOrEmpty="@{dbViewModel.item.toteCount}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_tote"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@{dbViewModel.item.toteCount}"
+            app:layout_constraintStart_toEndOf="@+id/cbArrival"
+            app:layout_constraintTop_toBottomOf="@+id/orderDetailsOrderNo"
+            tools:text="7" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bagCount"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfNullOrEmpty="@{dbViewModel.item.bagCount}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_bag"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@{dbViewModel.item.bagCount}"
+            app:layout_constraintStart_toEndOf="@+id/toteCount"
+            app:layout_constraintTop_toBottomOf="@+id/orderDetailsOrderNo"
+            app:layout_goneMarginStart="16dp"
+            tools:text="10" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/toteBagBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="toteCount,bagCount"
+            app:layout_goneMarginStart="8dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/looseCount"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfNullOrEmpty="@{dbViewModel.item.looseItemCount}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_loose"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@{dbViewModel.item.looseItemCount}"
+            app:layout_constraintStart_toEndOf="@+id/toteBagBarrier"
+            app:layout_constraintTop_toBottomOf="@+id/orderDetailsOrderNo"
+            tools:text="1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/viewByStatus"
+            style="@style/PoppinsMedium22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:includeFontPadding="false"
+            app:arrivalStatus="@{dbViewModel.item.customerArrivalStatus}"
+            app:onStartTimer="@{dbViewModel.onStartTimer}"
+            app:is1pl="@{dbViewModel.is1pl}"
+            app:item="@{dbViewModel.item}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cbArrival"
+            app:layout_goneMarginStart="0dp"
+            tools:text="4m 12s"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerName"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="18dp"
+            android:ellipsize="end"
+            android:maxEms="9"
+            android:maxLines="1"
+            android:text="@{dbViewModel.item.pickerName}"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ellipsisArrival"
+            tools:text="Marcos S." />
+
+        <ImageView
+            android:id="@+id/ellipsisArrival"
+            visibilityGoneIfTrue="@{!dbViewModel.isVisibleEllipsis}"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="16dp"
+            android:importantForAccessibility="no"
+            android:onClick="@{() -> dbViewModel.onEllipsisClick()}"
+            android:src="@drawable/ic_ellipses"
+            app:ellipsisColor="@{dbViewModel.isChecked}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/RoundedPill.LightAqua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            app:firstNotificationETATime="@{dbViewModel.firstNotificationETATime}"
+            app:inProgess="@{dbViewModel.inProgress}"
+            app:is1pl="@{dbViewModel.is1pl}"
+            app:item="@{dbViewModel.item}"
+            app:onStartTimer="@{dbViewModel.onStartTimer}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ellipsisArrival"
+            app:layout_goneMarginEnd="0dp"
+            app:secondNotificationETATime="@{dbViewModel.secondNotificationETATime}"
+            tools:text="Arrived" />
+
+        <View
+            android:layout_width="328dp"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

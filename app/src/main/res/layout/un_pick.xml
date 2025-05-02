@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.data.model.SellByType"/>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.itemdetails.ItemDetailsViewModel" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetViewData" />
+
+        <variable
+            name="bottomSheetViewModel"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetDialogViewModel" />
+
+        <variable
+            name="fragmentViewLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_top_corners_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:minHeight="@dimen/expanded_bottomsheet_peek_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingHorizontal="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_layout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/handle"
+                android:layout_width="56dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_handle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                style="@style/PopinsMedium20.DarkBrown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="-6sp"
+                android:text="@{viewData.title}"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/handle"
+                app:layout_goneMarginTop="12dp"
+                tools:text="@string/select_unpick_items" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alert_message"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_rounded_corner_alert"
+                android:drawableStart="@drawable/ic_alert"
+                android:drawablePadding="10dp"
+                android:gravity="start"
+                android:lineSpacingExtra="2sp"
+                android:includeFontPadding="false"
+                android:minWidth="328dp"
+                android:paddingVertical="8dp"
+                android:paddingStart="17dp"
+                android:paddingEnd="16dp"
+                app:setUnPickAlertMessage="@{viewModel.sellByType}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="@string/unpick_action_can_not_be_undone" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/checkBox"
+                visibilityGoneIfFalse="@{viewModel.hideUnpickAllCheckBox}"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="24dp"
+                android:buttonTint="@color/darkBlue"
+                android:gravity="center"
+                android:onClick="@{()-> viewModel.onSelectAllClicked()}"
+                android:src="@drawable/ic_checkbox_unchecked_state"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alert_message"
+                app:isCheckBoxEnabled="@{true}"
+                app:setCheckBoxStates="@{viewModel.isAllItemsSelected}" />
+
+            <TextView
+                style="@style/NunitoSansRegular12.Grey700"
+                visibilityGoneIfFalse="@{viewModel.hideUnpickAllCheckBox}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:onClick="@{()-> viewModel.onSelectAllClicked()}"
+                android:text="@string/select_all"
+                app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+                app:layout_constraintStart_toEndOf="@+id/checkBox"
+                app:layout_constraintTop_toTopOf="@+id/checkBox" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listview_totes"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:nestedScrollingEnabled="true"
+                app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                app:itemViewModel="@{viewModel}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox"
+                app:pickedItemVms="@{viewModel.itemActionList}"
+                tools:itemCount="2"
+                tools:listitem="@layout/row_un_pick" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/primaryButton"
+                    style="@style/ButtonPrimary"
+                    android:layout_width="264dp"
+                    android:layout_height="40dp"
+                    android:enabled="@{viewModel.isUnpickButtonEnabled}"
+                    android:gravity="center"
+                    android:onClick="@{_ -> viewModel.undoItemActions()}"
+                    android:text="@{viewData.positiveButtonText}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginVertical="16dp"
+                    tools:text="@string/un_pick"
+                    tools:enabled="false"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

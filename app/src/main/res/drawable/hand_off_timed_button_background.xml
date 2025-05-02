@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/disabledBlue" />
+        </shape>
+    </item>
+    <item android:id="@+id/clip_drawable">
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="start">
+            <shape
+                android:shape="rectangle">
+                <solid android:color="@color/darkBlue" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.SubstituteConfirmationViewModel" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <variable
+            name="sellByType"
+            type="com.albertsons.acupick.data.model.SellByType" />
+
+        <variable
+            name="lifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_top_corners_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="56dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bottomSheetHeading"
+            style="@style/PopinsMedium20.DarkBrown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@{viewData.title}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/handle"
+            app:layout_goneMarginTop="12dp"
+            tools:text="@string/confirm_substitution"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/alertMessageContainer"
+            visibilityGoneIfFalse="@{(viewModel.isIssueScanning &amp;&amp; viewModel.sellByType != sellByType.RegularItem) || viewModel.isBulk}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_rounded_corner_alert_dove_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bottomSheetHeading">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/infoIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_informational"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alertMessage"
+                style="@style/NunitoSansRegular14.Grey700"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="2sp"
+                android:minWidth="328dp"
+                android:paddingVertical="10dp"
+                android:text="@string/issue_scanning_alert_instruction"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/infoIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Please continue scanning until you have reached the requested quantity." />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/alertMessageBottomBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="alertMessageContainer,bottomSheetHeading" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderedItemLabel"
+            style="@style/NunitoSansSemiBold14.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/ordered_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alertMessageBottomBarrier" />
+
+        <ImageView
+            android:id="@+id/itemImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="16dp"
+            android:importantForAccessibility="no"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderedItemLabel"
+            app:loadImage="@{viewModel.imageUrl}"
+            tools:background="@color/colorAccent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/processedQty"
+            style="@style/NunitoSansBold14.StrongGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="31dp"
+            android:paddingHorizontal="12dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            isIssueScanning ="@{viewModel.isIssueScanning()}"
+            isOrderedByWeight="@{viewModel.isOrderedByWeight}"
+            app:isDisplayType3PW="@{viewModel.isDisplayType3PW}"
+            requestedQty="@{viewModel.requestedCount}"
+            requestedWeightAndUnits="@{viewModel.requestedWeightAndUnits}"
+            app:layout_constraintBottom_toBottomOf="@+id/itemImage"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="9" />
+
+        <ImageView
+            android:id="@+id/noBagsIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            visibilityGoneIfTrueOrNull="@{viewModel.isCustomerBagPreference}"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_no_bags"
+            app:layout_constraintBottom_toBottomOf="@+id/processedQty"
+            app:layout_constraintStart_toEndOf="@+id/processedQty"
+            app:layout_constraintTop_toTopOf="@+id/processedQty" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/substituteItemLabel"
+            style="@style/NunitoSansSemiBold14.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="24dp"
+            visibilityInvisibleIfTrue="@{viewModel.subListItemUi.empty}"
+            android:text="@{@plurals/substitute_item_label(viewModel.subListItemUi.size, viewModel.subListItemUi.size)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemImage"
+            tools:text="Substituted item"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/description"
+            style="@style/NunitoSansSemiBold14.Grey600"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="47dp"
+            android:text="@{viewModel.description}"
+            app:layout_constraintStart_toEndOf="@+id/itemImage"
+            app:layout_constraintTop_toBottomOf="@+id/orderedItemLabel"
+            tools:text="New York Bakery Bread Sticks Real Garlic 6 Count - 10.5 Oz" />
+
+         <androidx.appcompat.widget.AppCompatTextView
+             android:id="@+id/requestedWeight"
+             visibilityGoneIfFalse="@{viewModel.isRequestedWeightToShow}"
+             style="@style/NunitoSansBold14.Grey700"
+             android:layout_width="186dp"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="24dp"
+             android:layout_marginTop="2dp"
+             android:layout_marginEnd="47dp"
+             android:text="@{@string/requested_weight(viewModel.requestedWeightAndUnits)}"
+             app:layout_constraintTop_toBottomOf="@+id/description"
+             app:layout_constraintStart_toEndOf="@+id/itemImage"
+             tools:text="Requested weight: 2lbs" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/subRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:fragmentViewLifecycleOwner="@{lifecycleOwner}"
+            app:layout_constraintTop_toBottomOf="@+id/substituteItemLabel"
+            app:layout_constraintBottom_toTopOf="@id/bottomContainer"
+            app:subListItems="@{viewModel.subListItemUi}"
+            app:viewModel="@{viewModel}"
+            tools:listitem="@layout/item_substitution" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bottomContainer"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:minHeight="100dp"
+            android:orientation="vertical"
+            app:cardElevation="16dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/confirmButton"
+                    style="@style/ButtonPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="48dp"
+                    android:layout_marginTop="24dp"
+                    android:clickable="@{!isLoading}"
+                    android:onClick="@{()->viewModel.onConfirmButtonClick()}"
+                    android:text="@{viewData.positiveButtonText}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Confirm"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/anotherSubstitution"
+                    style="@style/ButtonLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:onClick="@{()->viewModel.onAddAnotherSubstitutionClick()}"
+                    android:text="@{viewData.negativeButtonText}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/confirmButton"
+                    tools:text="Add another substitution" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibilityGoneIfFalse="@{isLoading}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

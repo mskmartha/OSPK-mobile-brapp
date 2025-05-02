@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="isHandOffActionCancel"
+            type="Boolean" />
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffInterstitialViewModel" />
+        <variable
+            name="handOffItem1"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffCompletedItem" />
+        <variable
+            name="handOffItem2"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffCompletedItem" />
+        <variable
+            name="handOffItem3"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffCompletedItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/handOffLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <Space
+            android:id="@+id/topSpacer"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            visibilityGoneIfFalse="@{isHandOffActionCancel}"
+            android:layout_height="140dp"/>
+
+        <ImageView
+            android:id="@+id/handOffImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@{isHandOffActionCancel ? @drawable/ic_handoff_cancel : @drawable/handoff_complete}"
+            android:layout_marginTop="38dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topSpacer"
+            tools:visibility="visible"
+            tools:src="@drawable/handoff_complete"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/statusMessage"
+            style="@style/PopinsBold28.DarkBrown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="@string/handoff_completed"
+            app:action="@{viewModel.handOffAction}"
+            app:layout_constraintTop_toBottomOf="@+id/handOffImage" />
+
+        <ScrollView
+            android:id="@+id/customerWaitTimeScroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/troubleMessage"
+            app:layout_constraintTop_toBottomOf="@+id/statusMessage">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/grey_frame"
+                    visibilityGoneIfTrue="@{isHandOffActionCancel || handOffItem1 == null}"
+                    android:layout_width="match_parent"
+                    android:layout_height="136dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@color/warm_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/statusMessage">
+
+                    <TextView
+                        android:id="@+id/orderNumberText"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/order"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame"
+                        app:layout_constraintTop_toTopOf="@+id/grey_frame" />
+
+                    <TextView
+                        android:id="@+id/orderNumberValue"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@{'#' + handOffItem1.orderNumber}"
+                        app:layout_constraintEnd_toEndOf="@+id/grey_frame"
+                        app:layout_constraintTop_toTopOf="@+id/grey_frame"
+                        tools:text="#123456" />
+
+                    <TextView
+                        android:id="@+id/waitTimeText"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@{handOffItem1.isDugOrder() ?@string/customer_wait_time : @string/driver_wait_time}"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame"
+                        app:layout_constraintTop_toBottomOf="@+id/orderNumberText"
+                        tools:text="@string/customer_wait_time" />
+
+                    <TextView
+                        android:id="@+id/waitTimeValue"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        app:customerWaitTime="@{handOffItem1.waitingTime}"
+                        app:otpCapturedOrBypassTime="@{handOffItem1.otpCapturedOrByPassTime}"
+                        app:isDugOrder="@{handOffItem1.isDugOrder}"
+                        app:layout_constraintEnd_toEndOf="@+id/grey_frame"
+                        app:layout_constraintTop_toBottomOf="@+id/orderNumberValue"
+                        tools:text="2m 3s" />
+
+                    <TextView
+                        android:id="@+id/viewOrderSummaryText"
+                        style="@style/NunitoSansSemiBold14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/view_order_smummary"
+                        android:onClick="@{() -> viewModel.onViewOrderSummaryClicked(handOffItem1.orderNumber)}"
+                        android:textColor="@color/cattBlue"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame"
+                        app:layout_constraintTop_toBottomOf="@+id/waitTimeValue"
+                        tools:text="@string/view_order_smummary" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/grey_frame1"
+                    visibilityGoneIfTrue="@{isHandOffActionCancel || handOffItem2 == null}"
+                    android:layout_width="match_parent"
+                    android:layout_height="136dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/warm_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/grey_frame">
+
+                    <TextView
+                        android:id="@+id/orderNumberText1"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/order"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame1"
+                        app:layout_constraintTop_toTopOf="@+id/grey_frame1" />
+
+                    <TextView
+                        android:id="@+id/orderNumberValue1"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@{'#' + handOffItem2.orderNumber}"
+                        app:layout_constraintEnd_toEndOf="@+id/grey_frame1"
+                        app:layout_constraintTop_toTopOf="@+id/grey_frame1"
+                        tools:text="#123456" />
+
+                    <TextView
+                        android:id="@+id/waitTimeText1"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@{handOffItem2.isDugOrder() ?@string/customer_wait_time : @string/driver_wait_time }"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame1"
+                        app:layout_constraintTop_toBottomOf="@+id/orderNumberText1"
+                        tools:text="@string/customer_wait_time" />
+
+                    <TextView
+                        android:id="@+id/waitTimeValue1"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        app:customerWaitTime="@{handOffItem2.waitingTime}"
+                        app:otpCapturedOrBypassTime="@{handOffItem2.otpCapturedOrByPassTime}"
+                        app:isDugOrder="@{handOffItem2.isDugOrder}"
+                        app:layout_constraintEnd_toEndOf="@+id/grey_frame1"
+                        app:layout_constraintTop_toBottomOf="@+id/orderNumberValue1"
+                        tools:text="2m 3s" />
+
+                    <TextView
+                        android:id="@+id/viewOrderSummaryText1"
+                        style="@style/NunitoSansSemiBold14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/view_order_smummary"
+                        android:onClick="@{() -> viewModel.onViewOrderSummaryClicked(handOffItem2.orderNumber)}"
+                        android:textColor="@color/cattBlue"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame1"
+                        app:layout_constraintTop_toBottomOf="@+id/waitTimeValue1"
+                        tools:text="@string/view_order_smummary" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/grey_frame2"
+                    visibilityGoneIfTrue="@{isHandOffActionCancel || handOffItem3 == null}"
+                    android:layout_width="match_parent"
+                    android:layout_height="136dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/warm_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/grey_frame1">
+
+                    <TextView
+                        android:id="@+id/orderNumberText2"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/order"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame2"
+                        app:layout_constraintTop_toTopOf="@+id/grey_frame2" />
+
+                    <TextView
+                        android:id="@+id/orderNumberValue2"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@{'#' + handOffItem3.orderNumber}"
+                        app:layout_constraintEnd_toEndOf="@+id/grey_frame2"
+                        app:layout_constraintTop_toTopOf="@+id/grey_frame2"
+                        tools:text="#123456" />
+
+                    <TextView
+                        android:id="@+id/waitTimeText2"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@{handOffItem3.isDugOrder() ? @string/customer_wait_time :@string/driver_wait_time}"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame2"
+                        app:layout_constraintTop_toBottomOf="@+id/orderNumberText2"
+                        tools:text="@string/customer_wait_time" />
+
+                    <TextView
+                        android:id="@+id/waitTimeValue2"
+                        style="@style/NunitoSansSemiBold16.Grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        app:customerWaitTime="@{handOffItem3.waitingTime}"
+                        app:otpCapturedOrBypassTime="@{handOffItem3.otpCapturedOrByPassTime}"
+                        app:isDugOrder="@{handOffItem3.isDugOrder}"
+                        app:layout_constraintEnd_toEndOf="@+id/grey_frame2"
+                        app:layout_constraintTop_toBottomOf="@+id/orderNumberValue2"
+                        tools:text="2m 3s" />
+
+                    <TextView
+                        android:id="@+id/viewOrderSummaryText2"
+                        style="@style/NunitoSansSemiBold14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/view_order_smummary"
+                        android:onClick="@{() -> viewModel.onViewOrderSummaryClicked(handOffItem3.orderNumber)}"
+                        android:textColor="@color/cattBlue"
+                        app:layout_constraintStart_toStartOf="@+id/grey_frame2"
+                        app:layout_constraintTop_toBottomOf="@+id/waitTimeValue2"
+                        tools:text="@string/view_order_smummary" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/troubleMessage"
+            style="@style/NunitoSansSemiBoldItalic20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="@string/interstitial_reconnect_wifi"
+            app:layout_constraintTop_toBottomOf="@+id/customerWaitTimeScroll"
+            app:layout_constraintBottom_toTopOf="@+id/backToHomeButton"
+            app:visibilityGoneIfFalse="@{viewModel.isShowingTroubleMessage}"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/backToHomeButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="24dp"
+            android:enabled="@{viewModel.isBackToHomeButtonEnable}"
+            android:onClick="@{() -> viewModel.backToArrivalOrHomeScreen()}"
+            android:padding="10dp"
+            android:text="@{isHandOffActionCancel ? @string/continue_cta : @string/back_to_home}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Complete Handoff"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

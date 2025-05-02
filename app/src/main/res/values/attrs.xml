@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="showScrollIndicator" format="enum">
+        <enum name="bottom" value="0" />
+        <enum name="top" value="1" />
+        <enum name="both" value="2" />
+    </attr>
+
+    <declare-styleable name="AcuPickRecyclerView">
+        <attr name="showScrollIndicator" />
+    </declare-styleable>
+
+    <declare-styleable name="AcuPickScrollView">
+        <attr name="showScrollIndicator" />
+    </declare-styleable>
+
+    <declare-styleable name="StickyScrollView">
+        <attr name="stuckShadowHeight" format="dimension" />
+        <attr name="stuckShadowDrawable" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CarIconColor">
+        <attr name="body_color" format="color" />
+        <attr name="bottom_color" format="color" />
+        <attr name="tyre_top_color" format="color" />
+        <attr name="bottom_color_alpha" format="float" />
+        <attr name="body_stroke_color" format="color" />
+        <attr name="bottom_stroke_color" format="color" />
+        <attr name="door_handle_color" format="color" />
+        <attr name="load_bicycle_outer_color" format="color" />
+    </declare-styleable>
+
+</resources>

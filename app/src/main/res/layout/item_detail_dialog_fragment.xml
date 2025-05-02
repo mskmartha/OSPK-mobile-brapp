@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/detail_dialog_width"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/default_corner_radius">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/view_margin">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemLocationBanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_height"
+                android:background="@color/albertsonsBlue"
+                android:gravity="center"
+                android:text="@{viewData.title}"
+                android:textAppearance="@style/NunitoSansSemiBold16.white"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="18R.22.4.8" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/itemImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_detail_height"
+                android:layout_marginTop="@dimen/view_margin"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toBottomOf="@+id/itemLocationBanner"
+                app:loadImage="@{viewData.imageUrl}"
+                app:placeholderImage="@{@drawable/ic_item_details_empty_image}"
+                tools:src="@drawable/ic_item_details_empty_image" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemDescription"
+                style="@style/NunitoSansRegular14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/view_margin"
+                android:layout_marginTop="@dimen/view_margin"
+                android:text="@{viewData.body}"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/itemImage"
+                tools:text="Gala Apples Prepacked Bag - 3 Lb Gala Apples Prepacked Bag - 3 Lb Gala Apples Prepacked Bag - 3 Lb" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemId"
+                style="@style/NunitoSansBold12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_margin"
+                android:text="@{viewData.secondaryBody}"
+                android:textAlignment="center"
+                android:textColor="@color/grey_600"
+                app:layout_constraintTop_toBottomOf="@+id/itemDescription"
+                tools:text="PLU: 7780 (LB)" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

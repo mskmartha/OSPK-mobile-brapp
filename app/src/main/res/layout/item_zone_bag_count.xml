@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.albertsons.acupick.ui.models.ZoneBagCountUI" />
+
+        <variable
+            name="isCustomerPreferBag"
+            type="boolean" />
+
+        <variable
+            name="location"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/zone"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{location}"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="AM05" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bagOrToteCountTv"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:includeFontPadding="false"
+            app:bagOrToteCount="@{item}"
+            app:isCustomerPreferBag="@{isCustomerPreferBag}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dividerScannedCount"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginEnd="0dp"
+            tools:text="10 bags" />
+
+        <View
+            android:id="@+id/dividerScannedCount"
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/grey_550"
+            app:item="@{item}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/looseCountTv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/looseCountTv"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:looseCount="@{item}"
+            tools:text="10 loose" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Moving all the redesign themes here and later we can merge with the styles.xml. -->
+    <style name="PoppinsMedium42">
+        <item name="android:textSize">42sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="PoppinsMedium42.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="PoppinsMedium22.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="PoppinsMedium36">
+        <item name="android:textSize">36sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="PoppinsMedium36.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="PoppinsMedium32">
+        <item name="android:textSize">32sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="PoppinsMedium32.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+    <style name="PoppinsMedium28">
+        <item name="android:textSize">28sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+    <style name="PoppinsMedium28.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="PopinsMedium24">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+    <style name="PopinsMedium24.DarkBrown">
+        <item name="android:textColor">@color/darkBrown</item>
+    </style>
+
+    <style name="NunitoSansBold14.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansBold14.SemiLightBlue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="NunitoSansBold14.StrongGreen">
+        <item name="android:textColor">@color/strongGreen</item>
+    </style>
+
+    <style name="NunitoSansBold12.SemiLightBlue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="NunitoSansRegular14.DarkBrown">
+        <item name="android:textColor">@color/darkBrown</item>
+    </style>
+
+    <style name="NunitoSansBold16.DarkBrown">
+        <item name="android:textColor">@color/darkBrown</item>
+    </style>
+
+    <style name="NunitoSansBold16.SemiLightBlue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="NunitoSansRegular12.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="NunitoSansRegular14.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="NunitoSansBold20.SemiLightBlue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="NunitoSansBold12.StrongGreen">
+        <item name="android:textColor">@color/strongGreen</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.Blue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="NunitoSansRegular12.Grey550">
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="NunitoSansRegular10.grey550">
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12.coffeeGrey700">
+        <item name="android:textColor">@color/coffeeGrey700</item>
+
+    </style>
+
+    <style name="NunitoSansBold14.grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansBold16.grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12.grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.Blue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="NunitoSansSemiBold16.grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12.grey550">
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="NunitoSansRegular16.grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansBold14.Blue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+
+    <style name="PoppinsMedium20">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="PoppinsMedium22">
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="PoppinsMedium20.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="RoundedPill">
+        <item name="android:background">@drawable/rounded_corner_rectangle</item>
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/darkBrown</item>
+    </style>
+
+    <style name="RoundedPill.LightOrange">
+        <item name="android:backgroundTint">@color/lightOrange</item>
+    </style>
+
+    <style name="RoundedPill.LightAqua">
+        <item name="android:backgroundTint">@color/lightAqua</item>
+    </style>
+    
+    <style name="ButtonPrimary">
+        <item name="android:background">@drawable/rounded_corner_blue</item>
+        <item name="android:backgroundTint">@color/button_primary_background_tint_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/button_primary_text_selector</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="ButtonPrimary.Picking">
+        <item name="android:fontFamily">@font/nunito_sans_regular</item>
+    </style>
+
+    <style name="ButtonPrimaryBlue">
+        <item name="android:background">@drawable/rounded_blue_white_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/semiLightBlue</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+
+    <style name="ButtonChatSwap">
+        <item name="android:background">@drawable/rounded_blue_disable_blue_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/semiLightBlue</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="ButtonApproved">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/approved_green</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="ButtonDeclined">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/declinedRed</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+    
+    <!--Chip Style-->
+    <style name="ChipStyleOrderType" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_bg_state_selector</item>
+        <item name="android:textColor">@color/semiLightBlue</item>
+        <item name="chipStrokeColor">@color/chip_border_state_selector</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">20dp</item>
+        <item name="iconStartPadding">5dp</item>
+        <item name="android:checkable">true</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ButtonLink">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+    
+    <!--Quantity picker button-->
+    <!--<style name="ButtonPrimary.QuantityPicker">
+        <item name="android:backgroundTint">@color/quantity_picker_button_primary_background_tint_selector</item>
+        <item name="android:textColor">@color/button_primary_text_selector</item>
+    </style>-->
+
+    <style name="NunitoSansSemiBold20">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="RadioButtonPrimary" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/custom_radio_button</item>
+        <item name="android:textColor">@color/grey_700</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansRegular16.Grey550">
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="ButtonLink14" parent="ButtonLink">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="NunitoSansRegular12.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.SemiLightBlue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+    <style name="NunitoSansRegular10.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansRegular10.white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bg_rounded_corner_name_box</item>
+    </style>
+
+    <style name="NunitoSansRegular14.CoffeeGrey700">
+        <item name="android:textColor">@color/coffeeGrey700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold14.Grey550">
+        <item name="android:textColor">@color/grey_550</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12.Grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="CustomerComment" parent="NunitoSansRegular14.Black">
+        <item name="android:background">@drawable/rounded_corner_customer_comment</item>
+    </style>
+
+    <style name="NunitoSansSemiBold28">
+        <item name="android:textSize">28sp</item>
+        <item name="fontFamily">@font/nunito_sans_semibold</item>
+    </style>
+
+    <style name="NunitoSansBold28.CoffeGrey700">
+        <item name="android:textColor">@color/coffeeGrey700</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="NunitoSansBold18.darkBrown">
+        <item name="android:textColor">@color/darkBrown</item>
+    </style>
+
+    <style name="NunitoSansBold16.SemiDarkRed">
+        <item name="android:textColor">@color/semiDarkRed</item>
+    </style>
+
+    <style name="NunitoSansRegular16.semiLightBlue">
+        <item name="android:textColor">@color/semiLightBlue</item>
+    </style>
+    
+    <style name="NunitoSansRegular12.coffeGray700">
+        <item name="android:textColor">@color/coffeeGrey700</item>
+    </style>
+
+    <style name="NunitoSansBold12.coffeGray700">
+        <item name="android:textColor">@color/coffeeGrey700</item>
+    </style>
+
+    <style name="CarColorWhite">
+        <item name="body_color">#FFFFFF</item>
+        <item name="bottom_color">#2A2928</item>
+        <item name="tyre_top_color">#AFAEAC</item>
+        <item name="body_stroke_color">#DDD9D5</item>
+        <item name="bottom_stroke_color">#DDD9D5</item>
+        <item name="bottom_color_alpha">0.1</item>
+        <item name="door_handle_color">#AFAEAC</item>
+        <item name="load_bicycle_outer_color">#EAEAE9</item>
+    </style>
+
+    <style name="CarColorBlack" parent="CarColorWhite">
+        <item name="body_color">#535250</item>
+        <item name="bottom_color">#2A2928</item>
+        <item name="tyre_top_color">#1D1C1B</item>
+        <item name="body_stroke_color">#535250</item>
+        <item name="bottom_stroke_color">#2A2928</item>
+        <item name="bottom_color_alpha">1</item>
+        <item name="load_bicycle_outer_color">#2A2928</item>
+    </style>
+
+    <style name="CarColorRed" parent="CarColorWhite">
+        <item name="body_color">#A7293A</item>
+        <item name="bottom_color">#7B1A27</item>
+        <item name="tyre_top_color">#450D1A</item>
+        <item name="body_stroke_color">#A7293A</item>
+        <item name="bottom_stroke_color">#7B1A27</item>
+        <item name="bottom_color_alpha">1</item>
+        <item name="load_bicycle_outer_color">#7B1A27</item>
+    </style>
+
+    <style name="CarColorBlue" parent="CarColorWhite">
+        <item name="body_color">#124C81</item>
+        <item name="bottom_color">#0C3255</item>
+        <item name="tyre_top_color">#0D2D49</item>
+        <item name="body_stroke_color">#124C81</item>
+        <item name="bottom_stroke_color">#0C3255</item>
+        <item name="bottom_color_alpha">1</item>
+        <item name="load_bicycle_outer_color">#0C3255</item>
+    </style>
+
+    <style name="CarColorBrown" parent="CarColorWhite">
+        <item name="body_color">#804219</item>
+        <item name="bottom_color">#4E2910</item>
+        <item name="tyre_top_color">#341B0A</item>
+        <item name="body_stroke_color">#804219</item>
+        <item name="bottom_stroke_color">#4E2910</item>
+        <item name="bottom_color_alpha">1</item>
+        <item name="load_bicycle_outer_color">#4E2910</item>
+    </style>
+
+    <style name="CarColorBeige" parent="CarColorWhite">
+        <item name="body_color">#CDA890</item>
+        <item name="bottom_color">#A48673</item>
+        <item name="tyre_top_color">#7B6557</item>
+        <item name="body_stroke_color">#CDA890</item>
+        <item name="bottom_stroke_color">#A48673</item>
+        <item name="bottom_color_alpha">1</item>
+        <item name="door_handle_color">#7D7B78</item>
+        <item name="load_bicycle_outer_color">#A48673</item>
+    </style>
+
+    <style name="CarColorGreen" parent="CarColorWhite">
+        <item name="body_color">#4B6F57</item>
+        <item name="bottom_color">#385240</item>
+        <item name="tyre_top_color">#2C4132</item>
+        <item name="body_stroke_color">#4B6F57</item>
+        <item name="bottom_stroke_color">#385240</item>
+        <item name="bottom_color_alpha">1</item>
+        <item name="load_bicycle_outer_color">#385240</item>
+    </style>
+
+    <style name="CarColorGray" parent="CarColorWhite">
+        <item name="body_color">#7D7B78</item>
+        <item name="bottom_color">#535250</item>
+        <item name="tyre_top_color">#464543</item>
+        <item name="body_stroke_color">#7D7B78</item>
+        <item name="bottom_stroke_color">#535250</item>
+        <item name="bottom_color_alpha">1</item>
+        <item name="load_bicycle_outer_color">#535250</item>
+    </style>
+
+    <style name="CarColorSilver" parent="CarColorWhite">
+        <item name="body_color">#AFAEAC</item>
+        <item name="bottom_color">#7D7B78</item>
+        <item name="tyre_top_color">#535250</item>
+        <item name="body_stroke_color">#AFAEAC</item>
+        <item name="bottom_stroke_color">#7D7B78</item>
+        <item name="bottom_color_alpha">1</item>
+        <item name="door_handle_color">#DDD9D5</item>
+        <item name="load_bicycle_outer_color">#7D7B78</item>
+    </style>
+
+    <style name="NunitoSansSemiBold12.Grey7C7575">
+        <item name="android:textColor">@color/chat_toptext</item>
+    </style>
+
+    <style name="NunitoSansRegular14.grey700">
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="NunitoSansRegular14.semiDarkRed">
+        <item name="android:textColor">@color/semiDarkRed</item>
+    </style>
+
+</resources>

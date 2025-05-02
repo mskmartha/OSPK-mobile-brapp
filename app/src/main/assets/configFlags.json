@@ -1,0 +1,7 @@
+[
+  {
+    "featureFlagName": "feature.rxDug.enabled",
+    "featureFlagValue": true,
+    "minVersion": "1.27.0"
+  }
+]

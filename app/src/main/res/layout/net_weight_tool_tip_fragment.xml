@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fixed_item_tool_tip_body"
+            style="@style/NunitoSansRegular16.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/net_weight_tool_tip_body"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/fixed_item_tool_tip_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:layout_marginTop="14dp"
+            android:contentDescription="@string/net_weight_tool_tip_image_content_description"
+            android:src="@drawable/ic_fixed_item_tool_tip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fixed_item_tool_tip_body" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fixed_item_tool_tip_helper_text"
+            style="@style/NunitoSansItalic12.Grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:text="@string/net_weight_tool_tip_secondary_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fixed_item_tool_tip_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

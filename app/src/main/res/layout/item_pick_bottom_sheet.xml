@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragmentViewLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetViewData" />
+
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetDialogViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_top_corners_background"
+        android:minHeight="@dimen/default_bottomsheet_peek_height"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="66dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="79dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/bottomSheetBodyText"
+            style="@style/PopinsMedium20.DarkBrown"
+            bottomSheetTitle="@{viewData.title}"
+            bottomSheetType="@{viewData.dialogType}"
+            highLightText="@{viewData.textToBeHighlightedInTitle}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:gravity="center"
+            android:lineSpacingExtra="-3sp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/handle"
+            tools:text="@string/scan_a_new_tote" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/illustrationImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:animateItemCompleteImage="@{viewData.dialogType}"
+            app:imageResource="@{viewData.titleIcon}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bottomSheetBodyText"
+            app:srcCompat="@drawable/ic_tote_new"
+            tools:src="@drawable/ic_tote_new"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            app:isCustomerBagPreference="@{viewData.shouldBoldTitle}"
+            app:spannableText="@{viewData.body}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/illustrationImage"
+            tools:text="@string/scan_a_new_tote_description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

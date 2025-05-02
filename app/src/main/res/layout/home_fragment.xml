@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.data.model.CustomerType" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.home.HomeViewModel" />
+    </data>
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:isRefreshComplete="@{viewModel.isDataRefreshing}"
+        app:loadingState="@{viewModel.loadingState}"
+        app:setOnRefresh="@{viewModel}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundGrey">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                visibilityGoneIfTrue="@{!viewModel.showSkeletonState}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    visibilityGoneIfTrue="@{viewModel.showSkeletonState}"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout_editor_absoluteX="0dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/greetingUserNameTv"
+                        style="@style/NunitoSansBold28.CoffeGrey700"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="16dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@{viewModel.associateName}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Hello, Austin" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/associateCtaTV"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@{viewModel.associateCta}"
+                        android:textColor="@color/coffeeGrey700"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/greetingUserNameTv"
+                        tools:text="@string/here_is_your_next_pick" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/emptyHomeImage"
+                        visibilityGoneIfNull="@{viewModel.emptyStateDrawable}"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_marginTop="37dp"
+                        android:src="@{viewModel.emptyStateDrawable}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/associateCtaTV"
+                        tools:srcCompat="@drawable/ic_empty_state_home_screen" />
+
+                    <TextView
+                        android:id="@+id/emptyHomeMessage"
+                        style="@style/NunitoSansRegular16.Grey700"
+                        android:layout_width="219dp"
+                        visibilityGoneIfNull="@{viewModel.emptyStateText}"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:gravity="center"
+                        android:text="@{viewModel.emptyStateText}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/emptyHomeImage"
+                        tools:text="We are loading the order ..." />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/pickCard"
+                        visibilityGoneIfNull="@{viewModel.cardData}"
+                        android:layout_width="match_parent"
+                        android:layout_height="266dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="6dp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        app:cardBackgroundColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/associateCtaTV"
+                        app:strokeWidth="0dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:visibility="visible">
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/startGuideline2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_begin="16dp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/pickInfoTv"
+                                style="@style/NunitoSansRegular14.Grey700"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="24dp"
+                                app:customerArrivalStatus="@{viewModel.cardData.customerArrivalStatusUI}"
+                                app:customerArrivalTime="@{viewModel.waitTimeSeconds}"
+                                app:dueDayLabel="@{viewModel.dueDay}"
+                                app:is1Pl="@{viewModel.cardData.is1Pl}"
+                                app:layout_constraintEnd_toStartOf="@+id/reshopTv"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shouldShowPastDue="@{viewModel.showTimerPastDue}"
+                                app:timerStillActive="@{viewModel.timerStillActive}"
+                                tools:text="Stage by" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/reshopTv"
+                                style="@style/RoundedPill.LightOrange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="16dp"
+                                app:isPrePick="@{viewModel.cardData.isPrePickOrAdvancePick}"
+                                app:isPrepNeeded="@{viewModel.cardData.prepNotReady}"
+                                app:isReProcess="@{viewModel.cardData.reProcess}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Reshop" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/pickTimeTv"
+                                style="@style/PoppinsMedium42.Grey700"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                app:cardData="@{viewModel.cardData}"
+                                app:hidePastDue="@{viewModel.hidePastDue}"
+                                app:hideTimer="@{viewModel.hideTimer}"
+                                app:is1pl="@{viewModel.cardData.is1Pl}"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toBottomOf="@+id/pickInfoTv"
+                                app:setHandoffDuration="@{viewModel.waitTimeSeconds}"
+                                app:shouldShowPastDue="@{viewModel.showTimerPastDue}"
+                                app:timerStillActive="@{viewModel.timerStillActive}"
+                                tools:text="12:15" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/prepickDaysCount"
+                                style="@style/PoppinsMedium36.Grey700"
+                                visibilityGoneIfFalse="@{viewModel.hideTimer}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toBottomOf="@+id/pickInfoTv"
+                                app:setDueDay="@{viewModel.dueDay}"
+                                tools:text="5 Days"
+                                tools:visibility="gone" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/flashCountDownTv"
+                                style="@style/PoppinsMedium42.Grey700"
+                                visibilityGoneIfFalse="@{viewModel.timerStillActive}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                app:flashStageDurationMs="@{viewModel.countdownDurationMs}"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toBottomOf="@+id/pickInfoTv"
+                                app:timerColor="@{viewModel.timerColor}"
+                                tools:text="1m 20s"
+                                tools:visibility="gone" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/pickTimeFormatTv"
+                                style="@style/PoppinsMedium32.Grey700"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="16dp"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                app:cardDataAmPm="@{viewModel.cardData.isOrderReadyToPickUp}"
+                                app:hidePastDue="@{viewModel.hidePastDue}"
+                                app:hideTimer="@{viewModel.hideTimer}"
+                                app:isOnePl="@{viewModel.cardData.is1Pl}"
+                                app:layout_constraintBottom_toBottomOf="@+id/pickTimeTv"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/pickTimeTv"
+                                app:layout_constraintTop_toTopOf="@+id/pickTimeTv"
+                                app:setFormattedDateAmPm="@{viewModel.cardData.expectedEndTime}"
+                                app:shouldShowPastDue="@{viewModel.showTimerPastDue}"
+                                app:showAmPm="@{viewModel.timerStillActive || viewModel.cardData.is1Pl}"
+                                tools:text="PM" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvLabelPastDue"
+                                style="@style/NunitoSansRegular14.semiDarkRed"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="90dp"
+                                android:text="@string/pastDue"
+                                app:layout_constraintEnd_toStartOf="@+id/picklistIllustrationImg"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:visibilityGoneIfTrue="@{viewModel.hidePastDue}" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/orderNumberTV"
+                                style="@style/NunitoSansRegular16.Grey700"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="84dp"
+                                app:isOrderReadyToPickUp="@{viewModel.cardData.isOrderReadyToPickUp}"
+                                app:layout_constraintEnd_toStartOf="@+id/picklistIllustrationImg"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:orderNumber="@{viewModel.cardData.customerOrderNumber}"
+                                tools:text="Est pick time: 9 min"
+                                tools:visibility="gone" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/picklistIllustrationImg"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:layout_marginTop="58dp"
+                                android:layout_marginEnd="24dp"
+                                app:imageSrc="@{viewModel.picklistIllustrationDrawable}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:src="@drawable/ic_staging" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/itemCountTv"
+                                style="@style/NunitoSansRegular16.Grey700"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="130dp"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:setItems="@{viewModel.cardData}"
+                                tools:text="14 items" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/toteCount"
+                                style="@style/NunitoSansRegular14.Grey700"
+                                visibilityGoneIfFalse="@{viewModel.cardData.showTote}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="130dp"
+                                android:drawableStart="@drawable/ic_tote"
+                                android:drawablePadding="4dp"
+                                android:gravity="center"
+                                android:text="@{viewModel.cardData.toteCount}"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="7" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/bagCount"
+                                style="@style/NunitoSansRegular14.Grey700"
+                                visibilityGoneIfFalse="@{viewModel.cardData.showBag}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="130dp"
+                                android:drawableStart="@drawable/ic_bag"
+                                android:drawablePadding="4dp"
+                                android:gravity="center"
+                                android:text="@{viewModel.cardData.bagCount}"
+                                app:layout_constraintStart_toEndOf="@+id/toteCount"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_goneMarginStart="0dp"
+                                tools:text="10" />
+
+                            <androidx.constraintlayout.widget.Barrier
+                                android:id="@+id/toteBagBarrier"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:barrierDirection="end"
+                                app:constraint_referenced_ids="toteCount,bagCount"
+                                app:layout_goneMarginStart="8dp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/looseCount"
+                                style="@style/NunitoSansRegular14.Grey700"
+                                visibilityGoneIfFalse="@{viewModel.cardData.showLoose}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="130dp"
+                                android:drawableStart="@drawable/ic_loose"
+                                android:drawablePadding="4dp"
+                                android:gravity="center"
+                                android:text="@{viewModel.cardData.looseItemCount}"
+                                app:layout_constraintStart_toEndOf="@+id/toteBagBarrier"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="1" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/hzImg"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="12dp"
+                                android:src="@drawable/ic_hot"
+                                app:isActive="@{viewModel.hotActive}"
+                                app:isOrderReadyToPickUp="@{viewModel.cardData.isOrderReadyToPickUp}"
+                                app:layout_constraintBottom_toBottomOf="@+id/itemCountTv"
+                                app:layout_constraintStart_toStartOf="@+id/fzImg"
+                                app:layout_constraintTop_toTopOf="@+id/itemCountTv" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/fzImg"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="12dp"
+                                android:src="@drawable/ic_frozen"
+                                app:isActive="@{viewModel.frozenActive}"
+                                app:isOrderReadyToPickUp="@{viewModel.cardData.isOrderReadyToPickUp}"
+                                app:layout_constraintBottom_toBottomOf="@+id/itemCountTv"
+                                app:layout_constraintStart_toStartOf="@+id/chImg"
+                                app:layout_constraintTop_toTopOf="@+id/itemCountTv" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/chImg"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="12dp"
+                                android:src="@drawable/ic_chilled"
+                                app:isActive="@{viewModel.coldActive}"
+                                app:isOrderReadyToPickUp="@{viewModel.cardData.isOrderReadyToPickUp}"
+                                app:layout_constraintBottom_toBottomOf="@+id/itemCountTv"
+                                app:layout_constraintStart_toStartOf="@+id/amImg"
+                                app:layout_constraintTop_toTopOf="@+id/itemCountTv" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/amImg"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="8dp"
+                                android:src="@drawable/ic_ambient"
+                                app:isActive="@{viewModel.ambientActive}"
+                                app:isOrderReadyToPickUp="@{viewModel.cardData.isOrderReadyToPickUp}"
+                                app:layout_constraintBottom_toBottomOf="@+id/itemCountTv"
+                                app:layout_constraintStart_toEndOf="@+id/itemCountTv"
+                                app:layout_constraintTop_toTopOf="@+id/itemCountTv" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/customerNameOrOrderCountTv"
+                                style="@style/NunitoSansRegular16.Grey700"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="4dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                app:customerNameOrOrderCount="@{viewModel.cardData}"
+                                app:formattedOrderCountText="@{viewModel.orderCount}"
+                                app:isBatchOrder="@{viewModel.isBatchOrder}"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="@+id/startGuideline2"
+                                app:layout_constraintTop_toBottomOf="@+id/itemCountTv"
+                                tools:text="R. Carter-Cash" />
+
+                            <View
+                                android:id="@+id/customerOrderNumberDivider"
+                                android:layout_width="1dp"
+                                android:layout_height="14dp"
+                                android:layout_marginStart="8dp"
+                                android:background="#7D7B78"
+                                app:layout_constraintBottom_toBottomOf="@+id/customerNameOrOrderCountTv"
+                                app:layout_constraintStart_toEndOf="@+id/customerNameOrOrderCountTv"
+                                app:layout_constraintTop_toTopOf="@+id/customerNameOrOrderCountTv"
+                                app:visibilityGoneIfTrue="@{viewModel.hideDivider}" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/fullFillmentType"
+                                style="@style/NunitoSansRegular16.Grey700"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center"
+                                app:isBatchOrder="@{viewModel.isBatchOrder}"
+                                app:layout_constraintBottom_toBottomOf="@+id/customerNameOrOrderCountTv"
+                                app:layout_constraintStart_toEndOf="@+id/customerOrderNumberDivider"
+                                app:layout_constraintTop_toTopOf="@id/customerNameOrOrderCountTv"
+                                app:setFullFillmentType="@{viewModel.activityFulfillmentTypes}"
+                                app:source="@{viewModel.source}"
+                                tools:drawableEnd="@drawable/ic_fullfillment_dug"
+                                tools:drawablePadding="5dp"
+                                tools:text="C3" />
+
+                            <androidx.constraintlayout.widget.Barrier
+                                android:id="@+id/homeContentBarrier"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:barrierDirection="bottom"
+                                app:constraint_referenced_ids="customerNameOrOrderCountTv,picklistIllustrationImg" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/pickingButton"
+                                style="@style/ButtonPrimary"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="32dp"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="32dp"
+                                android:layout_marginBottom="24dp"
+                                android:includeFontPadding="false"
+                                android:onClick="@{() -> viewModel.onPickClicked()}"
+                                app:isOrderReadyToPickUp="@{viewModel.cardData.isOrderReadyToPickUp}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/homeContentBarrier"
+                                app:pickingButtonText="@{viewModel.pickingText}"
+                                tools:text="Start picking" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/openOrdersCard"
+                        visibilityGoneIfNull="@{viewModel.cardData}"
+                        android:layout_width="0dp"
+                        android:layout_height="92dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="-8dp"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/pickupReadyCard"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pickCard">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingStart="18dp"
+                            android:paddingTop="16dp"
+                            android:paddingEnd="0dp">
+
+                            <ImageView
+                                android:id="@+id/ivOpenOrders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_open_order"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/openOrderLabel"
+                                style="@style/NunitoSansRegular14.Grey700"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:includeFontPadding="false"
+                                android:text="@string/open_orders_home"
+                                app:layout_constraintStart_toEndOf="@+id/ivOpenOrders"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/orderCountTv"
+                                style="@style/PoppinsMedium42.Grey700"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="-8dp"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                android:text="@{viewModel.openOrderCount}"
+                                app:layout_constraintStart_toEndOf="@+id/ivOpenOrders"
+                                app:layout_constraintTop_toBottomOf="@+id/openOrderLabel"
+                                tools:text="30" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/pickupReadyCard"
+                        visibilityGoneIfNull="@{viewModel.cardData}"
+                        android:layout_width="0dp"
+                        android:layout_height="92dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/openOrdersCard"
+                        app:layout_constraintTop_toBottomOf="@+id/pickCard">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingStart="18dp"
+                            android:paddingTop="16dp"
+                            android:paddingEnd="0dp">
+
+                            <ImageView
+                                android:id="@+id/ivPickupReady"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_pickup_ready"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/pickupReadyLabel"
+                                style="@style/NunitoSansRegular14.Grey700"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:includeFontPadding="false"
+                                android:text="@string/pickup_ready_home"
+                                app:layout_constraintStart_toEndOf="@+id/ivPickupReady"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/pickupReadyTv"
+                                style="@style/PoppinsMedium42.Grey700"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="-8dp"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                android:text="@{viewModel.handOffOrderCount}"
+                                app:layout_constraintStart_toEndOf="@+id/ivPickupReady"
+                                app:layout_constraintTop_toBottomOf="@+id/pickupReadyLabel"
+                                tools:text="21" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.compose.ui.platform.ComposeView
+                    android:id="@+id/chatButtonView"
+                    android:layout_gravity="end|bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:composableName="ChatButtonView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</layout>

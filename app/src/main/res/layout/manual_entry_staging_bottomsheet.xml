@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.manualentry.handoff.ManualEntryStagingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_top_corners_background"
+        android:minHeight="@dimen/expanded_bottomsheet_peek_height"
+        android:paddingHorizontal="32dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="56dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/headerShortOrderNumber"
+            style="@style/NunitoSansBold20.grey600"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="@{viewModel.shortOrderId}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/handle"
+            tools:text="DUG-08" />
+
+        <View
+            android:id="@+id/viewDivider"
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/grey_550"
+            app:layout_constraintBottom_toBottomOf="@+id/headerShortOrderNumber"
+            app:layout_constraintStart_toEndOf="@+id/headerShortOrderNumber"
+            app:layout_constraintTop_toTopOf="@+id/headerShortOrderNumber" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/headerOrderNumber"
+            style="@style/NunitoSansBold20.grey600"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="44dp"
+            android:text="@{`#` + viewModel.orderNumberEntryText}"
+            app:layout_constraintStart_toEndOf="@id/viewDivider"
+            app:layout_constraintTop_toBottomOf="@+id/handle"
+            tools:text="#10042145" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/headerCustomerName"
+            style="@style/NunitoSansSemiBold16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{viewModel.customerName}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@+id/noBagPreferenceIcon"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerShortOrderNumber"
+            tools:text="Richard Carter" />
+
+        <ImageView
+            android:id="@+id/noBagPreferenceIcon"
+            visibilityGoneIfTrue="@{viewModel.isCustomerPreferBag}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_no_bags"
+            app:layout_constraintBottom_toBottomOf="@+id/headerCustomerName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/headerCustomerName"
+            app:layout_constraintTop_toTopOf="@+id/headerCustomerName" />
+
+        <com.albertsons.acupick.ui.util.CustomTextInput
+            android:id="@+id/locationNumberTextInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:errorDrawable="@{@drawable/ic_red_warning}"
+            app:errorTextResId="@{viewModel.zoneTextInputError}"
+            app:hint="@{@string/location_number}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerCustomerName"
+            app:nextFocus="@{@id/bagNumberTextInput}"
+            app:requestFocus="@{true}"
+            app:typedText="@={viewModel.zoneEntryTypedText}" />
+
+        <com.albertsons.acupick.ui.util.CustomTextInput
+            android:id="@+id/toteIdTextInput"
+            visibilityGoneIfFalse="@{!viewModel.isCustomerPreferBag}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:errorDrawable="@{@drawable/ic_red_warning}"
+            app:errorTextResId="@{viewModel.toteTextInputError}"
+            app:hint="@{@string/manual_entry_destaging_tote_id}"
+            app:imeClickEnabled="@{viewModel.continueEnabled}"
+            app:isEnabled="@{viewModel.isToteEntry}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationNumberTextInput"
+            app:onImeClick="@{viewModel.onContinueButtonClicked}"
+            app:typedText="@={viewModel.toteEntryTypedText}" />
+
+        <com.albertsons.acupick.ui.util.CustomTextInput
+            android:id="@+id/bagNumberTextInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:errorDrawable="@{@drawable/ic_red_warning}"
+            app:errorTextResId="@{viewModel.bagTextInputError}"
+            app:hint="@{viewModel.bagsOrLooseLabelText}"
+            app:imeClickEnabled="@{viewModel.continueEnabled}"
+            app:isEnabled="@{viewModel.isLooseEntry}"
+            app:isLastView="@{true}"
+            app:isNumber="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toteIdTextInput"
+            app:onImeClick="@{viewModel.onContinueButtonClicked}"
+            app:typedText="@={viewModel.bagsOrLooseEntryText}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/continueCta"
+            style="@style/ButtonPrimary"
+            android:layout_width="264dp"
+            android:layout_marginTop="24dp"
+            android:enabled="@{viewModel.continueEnabled}"
+            android:onClick="@{() -> viewModel.onContinueButtonClicked()}"
+            android:text="@string/continue_cta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bagNumberTextInput" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

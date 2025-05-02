@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.albertsons.acupick.data.model.SellByType"/>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.itemdetails.ItemActionDbViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="96dp"
+        android:onClick="@{_ -> viewModel.toggleCheckBox()}"
+        android:clickable="@{viewModel.isClickable}">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/checkBox"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/darkBlue"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:isCheckBoxEnabled="@{viewModel.isClickable}"
+            app:setCheckBoxStates="@{viewModel.isChecked}"
+            tools:src="@drawable/ic_checkbox_checked_state" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/checkBox"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{viewModel.imageUrl}"
+            tools:src="@drawable/ic_list_view_empty_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalQty"
+            style="@style/NunitoSansBold12.StrongGreen"
+            visibilityGoneIfFalse="@{viewModel.sellByType==SellByType.PriceEachTotal}"
+            android:layout_width="28dp"
+            android:layout_height="22dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            android:text="@{viewModel.qty.toString()}"
+            app:layout_constraintBottom_toBottomOf="@+id/item_image"
+            app:layout_constraintStart_toStartOf="@+id/item_image"
+            android:layout_marginTop="2dp"
+            tools:text="2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/item_image"
+            app:layout_constraintTop_toTopOf="@+id/item_image"
+            app:layout_constraintBottom_toBottomOf="@+id/item_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/item_name"
+                style="@style/NunitoSansSemiBold14.grey700"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="@{viewModel.description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="This is Item name text ." />
+
+            <TextView
+                android:id="@+id/item_PLU"
+                style="@style/NunitoSansRegular12.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{viewModel.upcPlu}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_name"
+                tools:text="PLU 3152" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemStatusTv"
+                style="@style/NunitoSansSemiBold12.Grey700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/rounded_corner_rectangle"
+                android:backgroundTint="@color/semiLightRed"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                app:isSubstitution="@{viewModel.isSubstitution}"
+                app:isIssueScanned="@{viewModel.issueScanned}"
+                android:visibility="@{viewModel.subVisible}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_PLU"
+                tools:backgroundTint="@color/semiLightRed"
+                tools:text="Substituted" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

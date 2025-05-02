@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dbViewModel"
+            type="com.albertsons.acupick.ui.picklistitems.PickListItemsDbViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.picklistitems.PickListItemsViewModel" />
+
+        <import type="com.albertsons.acupick.ui.picklistitems.ScanTarget" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/pickListCard"
+        android:layout_width="296dp"
+        android:layout_height="376dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> dbViewModel.onDetailsClick()}"
+        app:cardElevation="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/addressPinImage"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:onClick="@{()-> dbViewModel.onLocationClick()}"
+                android:src="@drawable/ic_address_pin"
+                app:layout_constraintBottom_toBottomOf="@+id/itemAddress"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/itemAddress" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemAddress"
+                style="@style/NunitoSansBold20.SemiLightBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:onClick="@{()-> dbViewModel.onLocationClick()}"
+                android:text="@{dbViewModel.itemAddressWithoutDept.isEmpty()? dbViewModel.itemDepName : dbViewModel.itemAddressWithoutDept}"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@+id/moreLocationCount"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/addressPinImage"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="8-L-01-011" />
+
+            <TextView
+                android:id="@+id/moreLocationCount"
+                style="@style/NunitoSansBold12.SemiLightBlue"
+                visibilityGoneIfNullOrEmpty="@{dbViewModel.locationCount}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/lighterBlue"
+                android:gravity="center"
+                android:onClick="@{()-> dbViewModel.onLocationClick()}"
+                android:text="@{dbViewModel.locationCount}"
+                app:layout_constraintBottom_toBottomOf="@+id/itemAddress"
+                app:layout_constraintEnd_toStartOf="@+id/ebtIndicator"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/itemAddress"
+                app:layout_constraintTop_toTopOf="@+id/itemAddress"
+                app:layout_goneMarginEnd="0dp"
+                tools:text="+2" />
+            <TextView
+                style="@style/NunitoSansBold12.SemiLightBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_lighter_blue"
+                android:padding="2dp"
+                visibilityGoneIfFalse="@{dbViewModel.showMoreInfoInCardView}"
+                android:layout_marginStart="8dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/itemAddress"
+                app:layout_constraintStart_toEndOf="@+id/itemAddress"
+                app:layout_constraintTop_toTopOf="@+id/itemAddress"
+                android:text="@string/more_info"/>
+            <ImageView
+                android:id="@+id/ebtIndicator"
+                visibilityGoneIfFalse="@{dbViewModel.isEbt || dbViewModel.showCattEbt}"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_ebt_sub"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/itemImage"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginHorizontal="58dp"
+                android:layout_marginBottom="2dp"
+                android:importantForAccessibility="no"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toTopOf="@id/description"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemAddress"
+                app:layout_goneMarginTop="24dp"
+                app:loadImage="@{dbViewModel.imageUrl}"
+                tools:srcCompat="@drawable/ic_card_view_empty_image" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/CustomerComment"
+                visibilityGoneIfNullOrEmpty="@{dbViewModel.customerInstruction}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="5dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{dbViewModel.customerInstruction}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemAddress"
+                tools:text="“ipsum dolor sit amet consectetur adipiscing elit ut aliquam purus sit” " />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemStatusTv"
+                style="@style/NunitoSansRegular12.Black"
+                visibilityGoneIfFalse="@{dbViewModel.hasExceptions || dbViewModel.itemComplete}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_corner_rectangle"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="@{dbViewModel.status.first}"
+                app:layout_constraintBottom_toTopOf="@+id/barrierQtyWeight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:textBackgroundTint="@{dbViewModel.status.second}"
+                tools:backgroundTint="@color/semiLighterRed"
+                tools:text="Out of Stock" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/qtyOfTotalContainer"
+                visibilityGoneIfTrue="@{dbViewModel.isDisplayType3PW}"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:background="@drawable/rounded_corner_lighter_green"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="6dp"
+                app:layout_constraintBottom_toBottomOf="@+id/itemImage"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/processedQty"
+                    style="@style/NunitoSansBold14.StrongGreen"
+                    visibilityGoneIfTrue="@{dbViewModel.isOrderedByWeight}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{dbViewModel.processedQty}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="0" />
+
+                <TextView
+                    android:id="@+id/of"
+                    style="@style/NunitoSansBold14.StrongGreen"
+                    visibilityGoneIfTrue="@{dbViewModel.isOrderedByWeight}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/item_details_of"
+                    app:layout_constraintBaseline_toBaselineOf="@id/processedQty"
+                    app:layout_constraintStart_toEndOf="@id/processedQty" />
+
+                <TextView
+                    android:id="@+id/totalQty"
+                    style="@style/NunitoSansBold14.StrongGreen"
+                    visibilityGoneIfTrue="@{dbViewModel.isOrderedByWeight}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{dbViewModel.totalQty}"
+                    app:layout_constraintBaseline_toBaselineOf="@id/processedQty"
+                    app:layout_constraintStart_toEndOf="@id/of"
+                    tools:text="4" />
+
+                <TextView
+                    android:id="@+id/weight"
+                    style="@style/NunitoSansBold14.StrongGreen"
+                    visibilityGoneIfFalse="@{dbViewModel.isOrderedByWeight}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{dbViewModel.weightString}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2 lbs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/weightIcon"
+                visibilityGoneIfFalse="@{dbViewModel.isSellByTypeWeight}"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="4dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_weighted"
+                app:layout_constraintBottom_toBottomOf="@+id/qtyOfTotalContainer"
+                app:layout_constraintStart_toEndOf="@+id/qtyOfTotalContainer"
+                app:layout_constraintTop_toTopOf="@+id/qtyOfTotalContainer" />
+
+            <ImageView
+                android:id="@+id/noBagsIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                visibilityGoneIfTrueOrNull="@{dbViewModel.isCustomerBagPreference}"
+                android:layout_marginStart="4dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_no_bags"
+                app:layout_constraintBottom_toBottomOf="@+id/qtyOfTotalContainer"
+                app:layout_constraintStart_toEndOf="@+id/weightIcon"
+                app:layout_constraintTop_toTopOf="@+id/qtyOfTotalContainer" />
+
+            <TextView
+                android:id="@+id/weightQuantityPWItem"
+                style="@style/NunitoSansBold14"
+                visibilityInvisibleIfFalse="@{dbViewModel.showWeightIndicator}"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="4dp"
+                android:background="@{dbViewModel.showError ? @drawable/rounded_corner_yellow : @drawable/rounded_corner_lighter_green}"
+                android:gravity="center"
+                android:paddingHorizontal="12dp"
+                android:textColor="@{dbViewModel.showError ? @color/grey_700 : @color/strongGreen}"
+                app:fulfilledWeight="@{dbViewModel.fulfilledWeight}"
+                app:isDisplayType3Enabled="@{dbViewModel.isDisplayType3PW}"
+                app:layout_constraintBottom_toBottomOf="@+id/noBagsIcon"
+                app:layout_constraintStart_toEndOf="@+id/noBagsIcon"
+                app:layout_constraintTop_toTopOf="@+id/noBagsIcon"
+                app:orderedWeight="@{dbViewModel.orderedWeight}"
+                app:totalWeight="@{dbViewModel.totalWeight}"
+                tools:text="0.5 of 2.5 lb" />
+
+
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierQtyWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="top"
+                app:constraint_referenced_ids="qtyOfTotalContainer,weightQuantityPWItem" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description"
+                style="@style/NunitoSansBold16.DarkBrown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
+                android:maxHeight="45dp"
+                android:text="@{dbViewModel.description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemImage"
+                tools:text="Estroven Dietary SupplementMenopause Relief...- 30 Count" />
+
+            <TextView
+                android:id="@+id/upc"
+                style="@style/NunitoSansRegular14.DarkBrown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{dbViewModel.upcOrPlu}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                tools:text="UPC: 400 800 90029" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cantFindItemText"
+                style="@style/ButtonLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{!dbViewModel.showCompletePickButton  &amp;&amp; dbViewModel.showUnpick}"
+                android:onClick="@{()->dbViewModel.onSubstituteClick()}"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="@{dbViewModel.bottomLinkCta}"
+                android:textColor="@{(dbViewModel.showCompletePickButton || !dbViewModel.showUnpick)? @color/semiLightGray : @color/semiLightBlue}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/cant_find_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

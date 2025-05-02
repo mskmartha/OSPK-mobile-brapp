@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="headerItem"
+            type="com.albertsons.acupick.ui.itemdetails.ItemActonHeaderItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setTopMargin="@{headerItem.firstItem ? @dimen/zero_dp : @dimen/twenty_four_dp}"
+        >
+
+        <TextView
+            android:id="@+id/tote_label"
+            style="@style/NunitoSansRegular12.Grey600"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tote"
+            app:layout_constraintBottom_toBottomOf="@+id/tote_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tote_name"
+            tools:text="Tote" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tote_name"
+            style="@style/NunitoSansBold14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{headerItem.toteName}"
+            app:layout_constraintStart_toEndOf="@+id/tote_label"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TTA21" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

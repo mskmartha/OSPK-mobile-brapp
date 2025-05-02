@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.picklists.PickListsBaseViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:isRefreshComplete="@{viewModel.isDataRefreshing}"
+        app:setOnRefresh="@{viewModel}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/empty_stage_image"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginTop="98dp"
+                android:src="@drawable/ic_empty_state_pick_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipView"
+                app:visibilityGoneIfFalse="@{viewModel.noPicks &amp;&amp; !viewModel.isSkeletonStateShowing()}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/noPicksTexts"
+                style="@style/NunitoSansRegular16.Grey700"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/there_are_no_picklists_available"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/empty_stage_image"
+                app:visibilityGoneIfFalse="@{viewModel.noPicks &amp;&amp; !viewModel.isSkeletonStateShowing()}"  />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                style="@style/NunitoSansRegular16.Grey700"
+                android:layout_height="40dp"
+                android:padding="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/search"
+                android:text="@={viewModel.searchQuery}"
+                visibilityGoneIfFalse="@{viewModel.isInternalBuild}"
+                tools:hint="100"
+                android:background="@drawable/rounded_corner_edittext_background_active"
+                tools:visibility="visible"/>
+
+            <HorizontalScrollView
+                android:id="@+id/chipView"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@color/white"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="0dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText2"
+                app:visibilityGoneIfTrue="@{viewModel.noPicks}">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/orderTypeChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="horizontal"
+                    app:picklistCategories="@{viewModel.picklistCategories}"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true"
+                    app:viewModel="@{viewModel}" />
+
+            </HorizontalScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/picklistsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                app:acknowledgedFlashOrderActId="@{viewModel.acknowledgedFlashOrderActId}"
+                app:isFlashOrderEnabled="@{viewModel.isFlashOrderEnabled}"
+                app:isWineOrder="@{viewModel.isWineOrder}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipView"
+                app:pickLists="@{viewModel.filteredPickList}"
+                app:viewModel="@{viewModel}"
+                tools:visibility="gone"
+                app:visibilityGoneIfTrue="@{viewModel.noPicks || viewModel.isSkeletonStateShowing}"
+                tools:listitem="@layout/item_picklist" />
+
+            <!--Todo Figure out why visibilityGoneIfFalse does not work here-->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                visibilityGoneIfTrue="@{!viewModel.isSkeletonStateShowing}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

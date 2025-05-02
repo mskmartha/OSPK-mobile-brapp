@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="status"
+            type="com.albertsons.acupick.ui.models.CustomerArrivalStatusUI" />
+
+        <variable
+            name="count"
+            type="int" />
+
+    </data>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/NunitoSansBold18.darkBrown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/coffeeLighter"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        android:text="@{status}"
+        app:section_count="@{count}"
+        tools:text="Arrived (4)" />
+
+</layout>

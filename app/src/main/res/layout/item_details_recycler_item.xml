@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.itemdetails.ItemActionDbViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/numItemsCenterGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".218" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/subCenterGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".922" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dividerGrey"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/itemCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/checkbox_button"
+            android:checked="@={viewModel.isChecked}"
+            android:enabled="@{!viewModel.checkBoxDisable}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemCount"
+            style="@style/NunitoSansBold14.DarkBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.qty}"
+            app:layout_constraintBottom_toBottomOf="@+id/itemCheck"
+            app:layout_constraintEnd_toEndOf="@id/numItemsCenterGuideline"
+            app:layout_constraintStart_toStartOf="@id/numItemsCenterGuideline"
+            app:layout_constraintTop_toTopOf="@+id/itemCheck"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/itemUpcPlu"
+            style="@style/NunitoSansRegular14.Grey600"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="126dp"
+            android:text="@{viewModel.description}"
+            app:layout_constraintBaseline_toBaselineOf="@id/itemCount"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="123456789012" />
+
+        <TextView
+            android:id="@+id/itemTote"
+            style="@style/NunitoSansBold14.DarkBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="251dp"
+            android:text="@{viewModel.tote}"
+            app:layout_constraintBaseline_toBaselineOf="@id/itemCount"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="TTA00" />
+        <!-- tools:text="-" />-->
+
+        <TextView
+            android:id="@+id/subIcon"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/rounded_text_view"
+            android:backgroundTint="@color/orange"
+            android:visibility="@{viewModel.subVisible}"
+            app:layout_constraintBottom_toBottomOf="@+id/itemCheck"
+            app:layout_constraintEnd_toEndOf="@id/subCenterGuideline"
+            app:layout_constraintStart_toStartOf="@id/subCenterGuideline"
+            app:layout_constraintTop_toTopOf="@+id/itemCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

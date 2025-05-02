@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.data.model.StorageType" />
+
+        <variable
+            name="pagerVm"
+            type="com.albertsons.acupick.ui.staging.StagingPagerViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.staging.StagingViewModel" />
+
+        <variable
+            name="fragmentViewLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <com.albertsons.acupick.ui.custom.StickyScrollView
+        android:id="@+id/stickyScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/stagingHeader"
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/headerShortOrderNumber"
+                    style="@style/NunitoSansBold20.grey600"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="@{viewModel.stagingUi.shortOrderId}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="DUG08" />
+
+                <View
+                    android:id="@+id/viewDivider"
+                    android:layout_width="1dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/grey_550"
+                    app:layout_constraintBottom_toBottomOf="@+id/headerShortOrderNumber"
+                    app:layout_constraintStart_toEndOf="@+id/headerShortOrderNumber"
+                    app:layout_constraintTop_toTopOf="@+id/headerShortOrderNumber" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/headerOrderNumber"
+                    style="@style/NunitoSansBold20.grey600"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.stagingUi.orderNumber}"
+                    app:layout_constraintStart_toEndOf="@id/viewDivider"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10042145" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/headerCustomerName"
+                    style="@style/NunitoSansSemiBold16.grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
+                    android:text="@{viewModel.stagingUi.customerName}"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toStartOf="@+id/noBagPreferenceIcon"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/headerShortOrderNumber"
+                    tools:text="Richard Carter" />
+
+                <ImageView
+                    android:id="@+id/noBagPreferenceIcon"
+                    visibilityGoneIfTrue="@{viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_no_bags"
+                    app:layout_constraintBottom_toBottomOf="@+id/headerCustomerName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/headerCustomerName"
+                    app:layout_constraintTop_toTopOf="@+id/headerCustomerName" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--  Ambient -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ambientBanner"
+                visibilityGoneIfTrue="@{viewModel.hideAmbientCard}"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@color/coffeeLighter"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stagingHeader">
+
+                <ImageView
+                    android:id="@+id/ambientImg"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_ambient"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NunitoSansBold16.grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/ambient_staging"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ambientImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ambientView"
+                visibilityGoneIfTrue="@{viewModel.hideAmbientCard}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/chilledBanner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ambientBanner"
+                app:layout_constraintVertical_bias="0">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ambientToteLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/staging_label_tote"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ambientLooseOutsideBoxLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="152dp"
+                    android:text="@string/staging_label_loose_item"
+                    app:layout_constraintStart_toEndOf="@+id/ambientToteLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ambientBagLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{!viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="98dp"
+                    android:text="@string/staging_label_bag"
+                    app:layout_constraintStart_toEndOf="@+id/ambientToteLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ambientLooseLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{!viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="98dp"
+                    android:text="@string/staging_label_loose_item"
+                    app:layout_constraintStart_toEndOf="@+id/ambientBagLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ambient_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ambientToteLabel"
+                    app:storageType="@{StorageType.AM}"
+                    app:totesList="@{viewModel.toteDbVms}"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_tote_to_bag" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--  Chilled -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chilledBanner"
+                visibilityGoneIfTrue="@{viewModel.hideChilledCard}"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@color/coffeeLighter"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ambientView">
+
+                <ImageView
+                    android:id="@+id/chilledImg"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_chilled"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NunitoSansBold16.grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/chilled_staging"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/chilledImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chilledView"
+                visibilityGoneIfTrue="@{viewModel.hideChilledCard}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chilledBanner">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/chilledToteLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/staging_label_tote"
+                    android:textColor="#535250"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/chilledLooseOutsideBoxLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="152dp"
+                    android:text="@string/staging_label_loose_item"
+                    app:layout_constraintStart_toEndOf="@+id/chilledToteLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/chilledBagLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{!viewModel.isCustomerPreferBag}"
+                    android:layout_width="23dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="98dp"
+                    android:text="@string/staging_label_bag"
+                    app:layout_constraintStart_toEndOf="@+id/chilledToteLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/chilledLooseLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{!viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="98dp"
+                    android:text="@string/staging_label_loose_item"
+                    app:layout_constraintStart_toEndOf="@+id/chilledBagLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chilled_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chilledToteLabel"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:storageType="@{StorageType.CH}"
+                    app:totesList="@{viewModel.toteDbVms}"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_tote_to_bag" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--  Frozen -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frozenBanner"
+                visibilityGoneIfTrue="@{viewModel.hideFrozenCard}"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@color/coffeeLighter"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chilledView">
+
+                <ImageView
+                    android:id="@+id/frozenImg"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_frozen"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NunitoSansBold16.grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/frozen_staging"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/frozenImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frozenView"
+                visibilityGoneIfTrue="@{viewModel.hideFrozenCard}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frozenBanner">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/frozenToteLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/staging_label_tote"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/frozenLooseOutsideBoxLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="152dp"
+                    android:text="@string/staging_label_loose_item"
+                    app:layout_constraintStart_toEndOf="@+id/frozenToteLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/frozenBagLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{!viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="98dp"
+                    android:text="@string/staging_label_bag"
+                    app:layout_constraintStart_toEndOf="@+id/frozenToteLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/frozenLooseLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{!viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="98dp"
+                    android:text="@string/staging_label_loose_item"
+                    app:layout_constraintStart_toEndOf="@+id/frozenBagLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/frozen_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frozenToteLabel"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:storageType="@{StorageType.FZ}"
+                    app:totesList="@{viewModel.toteDbVms}"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_tote_to_bag" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--  Hot -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/hotBanner"
+                visibilityGoneIfTrue="@{viewModel.hideHotCard}"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@color/coffeeLighter"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frozenView">
+
+                <ImageView
+                    android:id="@+id/hotImg"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_hot"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NunitoSansBold16.grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/hot_staging"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/hotImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/hotView"
+                visibilityGoneIfTrue="@{viewModel.hideHotCard}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hotBanner">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hotToteLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/staging_label_tote"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hotLooseOutsideBoxLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="152dp"
+                    android:text="@string/staging_label_loose_item"
+                    app:layout_constraintStart_toEndOf="@+id/hotToteLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hotBagLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{!viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="98dp"
+                    android:text="@string/staging_label_bag"
+                    app:layout_constraintStart_toEndOf="@+id/hotToteLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hotLooseLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfTrue="@{!viewModel.isCustomerPreferBag}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="98dp"
+                    android:text="@string/staging_label_loose_item"
+                    app:layout_constraintStart_toEndOf="@+id/hotBagLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hot_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hotToteLabel"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:storageType="@{StorageType.HT}"
+                    app:totesList="@{viewModel.toteDbVms}"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_tote_to_bag" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/stagingConfirmButton"
+                style="@style/ButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginHorizontal="42dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:onClick="@{_ -> pagerVm.onClickCta(viewModel.orderCompletionState, viewModel.getIncompleteStorageTypes())}"
+                app:areAllOrdersCompleted="@{pagerVm.areAllOrdersCompleted}"
+                app:isCustomerPreferBag="@{viewModel.isCustomerPreferBag}"
+                app:isLastTab="@{pagerVm.isLastTab}"
+                app:isMfc="@{pagerVm.isMfc}"
+                app:isAnyCustomerPreferNoBag="@{pagerVm.isAnyCustomerPreferNoBag}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hotView"
+                app:layout_constraintVertical_bias="0"
+                app:orderCompletionState="@{viewModel.orderCompletionState}"
+                tools:text="@string/complete_bag_count" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.albertsons.acupick.ui.custom.StickyScrollView>
+</layout>

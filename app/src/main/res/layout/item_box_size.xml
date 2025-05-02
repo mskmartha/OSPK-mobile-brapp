@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+    <variable
+        name="viewModel"
+        type="com.albertsons.acupick.ui.staging.winestaging.BoxSizeUiModel" />
+    <variable
+        name="fragmentLifecycleOwner"
+        type="androidx.lifecycle.LifecycleOwner" />
+
+</data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:boxSizeIcon="@{viewModel.boxSize}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/boxSize"
+        android:layout_marginStart="20dp" />
+    <TextView
+        android:id="@+id/boxSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon"
+        style="@style/NunitoSansSemiBold16"
+        app:boxSize="@{viewModel.boxSize}"
+        tools:text="Small"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"/>
+
+    <TextView
+        android:id="@+id/boxCapacityCopy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/boxSize"
+        app:layout_constraintStart_toEndOf="@id/icon"
+        style="@style/NunitoSansRegular16"
+        app:boxCapacity="@{viewModel.boxSize}"
+        tools:text="2-3 bottles"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/boxQuantityContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_goneMarginTop="32dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintHorizontal_bias="1"
+        android:background="@drawable/drawable_radius_4"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/boxCapacityCopy"
+        app:layout_constraintTop_toTopOf="@id/boxSize">
+
+        <ImageButton
+            android:id="@+id/capacityQuantityMinus"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_bias="0"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/plu_minus_content_description"
+            android:src="@drawable/ic_minus_disabled"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/capacityQuantityPlus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@drawable/ic_minus_disabled" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/boxCapacityQuantity"
+            style="@style/NunitoSansBold.34.Grey600"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:includeFontPadding="false"
+            android:lines="1"
+            app:layout_constraintBottom_toBottomOf="@id/capacityQuantityMinus"
+            app:layout_constraintEnd_toStartOf="@+id/capacityQuantityPlus"
+            app:layout_constraintStart_toEndOf="@+id/capacityQuantityMinus"
+            app:layout_constraintTop_toTopOf="@id/capacityQuantityMinus"
+            tools:text="2" />
+
+        <ImageButton
+            android:id="@+id/capacityQuantityPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/plu_plus_content_description"
+            android:src="@drawable/ic_plus_enabled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boxCapacityQuantity"
+            app:layout_constraintTop_toTopOf="@id/boxCapacityQuantity"
+            tools:src="@drawable/ic_plus_enabled" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/item_divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/boxQuantityContainer"
+        android:layout_marginTop="20dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

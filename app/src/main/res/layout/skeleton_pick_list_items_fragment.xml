@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_clip_to_children="true"
+        app:shimmer_direction="left_to_right"
+        app:shimmer_duration="1500"
+        app:shimmer_highlight_color="@color/disabledGrey">
+
+        <View
+            android:id="@+id/skeleton_tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/shimmer_loading_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/skeleton_item_picklist_item"
+                android:layout_width="286dp"
+                android:layout_height="387dp"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="11dp" />
+
+            <include
+                layout="@layout/skeleton_item_picklist_item"
+                android:layout_width="286dp"
+                android:layout_height="387dp"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</layout>
+

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.albertsons.acupick.ui.models.CustomerArrivalStatusUI" />
+
+        <variable
+            name="handOffUI"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffUI" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/startGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/endGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/handOffRestrictionViewGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="handOffRestrictions, handOffCheckIdLabel, idValidImage, idInValidImage" />
+
+        <View
+            android:id="@+id/handoffRestrictionsBottomView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/handOffRestrictions" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/handOffRestrictions"
+            style="@style/NunitoSansSemiBold16.verificationRed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lighterRed"
+            android:drawableStart="@drawable/ic_alert_error_red"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:minHeight="32dp"
+            android:paddingStart="11dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="11dp"
+            android:text="@string/restricted_items"
+            android:textColor="@color/verificationRed"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Restricted Items" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/handOffCheckIdLabel"
+            style="@style/NunitoSansSemiBoldItalic16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            visibilityGoneIfFalse="@{viewModel.hasRegulatedItems}"
+            android:text="@string/hand_off_check_id_text"
+            android:textColor="@color/grey_600"
+            app:layout_constraintEnd_toEndOf="@+id/endGuideline"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@id/handOffRestrictions" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/idValidImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginVertical="24dp"
+            android:clickable="true"
+            app:layout_constraintVertical_bias="0"
+            android:focusable="false"
+            visibilityGoneIfFalse="@{viewModel.hasRegulatedItems}"
+            android:focusableInTouchMode="false"
+            setValidIdBySelected="@{viewModel.isValidIdClicked}"
+            app:layout_constraintEnd_toStartOf="@+id/idInValidImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/handOffCheckIdLabel"
+            tools:src="@drawable/ic_id_valid_unselected" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/idInValidImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginVertical="24dp"
+            app:layout_constraintVertical_bias="0"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            visibilityGoneIfFalse="@{viewModel.hasRegulatedItems}"
+            setInvalidIdBySelected="@{viewModel.isInvalidIdClicked}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/idValidImage"
+            app:layout_constraintTop_toBottomOf="@+id/handOffCheckIdLabel"
+            tools:src="@drawable/ic_id_invalid_unselected" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/handOffRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:clipToPadding="false"
+                android:paddingTop="20dp"
+                app:handOffItems="@{viewModel.handOffUI.items}"
+                app:handOffViewModel="@{viewModel}"
+                app:layout_constraintTop_toBottomOf="@+id/handOffRemoveItemsLabel"
+                app:layout_constraintStart_toStartOf="@id/startGuideline"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:onRvVisible="@{viewModel.isInvalidIdClicked}"
+                app:scrollSpeed="@{1000f}"
+                app:showRvItems="@{viewModel.isInvalidIdClicked}"
+                tools:itemCount="3"
+                tools:listitem="@layout/hand_off_recycler_item" />
+            <FrameLayout
+                android:id="@+id/order_verified_message_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="8dp"
+                app:layout_goneMarginTop="0dp"
+                app:visibilityGoneIfFalse="@{viewModel.codeVerifiedOrReportLogged}"
+                app:layout_constraintTop_toBottomOf="@id/handOffRecyclerView">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/order_verified_message"
+                    style="@style/NunitoSansBold16.darkBlue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16sp"
+                    android:paddingVertical="14dp"
+                    android:gravity="start"
+                    app:isAuthCodeVerified="@{viewModel.isAuthCodeVerified}"
+                    app:authCodeIssueReported="@{viewModel.authCodeIssueReported}"
+                    tools:text="Order Verified"/>
+            </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/handOffRemoveItemsLabel"
+            style="@style/NunitoSansSemiBoldItalic16"
+            android:layout_width="0dp"
+            visibilityGoneIfFalse="@{viewModel.isInvalidIdClicked}"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/hand_off_remove_items_text"
+            android:textColor="@color/grey_600"
+            app:layout_constraintEnd_toEndOf="@+id/endGuideline"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/idValidImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

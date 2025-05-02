@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.destage.removeitems.Rejected1PLItemDbViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="@{() -> viewModel.onCheckChanged()}"
+        android:clickable="@{!viewModel.isMisplaced}"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        tools:layout_width="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/rejected_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/darkBlue"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setRejectedItemCheckBoxStates="@{viewModel.isChecked}"
+            tools:src="@drawable/ic_checkbox_unchecked_state" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_image"
+            android:layout_width="72dp"
+            android:layout_height="84dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/rejected_check"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:loadImage="@{viewModel.item.imageUrl}"
+            tools:src="@drawable/ic_list_view_empty_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalQty"
+            style="@style/NunitoSansBold12.StrongGreen"
+            visibilityGoneIfFalse="@{viewModel.showPill}"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:minWidth="28dp"
+            android:paddingHorizontal="2dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            app:isWeighted="@{viewModel.isWeighted}"
+            app:weight="@{viewModel.item.weight}"
+            app:quantity="@{viewModel.item.qty}"
+            app:layout_constraintBottom_toBottomOf="@+id/item_image"
+            app:layout_constraintStart_toStartOf="@+id/item_image"
+            android:layout_marginTop="2dp"
+            tools:text="2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/item_image"
+            app:layout_constraintStart_toEndOf="@id/item_image"
+            app:layout_constraintBottom_toBottomOf="@+id/item_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/darkBlue"
+                android:clickable="false"
+                android:gravity="center"
+                android:src="@drawable/ic_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                 />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tote_name"
+            style="@style/NunitoSansBold16.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.item.containerId}"
+            android:maxLines="2"
+            android:textColor="@color/grey_600"
+            app:layout_constraintStart_toEndOf="@+id/ic_label"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TTA - 01" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_name"
+            style="@style/NunitoSansSemiBold14.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.item.itemDesc}"
+            android:maxLines="2"
+            android:textColor="@color/grey_600"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tote_name"
+            tools:text="LaCroix Sparkling Water Cherry Lime - 8-12 Oz" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_upc"
+            style="@style/NunitoSansRegular12.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/grey_600"
+            app:itemType="@{viewModel.item.itemType}"
+            app:displayType="@{viewModel.item.displayType}"
+            app:upcOrPlu="@{viewModel.item.upcOrPlu}"
+            app:layout_constraintStart_toStartOf="@id/item_name"
+            app:layout_constraintTop_toBottomOf="@id/item_name"
+            tools:text="UPC: 400 800 9002" />
+
+
+
+        <TextView
+            android:id="@+id/markAsMisplacedCta"
+            style="@style/NunitoSansSemiBold14"
+            visibilityInvisibleIfTrue="@{viewModel.isChecked}"
+            android:clickable="@{!viewModel.isChecked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onMarkAsMisplacedClicked()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_upc"
+            app:markAsMisplacedTextAndColor="@{viewModel.isMisplaced}"
+            tools:text="@string/mark_as_misplaced"
+            tools:textColor="@color/albertsonsBlue" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

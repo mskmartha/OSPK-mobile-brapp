@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/order_verified_message_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:visibilityGoneIfFalse="@{viewModel.isAuthCodeVerified || viewModel.authCodeIssueReported}">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dugvehicleNameCL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_1_dp_card"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/authentication_code"
+                    style="@style/NunitoSansSemiBold16.grey700"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/authentication_code"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/success"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    android:importantForAccessibility="no"
+                    android:src="@{viewModel.isAuthCodeVerified ? @drawable/success : @drawable/alert}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/authentication_code"
+                    tools:src="@drawable/success" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/order_verified_message"
+                    style="@style/NunitoSansRegular14.grey700"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/order_report_logged_unavailable_code"
+                    app:authCodeIssueReported="@{viewModel.authCodeIssueReported}"
+                    app:authCodefailureReasonCode="@{viewModel.authCodeUnavailableReasonCodeFlow}"
+                    app:isAuthCodeVerified="@{viewModel.isAuthCodeVerified}"
+                    app:isRxDug="@{viewModel.isRxDugHandOff}"
+                    app:rxOrderStatus="@{viewModel.isRxDeliveryReadyForPU}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/success"
+                    app:layout_constraintTop_toTopOf="@+id/success" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </FrameLayout>
+
+</layout>

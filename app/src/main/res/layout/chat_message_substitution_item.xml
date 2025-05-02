@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="subItem"
+            type="com.albertsons.acupick.data.model.chat.SubstituteItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_substitution"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            tools:src="@color/chat_blue"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            android:background="@drawable/bg_rounded_background_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{subItem.imageUrl}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/processedQty"
+            style="@style/NunitoSansBold12.Greeen"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:background="@drawable/bg_item_quantity_rounded"
+            android:gravity="center"
+            android:minWidth="20dp"
+            android:layout_marginStart="10dp"
+            android:text="@{subItem.substitutedQuantity.toString()}"
+            app:layout_constraintBottom_toBottomOf="@+id/image_substitution"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/text_substitute_price"
+            style="@style/NunitoSansBold12.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            visibilityGoneIfFalse="@{subItem.showPrice}"
+            android:text="@{@string/dollar_format(subItem.substitutedItemPrice.toString())}"
+            app:layout_constraintStart_toEndOf="@id/image_substitution"
+            app:layout_constraintTop_toTopOf="@id/image_substitution"
+            tools:text="$9.99" />
+
+        <TextView
+            android:id="@+id/text_substitute_name"
+            style="@style/NunitoSansRegular14.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
+            android:maxLines="2"
+            android:text="@{subItem.substitutedItemDescription}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_substitution"
+            app:layout_constraintTop_toBottomOf="@id/text_substitute_price"
+            tools:text="Alfaro's Artesano Bakery Bread - 20 Oz"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

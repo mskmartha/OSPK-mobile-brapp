@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.MainActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/navSmileImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/userName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="10sp"
+                android:text="N. Richardson"
+                android:fontFamily="@font/nunito_sans_regular"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/navSmileImg"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickHistoryTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/pick_history"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="64dp"
+            app:layout_constraintTop_toBottomOf="@+id/nav_header"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/signOutTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:textColor="@color/colorPrimaryDark"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:text="@string/sign_out"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="67dp"
+            android:onClick="@{() -> viewModel.manualLogout()}"
+            app:layout_constraintTop_toBottomOf="@+id/pickHistoryTv"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Widget.Custom.NavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:letterSpacing=".09"
+            android:lineSpacingExtra="12sp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/version_number_text"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom"
+            android:textSize="12sp"
+            app:showAppVersion="@{true}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Version 00.00.00"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

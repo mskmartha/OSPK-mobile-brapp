@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.BulkSubstituteConfirmationViewModel" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <variable
+            name="lifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_top_corners_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="56dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bottomSheetHeading"
+            style="@style/PopinsMedium20.DarkBrown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@{viewData.title}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/handle"
+            app:layout_goneMarginTop="12dp"
+            tools:text="Select the variant picked"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/subRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:bulkSubstitutionItems="@{viewModel.bulkSubList}"
+            app:layout_constraintBottom_toTopOf="@id/bottomContainer"
+            app:layout_constraintTop_toBottomOf="@+id/bottomSheetHeading"
+            tools:listitem="@layout/bulk_item_substitution" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bottomContainer"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:minHeight="100dp"
+            android:orientation="vertical"
+            app:cardElevation="16dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/confirmButton"
+                    style="@style/ButtonPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="48dp"
+                    android:layout_marginTop="24dp"
+                    android:enabled="@{viewModel.isConfirmEnabled}"
+                    android:onClick="@{()-> viewModel.onConfirmButtonClick()}"
+                    android:text="@{viewData.positiveButtonText}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Confirm"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/anotherSubstitution"
+                    style="@style/ButtonLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:onClick="@{()->viewModel.onCancel()}"
+                    android:text="@{viewData.negativeButtonText}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/confirmButton"
+                    tools:text="Cancel" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibilityGoneIfFalse="@{isLoading}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

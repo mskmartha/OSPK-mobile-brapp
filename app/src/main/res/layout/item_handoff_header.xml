@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.albertsons.acupick.ui.models.CustomerArrivalStatusUI" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/userInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="4dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/startGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/endGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickupCustomerName"
+            style="@style/NunitoSansBold20.grey600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{viewModel.handOffUI.name}"
+            app:layout_constraintEnd_toStartOf="@+id/ivRegulatedItem"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="wrap"
+            tools:text="Justin Herbet" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/handoffFulfillmentType"
+            style="@style/NunitoSansRegular16.Grey600"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.handOffUI.orderType}"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@id/pickupCustomerName"
+            tools:text="DUG-108" />
+
+        <View
+            android:id="@+id/dividerOrderDetails"
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/grey_550"
+            app:layout_constraintBottom_toBottomOf="@id/handoffFulfillmentType"
+            app:layout_constraintStart_toEndOf="@+id/handoffFulfillmentType"
+            app:layout_constraintTop_toTopOf="@+id/handoffFulfillmentType" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/handoffOrderNo"
+            style="@style/NunitoSansRegular16.Grey600"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{`#` + viewModel.handOffUI.orderNumber}"
+            app:layout_constraintStart_toEndOf="@+id/dividerOrderDetails"
+            app:layout_constraintTop_toBottomOf="@id/pickupCustomerName"
+            app:layout_constraintWidth_default="wrap"
+            tools:text="#04280018" />
+
+        <ImageView
+            android:id="@+id/ivGift"
+            visibilityGoneIfFalse="@{viewModel.handOffUI.isGiftLabelPrinted}"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_gift_wrapped"
+            app:layout_constraintBottom_toBottomOf="@+id/handoffOrderNo"
+            app:layout_constraintStart_toEndOf="@+id/handoffOrderNo"
+            app:layout_constraintTop_toTopOf="@+id/handoffOrderNo" />
+
+        <ImageView
+            android:id="@+id/ivRegulatedItem"
+            visibilityGoneIfFalse="@{viewModel.hasRegulatedItems}"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_regulated_item_warning"
+            app:layout_constraintBottom_toBottomOf="@+id/handoffOrderNo"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/ivGift"
+            app:layout_constraintTop_toTopOf="@+id/handoffOrderNo" />
+
+        <ImageView
+            android:id="@+id/pharmacyIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            visibilityGoneIfTrue="@{!viewModel.isRxDugHandOff || !viewModel.hasPharmacyServicingOrders}"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_rx"
+            app:layout_constraintStart_toEndOf="@+id/ivRegulatedItem"
+            app:layout_constraintTop_toTopOf="@+id/handoffOrderNo" />
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/view_order_summary"
+            style="@style/NunitoSansSemiBold14"
+            visibilityGoneIfFalse="@{viewModel.isCctEnabled}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.5dp"
+            android:layout_marginBottom="4dp"
+            android:onClick="@{() -> viewModel.onViewOrderSummaryClicked()}"
+            android:text="@string/view_order_smummary"
+            android:textColor="@color/cattBlue"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/handoffFulfillmentType"
+            app:layout_constraintVertical_bias="0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/toteCount"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfFalse="@{viewModel.showToteCount}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_tote"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@{viewModel.toteCount}"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/view_order_summary"
+            tools:text="7" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bagCount"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfFalse="@{viewModel.showBagCount}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_bag"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@{viewModel.bagCount}"
+            app:layout_constraintStart_toEndOf="@+id/toteCount"
+            app:layout_constraintTop_toBottomOf="@+id/view_order_summary"
+            app:layout_goneMarginStart="0dp"
+            tools:text="10" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/looseCount"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfFalse="@{viewModel.showLooseItemCount}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_loose"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@{viewModel.looseItemCount}"
+            app:layout_constraintStart_toEndOf="@+id/bagCount"
+            app:layout_constraintTop_toBottomOf="@+id/view_order_summary"
+            app:layout_goneMarginStart="0dp"
+            tools:text="1" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierContainerType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="bagCount, looseCount, toteCount" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/view_bags_cta"
+            style="@style/NunitoSansSemiBold14"
+            visibilityGoneIfFalse="@{viewModel.isCattEnabled}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.5dp"
+            android:layout_marginBottom="4dp"
+            android:onClick="@{() -> viewModel.onViewBagsPerViewModelClicked()}"
+            android:text="@string/view_details"
+            android:textColor="@color/cattBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/barrierContainerType"
+            app:layout_constraintVertical_bias="0" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ebtImage"
+            visibilityGoneIfFalse="@{viewModel.isCattEnabled}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/endGuideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/catt_bag" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderCount"
+            style="@style/NunitoSansBold12.Grey700"
+            visibilityGoneIfFalse="@{viewModel.isCattEnabled}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{@string/customer_orders(viewModel.createdOrders)}"
+            app:layout_constraintEnd_toEndOf="@+id/ebtImage"
+            app:layout_constraintStart_toStartOf="@+id/ebtImage"
+            app:layout_constraintTop_toBottomOf="@+id/ebtImage"
+            tools:text="15 OREDERS!" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

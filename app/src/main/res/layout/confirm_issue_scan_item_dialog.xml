@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/rounded_coener_dialog_background"
+        android:minWidth="311dp"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="32dp">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            style="@style/PoppinsMedium20.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="56dp"
+            android:text="@{viewData.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Model Header" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/body"
+            style="@style/NunitoSansRegular16.grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{viewData.body}"
+            android:visibility="@{viewData.bodyVisibility}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="Before you proceed is this the exact same item you are trying to scan?." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ordered_item_title"
+            style="@style/NunitoSansSemiBold12.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:maxLines="2"
+            android:text="@string/ordered_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/body"
+            tools:text="Ordered item" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_image"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ordered_item_title"
+            app:loadImage="@{viewData.imageUrl}"
+            tools:src="@drawable/ic_list_view_empty_image" />
+
+        <TextView
+            android:id="@+id/totalQty"
+            style="@style/NunitoSansBold12.StrongGreen"
+            visibilityGoneIfTrue="@{viewData.isOrderedByWeight}"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/item_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:totalQuantity="@{viewData.remainingOrderedQuantity}"
+            app:remainingWeight="@{viewData.remainingWeight}"
+            tools:text="4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_name"
+            style="@style/NunitoSansSemiBold14.grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:maxLines="2"
+            android:text="@{viewData.secondaryBody}"
+            app:layout_constraintBottom_toBottomOf="@+id/item_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_image"
+            app:layout_constraintTop_toTopOf="@+id/item_image"
+            tools:text="This is Item name text ." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_text_link"
+            style="@style/NunitoSansBold12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/cattBlue"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/item_image"
+            app:layout_constraintTop_toBottomOf="@+id/item_PLU"
+            app:layout_constraintVertical_bias="0" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/positiveButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+            android:text="@{viewData.positiveButtonText}"
+            android:visibility="@{viewData.positiveButtonVisibility}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_image"
+            tools:text="Positive CTA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/negativeButton"
+            style="@style/ButtonLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@null"
+            android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+            android:text="@{viewData.negativeButtonText}"
+            android:visibility="@{viewData.negativeButtonVisibility}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/positiveButton"
+            tools:text="Negative CTA" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

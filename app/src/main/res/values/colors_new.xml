@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="semiLightOrange">#F69E37</color>
+    <color name="semiDarkRed">#C74E4E</color>
+    <color name="coffeeLight">#F1F0EE</color>
+    <color name="coffeeLighter">#FAF9F8</color>
+    <color name="coffeeGrey700">#535250</color>
+    <color name="navyBlue600">#0D2D49</color>
+    <color name="semiLightGreen">#C4E4AE</color>
+    <color name="lighterGreen">#EEF4EB</color>
+    <color name="strongGreen">#008000</color>
+    <color name="semiLightRed">#F9EFE1</color>
+    <color name="semiLighterRed">#FFCBBB</color>
+    <color name="darkBrown">#2A2928</color>
+    <color name="lightAqua">#BAE4FC</color>
+    <color name="lighterBlue">#E8F2FA</color>
+    <color name="lightOrange">#FCDAB6</color>
+    <color name="darkOffBlue">#2C2A29</color>
+    <color name="darkerGreen">#85C756</color>
+    <color name="darkAqua">#7AB9F4</color>
+    <color name="mustard">#F6BD67</color>
+    <color name="strokeColorGrey">#EDEAE9</color>
+
+    <color name="divider_color">#DDD9D5</color>
+    <color name="lightCoffeeGray">#DDD9D5</color>
+    <color name="lightPurple">#E1DDEE</color>
+    <color name="darkerGray">#6E6E6D</color>
+
+    <!--    Tabs Color-->
+    <color name="tab_indicator_color">#2A2928</color>
+    <color name="tab_text_color_deselected">#AFAEAC</color>
+
+    <!--Side Navigation View color-->
+    <color name="navBgColor">#FAF9F8</color>
+    <color name="light_red">#FAD49E</color>
+    <color name="doveLight">#B3D3EB</color>
+</resources>

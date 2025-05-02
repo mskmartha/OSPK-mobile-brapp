@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notification"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/notification_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/notification_picker_joined" />
+
+    <TextView
+        android:id="@+id/notification_title"
+        android:textAppearance="@style/NunitoSansBold16.SemiBlue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:letterSpacing="0.01"
+        android:layout_toStartOf="@+id/notification_icon"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/notification_text"
+        android:textAppearance="@style/NunitoSansRegular16.Grey700"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notification_title"
+        android:layout_alignStart="@+id/notification_title"
+        android:layout_marginTop="8dp"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="2sp"
+        android:layout_marginEnd="24dp"
+        android:layout_toStartOf="@+id/notification_icon"
+        tools:text="Text" />
+
+</RelativeLayout>

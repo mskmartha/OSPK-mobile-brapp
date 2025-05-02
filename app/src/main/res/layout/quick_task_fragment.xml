@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="android.view.View" />
+
+        <variable
+            name="fragmentLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.swapsubstitution.QuickTaskBaseViewModel" />
+
+        <import type="com.albertsons.acupick.ui.swapsubstitution.QuickTaskCategories" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:isRefreshComplete="@{viewModel.isDataRefreshing}"
+        app:setOnRefresh="@{viewModel}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/emptyStateView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundGrey"
+                app:visibilityGoneIfFalse="@{viewModel.emptyView &amp;&amp; !viewModel.isSkeletonStateShowing()}">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/emptyViewStateImage"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/empty_basket"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="79dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/emptyViewStateLabel"
+                    style="@style/NunitoSansRegular16.Grey700"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="77dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="77dp"
+                    android:text="@{viewModel.quickTaskCategory==QuickTaskCategories.MY_ITEM ? @string/empty_view_state_label_my_shoppers_item : @string/empty_view_state_label_other_shoppers_item }"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/emptyViewStateImage"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/quickTaskItemsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                app:fragmentLifecycleOwner="@{fragmentLifecycleOwner}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:swapSubItems="@{viewModel.swapSubstitutionList}"
+                app:visibilityGoneIfTrue="@{viewModel.emptyView || viewModel.isSkeletonStateShowing}"
+                app:viewodel="@{viewModel}" />
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                visibilityGoneIfTrue="@{!viewModel.isSkeletonStateShowing}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.albertsons.acupick.ui.models.CustomerArrivalStatusUI" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffViewModel" />
+
+        <variable
+            name="fragmentLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/topView"
+            layout="@layout/hand_off_header"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:fragmentLifecycleOwner="@{fragmentLifecycleOwner}"
+            app:layout_constraintBottom_toTopOf="@+id/barrierBottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewModel="@{viewModel}" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="authenticatedDugLayout, bottomView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/authenticatedDugLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingVertical="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/removeItemsFooter"
+                visibilityGoneIfFalse="@{viewModel.showRemoveItemsCta}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:elevation="16dp"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/removeItems"
+                    style="@style/ButtonPrimary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="48dp"
+                    android:onClick="@{() -> viewModel.removeItemsClicked()}"
+                    android:padding="8dp"
+                    android:text="@string/items_removed_cta"
+                    android:textAlignment="center"
+                    app:enabled="@{viewModel.removeItemsCtaEnabled}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/cancel"
+                    style="@style/NunitoSansBold16.SemiBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:onClick="@{() -> viewModel.removeItemsCanceled()}"
+                    android:text="@string/cancel"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/removeItems"
+                    app:layout_constraintStart_toStartOf="@+id/removeItems"
+                    app:layout_constraintTop_toBottomOf="@+id/removeItems" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/authCodeUnavailableCta"-->
+            <!--                style="@style/NunitoSansRegular14"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:layout_marginBottom="12dp"-->
+            <!--                android:onClick="@{() -> viewModel.onAuthCodeUnavailableCtaClicked()}"-->
+            <!--                android:text="@string/code_unavailable"-->
+            <!--                android:textAlignment="center"-->
+            <!--                android:textColor="@color/darkBlue"-->
+            <!--                app:availabilityCtaState="@{viewModel.handOffVerificationState}"-->
+            <!--                app:isAuthDUGEnabled="@{viewModel.isAuthDugEnabled &amp;&amp; viewModel.isDugOrder()}"-->
+            <!--                app:isUnavailableCtaEnabled="@{viewModel.isCodeUnavailableButtonShown}"-->
+            <!--                app:layout_constraintBottom_toTopOf="@+id/verifyCodeButton"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/verifyCodeButton"
+                style="@style/ButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="48dp"
+                android:enabled="true"
+                android:onClick="@{() -> viewModel.verifyCtaClicked()}"
+                android:text="@string/verify_code"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibilityGoneIfFalse="@{viewModel.verifyCodeVisibility}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomSheetHeader"
+            visibilityGoneIfFalse="@{viewModel.isDugBottomSheetVisible}"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="1dp"
+            android:background="@color/white"
+            android:elevation="16dp"
+            android:onClick="@{() -> viewModel.onBottomSheetHeaderClicked()}"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/bottomSheetHeaderText"
+                style="@style/NunitoSansBold16.darkBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/complete_handoff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/collapseExpandIcon"
+                android:layout_width="@dimen/standard_icon"
+                android:layout_height="@dimen/standard_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setDrawableByExpanded="@{true}"
+                tools:src="@drawable/ic_expand" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/bottomView"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:visibilityGoneIfFalse="@{viewModel.showCompleteCta || viewModel.rxRemoveItemsCta}"
+            tools:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/completeButton"
+            style="@style/ButtonPrimary"
+            handoffUiState="@{viewModel.handOffVerificationState}"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="48dp"
+            android:enabled="@{viewModel.isCompleteEnabled}"
+            android:onClick="@{() -> viewModel.onCompleteClicked()}"
+            app:customerCount="@{viewModel.customerCount}"
+            app:customerIndex="@{viewModel.customerIndex}"
+            app:is3p="@{viewModel.is3p}"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomView"
+            app:layout_constraintEnd_toEndOf="@+id/bottomView"
+            app:layout_constraintStart_toStartOf="@+id/bottomView"
+            app:layout_constraintTop_toTopOf="@+id/bottomView"
+            app:visibilityGoneIfFalse="@{viewModel.showCompleteCta}"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rxItemRemovalButton"
+            style="@style/ButtonPrimary"
+            visibilityGoneIfFalse="@{viewModel.rxRemoveItemsCta}"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="48dp"
+            android:enabled="@{viewModel.removeItemsCtaEnabled}"
+            android:onClick="@{() -> viewModel.onCompleteClicked()}"
+            app:hasDugRegulatedItems="@{viewModel.hasRegulatedItems}"
+            handoffUiState="@{viewModel.handOffVerificationState}"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomView"
+            app:layout_constraintEnd_toEndOf="@+id/bottomView"
+            app:layout_constraintStart_toStartOf="@+id/bottomView"
+            app:layout_constraintTop_toTopOf="@+id/bottomView"
+            app:rxDugEnabled="@{viewModel.isRxDugHandOff()}"
+            tools:visibility="visible" />
+
+        <include
+            layout="@layout/hand_off_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isCancelled="@{viewModel.isCancelled}"
+            app:visibilityGoneIfTrue="@{!viewModel.isOverlayVisible}"
+            tools:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

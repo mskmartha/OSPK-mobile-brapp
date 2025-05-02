@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dbViewModel"
+            type="com.albertsons.acupick.ui.picklists.PickListDbViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bordered_flash_acknowledge"
+        android:onClick="@{() -> dbViewModel.onPickerItemClick()}"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        app:isAcceptedFlashOrder="@{dbViewModel.acknowledgedFlashOrder}"
+        tools:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickInfoTv"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:dueDayLabel="@{dbViewModel.dueDay}"
+            app:layout_constraintEnd_toStartOf="@+id/orderSpeedPill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fullFillmentType"
+            style="@style/NunitoSansRegular14.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            app:onePLvanNumber="@{dbViewModel.vanNumber}"
+            app:isBatchOrder="@{dbViewModel.isBatch}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:updateFulfillment="@{dbViewModel.fulfillment}"
+            tools:drawableEnd="@drawable/ic_fullfillment_dug"
+            tools:drawablePadding="5dp"
+            tools:text="C3" />
+
+        <com.albertsons.acupick.ui.custom.OrderSpeedView
+            android:id="@+id/orderSpeedPill"
+            visibilityGoneIfFalse="@{!dbViewModel.hideOrderSpeedPill}"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reshopTv"
+            app:orderTypeIcon="@{dbViewModel.orderType}"
+            app:orderTypeText="@{dbViewModel.orderSpeedPillText}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/reshopTv"
+            style="@style/RoundedPill.LightOrange"
+            visibilityGoneIfNull="@{dbViewModel.redBadgeText}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{dbViewModel.redBadgeText}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fullFillmentType"
+            app:textBackgroundTint="@{dbViewModel.badgeColor}"
+            tools:text="Reshop" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderTypePillTv"
+            style="@style/RoundedPill.LightAqua"
+            visibilityGoneIfFalse="@{dbViewModel.isPartnerPickOrder}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/partnerpick_order"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderSpeedPill"
+            tools:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickTimeTv"
+            style="@style/PoppinsMedium36.Grey700"
+            visibilityGoneIfFalse="@{!dbViewModel.hideTimer}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-4dp"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@+id/pickTimeFormatTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickInfoTv"
+            app:setFormattedDate="@{dbViewModel.endTime}"
+            tools:text="12:15" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/prepickTimeTv"
+            style="@style/PoppinsMedium32.Grey700"
+            visibilityGoneIfFalse="@{dbViewModel.hideTimer}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-4dp"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickInfoTv"
+            app:setDueDay="@{dbViewModel.dueDay}"
+            tools:text="5 days" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickTimeFormatTv"
+            style="@style/PoppinsMedium28.Grey700"
+            visibilityGoneIfFalse="@{!dbViewModel.hideTimer}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:foregroundGravity="left"
+            android:gravity="bottom"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@+id/pickTimeTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pickTimeTv"
+            app:layout_constraintTop_toTopOf="@+id/pickTimeTv"
+            app:setFormattedDateAmPm="@{dbViewModel.endTime}"
+            tools:text="PM" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/estPickTimeTV"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Est pick time: 9 min" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemCountTv"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@{dbViewModel.totalItemCountString + ` ` + dbViewModel.totalItemsPluralString}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estPickTimeTV"
+            tools:text="14 items" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/hzImg"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_hot"
+            app:layout_constraintBottom_toBottomOf="@+id/itemCountTv"
+            app:layout_constraintStart_toStartOf="@+id/fzImg"
+            app:layout_constraintTop_toTopOf="@+id/itemCountTv"
+            app:layout_goneMarginStart="8dp"
+            app:visibilityGoneIfTrue="@{!dbViewModel.hotActive}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fzImg"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_frozen"
+            app:layout_constraintBottom_toBottomOf="@+id/itemCountTv"
+            app:layout_constraintStart_toStartOf="@+id/chImg"
+            app:layout_constraintTop_toTopOf="@+id/itemCountTv"
+            app:layout_goneMarginStart="8dp"
+            app:visibilityGoneIfTrue="@{!dbViewModel.frozenActive}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/chImg"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_chilled"
+            app:layout_constraintBottom_toBottomOf="@+id/itemCountTv"
+            app:layout_constraintStart_toStartOf="@+id/amImg"
+            app:layout_constraintTop_toTopOf="@+id/itemCountTv"
+            app:layout_goneMarginStart="8dp"
+            app:visibilityGoneIfTrue="@{!dbViewModel.coldActive}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/amImg"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_ambient"
+            app:layout_constraintBottom_toBottomOf="@+id/itemCountTv"
+            app:layout_constraintStart_toEndOf="@+id/itemCountTv"
+            app:layout_constraintTop_toTopOf="@+id/itemCountTv"
+            app:visibilityGoneIfTrue="@{!dbViewModel.ambientActive}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/customerNameOrOrderCountTv"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            app:customerNameOrOrderCount="@{dbViewModel.customerName}"
+            app:isBatchOrder="@{dbViewModel.isBatch}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@+id/ebtCircle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemCountTv"
+            app:orderCount="@{dbViewModel.orderCount}"
+            tools:text="N. Radhakrishn..." />
+
+        <ImageView
+            android:id="@+id/ebtCircle"
+            visibilityGoneIfFalse="@{dbViewModel.isEbt}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_ebt_sub"
+            app:layout_constraintBottom_toBottomOf="@+id/customerNameOrOrderCountTv"
+            app:layout_constraintEnd_toStartOf="@+id/barrierCustomerNameEbt"
+            app:layout_constraintStart_toEndOf="@+id/customerNameOrOrderCountTv"
+            app:layout_constraintTop_toTopOf="@+id/customerNameOrOrderCountTv" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierCustomerNameEbt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="customerNameOrOrderCountTv,ebtCircle" />
+
+        <View
+            android:id="@+id/customerOrderNumberDivider"
+            visibilityGoneIfFalse="@{!dbViewModel.isBatch}"
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="8dp"
+            android:background="#7D7B78"
+            app:layout_constraintBottom_toBottomOf="@+id/customerNameOrOrderCountTv"
+            app:layout_constraintStart_toEndOf="@+id/barrierCustomerNameEbt"
+            app:layout_constraintTop_toTopOf="@+id/customerNameOrOrderCountTv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/customerOrderNumber"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfFalse="@{!dbViewModel.isBatch}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:includeFontPadding="false"
+            android:text="@{dbViewModel.customerOrderNumber}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@+id/associateName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/customerOrderNumberDivider"
+            app:layout_constraintTop_toBottomOf="@+id/itemCountTv"
+            tools:text="#10042145" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#F1F0EE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/customerNameOrOrderCountTv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/associateName"
+            style="@style/NunitoSansRegular14.Grey700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@{dbViewModel.associateName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemCountTv"
+            tools:text="Abcdefghijk... S." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dbViewModel"
+            type="com.albertsons.acupick.ui.storelist.StoreDbViewModel" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/itemStoreCardView"
+        isSelected="@{dbViewModel.selected}"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:focusable="true"
+        android:onClick="@{() -> dbViewModel.onStoreClicked()}">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            style="@style/RadioButtonPrimary"
+            android:checked="@{dbViewModel.selected}"
+            android:clickable="false"
+            android:minWidth="0dp"
+            android:minHeight="0dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/storeNo"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:focusable="false"
+            android:text="@{@string/store_format(dbViewModel.storeNo)}"
+            tools:text="Store #1001" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

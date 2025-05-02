@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dbViewModel"
+            type="com.albertsons.acupick.ui.substitute.BulkSubstitutionDbViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
+        android:onClick="@{v -> dbViewModel.onClick(dbViewModel.bulkItem)}"
+        android:background="@color/white"
+        android:paddingBottom="16dp">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/substituteItemRadioButton"
+            style="@style/RadioButtonPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:checked="@{dbViewModel.selected}"
+            android:clickable="false"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/substituteItemImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="@+id/substituteItemRadioButton"
+            app:layout_constraintStart_toEndOf="@+id/substituteItemRadioButton"
+            app:layout_constraintTop_toTopOf="@+id/substituteItemRadioButton"
+            app:loadImage="@{dbViewModel.imageUrl}"
+            tools:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/substituteDescription"
+            style="@style/NunitoSansSemiBold14.Grey700"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:text="@{dbViewModel.title}"
+            app:layout_constraintStart_toEndOf="@+id/substituteItemImage"
+            app:layout_constraintTop_toTopOf="@+id/substituteItemImage"
+            tools:text="Bakery Fresh Sugar Donut" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/scannedWeight"
+            style="@style/NunitoSansSemiBold12.Grey700"
+            visibilityGoneIfFalse="@{dbViewModel.isSystemSuggested}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_corner_rectangle"
+            android:backgroundTint="@color/semiLightRed"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="@string/system_suggested"
+            app:layout_constraintStart_toEndOf="@+id/substituteItemImage"
+            app:layout_constraintTop_toBottomOf="@+id/substituteDescription"
+            tools:text="System suggested" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/suggestionType"
+            style="@style/NunitoSansRegular12.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_corner_light_red"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="@string/substitute_suggested_header_customer_chosen"
+            visibilityGoneIfFalse="@{dbViewModel.isCustomerChoosen}"
+            app:layout_constraintStart_toEndOf="@+id/substituteItemImage"
+            app:layout_constraintTop_toBottomOf="@+id/substituteDescription"
+            tools:text="Customer choice" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

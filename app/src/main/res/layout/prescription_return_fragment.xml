@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/handOffLayout"
+            visibilityGoneIfFalse="@{viewModel.showPrescritonReturned}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/pharmacyIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/pharmacy1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/statusMessage"
+                style="@style/PopinsBold28.DarkBrown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/pharmacy_return_prescription_header"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pharmacyIcon" />
+
+           <!-- <FrameLayout
+                android:id="@+id/handoffCompleteIcon"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/darkBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone">
+
+                <View
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:foreground="@drawable/ic_check"
+                    android:foregroundTint="@color/white" />
+            </FrameLayout>-->
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/backToHomeButton"
+                style="@style/ButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginHorizontal="48dp"
+                android:layout_marginBottom="32dp"
+                android:enabled="@{viewModel.isBackToHomeButtonEnable}"
+                android:onClick="@{() -> viewModel.backToArrivalOrHomeScreen()}"
+                android:text="@string/back_to_home"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/svPrescriptionReturn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            visibilityGoneIfTrue="@{viewModel.showPrescritonReturned}"
+            app:layout_constraintBottom_toTopOf="@+id/staff_required"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/topView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/shortOrderNumber"
+                        style="@style/NunitoSansBold20.grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:includeFontPadding="false"
+                        android:text="@{viewModel.shortOrderNumber}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="DUG08" />
+
+                    <View
+                        android:id="@+id/viewDivider"
+                        android:layout_width="1dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/grey_550"
+                        app:layout_constraintBottom_toBottomOf="@+id/shortOrderNumber"
+                        app:layout_constraintStart_toEndOf="@+id/shortOrderNumber"
+                        app:layout_constraintTop_toTopOf="@+id/shortOrderNumber" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/headerOrderNumber"
+                        style="@style/NunitoSansBold20.grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:includeFontPadding="false"
+                        android:text="@{`#` + viewModel.customerOrderNumber}"
+                        app:layout_constraintStart_toEndOf="@id/viewDivider"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="10042145" />
+
+                    <ImageView
+                        android:id="@+id/rxImg1"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_rx"
+                        app:layout_constraintStart_toEndOf="@+id/headerOrderNumber"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/headerCustomerName"
+                        style="@style/NunitoSansSemiBold16.grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{viewModel.contactName}"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shortOrderNumber"
+                        tools:text="Richard Carter" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/rxOrdersLabelText"
+                        style="@style/NunitoSansRegular12.coffeGray700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@{viewModel.rxOrdersLabelText}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/headerCustomerName"
+                        tools:text="RX orders (8)"
+                        tools:visibility="visible" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/flRxOrderPrescriptions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rxOrdersLabelText"
+                        tools:visibility="visible">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rxOrderPrescriptions"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:clipToPadding="false"
+                            android:fadeScrollbars="false"
+                            android:nestedScrollingEnabled="false"
+                            android:scrollbarSize="3dp"
+                            android:scrollbars="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_max="138dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:prescriptionListUi="@{viewModel.prescriptionListUi}"
+                            tools:itemCount="5"
+                            tools:listitem="@layout/item_rx_prescription_return" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/rxBanner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@color/coffeeLighter"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/topView"
+                    app:layout_goneMarginTop="0dp">
+
+                    <ImageView
+                        android:id="@+id/rxImg"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_rx"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/NunitoSansBold16.grey700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/rx_staging"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rxImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rxLocationLabel"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/location_label"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rxBanner" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/no_location_scanned"
+                    style="@style/NunitoSansRegular16.grey700"
+                    visibilityGoneIfFalse="@{viewModel.showNoLocationScanned}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:text="@string/no_location_scanned"
+                    app:layout_constraintStart_toStartOf="@+id/rxLocationLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/rxLocationLabel"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/label"
+                    layout="@layout/item_scanned_pharmacy_bag"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingBottom="4dp"
+                    app:count="@{viewModel.totalScannedItems}"
+                    app:isVisible="@{false}"
+                    app:label="@{viewModel.arrivalLabelText}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rxLocationLabel"
+                    app:totalCount="@{viewModel.totalBagCount}"
+                    app:visibilityGoneIfTrue="@{!viewModel.hasArrivalLabel}"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rxLabelPlaceholder"
+                    style="@style/NunitoSansSemiBold12.grey550"
+                    visibilityGoneIfFalse="@{viewModel.hasArrivalLabel}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/label_label"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/no_return_barcode_scanned"
+                    style="@style/NunitoSansRegular16.grey700"
+                    visibilityGoneIfFalse="@{viewModel.showNoReturnBarcodeScanned}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:text="@string/no_return_barcode_scanned"
+                    app:layout_constraintStart_toStartOf="@+id/rxLabelPlaceholder"
+                    app:layout_constraintTop_toBottomOf="@+id/rxLabelPlaceholder"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/label2"
+                    layout="@layout/item_scanned_pharmacy_bag"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:count="@{viewModel.totalScannedItems}"
+                    app:isVisible="@{true}"
+                    app:label="@{viewModel.returnLabelText}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rxLabelPlaceholder"
+                    app:totalCount="@{viewModel.totalBagCount}"
+                    app:visibilityGoneIfTrue="@{!viewModel.hasReturnLabel}"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/staff_required"
+            visibilityGoneIfFalse="@{viewModel.showPharmacyStaffRequired}"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="72dp"
+            android:backgroundTint="@color/warm_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeColor="@color/doveLight"
+            app:strokeWidth="1dp"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_info"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@drawable/ic_info" />
+
+                <TextView
+                    android:id="@+id/message"
+                    style="@style/NunitoSansRegular14.Grey700"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/pharmacy_staff_required"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/pharmacy_staff_required" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cta"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> viewModel.onCompleteClicked()}"
+            android:text="@string/pharmacy_return_prescription"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:visibilityGoneIfFalse="@{viewModel.showCompleteCta}" />
+
+        <com.albertsons.acupick.ui.custom.AcuPickPromptSnackBar
+            android:id="@+id/promptBar"
+            visibilityGoneIfTrue="@{viewModel.hideStaticPrompt}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionVisible="@{!viewModel.hideStaticPrompt}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1"
+            app:setSnackbarAction="@{viewModel.snackbarEvent}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.storelist.StoresViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchTextInputContainer"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/searchTextInputEditText"
+                style="@style/NunitoSansRegular16.Grey700"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_searchbox_state_selector"
+                android:digits="0123456789"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="11dp"
+                android:hint="@string/change_store_search_hint"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="19dp"
+                android:text="@={viewModel.searchText}"
+                android:textColorHint="@color/coffeeGrey700"
+                android:textCursorDrawable="@drawable/cursor_dark_grey" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icSearchClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="17dp"
+                android:onClick="@{()->viewModel.onSearchClearClick()}"
+                android:src="@drawable/ic_search_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibilityGoneIfFalse="@{viewModel.searchText.length() > 0}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sectionHeader"
+            style="@style/NunitoSansBold16.grey700"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:text="@string/change_store_section_header"
+            app:layout_constraintTop_toBottomOf="@id/searchTextInputContainer" />
+
+        <com.albertsons.acupick.ui.custom.AcuPickRecyclerView
+            android:id="@+id/storesRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottomContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sectionHeader"
+            app:showScrollIndicator="top"
+            app:stores="@{viewModel.filteredStores}"
+            app:viewModel="@{viewModel}"
+            tools:listitem="@layout/item_store" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/noPicks"
+            style="@style/NunitoSansRegular14.Grey700"
+            visibilityGoneIfFalse="@{viewModel.filteredStores.isEmpty()}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/no_stores_match_search"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageSearchNA" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageSearchNA"
+            visibilityGoneIfFalse="@{viewModel.filteredStores.isEmpty()}"
+            android:layout_width="121dp"
+            android:layout_height="121dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_search_na"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sectionHeader" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bottomContainer"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            app:cardElevation="16dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/confirmButton"
+                style="@style/ButtonPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:enabled="@{viewModel.confirmActive}"
+                android:onClick="@{() -> viewModel.onConfirmClick()}"
+                android:text="@string/confirm" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

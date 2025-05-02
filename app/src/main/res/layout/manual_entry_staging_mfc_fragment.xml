@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.manualentry.handoff.ManualEntryStagingMfcViewModel" />
+
+        <variable
+            name="entryParams"
+            type="com.albertsons.acupick.ui.manualentry.ManualEntryStagingUi" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ScrollView
+            android:id="@+id/manualScroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/continueButton"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <com.albertsons.acupick.ui.util.CustomTextInput
+                    android:id="@+id/customerOrderNumberTI"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"
+                    app:errorDrawable="@{@drawable/ic_red_warning}"
+                    app:errorTextResId="@{viewModel.orderNumberTextInputError}"
+                    app:hint="@{@string/manual_order_num_hint}"
+                    app:isEnabled="@{false}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:typedText="@={viewModel.orderNumberEntryText}" />
+
+                <com.albertsons.acupick.ui.util.CustomTextInput
+                    android:id="@+id/zoneTI"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"
+                    app:errorDrawable="@{@drawable/ic_red_warning}"
+                    app:errorTextResId="@{viewModel.zoneTextInputError}"
+                    app:hint="@{@string/manual_handoff_zone_number}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/customerOrderNumberTI"
+                    app:typedText="@={viewModel.zoneEntryText}" />
+
+                <com.albertsons.acupick.ui.util.CustomTextInput
+                    android:id="@+id/toteNumberTextInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"
+                    app:errorDrawable="@{@drawable/ic_red_warning}"
+                    app:errorTextResId="@{viewModel.toteIdTextInputError}"
+                    app:hint="@{@string/mfc_manual_entry_staging_hint}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/zoneTI"
+                    app:typedText="@={viewModel.toteIdEntryText}" />
+
+                <ImageButton
+                    android:id="@+id/toteInfo"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/transparent"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_info"
+                    app:layout_constraintBottom_toBottomOf="@+id/toteNumberTextInput"
+                    app:layout_constraintEnd_toEndOf="@+id/toteNumberTextInput"
+                    app:layout_constraintTop_toTopOf="@+id/toteNumberTextInput" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/continueButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="16dp"
+            android:enabled="@{viewModel.continueEnabled}"
+            android:onClick="@{() -> viewModel.onContinueButtonClicked()}"
+            android:text="@string/confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

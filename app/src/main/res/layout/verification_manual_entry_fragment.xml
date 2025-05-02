@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.VerificationManualEntryViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/startGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/endGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/instructions"
+                style="@style/NunitoSansBold16.grey600"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{viewModel.title}"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@id/startGuideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.albertsons.acupick.ui.util.CustomTextInput
+                android:id="@+id/nameTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                app:errorDrawable="@{@drawable/ic_red_warning}"
+                app:errorTextResId="@{null}"
+                app:hint="@{@string/pickup_driver_first_last_name_hint}"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@id/startGuideline"
+                app:layout_constraintTop_toBottomOf="@id/instructions"
+                app:nextFocus="@{@id/dobTextInputLayout}"
+                app:typedText="@={viewModel.nameEntry}" />
+
+            <com.albertsons.acupick.ui.util.CustomTextInput
+                android:id="@+id/dobTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:errorDrawable="@{@drawable/ic_red_warning}"
+                app:errorTextResId="@{viewModel.dobEntryErrorRes}"
+                app:hint="@{@string/pickup_person_dob_hint}"
+                app:isDobText="@{true}"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@id/startGuideline"
+                app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout"
+                app:nextFocus="@{@id/idNumberTextInputLayout}" />
+
+            <com.albertsons.acupick.ui.util.CustomTextInput
+                android:id="@+id/idNumberTextInputLayout"
+                visibilityGoneIfFalse="@{viewModel.showId}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:errorDrawable="@{@drawable/ic_red_warning}"
+                app:errorTextResId="@{null}"
+                app:hint="@{viewModel.idTypeText + ` #`}"
+                app:imeOptionDone="@{true}"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@id/startGuideline"
+                app:layout_constraintTop_toBottomOf="@id/dobTextInputLayout"
+                app:typedText="@={viewModel.idNumberEntry}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/verifyButton"
+                style="@style/ButtonPrimary"
+                android:layout_width="264dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:enabled="@{viewModel.isVerifyCtaEnabled}"
+                android:onClick="@{() -> viewModel.onVerifyCtaClicked()}"
+                android:text="@{viewModel.verifyCtaText}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/idNumberTextInputLayout"
+                app:layout_constraintVertical_bias="1"
+                tools:text="@string/verification_pickup_person_cta" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

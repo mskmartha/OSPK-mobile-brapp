@@ -1,0 +1,10 @@
+<templateSet group="testMocks">
+  <template name="ldmock" value="val $OC$Mock = vm.$OBSERVABLE$.mock()" description="LiveData Mock" toReformat="false" toShortenFQNames="true">
+    <variable name="OBSERVABLE" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="OC" expression="" defaultValue="OBSERVABLE" alwaysStopAt="false" />
+    <context>
+      <option name="KOTLIN_EXPRESSION" value="true" />
+      <option name="KOTLIN_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <data>
+        <variable
+            name="activityViewModel"
+            type="com.albertsons.acupick.ui.MainActivityViewModel" />
+    </data>
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_container1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_clip_to_children="true"
+        app:shimmer_direction="left_to_right"
+        app:shimmer_duration="1500"
+        app:shimmer_highlight_color="@color/disabledGrey">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:layout_marginTop="16dp"
+                layout="@layout/skeleton_item_picklist"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <include
+                android:layout_marginTop="4dp"
+                layout="@layout/skeleton_item_picklist"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <include
+                android:layout_marginTop="4dp"
+                layout="@layout/skeleton_item_picklist"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</layout>
+

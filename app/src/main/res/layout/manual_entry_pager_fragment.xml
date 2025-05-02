@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.manualentry.pick.ManualEntryPagerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/manualEntryTabLayout"
+            style="@style/Tabs.Default"
+            visibilityGoneIfFalse="@{viewModel.tabVisibility}"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/manualEntryViewPager"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manualEntryTabLayout"
+            app:layout_constraintVertical_bias="0"
+            app:layout_goneMarginTop="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/continueButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="28dp"
+            android:enabled="@{viewModel.isContinueEnabled}"
+            android:includeFontPadding="false"
+            android:onClick="@{() -> viewModel.onContinueButtonClicked()}"
+            android:text="@string/manual_plu_cta"
+            app:layout_constraintTop_toBottomOf="@+id/manualEntryViewPager" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

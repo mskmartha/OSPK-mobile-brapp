@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetDialogViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/default_bottomsheet_peek_height"
+        android:paddingHorizontal="30dp"
+        android:background="@drawable/rounded_top_corners_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="56dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/scanItemTitle"
+            style="@style/PopinsMedium20.DarkBrown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="-6sp"
+            android:text="@{viewData.title}"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/pickerItemImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Attach labels to bags and loose items" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/pickerItemImage"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="104dp"
+            app:imageResource="@{viewData.largeImage}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_attach_tote_labels" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pickerPluAndPounds"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2sp"
+            android:text="@{viewData.body}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickerItemImage"
+            tools:text="Find the printer to collect your bag and loose item labels." />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/ButtonPrimary"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.dismissBottomSheet()}"
+            android:text="@{viewData.positiveButtonText}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/next" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

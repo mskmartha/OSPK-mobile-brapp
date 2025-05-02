@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isWineShipping"
+            type="Boolean" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+        <variable
+            name="radioButtons"
+            type="java.util.List&lt;String&gt;" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_radius_4"
+        android:backgroundTint="@color/white"
+        android:minWidth="312dp"
+        android:minHeight="256dp"
+        android:paddingStart="20dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dialogTitle"
+            style="@style/PopinsMedium20.DarkBrown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{viewData.title}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/bodyScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fillViewport="true"
+            android:isScrollContainer="true"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@id/positiveButton"
+            app:layout_constraintTop_toBottomOf="@+id/dialogTitle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@={viewModel.radioChecked}"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioButton1"
+                        style="@style/NunitoSansRegular16.Grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/darkBlue"
+                        android:paddingHorizontal="4dp"
+                        android:text="@{radioButtons[0]}"
+                        app:visibilityGoneIfFalse="@{radioButtons.size() > 0}"
+                        tools:text="Selection 1" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioButton2"
+                        style="@style/NunitoSansRegular16.Grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/darkBlue"
+                        android:paddingHorizontal="4dp"
+                        android:text="@{radioButtons[1]}"
+                        app:disableRadioButton="@{!isWineShipping}"
+                        app:visibilityGoneIfFalse="@{radioButtons.size() > 1}"
+                        tools:text="Selection 2" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioButton3"
+                        style="@style/NunitoSansRegular16.Grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/darkBlue"
+                        android:paddingHorizontal="4dp"
+                        android:text="@{radioButtons[2]}"
+                        app:disableRadioButton="@{!isWineShipping}"
+                        app:visibilityGoneIfFalse="@{radioButtons.size() > 2}"
+                        tools:text="Selection 3" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioButton4"
+                        style="@style/NunitoSansRegular16.Grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/darkBlue"
+                        android:paddingHorizontal="4dp"
+                        android:text="@{radioButtons[3]}"
+                        app:visibilityGoneIfFalse="@{radioButtons.size() > 3}"
+                        tools:text="Selection 4" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioButton5"
+                        style="@style/NunitoSansRegular16.Grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/darkBlue"
+                        android:paddingHorizontal="4dp"
+                        android:text="@{radioButtons[4]}"
+                        app:visibilityGoneIfFalse="@{radioButtons.size() > 4}"
+                        tools:text="Selection 5" />
+
+                </RadioGroup>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/buttonGroup"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingBottom="10dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/bodyScrollView">-->
+
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:id="@+id/negativeButton"-->
+<!--                style="@style/ButtonPrimary"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:onClick="@{() -> viewModel.onNegativeButtonClick()}"-->
+<!--                android:text="@{viewData.negativeButtonText}"-->
+<!--                android:visibility="@{viewData.negativeButtonVisibility}"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/positiveButton"-->
+<!--                app:layout_constraintHorizontal_bias="1"-->
+<!--                app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:text="Confirm" />-->
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/positiveButton"
+                style="@style/ButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:enabled="@{viewModel.selection != null}"
+                android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+                android:text="@{viewData.positiveButtonText}"
+                android:visibility="@{viewData.positiveButtonVisibility}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bodyScrollView"
+                tools:text="Confirm" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/negativeButton"
+                style="@style/ButtonLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@null"
+                android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+                android:text="@{viewData.negativeButtonText}"
+                android:visibility="@{viewData.negativeButtonVisibility}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/positiveButton"
+                tools:text="Negative CTA" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+</layout>

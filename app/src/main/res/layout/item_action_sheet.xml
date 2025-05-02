@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="dbViewModel"
+            type="com.albertsons.acupick.ui.bottomsheetdialog.ActionSheetDbViewModel" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/itemStoreCardView"
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="@{() -> dbViewModel.onSettingsClicked()}"
+        android:focusable="true">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/storeNo"
+            style="@style/ButtonLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:drawableStart="@{ContextCompat.getDrawable(context, dbViewModel.settings.settingsIcon)}"
+            android:drawablePadding="16dp"
+            android:text="@{dbViewModel.settings.settingsString}"
+            tools:drawableStart="@drawable/ic_tote_full"
+            tools:text="@string/staging_picklist_summary" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

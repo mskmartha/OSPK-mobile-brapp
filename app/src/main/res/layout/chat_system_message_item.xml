@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="com.albertsons.acupick.ui.chat.MessageListViewItem" />
+
+        <import type="android.view.View" />
+
+        <import type="com.albertsons.acupick.data.model.chat.MessageSubType" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:focusableInTouchMode="false">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@{message.isSwapOrSub ? @drawable/swap : @drawable/close}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/swap" />
+
+        <TextView
+            android:id="@+id/message_body"
+            style="@style/NunitoSansRegular14.Coffee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:includeFontPadding="false"
+            android:singleLine="false"
+            android:text="@{message.swapMessage}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:maxLength="300"
+            tools:text="Daves Killer Bread.... Qty: 2 for $6.29 substituted with Alfaro's Artesano Bakery.... Qty: 1 for $4.99."
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

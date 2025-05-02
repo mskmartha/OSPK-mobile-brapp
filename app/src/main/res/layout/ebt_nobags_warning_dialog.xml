@@ -1,0 +1,112 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
+        android:background="@drawable/rounded_coener_dialog_background"
+        android:minWidth="311dp"
+        android:paddingBottom="32dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            style="@style/PopinsMedium20.DarkBrown"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="@{viewData.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Price sensitive EBT order and do not bag" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ebtImage"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            app:imageResource="@{viewData.titleIcon}"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:src="@drawable/ebt_image_cbp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/noBagsImage"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginStart="24dp"
+            app:imageResource="@{viewData.largeImage}"
+            app:layout_constraintStart_toEndOf="@+id/ebtImage"
+            app:layout_constraintTop_toTopOf="@+id/ebtImage"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:src="@drawable/no_bags_small_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/body"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@{viewData.body}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/noBagsImage"
+            tools:text="If substituting, ensure new items are comparable in price to the original item." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/secondaryBody"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@{viewData.secondaryBody}"
+            visibilityGoneIfNull="@{viewData.secondaryBody}"
+            app:layout_constraintTop_toBottomOf="@+id/body"
+            tools:text="For weighted items, stay close to the ordered quantity" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/modalBody"
+            style="@style/NunitoSansRegular16.Grey700"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@{viewData.questionBody}"
+            visibilityGoneIfNull="@{viewData.questionBody}"
+            app:layout_constraintTop_toBottomOf="@+id/secondaryBody"
+            tools:text="Please do not use bags for some of the items" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/continueButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_corner_lighter_green"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+            android:text="@{viewData.positiveButtonText}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modalBody"
+            tools:text="@string/continue_cta" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

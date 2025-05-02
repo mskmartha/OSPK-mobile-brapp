@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:background="@drawable/rounded_coener_dialog_background"
+        android:minWidth="313dp"
+        android:paddingBottom="32dp">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/PoppinsMedium20.Grey700"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:minHeight="56dp"
+            android:text="@{viewData.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Verification failed" />
+
+        <TextView
+            android:id="@+id/body"
+            style="@style/NunitoSansBold16"
+            visibilityGoneIfFalse="@{viewData.body != null}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:gravity="center"
+            android:text="@{viewData.body}"
+            android:textColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="This is the custom dialog body text."
+            tools:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/secondaryBody"
+            style="@style/NunitoSansRegular16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="24dp"
+            android:gravity="center"
+            android:text="@{viewData.secondaryBody}"
+            android:textColor="@color/grey_600"
+            app:layout_constraintTop_toBottomOf="@id/body"
+            tools:text="Try entering the code again or proceed to hand off and a report will be automatically logged." />
+
+        <TextView
+            android:id="@+id/question"
+            style="@style/NunitoSansRegular16"
+            visibilityGoneIfNull="@{viewData.questionBody}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@{viewData.questionBody}"
+            app:layout_constraintTop_toBottomOf="@id/secondaryBody"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Are you sure you want to continue?" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/positiveButton"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:onClick="@{() -> viewModel.onPositiveButtonClick()}"
+            android:text="@{viewData.positiveButtonText}"
+            android:visibility="@{viewData.positiveButtonVisibility}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question"
+            tools:text="Positive CTA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/negativeButton"
+            style="@style/ButtonLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@null"
+            android:onClick="@{() -> viewModel.onNegativeButtonClick()}"
+            android:text="@{viewData.negativeButtonText}"
+            android:visibility="@{viewData.negativeButtonVisibility}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/positiveButton"
+            tools:text="Negative CTA" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

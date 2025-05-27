@@ -3,6 +3,7 @@ package com.albertsons.acupick.ui.bindingadapters
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import com.albertsons.acupick.R
 import com.albertsons.acupick.ui.custom.ZoomableImageView
@@ -49,6 +50,15 @@ class KoinBindingAdapters(private val picasso: Picasso) {
             } else if (imageUrl.isNotEmpty()) {
                 picasso.load(Uri.parse(it)).into(this)
             }
+        }
+    }
+    @BindingAdapter("app:localImageRes")
+    fun ImageView.loadLocalImageResource(@DrawableRes imageResId: Int) {
+        if (imageResId != 0) { // Check if a valid resource ID is provided
+            picasso.load(imageResId).into(this)
+        } else {
+            // Optionally, clear the image or set a default if 0 is passed
+            this.setImageDrawable(null)
         }
     }
 

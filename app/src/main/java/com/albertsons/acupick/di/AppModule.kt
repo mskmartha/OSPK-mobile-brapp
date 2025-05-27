@@ -87,6 +87,7 @@ import com.albertsons.acupick.ui.metrics.MetricsViewModel
 import com.albertsons.acupick.ui.missingItemLocation.MissingItemLocationViewModel
 import com.albertsons.acupick.ui.missingItemLocation.WhereToFindLocationViewModel
 import com.albertsons.acupick.ui.models.RemoveRejectedItemUiData
+import com.albertsons.acupick.ui.my_score.MyScoreViewModel
 import com.albertsons.acupick.ui.notification.NotificationViewModel
 import com.albertsons.acupick.ui.picklistitems.ConfirmAmountViewModel
 import com.albertsons.acupick.ui.picklistitems.PickListItemsViewModel
@@ -330,6 +331,7 @@ object AppModule {
         viewModel { QuickTaskPagerViewModel(app = get()) }
         viewModel { QuickTaskOtherShoppersitemsViewModel(app = get()) }
         viewModel { QuickTaskMyItemsViewModel(app = get()) }
+        viewModel { MyScoreViewModel(app = get(), repo = get(), dispatcherProvider = get()) }
         single { AnalyticsHelper(sharedPreferences = get(named(KoinNamedSharedPreferences.AutoLogout))) }
         single<BuildConfigProvider> { BuildConfigProviderImpl() }
         single<AutoLogoutLogic> {

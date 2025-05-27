@@ -104,3 +104,5 @@ fun AppCompatTextView.setupAddBagCountCta(
     setTextColor(ContextCompat.getColor(context, textColorRes))
     text = context.getString(if (isLastTab == true) if (isAnyCustomerPreferNoBag.orFalse()) R.string.complete_count else R.string.complete_bag_count else R.string.next)
 }
+
+

@@ -592,7 +592,7 @@ private const val APIM_PROD_EAST_BASE_APS_URL = "https://esag-intgw-prod-eastus-
 // NOTE: Dev auth requires a different api contract and is not supported in the codebase at this time. Also, authentication endpoints for the QA env won't be used.
 private const val QA_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa1int/ospkwu/authservice/"
 private const val QA2_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa2int/ospkwu/authservice/ "
-private const val QA3_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa3int/ospkwu/authservice/"
+private const val QA3_BASE_AUTH_URL = "https://acupickgame.free.beeceptor.com/esag-intgw-nonprod-westus-01.albertsons.com/abs/qa3int/ospkwu/authservice/"
 private const val QA4_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa4int/ospkwu/authservice/"
 private const val QA5_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa5int/ospkwu/authservice/"
 private const val PERF_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/perf1int/ospkwu/authservice/"

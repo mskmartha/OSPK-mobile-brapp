@@ -59,6 +59,7 @@ import com.albertsons.acupick.data.model.response.SiteType
 import com.albertsons.acupick.data.model.response.StagingSummaryDto
 import com.albertsons.acupick.data.model.response.SubstitutionItemDetailsDto
 import com.albertsons.acupick.data.model.response.ArrivalsCountDetailsDto
+import com.albertsons.acupick.data.model.response.GameConfigDto
 import com.albertsons.acupick.data.model.response.OnePlDto
 import com.albertsons.acupick.data.model.response.ScanContDto
 import retrofit2.Response
@@ -338,4 +339,8 @@ internal interface ApsService {
     suspend fun logError(
         @Body errorMessage: ErrorMessage,
     ): Response<Unit>
+
+
+    @GET("https://acupickgame.free.beeceptor.com/oceg-game-services/gamification/player/rules/SMAR602")
+    suspend fun getGameRewards(): Response<GameConfigDto>
 }

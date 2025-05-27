@@ -40,7 +40,7 @@
     <action
         android:id="@+id/action_to_prescriptionReturnFragment"
         app:destination="@+id/prescriptionReturnFragment"
-        app:popUpToInclusive="false"/>
+        app:popUpToInclusive="false" />
 
     <action
         android:id="@+id/action_to_chatFragment"
@@ -65,8 +65,7 @@
 
     <action
         android:id="@+id/action_to_remove1PLRejectedFragment"
-        app:destination="@id/rejected1PLItemScope"
-         />
+        app:destination="@id/rejected1PLItemScope" />
 
     <action
         android:id="@+id/action_pickListFragment_to_stagingFragment"
@@ -266,13 +265,13 @@
             android:id="@+id/action_chatFragment_to_substituteFragment"
             app:destination="@id/substituteFragment"
             app:popUpTo="@id/chatFragment"
-            app:popUpToInclusive="false"/>
+            app:popUpToInclusive="false" />
 
         <action
             android:id="@+id/action_chatFragment_to_quickTaskFragment"
             app:destination="@id/quickTaskPagerFragment"
             app:popUpTo="@id/chatFragment"
-            app:popUpToInclusive="false"/>
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/devOptionsFragment"
@@ -347,7 +346,7 @@
         tools:layout="@layout/report_missing_bag_fragment">
         <argument
             android:name="reportMissingBagsParams"
-            app:argType="com.albertsons.acupick.ui.arrivals.destage.reportmissingbag.ReportMissingBagsParams"/>
+            app:argType="com.albertsons.acupick.ui.arrivals.destage.reportmissingbag.ReportMissingBagsParams" />
     </fragment>
     <fragment
         android:id="@+id/boxInputWeightFragment"
@@ -369,7 +368,7 @@
         tools:layout="@layout/order_summary_fragment">
         <argument
             android:name="orderSummaryArg"
-            app:argType="com.albertsons.acupick.ui.arrivals.complete.OrderSummaryArg"/>
+            app:argType="com.albertsons.acupick.ui.arrivals.complete.OrderSummaryArg" />
     </fragment>
 
     <fragment
@@ -379,7 +378,7 @@
         tools:layout="@layout/order_summary_fragment">
         <argument
             android:name="swapSubstitutionArg"
-            app:argType="com.albertsons.acupick.data.model.response.SwapSubstitutionArg"/>
+            app:argType="com.albertsons.acupick.data.model.response.SwapSubstitutionArg" />
         <action
             android:id="@+id/action_to_swapSubstitution"
             app:destination="@id/swapSubstitutionFragment" />
@@ -388,7 +387,7 @@
             android:id="@+id/action_swapSubstitutionFragment_to_substituteFragment"
             app:destination="@id/substituteFragment"
             app:popUpTo="@id/pickListItemsFragment"
-            app:popUpToInclusive="false"/>
+            app:popUpToInclusive="false" />
 
     </fragment>
 
@@ -403,8 +402,8 @@
 
         <argument
             android:name="prescriptionReturnData"
-            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
             android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
             app:nullable="true" />
     </fragment>
     <fragment
@@ -425,9 +424,9 @@
             app:argType="boolean" />
         <argument
             android:name="toteEstimate"
-            app:argType="com.albertsons.acupick.data.model.ToteEstimate"
             android:defaultValue="@null"
-            app:nullable="true"/>
+            app:argType="com.albertsons.acupick.data.model.ToteEstimate"
+            app:nullable="true" />
         <argument
             android:name="navigateToChat"
             android:defaultValue="false"
@@ -450,7 +449,7 @@
             android:id="@+id/action_pickListItemsFragment_to_substituteFragment"
             app:destination="@id/substituteFragment"
             app:popUpTo="@id/pickListItemsFragment"
-            app:popUpToInclusive="false"/>
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_pickListItemsFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
@@ -486,9 +485,9 @@
             app:argType="string" />
         <argument
             android:name="toteEstimate"
-            app:argType="com.albertsons.acupick.data.model.ToteEstimate"
             android:defaultValue="@null"
-            app:nullable="true"/>
+            app:argType="com.albertsons.acupick.data.model.ToteEstimate"
+            app:nullable="true" />
         <action
             android:id="@+id/action_totesFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -548,8 +547,15 @@
 
         <action
             android:id="@+id/action_to_remove1PLHandoffFragment"
-            app:destination="@id/handoff1plFragment"
-            />
+            app:destination="@id/handoff1plFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/myScoreFragment"
+        android:name="com.albertsons.acupick.ui.my_score.MyScoreFragment"
+        android:label=""
+        tools:layout="@layout/fragment_my_score">
+
 
     </fragment>
 
@@ -714,7 +720,7 @@
         android:id="@+id/quickTaskPagerFragment"
         android:name="com.albertsons.acupick.ui.swapsubstitution.QuickTaskPagerFragment"
         android:label=""
-        tools:layout="@layout/quick_task_pager_fragment" >
+        tools:layout="@layout/quick_task_pager_fragment">
         <argument
             android:name="customerName"
             app:argType="string" />
@@ -723,8 +729,7 @@
         android:id="@+id/action_quickTaskPagerFragment_to_substituteFragment"
         app:destination="@id/substituteFragment"
         app:popUpTo="@id/pickListItemsFragment"
-        app:popUpToInclusive="false"
-        />
+        app:popUpToInclusive="false" />
     <fragment
         android:id="@+id/quickTaskFragment"
         android:name="com.albertsons.acupick.ui.swapsubstitution.myitems.QuickTaskMyItemsFragment"
@@ -741,7 +746,7 @@
 
     </fragment>
 
-<!--    Master-order-view UI navigation end-->
+    <!--    Master-order-view UI navigation end-->
     <fragment
         android:id="@+id/teamPickListsFragment"
         android:name="com.albertsons.acupick.ui.picklists.team.TeamPickListsFragment"
@@ -890,7 +895,7 @@
             android:name="customerordernumber"
             app:argType="string" />
     </fragment>
-    
+
     <fragment
         android:id="@+id/printLabelFragment"
         android:name="com.albertsons.acupick.ui.staging.print.PrintLabelsFragment"
@@ -927,8 +932,8 @@
 
         <argument
             android:name="pickedBagNumbers"
-            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
             android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
             app:nullable="true" />
         <fragment
             android:id="@+id/handOffFragment"
@@ -937,7 +942,7 @@
             tools:layout="@layout/hand_off_pager_fragment">
             <argument
                 android:name="handOffArgData"
-                app:argType="com.albertsons.acupick.ui.arrivals.complete.HandOffArgData"/>
+                app:argType="com.albertsons.acupick.ui.arrivals.complete.HandOffArgData" />
             <argument
                 android:name="isFromNotification"
                 android:defaultValue="false"
@@ -949,8 +954,8 @@
 
             <argument
                 android:name="pickedBagNumbers"
-                app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
                 android:defaultValue="@null"
+                app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
                 app:nullable="true" />
             <action
                 android:id="@+id/action_handOffFragment_to_verificationIdTypeFragment"
@@ -1100,8 +1105,7 @@
         <fragment
             android:id="@+id/remove1PLRejectedFragment"
             android:name="com.albertsons.acupick.ui.arrivals.destage.removeitems.RemoveRejected1PLFragment"
-            tools:layout="@layout/remove_rejected_1pl_fragment"
-            >
+            tools:layout="@layout/remove_rejected_1pl_fragment">
             <argument
                 android:name="rejectedItems"
                 android:defaultValue="@null"
@@ -1109,21 +1113,19 @@
                 app:nullable="true" />
             <action
                 android:id="@+id/action_to_remove1PLRejectedItemsFragment"
-                app:destination="@id/remove1PLRejectedItemsFragment"
-                />
+                app:destination="@id/remove1PLRejectedItemsFragment" />
             <action
                 android:id="@+id/action_to_remove1PLHandoffFragment"
                 app:destination="@id/handoff1plFragment"
                 app:popUpTo="@id/arrivalsPagerFragment"
-                app:popUpToInclusive="true"/>
+                app:popUpToInclusive="true" />
 
         </fragment>
 
         <fragment
             android:id="@+id/remove1PLRejectedItemsFragment"
             android:name="com.albertsons.acupick.ui.arrivals.destage.removeitems.RemoveRejected1PLItemsFragment"
-            tools:layout="@layout/remove_rejected_1pl_item_fragment"
-            >
+            tools:layout="@layout/remove_rejected_1pl_item_fragment">
             <argument
                 android:name="rejectedItemsByZone"
                 android:defaultValue="@null"
@@ -1139,7 +1141,7 @@
                 android:id="@+id/action_to_arrivalsOrdersPagerFragment"
                 app:destination="@id/arrivalsPagerFragment"
                 app:popUpTo="@id/arrivalsPagerFragment"
-                app:popUpToInclusive="true"/>
+                app:popUpToInclusive="true" />
         </fragment>
 
     </navigation>
@@ -1147,8 +1149,7 @@
     <fragment
         android:id="@+id/handoff1plFragment"
         android:name="com.albertsons.acupick.ui.arrivals.destage.removeitems.Handoff1PLFragment"
-        tools:layout="@layout/remove_1pl_handoff_fragment"
-        >
+        tools:layout="@layout/remove_1pl_handoff_fragment">
         <argument
             android:name="totalOrderCount"
             android:defaultValue="1"
@@ -1199,7 +1200,7 @@
             app:argType="com.albertsons.acupick.data.model.HandOffInterstitialParamsList" />
         <argument
             android:name="orderSummaryParamsList"
-            app:argType="com.albertsons.acupick.data.model.OrderSummaryParamsList"/>
+            app:argType="com.albertsons.acupick.data.model.OrderSummaryParamsList" />
         <action
             android:id="@+id/action_handOffInterstitialFragment_to_arrivalsOrdersPagerFragment"
             app:destination="@id/arrivalsPagerFragment"
@@ -1220,12 +1221,12 @@
 
         <argument
             android:name="pickedBagNumbers"
-            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
             android:defaultValue="@null"
+            app:argType="com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData"
             app:nullable="true" />
         <argument
             android:name="orderSummaryParamsList"
-            app:argType="com.albertsons.acupick.data.model.OrderSummaryParamsList"/>
+            app:argType="com.albertsons.acupick.data.model.OrderSummaryParamsList" />
         <action
             android:id="@+id/action_handOffInterstitialFragment_to_prescriptionReturnFragment"
             app:destination="@id/prescriptionReturnFragment"

@@ -15,4 +15,10 @@
         android:title="@string/bottom_nav_arrivals"
         android:icon="@drawable/ic_bottom_nav_arrival"
         />
+
+    <item
+        android:id="@+id/myScoreFragment"
+        android:title="@string/bottom_nav_score"
+        android:icon="@drawable/ic_bottom_nav_arrival"
+        />
 </menu>

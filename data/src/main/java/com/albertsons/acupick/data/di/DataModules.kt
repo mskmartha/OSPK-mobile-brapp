@@ -72,6 +72,8 @@ import com.albertsons.acupick.data.repository.ConversationsRepositoryImpl
 import com.albertsons.acupick.data.repository.DevOptionsRepository
 import com.albertsons.acupick.data.repository.DevOptionsRepositoryImplementation
 import com.albertsons.acupick.data.repository.DevOptionsRepositoryWriter
+import com.albertsons.acupick.data.repository.GamesRepository
+import com.albertsons.acupick.data.repository.GamesRepositoryImpl
 import com.albertsons.acupick.data.repository.IdRepository
 import com.albertsons.acupick.data.repository.IdRepositoryImplementation
 import com.albertsons.acupick.data.repository.ItemProcessorRepository
@@ -174,6 +176,7 @@ object Data {
         }
         single<ConfigApi> { ConfigApiImpl() }
         single<ApsRepository> { ApsRepositoryImplementation(apsService = get(), pickRepository = get(), itemProcessorRepository = get(), responseToApiResultMapper = get()) }
+        single<GamesRepository> { GamesRepositoryImpl(apsService = get(), responseToApiResultMapper = get()) }
         single<WineShippingRepository> { WineShippingRepositoryImplementation(apsService = get(), responseToApiResultMapper = get()) }
         single<ConversationsRepository> { ConversationsRepositoryImpl(conversationsClientWrapper = get(), dispatchers = get(), siteRepository = get(), moshi = get()) }
         single<OsccRepository> { OsccRepositoryImpl(osccService = get(), responseToApiResultMapper = get()) }

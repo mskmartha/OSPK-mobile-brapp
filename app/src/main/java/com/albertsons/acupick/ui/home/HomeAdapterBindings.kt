@@ -20,6 +20,7 @@ import com.albertsons.acupick.infrastructure.utils.isNotNullOrBlank
 import com.albertsons.acupick.ui.bindingadapters.setVisibilityGoneIfTrue
 import com.albertsons.acupick.ui.models.CustomerArrivalStatusUI
 import com.albertsons.acupick.ui.models.FulfillmentTypeUI
+import com.albertsons.acupick.ui.my_score.MyScoreViewModel
 import com.albertsons.acupick.ui.util.getOrEmpty
 import com.albertsons.acupick.ui.util.setTopMargin
 import java.time.ZoneId
@@ -36,6 +37,7 @@ fun SwipeRefreshLayout.setOnRefresh(viewModel: HomeViewModel, refreshComplete: B
         }
     }
 }
+
 
 @BindingAdapter(value = ["app:customerArrivalStatus", "app:customerArrivalTime", "app:shouldShowPastDue", "app:timerStillActive", "app:dueDayLabel", "app:is1Pl"])
 fun AppCompatTextView.setPastDueVisible(

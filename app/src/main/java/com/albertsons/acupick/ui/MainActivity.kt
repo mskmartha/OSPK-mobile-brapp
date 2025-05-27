@@ -619,6 +619,7 @@ class MainActivity :
                     R.id.destageOrderFragment,
                     R.id.pickListsFragment,
                     R.id.pickListPagerFragment,
+                    R.id.myScoreFragment,
                     R.id.arrivalsPagerFragment,
                     R.id.metricsFragment
                 ),
@@ -665,6 +666,7 @@ class MainActivity :
                     R.id.homeFragment,
                     R.id.pickListPagerFragment,
                     R.id.arrivalsPagerFragment,
+                    R.id.myScoreFragment,
                     -> {
                         if (siteRepository.isFlashInterjectionEnabled) {
                             // On screens that show bottom nav, make API call and show/hide flash order acknowledgement badge
@@ -708,6 +710,11 @@ class MainActivity :
                         actionBar?.setDisplayShowTitleEnabled(false)
                         toolbar.visibility = View.VISIBLE
                     }
+                    R.id.myScoreFragment ->{
+                        actionBar?.setHomeButtonEnabled(false)
+                        actionBar?.setDisplayShowTitleEnabled(false)
+                        toolbar.visibility = View.VISIBLE
+                    }
 
                     else -> {
                         toolbar.visibility = View.VISIBLE
@@ -722,6 +729,7 @@ class MainActivity :
                     R.id.wineStaging2Fragment,
                     R.id.prescriptionReturnFragment,
                     R.id.pickListPagerFragment,
+                    R.id.myScoreFragment,
                     R.id.arrivalsPagerFragment,
                     R.id.handoff1plFragment,
                     -> null

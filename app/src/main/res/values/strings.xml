@@ -636,6 +636,7 @@
     <string name="bottom_nav_home">HOME</string>
     <string name="bottom_nav_pick">PICK LISTS</string>
     <string name="bottom_nav_arrivals">ARRIVALS</string>
+    <string name="bottom_nav_score">MY SCORE</string>
     <string name="bottom_nav_metrics">Metrics</string>
     <string name="refresh">Refresh</string>
     <string name="pick_history">Pick History</string>
@@ -669,6 +670,7 @@
     <string name="toolbar_title_signature">Signature</string>
     <string name="toolbar_due_tomorrow">Due Tomorrow</string>
     <string name="toolbar_due_in_days">Due in %1$d Days</string>
+    <string name="toolbar_title_my_game">How To Win</string>
 
     <!-- Staging -->
     <plurals name="staging_totes_plural">
@@ -1933,5 +1935,23 @@
     <string name="end_pick_reason_dialog_title">Why do you want to end pick?</string>
     <string name="picking_another_order">Picking another priority order</string>
     <string name="handoff_customer">Handoff for another customer</string>
+    <string name="every_effort_counts">Every Effort Counts!</string>
+    <string name="your_score_is_combined_from">Your score is combined from:</string>
+    <string name="lbl_basic_points">Basic points</string>
+    <string name="lbl_basic_oth5">Your OTH5 of the day*</string>
+    <string name="lbl_basic_store_oth5">Store OTH5 of the day*</string>
+    <string name="lbl_basic_points_info">Get points from every handoff when:</string>
+    <string name="lbl_oth5_info">On time handoff will get you max points:</string>
+    <string name="lbl_store_oth5_info">Get extra points if your store performs well:</string>
+    
+    <string name="lbl_base_pts">+%s pt</string>
+    <string name="lbl_other_pts">+%s pts</string>
+    
+    <string name="lbl_top_to_win">Be the top to win!</string>
+    <string name="lbl_here_rewards">Here are the rewards</string>
+    <string name="_50_gift_card">$50\nGift Card</string>
+    <string name="_25_gift_card">$25\nGift Card</string>
+    <string name="_10_gift_card">$10\nGift Card</string>
+    <string name="lbl_note_work">*Your OTH5 and store OTH5 score will be shared next day when you return to work.</string>
 
 </resources>

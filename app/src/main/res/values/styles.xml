@@ -1186,4 +1186,9 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="NunitoSansBold20.Black">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/nunito_sans_black</item>
+    </style>
 </resources>

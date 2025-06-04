@@ -128,4 +128,5 @@
     <color name="lightGray">#949493</color>
 
     <color name="score_card">#FAF9F7</color>
+    <color name="home_banner_bg">#E5FAFF</color>
 </resources>

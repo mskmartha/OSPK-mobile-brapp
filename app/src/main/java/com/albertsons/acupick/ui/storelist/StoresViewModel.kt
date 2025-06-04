@@ -90,7 +90,7 @@ class StoresViewModel(
     @OptIn(DelicateCoroutinesApi::class)
     fun onConfirmClick() {
         storeSelectionCompleteAction.postValue(Unit)
-     /*   viewModelScope.launch(dispatcherProvider.IO) {
+        viewModelScope.launch(dispatcherProvider.IO) {
             if (networkAvailabilityManager.isConnected.first().not()) {
                 networkAvailabilityManager.triggerOfflineError { onConfirmClick() }
             } else {
@@ -127,7 +127,7 @@ class StoresViewModel(
                     }.exhaustive
                 }
             }
-        }*/
+        }
     }
 
     fun onSearchClearClick() {

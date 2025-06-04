@@ -29,8 +29,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="win_cup" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../../Aahan Personal/Projects/Upwork/Shravan/Archive/win_cup.svg" />
+                            <entry key="outputName" value="ic_hand_off_hero" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../../Aahan Personal/Projects/Upwork/Shravan/Archive/bunny.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -342,6 +342,10 @@ private object Libraries {
     // SignaturePad
     private const val SIGNATUREPAD_VERSION = "1.3.1"
     const val SIGNATUREPAD = "com.github.gcacace:signature-pad:$SIGNATUREPAD_VERSION"
+
+    // For Progress View handling
+    // https://github.com/aahanverma00710/StepProgressBarView
+    const val STEP_PROGRESS = "com.github.aahanverma00710:StepProgressBarView:1.0"
 }
 
 /**
@@ -382,6 +386,8 @@ private object TestLibraries {
     // https://github.com/cashapp/turbine/blob/trunk/CHANGELOG.md
     // https://github.com/cashapp/turbine/releases
     const val TURBINE = "app.cash.turbine:turbine:0.7.0"
+
+
 }
 
 //// Dependency Groups - to be used inside dependencies {} block instead of declaring all necessary lines for a particular dependency
@@ -593,4 +599,8 @@ fun DependencyHandler.cameraDependencies() {
 
 fun DependencyHandler.signaturePadDependencies() {
     implementation(Libraries.SIGNATUREPAD)
+}
+
+fun DependencyHandler.stepsSeekbarDependencies() {
+    implementation(Libraries.STEP_PROGRESS)
 }

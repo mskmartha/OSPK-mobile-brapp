@@ -26,7 +26,6 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
 
     override fun setupBinding(binding: HomeFragmentBinding) {
         super.setupBinding(binding)
-
         setupRefresh()
         binding.chatButtonView.setContent {
             ChatIconWithTooltip(onChatClicked = { orderNumber ->

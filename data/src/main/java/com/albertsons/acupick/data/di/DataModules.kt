@@ -72,6 +72,8 @@ import com.albertsons.acupick.data.repository.ConversationsRepositoryImpl
 import com.albertsons.acupick.data.repository.DevOptionsRepository
 import com.albertsons.acupick.data.repository.DevOptionsRepositoryImplementation
 import com.albertsons.acupick.data.repository.DevOptionsRepositoryWriter
+import com.albertsons.acupick.data.repository.GamePointsRepository
+import com.albertsons.acupick.data.repository.GamePointsRepositoryImpl
 import com.albertsons.acupick.data.repository.GamesRepository
 import com.albertsons.acupick.data.repository.GamesRepositoryImpl
 import com.albertsons.acupick.data.repository.IdRepository
@@ -410,6 +412,11 @@ object Data {
         }
         single { CompleteHandoffUseCase(get(), get(), get(), get()) }
         single { CompleteHandoff1PLUseCase(get(), get(), get()) }
+        single<GamePointsRepository> {
+            GamePointsRepositoryImpl(
+                sharedPreferences =  get(named(KoinNamedSharedPreferences.AutoLogout))
+            )
+        }
     }
 }
 

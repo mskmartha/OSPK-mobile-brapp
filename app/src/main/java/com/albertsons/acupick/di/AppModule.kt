@@ -17,6 +17,8 @@ import com.albertsons.acupick.data.model.StorageType
 import com.albertsons.acupick.data.model.response.RejectedItemsByZone
 import com.albertsons.acupick.data.network.logging.LoggingDataProvider
 import com.albertsons.acupick.data.repository.ConversationsClientWrapper
+import com.albertsons.acupick.data.repository.GamePointsRepository
+import com.albertsons.acupick.data.repository.GamePointsRepositoryImpl
 import com.albertsons.acupick.data.toast.Toaster
 import com.albertsons.acupick.data.toast.ToasterImplementation
 import com.albertsons.acupick.domain.AcuPickLoggerInterface

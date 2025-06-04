@@ -37,7 +37,7 @@ BuildInfoManager.initialize(
 // Android Gradle Plugin api: https://developer.android.com/reference/tools/gradle-api/4.1/classes
 android {
     compileSdk = Config.AndroidSdkVersions.COMPILE_SDK
-    buildToolsVersion = Config.AndroidSdkVersions.BUILD_TOOLS
+ //   buildToolsVersion = Config.AndroidSdkVersions.BUILD_TOOLS
     defaultConfig {
         minSdk = Config.AndroidSdkVersions.MIN_SDK
         targetSdk = Config.AndroidSdkVersions.TARGET_SDK
@@ -237,6 +237,7 @@ dependencies {
     lottieDependencies()
     shimmerLayoutDependencies()
     composeDependencies()
+    //stepsSeekbarDependencies()
     // Utility
     liveEventDependencies()
     timberDependencies()

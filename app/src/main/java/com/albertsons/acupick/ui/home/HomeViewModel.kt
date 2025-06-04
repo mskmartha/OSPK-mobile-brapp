@@ -9,6 +9,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.albertsons.acupick.AcuPickConfig
 import com.albertsons.acupick.NavGraphDirections
 import com.albertsons.acupick.R
@@ -41,6 +42,7 @@ import com.albertsons.acupick.data.model.shouldShowCountdownTimer
 import com.albertsons.acupick.data.network.NetworkAvailabilityManager
 import com.albertsons.acupick.data.repository.ApsRepository
 import com.albertsons.acupick.data.repository.ConversationsRepository
+import com.albertsons.acupick.data.repository.GamePointsRepository
 import com.albertsons.acupick.data.repository.IdRepository
 import com.albertsons.acupick.data.repository.PickRepository
 import com.albertsons.acupick.data.repository.SiteRepository
@@ -92,6 +94,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 import timber.log.Timber
+import java.sql.Time
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 import kotlin.math.abs
@@ -105,7 +108,8 @@ class HomeViewModel(
     private val networkAvailabilityManager: NetworkAvailabilityManager,
     private val completeHandoffUseCase: CompleteHandoffUseCase,
     private val completeHandoff1PLUseCase: CompleteHandoff1PLUseCase,
-    private val activityViewModel: MainActivityViewModel
+    private val activityViewModel: MainActivityViewModel,
+
 ) : BaseViewModel(app) {
 
     private val siteRepository: SiteRepository by inject()
@@ -113,7 +117,7 @@ class HomeViewModel(
     private val imagePreCacher: ImagePreCacher by inject()
     private val conversationsRepository: ConversationsRepository by inject()
     private val idRepository: IdRepository by inject()
-
+    private val apiCallTimeStamp: GamePointsRepository by inject()
     // Loading flags
     val isDataLoading: LiveData<Boolean> = MutableLiveData(true)
     val isDataRefreshing = MutableLiveData(false)
@@ -237,6 +241,7 @@ class HomeViewModel(
     init {
 
         // Use View model scope to observe so we don't have to remover observers from live data
+        refreshTotalGamePoints()
         viewModelScope.launch {
             completeHandoffUseCase.handOffReassigned.collect {
                 inlineDialogEvent.postValue(
@@ -285,6 +290,25 @@ class HomeViewModel(
                     load()
                 }
             )
+        }
+    }
+
+    private fun refreshTotalGamePoints() {
+        viewModelScope.launch(dispatcherProvider.IO) {
+            if (networkAvailabilityManager.isConnected.first().not()) {
+                networkAvailabilityManager.triggerOfflineError { refreshTotalGamePoints() }
+            } else {
+                 // Call api to store all points
+                 // Check for last api call 10 min refresh
+                if (apiCallTimeStamp.canMakeApiCall()){
+                    Timber.e("refreshTotalGamePoints can make api call")
+                    apiCallTimeStamp.storeTimeStamp()
+                    apiCallTimeStamp.setPoints("100")
+                }else{
+                    Timber.e("refreshTotalGamePoints can't make api time stamp exceeds")
+                    // Already Made an api call no need to make api call
+                }
+            }
         }
     }
 

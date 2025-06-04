@@ -33,7 +33,7 @@ fun appVersion(context: Context): String {
     var version = ""
     try {
         val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-        version = pInfo.versionName
+        version = pInfo.versionName ?: ""
     } catch (e: PackageManager.NameNotFoundException) {
         e.printStackTrace()
     }

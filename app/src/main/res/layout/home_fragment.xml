@@ -50,18 +50,83 @@
                     app:layout_constraintVertical_bias="0.0"
                     tools:layout_editor_absoluteX="0dp">
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/home_banner_bg"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivHandOffIcon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:contentDescription="@string/handoff_batch_canceled_body"
+                            android:src="@drawable/ic_hand_off_hero"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStartPerformerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:lineSpacingExtra="2dp"
+                            android:text="Jessica just earned"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivHandOffIcon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintStart_toEndOf="@+id/ivHandOffIcon"
+                            app:layout_constraintTop_toTopOf="@+id/ivHandOffIcon" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCoins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:lineSpacingExtra="2dp"
+                            android:text="+3"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivHandOffIcon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintStart_toEndOf="@+id/tvStartPerformerName"
+                            app:layout_constraintTop_toTopOf="@+id/ivHandOffIcon" />
+
+                        <ImageView
+                            android:id="@+id/ivStar"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@drawable/gold_star"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvCoins"
+                            app:layout_constraintStart_toEndOf="@+id/tvCoins"
+                            app:layout_constraintTop_toTopOf="@+id/tvCoins" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/greetingUserNameTv"
                         style="@style/NunitoSansBold28.CoffeGrey700"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="16dp"
                         android:lineSpacingExtra="2dp"
                         android:text="@{viewModel.associateName}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/clBanner"
                         tools:text="Hello, Austin" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -94,8 +159,8 @@
                     <TextView
                         android:id="@+id/emptyHomeMessage"
                         style="@style/NunitoSansRegular16.Grey700"
-                        android:layout_width="219dp"
                         visibilityGoneIfNull="@{viewModel.emptyStateText}"
+                        android:layout_width="219dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
                         android:gravity="center"
@@ -601,9 +666,9 @@
 
                 <androidx.compose.ui.platform.ComposeView
                     android:id="@+id/chatButtonView"
-                    android:layout_gravity="end|bottom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"

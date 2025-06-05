@@ -566,7 +566,7 @@ private const val QA2_BASE_APS_URL = "https://ospk.qa2.westus.aks.az.albertsons.
 // The west APIM  url for pickservice // TODO we don't the east url for APIM QA3
 private const val APIM_QA1_WEST_BASE_APS_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa1int/ospkwu/pickservice/" // "https://apim-dev-01.albertsons.com/abs/qa/pickservice/"
 private const val APIM_QA2_WEST_BASE_APS_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa2int/ospkwu/pickservice/" // "https://apim-dev-02.albertsons.com/abs/qa3/pickservice/"
-private const val APIM_QA3_WEST_BASE_APS_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa3int/ospkwu/pickservice/" // "https://apim-dev-02.albertsons.com/abs/qa3/pickservice/"
+private const val APIM_QA3_WEST_BASE_APS_URL = "https://acupickgame.free.beeceptor.com/abs/qa3int/ospkwu/pickservice/" // "https://apim-dev-02.albertsons.com/abs/qa3/pickservice/"
 private const val APIM_QA4_WEST_BASE_APS_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa4int/ospkwu/pickservice/"
 private const val APIM_QA5_WEST_BASE_APS_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa5int/ospkwu/pickservice/"
 private const val APIM_PERF_WEST_BASE_APS_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/perfint/ospkwu/pickservice/"
@@ -592,7 +592,7 @@ private const val APIM_PROD_EAST_BASE_APS_URL = "https://esag-intgw-prod-eastus-
 // NOTE: Dev auth requires a different api contract and is not supported in the codebase at this time. Also, authentication endpoints for the QA env won't be used.
 private const val QA_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa1int/ospkwu/authservice/"
 private const val QA2_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa2int/ospkwu/authservice/ "
-private const val QA3_BASE_AUTH_URL = "https://acupickgame.free.beeceptor.com/esag-intgw-nonprod-westus-01.albertsons.com/abs/qa3int/ospkwu/authservice/"
+private const val QA3_BASE_AUTH_URL = "https://acupickgame.free.beeceptor.com/abs/qa3int/ospkwu/authservice/"
 private const val QA4_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa4int/ospkwu/authservice/"
 private const val QA5_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/qa5int/ospkwu/authservice/"
 private const val PERF_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.albertsons.com/abs/perf1int/ospkwu/authservice/"
@@ -600,7 +600,7 @@ private const val PERF_BASE_AUTH_URL = "https://esag-intgw-nonprod-westus-01.alb
 private const val APIM_PROD_BASE_AUTH_URL = "https://esag-intgw-prod-westus-01.albertsons.com/abs/int/ospkwu/authservice/"
 private const val APIM_PROD_BASE_AUTH_URL_CANARY = "https://esag-intgw-prod-westus-01.albertsons.com/abs/pilotint/ospkwu/authservice/"
 
-private const val OSCC_QA_BASE_URL = "https://esap-share-nonprod-apim-01-west-az.albertsons.com/abs/qaint/oscc-processor/"
+private const val OSCC_QA_BASE_URL = "https://acupickgame.free.beeceptor.com/abs/qaint/oscc-processor/"
 private const val OSCC_QA2_BASE_URL = "https://esap-share-nonprod-apim-01-west-az.albertsons.com/abs/acceptanceint/oscc-processor/"
 private const val OSCC_PROD_BASE_URL = "https://esap-apim-prod-01.albertsons.com/abs/int/oscc-processor/"
 

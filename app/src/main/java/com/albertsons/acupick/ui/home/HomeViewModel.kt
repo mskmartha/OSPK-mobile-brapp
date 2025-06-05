@@ -300,14 +300,24 @@ class HomeViewModel(
             } else {
                  // Call api to store all points
                  // Check for last api call 10 min refresh
-                if (apiCallTimeStamp.canMakeApiCall()){
-                    Timber.e("refreshTotalGamePoints can make api call")
-                    apiCallTimeStamp.storeTimeStamp()
-                    apiCallTimeStamp.setPoints("100")
-                }else{
-                    Timber.e("refreshTotalGamePoints can't make api time stamp exceeds")
-                    // Already Made an api call no need to make api call
+                if (!apiCallTimeStamp.canMakeApiCall()){
+                    Timber.e("APiCAlled allready stored ")
+                    return@launch
                 }
+
+                val result = isBlockingUi.wrap { apsRepo.getTotalGamesPoint() }
+                when (result) {
+                    is ApiResult.Success -> {
+                        load(true)
+                        result.data.totalPoints?.let {
+                            apiCallTimeStamp.setPoints(it.toString())
+                        }
+
+                    }
+                    is ApiResult.Failure -> {
+                        handleApiError(result, retryAction = { refreshTotalGamePoints() })
+                    }
+                }.exhaustive
             }
         }
     }

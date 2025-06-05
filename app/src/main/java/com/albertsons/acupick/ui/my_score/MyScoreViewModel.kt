@@ -39,7 +39,7 @@ class MyScoreViewModel(
         getMyRewards()
     }
 
-    private fun getMyRewards()  = viewModelScope.launch(dispatcherProvider.IO){
+    private fun getMyRewards() = viewModelScope.launch(dispatcherProvider.IO){
         val result = isBlockingUi.wrap { repo.getGameRewardsPoint() }
         when (result) {
             is ApiResult.Success -> {

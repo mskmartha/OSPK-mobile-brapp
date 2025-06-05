@@ -89,7 +89,7 @@ class StoresViewModel(
 
     @OptIn(DelicateCoroutinesApi::class)
     fun onConfirmClick() {
-        storeSelectionCompleteAction.postValue(Unit)
+      //  storeSelectionCompleteAction.postValue(Unit)
         viewModelScope.launch(dispatcherProvider.IO) {
             if (networkAvailabilityManager.isConnected.first().not()) {
                 networkAvailabilityManager.triggerOfflineError { onConfirmClick() }

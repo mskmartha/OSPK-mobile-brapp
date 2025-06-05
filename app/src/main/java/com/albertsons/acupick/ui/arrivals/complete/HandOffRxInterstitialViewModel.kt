@@ -10,6 +10,7 @@ import com.albertsons.acupick.data.model.HandOffAction
 import com.albertsons.acupick.data.model.HandOffInterstitialParamsList
 import com.albertsons.acupick.data.model.OrderSummaryParams
 import com.albertsons.acupick.data.network.NetworkAvailabilityManager
+import com.albertsons.acupick.data.repository.GamePointsRepository
 import com.albertsons.acupick.navigation.NavigationEvent
 import com.albertsons.acupick.ui.BaseViewModel
 import com.albertsons.acupick.ui.arrivals.pharmacy.PrescriptionReturnData
@@ -31,6 +32,7 @@ class HandOffRxInterstitialViewModel(
     private val completeHandoffUseCase: CompleteHandoffUseCase,
 ) : BaseViewModel(app) {
 
+    private val apiCallTimeStamp: GamePointsRepository by inject()
     private val messageDuration = 1500L
 
     private val networkAvailabilityManager: NetworkAvailabilityManager by inject()
@@ -48,6 +50,7 @@ class HandOffRxInterstitialViewModel(
     var erId: String = ""
     var scannedBags: PrescriptionReturnData? = null
     var orderSummaryParamsList: List<OrderSummaryParams> = emptyList()
+    var totalPoints :LiveData<String> = MutableLiveData()
     // flag to make sure the api not getting called multiple times when we go to new screen and come back
     var isActive: Boolean = false
 
@@ -66,6 +69,13 @@ class HandOffRxInterstitialViewModel(
                     )
                 )
             }
+        }
+        setTotalPoints()
+    }
+
+    private fun setTotalPoints() {
+        viewModelScope.launch {
+            totalPoints.postValue(apiCallTimeStamp.getPoints())
         }
     }
 

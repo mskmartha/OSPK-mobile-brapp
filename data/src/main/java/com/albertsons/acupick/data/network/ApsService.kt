@@ -60,6 +60,7 @@ import com.albertsons.acupick.data.model.response.StagingSummaryDto
 import com.albertsons.acupick.data.model.response.SubstitutionItemDetailsDto
 import com.albertsons.acupick.data.model.response.ArrivalsCountDetailsDto
 import com.albertsons.acupick.data.model.response.GameConfigDto
+import com.albertsons.acupick.data.model.response.GamesPointsDto
 import com.albertsons.acupick.data.model.response.OnePlDto
 import com.albertsons.acupick.data.model.response.ScanContDto
 import retrofit2.Response
@@ -343,4 +344,7 @@ internal interface ApsService {
 
     @GET("https://acupickgame.free.beeceptor.com/oceg-game-services/gamification/player/rules/SMAR602")
     suspend fun getGameRewards(): Response<GameConfigDto>
+
+    @GET("https://esag-intgw.free.beeceptor.com/oceg-game-services/getPlayerInfoFromMemoryFirstThenDB/v1?playerId=smar602")
+    suspend fun getTotalPoints(): Response<GamesPointsDto>
 }

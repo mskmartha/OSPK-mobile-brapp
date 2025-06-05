@@ -246,6 +246,9 @@
         <action
             android:id="@+id/action_homeFragment_to_arrivalsResultDetailsFragment"
             app:destination="@id/destageOrderScope" />
+
+
+
     </fragment>
     <fragment
         android:id="@+id/chatFragment"

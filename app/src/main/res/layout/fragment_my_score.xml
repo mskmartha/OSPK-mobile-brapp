@@ -58,12 +58,14 @@
                    android:id="@+id/llIncluded"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
+                   android:layout_marginTop="792dp"
                    android:orientation="vertical"
                    app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintHorizontal_bias="0.0"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@+id/lblHeading2">
 
-                 <include
+                   <include
                        layout="@layout/layout_score_types_view"
                        app:description="@{@string/lbl_basic_points_info}"
                        app:itemEnd="@{@drawable/baseline_add_24}"

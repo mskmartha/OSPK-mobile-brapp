@@ -1,6 +1,7 @@
 package com.albertsons.acupick.ui.home
 
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.albertsons.acupick.R
 import com.albertsons.acupick.data.network.NetworkAvailabilityManager
 import com.albertsons.acupick.databinding.HomeFragmentBinding
@@ -40,6 +41,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
         fragmentViewModel.cardData.observe(viewLifecycleOwner) {
             fragmentViewModel.runCardDataActions()
         }
+
     }
 
     private fun setupRefresh() {

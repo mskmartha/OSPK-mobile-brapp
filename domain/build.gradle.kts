@@ -6,7 +6,6 @@ plugins {
 dependencies {
     kotlinDependencies()
     coroutineDependencies()
-
     // Test
     junitDependencies()
     mockitoKotlinDependencies()

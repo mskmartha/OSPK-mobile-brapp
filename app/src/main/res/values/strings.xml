@@ -1954,4 +1954,11 @@
     <string name="_10_gift_card">$10\nGift Card</string>
     <string name="lbl_note_work">*Your OTH5 and store OTH5 score will be shared next day when you return to work.</string>
 
+    <string name="lbl_hand_off_lbl_1">Nailed it!</string>
+    <string name="lbl_hand_off_lbl_2">Your speed was impressive</string>
+    <string name="handoff_complete">Handoff complete</string>
+    <string name="collect_all_items">Collect all items</string>
+    <string name="collect_auth_code">Collect auth code</string>
+    <string name="total_points">Total Points</string>
+    <string name="wait_time_breakdown">Wait time breakdown</string>
 </resources>

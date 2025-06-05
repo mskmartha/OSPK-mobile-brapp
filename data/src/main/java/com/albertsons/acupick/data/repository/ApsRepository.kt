@@ -41,6 +41,7 @@ import com.albertsons.acupick.data.model.response.FetchOrderStatusResponseDto
 import com.albertsons.acupick.data.model.response.Remove1PLItemsResponseDto
 import com.albertsons.acupick.data.model.response.ScanContActDto
 import com.albertsons.acupick.data.model.response.ArrivalsCountDetailsDto
+import com.albertsons.acupick.data.model.response.GamesPointsDto
 import com.albertsons.acupick.data.model.response.OnePlDto
 import com.albertsons.acupick.data.model.response.ScanContDto
 import com.albertsons.acupick.data.model.response.isAssigned
@@ -110,6 +111,7 @@ interface ApsRepository : Repository {
     suspend fun get1PLTruckRemovalList(remove1PLItemsRequestDto: Get1PLTruckRemovalItemListRequestDto): ApiResult<Remove1PLItemsResponseDto>
     suspend fun logError(errorMessage: ErrorMessage): ApiResult<Unit>
     suspend fun printGiftLabel(erIds: List<Long>): ApiResult<Unit>
+    suspend fun getTotalGamesPoint():ApiResult<GamesPointsDto>
 }
 
 internal class ApsRepositoryImplementation(
@@ -160,6 +162,12 @@ internal class ApsRepositoryImplementation(
     override suspend fun printGiftLabel(erIds: List<Long>): ApiResult<Unit> {
         return wrapExceptions("printGiftLabel") {
             apsService.printGiftLabel(erIds).toResult()
+        }
+    }
+
+    override suspend fun getTotalGamesPoint(): ApiResult<GamesPointsDto> {
+        return wrapExceptions("getGamePoints") {
+            apsService.getTotalPoints().toResult()
         }
     }
 

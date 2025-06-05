@@ -418,12 +418,25 @@
                           <map>
                             <entry key="customerSignatureFragment">
                               <value>
-                                <LayoutPositions />
+                                <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="744" />
+                                      <option name="y" value="12" />
+                                    </Point>
+                                  </option>
+                                </LayoutPositions>
                               </value>
                             </entry>
                             <entry key="handOffFragment">
                               <value>
                                 <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="12" />
+                                      <option name="y" value="118" />
+                                    </Point>
+                                  </option>
                                   <option name="myPositions">
                                     <map>
                                       <entry key="action_handOffFragment_to_arrivalsOrdersPagerFragment">
@@ -454,6 +467,12 @@
                             <entry key="identificationBarcodeScanFragment">
                               <value>
                                 <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="744" />
+                                      <option name="y" value="368" />
+                                    </Point>
+                                  </option>
                                   <option name="myPositions">
                                     <map>
                                       <entry key="action_to_verificationManualEntryFragment">
@@ -469,6 +488,12 @@
                             <entry key="verificationIdTypeFragment">
                               <value>
                                 <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="256" />
+                                      <option name="y" value="118" />
+                                    </Point>
+                                  </option>
                                   <option name="myPositions">
                                     <map>
                                       <entry key="action_to_identificationBarcodeScanFragment">
@@ -489,6 +514,12 @@
                             <entry key="verificationManualEntryFragment">
                               <value>
                                 <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="500" />
+                                      <option name="y" value="76" />
+                                    </Point>
+                                  </option>
                                   <option name="myPositions">
                                     <map>
                                       <entry key="action_to_customerSignatureFragment">
@@ -592,8 +623,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="988" />
-                            <option name="y" value="2045" />
+                            <option name="x" value="572" />
+                            <option name="y" value="2313" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -667,8 +698,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1233" />
-                            <option name="y" value="4500" />
+                            <option name="x" value="1328" />
+                            <option name="y" value="4154" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -791,15 +822,6 @@
                             <option name="x" value="12" />
                             <option name="y" value="12" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_to_remove1PLHandoffFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

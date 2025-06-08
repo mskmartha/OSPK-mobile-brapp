@@ -11,6 +11,7 @@ import com.albertsons.acupick.data.model.HandOffInterstitialParamsList
 import com.albertsons.acupick.data.model.OrderSummaryParams
 import com.albertsons.acupick.data.model.OrderSummaryParamsList
 import com.albertsons.acupick.data.network.NetworkAvailabilityManager
+import com.albertsons.acupick.data.repository.GamePointsRepository
 import com.albertsons.acupick.navigation.NavigationEvent
 import com.albertsons.acupick.ui.BaseViewModel
 import com.albertsons.acupick.ui.dialog.CustomDialogArgDataAndTag
@@ -30,6 +31,7 @@ class HandOffInterstitialViewModel(
     val app: Application,
     private val completeHandoffUseCase: CompleteHandoffUseCase,
 ) : BaseViewModel(app) {
+    private val apiCallTimeStamp: GamePointsRepository by inject()
 
     private val networkAvailabilityManager: NetworkAvailabilityManager by inject()
 
@@ -44,7 +46,7 @@ class HandOffInterstitialViewModel(
     var isDugOrder: Boolean = false
     // flag to make sure the api not getting called multiple times when we go to new screen and come back
     var isActive: Boolean = false
-
+    var totalPoints :LiveData<String> = MutableLiveData()
     init {
         registerCloseAction(SINGLE_ORDER_ERROR_DIALOG_TAG) {
             closeActionFactory(
@@ -62,8 +64,13 @@ class HandOffInterstitialViewModel(
                 )
             }
         }
+        getTotalPoints()
     }
-
+    private fun getTotalPoints() {
+        viewModelScope.launch {
+            totalPoints.postValue(apiCallTimeStamp.getPoints())
+        }
+    }
     fun handleHandoffCompletion(params: HandOffInterstitialParamsList, orderSummaryParamsList: OrderSummaryParamsList, isFromNotification: Boolean = false) {
         if (isActive) return
         this.isFromNotification = isFromNotification

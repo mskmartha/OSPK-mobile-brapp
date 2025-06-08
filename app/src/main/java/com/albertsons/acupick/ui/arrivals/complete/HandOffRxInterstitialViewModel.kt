@@ -70,10 +70,10 @@ class HandOffRxInterstitialViewModel(
                 )
             }
         }
-        setTotalPoints()
+        getTotalPoints()
     }
 
-    private fun setTotalPoints() {
+    private fun getTotalPoints() {
         viewModelScope.launch {
             totalPoints.postValue(apiCallTimeStamp.getPoints())
         }

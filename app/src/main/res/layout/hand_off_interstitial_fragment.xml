@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             visibilityGoneIfFalse="@{isHandOffActionCancel}"
-            android:layout_height="140dp"/>
+            android:layout_height="10dp"/>
 
         <ImageView
             android:id="@+id/handOffImage"
@@ -49,6 +49,65 @@
             app:layout_constraintTop_toBottomOf="@+id/topSpacer"
             tools:visibility="visible"
             tools:src="@drawable/handoff_complete"/>
+        <LinearLayout
+            android:id="@+id/lTotalPoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusMessage">
+
+            <ImageView
+                android:id="@+id/ivHeader"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:elevation="10dp"
+                android:src="@drawable/win_cup" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-25dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/score_card"
+                    android:paddingHorizontal="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp">
+                    <com.google.android.material.textview.MaterialTextView
+
+                        style="@style/PopinsMedium16.DarkBrown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/total_points" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvPoints"
+                        style="@style/PopinsBold30.DarkBrown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="24sp"
+                        android:text="@{viewModel.totalPoints}"
+                        android:includeFontPadding="false"
+                        app:layout_constraintTop_toBottomOf="@id/pharmacyIcon"
+                        tools:text="3" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -60,7 +119,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text="@string/handoff_completed"
+            android:text="Test"
             app:action="@{viewModel.handOffAction}"
             app:layout_constraintTop_toBottomOf="@+id/handOffImage" />
 
@@ -70,7 +129,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toTopOf="@+id/troubleMessage"
-            app:layout_constraintTop_toBottomOf="@+id/statusMessage">
+            app:layout_constraintTop_toBottomOf="@+id/lTotalPoints">
 
             <LinearLayout
                 android:layout_width="match_parent"

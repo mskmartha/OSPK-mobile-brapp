@@ -49,6 +49,20 @@
             app:layout_constraintTop_toBottomOf="@+id/topSpacer"
             tools:visibility="visible"
             tools:src="@drawable/handoff_complete"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/statusMessage"
+            style="@style/PopinsBold28.DarkBrown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="@string/handoff_completed"
+            app:action="@{viewModel.handOffAction}"
+            app:layout_constraintTop_toBottomOf="@+id/handOffImage" />
         <LinearLayout
             android:id="@+id/lTotalPoints"
             android:layout_width="match_parent"
@@ -108,21 +122,6 @@
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/statusMessage"
-            style="@style/PopinsBold28.DarkBrown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:gravity="center"
-            android:text="Test"
-            app:action="@{viewModel.handOffAction}"
-            app:layout_constraintTop_toBottomOf="@+id/handOffImage" />
-
         <ScrollView
             android:id="@+id/customerWaitTimeScroll"
             android:layout_width="match_parent"

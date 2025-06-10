@@ -213,7 +213,7 @@
             android:layout_height="match_parent"
             app:isCancelled="@{viewModel.isCancelled}"
             app:visibilityGoneIfTrue="@{!viewModel.isOverlayVisible}"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -6,7 +6,7 @@
     <data>
 
         <import type="android.view.View" />
-
+        <import type="com.albertsons.acupick.R"/>
         <variable
             name="isHandOffActionCancel"
             type="Boolean" />
@@ -21,210 +21,386 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             visibilityGoneIfTrue="@{viewModel.showCompleteWithException}"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:visibility="gone">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Space
-                android:id="@+id/space"
+            <androidx.constraintlayout.widget.ConstraintLayout
+
                 android:layout_width="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                visibilityGoneIfFalse="@{isHandOffActionCancel}"
-                android:layout_height="140dp"/>
-
-            <ImageView
-                android:id="@+id/handOffImage"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="38dp"
-                android:src="@{isHandOffActionCancel ? @drawable/ic_handoff_cancel : @drawable/handoff_complete}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/space"
-                android:visibility="visible"
-                tools:src="@drawable/handoff_complete"/>
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/handOffActionMessage"
-                style="@style/PopinsBold28.DarkBrown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="32dp"
-                android:gravity="center"
-                android:text="@string/handoff_completed"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/handOffImage"
-                app:rxaction="@{viewModel.handOffAction}" />
-            <LinearLayout
-                android:id="@+id/lTotalPoints"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginHorizontal="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/handOffActionMessage">
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="30dp"
+                android:visibility="visible">
 
                 <ImageView
-                    android:id="@+id/ivHeader"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal"
-                    android:elevation="10dp"
-                    android:src="@drawable/win_cup" />
+                    android:id="@+id/handOffImage"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@{isHandOffActionCancel ? @drawable/ic_handoff_cancel : @drawable/handoff_complete}"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/handoff_complete" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblHandOff1"
+                    style="@style/PopinsBold30.DarkBrown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-25dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="@string/lbl_hand_off_lbl_1"
+                    app:layout_constraintTop_toBottomOf="@id/handOffImage"
+                    tools:text="@string/lbl_hand_off_lbl_1" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblHandOff2"
+                    style="@style/PopinsBold16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:gravity="center"
+                    android:text="@string/lbl_hand_off_lbl_2"
+                    android:textColor="@color/darkBrown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lblHandOff1"
+                    tools:text="@string/lbl_hand_off_lbl_2" />
+
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".33" />
+
+                <include
+                    android:id="@+id/lFirst"
+                    layout="@layout/layout_rewards_info"
+                    android:layout_width="0dp"
+                    app:title="@{@string/handoff_complete}"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/gl1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblHandOff2" />
+
+
+                <include
+                    android:id="@+id/lSecond"
+                    layout="@layout/layout_rewards_info"
+                    android:layout_width="0dp"
+                    app:title="@{@string/collect_all_items}"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/gl2"
+                    app:layout_constraintStart_toStartOf="@+id/gl1"
+                    app:layout_constraintTop_toBottomOf="@+id/lblHandOff2" />
+
+                <include
+                    android:id="@+id/lThird"
+                    layout="@layout/layout_rewards_info"
+                    android:layout_width="0dp"
+                    app:title="@{@string/collect_auth_code}"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/gl2"
+                    app:layout_constraintTop_toBottomOf="@+id/lblHandOff2" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".66" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".5" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcRank"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="25dp"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="0dp"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintEnd_toStartOf="@+id/gl3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lThird">
 
-                    <LinearLayout
-                        android:orientation="vertical"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="@color/score_card"
-                        android:paddingHorizontal="10dp"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="10dp">
-                        <com.google.android.material.textview.MaterialTextView
+                        android:padding="10dp">
 
-                            style="@style/PopinsMedium16.DarkBrown"
-                            android:layout_width="match_parent"
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivRank"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_achievements"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvlblTimeBreakdown"
+                            style="@style/TabNunitoSansSemiBoldGrey"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="18sp"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/total_points" />
+                            android:includeFontPadding="false"
+                            android:text="@string/rank"
+                            android:textColor="@color/darkBrown"
+                            android:textSize="16sp"
+                            app:layout_constraintHorizontal_bias="0.1"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivRank"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ivRank"
+                            app:layout_constraintTop_toTopOf="@+id/ivRank" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvRank"
+                            style="@style/PopinsBold30.DarkBrown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintHorizontal_bias="0.1"
+                            android:drawableStart="@drawable/ic_arrow_up_rank"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="15"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ivRank"
+                            app:layout_constraintTop_toBottomOf="@+id/tvlblTimeBreakdown" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvPoints"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/gl3"
+                    app:layout_constraintTop_toBottomOf="@+id/lThird">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/score_card"
+                        android:padding="10dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivPoints"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/gold_star"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvLblPoints"
+                            style="@style/TabNunitoSansRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@string/points_earned"
+                            android:textColor="@color/darkBrown"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivPoints"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.1"
+                            app:layout_constraintStart_toEndOf="@+id/ivPoints"
+                            app:layout_constraintTop_toTopOf="@+id/ivPoints" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tvPoints"
                             style="@style/PopinsBold30.DarkBrown"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="24sp"
-                            android:text="@{viewModel.totalPoints}"
                             android:includeFontPadding="false"
-                            app:layout_constraintTop_toBottomOf="@id/pharmacyIcon"
-                            tools:text="3" />
-                    </LinearLayout>
+                            android:text="@{`+ ` + viewModel.totalPoints + ` pts`}"
+                            android:textSize="24sp"
+                            tools:text="+500 pts"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.1"
+                            app:layout_constraintStart_toEndOf="@+id/ivPoints"
+                            app:layout_constraintTop_toBottomOf="@+id/tvLblPoints" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout>
-            <include
-                android:id="@+id/waitTime"
-                layout="@layout/hand_off_completed_wait_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:orderNumber="@{viewModel.orderNumber}"
-                app:visibilityGoneIfTrue="@{isHandOffActionCancel}"
-                app:customerWaitTime="@{viewModel.customerArrivalTime}"
-                app:viewModel="@{viewModel}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lTotalPoints"
-                tools:visibility="visible" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvTimeSection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/mcvPoints"
+                    app:layout_constraintStart_toStartOf="@+id/mcRank"
+                    app:layout_constraintTop_toBottomOf="@+id/mcRank">
 
-            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                android:id="@+id/grey_frame"-->
-            <!--                visibilityGoneIfTrue="@{isHandOffActionCancel}"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="88dp"-->
-            <!--                android:layout_marginHorizontal="16dp"-->
-            <!--                android:layout_marginTop="24dp"-->
-            <!--                android:background="@color/warm_background"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/handOffActionMessage">-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/score_card"
+                        android:padding="15dp">
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/orderNumberText"-->
-            <!--                    style="@style/NunitoSansRegular16.Grey700"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginStart="20dp"-->
-            <!--                    android:layout_marginTop="16dp"-->
-            <!--                    android:text="@string/order"-->
-            <!--                    app:layout_constraintStart_toStartOf="@+id/grey_frame"-->
-            <!--                    app:layout_constraintTop_toTopOf="@+id/grey_frame" />-->
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvLblWaitTime"
+                            style="@style/TabNunitoSansRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@string/wait_time"
+                            android:textColor="@color/darkBrown"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/orderNumberValue"-->
-            <!--                    style="@style/NunitoSansSemiBold16.Grey700"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="16dp"-->
-            <!--                    android:layout_marginEnd="20dp"-->
-            <!--                    android:text="@{'#' + viewModel.orderNumber}"-->
-            <!--                    app:layout_constraintEnd_toEndOf="@+id/grey_frame"-->
-            <!--                    app:layout_constraintTop_toTopOf="@+id/grey_frame"-->
-            <!--                    tools:text="#123456" />-->
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvCompletedTime"
+                            style="@style/PopinsBold30.DarkBrown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:textSize="30sp"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:customerWaitTime="@{viewModel.customerArrivalTime}"
+                            app:isDugOrder="@{false}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/tvLblWaitTime"
+                            app:layout_constraintTop_toBottomOf="@+id/tvLblWaitTime"
+                            tools:text="2m 3s" />
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/waitTimeText"-->
-            <!--                    style="@style/NunitoSansRegular16.Grey700"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginStart="20dp"-->
-            <!--                    android:layout_marginTop="8dp"-->
-            <!--                    android:text="@string/customer_wait_time"-->
-            <!--                    app:layout_constraintStart_toStartOf="@+id/grey_frame"-->
-            <!--                    app:layout_constraintTop_toBottomOf="@+id/orderNumberText" />-->
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvLblAbg"
+                            style="@style/TabNunitoSansRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@string/avg"
+                            android:textColor="@color/darkBrown"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvLblWaitTime"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tvLblWaitTime" />
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/waitTimeValue"-->
-            <!--                    style="@style/NunitoSansSemiBold16.Grey700"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="8dp"-->
-            <!--                    android:layout_marginEnd="20dp"-->
-            <!--                    app:customerWaitTime="@{viewModel.customerArrivalTime}"-->
-            <!--                    app:layout_constraintEnd_toEndOf="@+id/grey_frame"-->
-            <!--                    app:layout_constraintTop_toBottomOf="@+id/orderNumberValue"-->
-            <!--                    tools:text="2m 3s" />-->
-            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvAvgTime"
+                            style="@style/TabNunitoSansRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_arrow_up_rank"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="2m 2s"
+                            android:textColor="@color/darkBrown"
+                            android:textSize="22sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            app:layout_constraintTop_toBottomOf="@+id/tvLblAbg" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvLblBestTime"
+                            android:layout_marginTop="2dp"
+                            style="@style/TabNunitoSansRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@string/best"
+                            android:textColor="@color/darkBrown"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="@+id/tvAvgTime"
+                            app:layout_constraintTop_toBottomOf="@+id/tvAvgTime" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvBestTime"
+                            style="@style/TabNunitoSansRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="2m 2s"
+                            android:textColor="@color/darkBrown"
+                            android:textSize="22sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvLblBestTime" />
 
 
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/troubleMessages"
-                style="@style/NunitoSansSemiBoldItalic20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:text="@string/interstitial_reconnect_wifi"
-                app:layout_constraintTop_toBottomOf="@+id/waitTime"
-                app:visibilityGoneIfFalse="@{viewModel.isShowingTroubleMessage}"
-                tools:visibility="visible" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/backToHomeButton"
-                style="@style/ButtonPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"
-                android:layout_marginBottom="24dp"
-                android:enabled="@{viewModel.isBackToHomeButtonEnable}"
-                android:onClick="@{() -> viewModel.navigateToPrescriptionFragmentOrHome()}"
-                android:padding="10dp"
-                android:text="@{isHandOffActionCancel ? @string/rx_dug_code_continue_positive_button : @string/back_to_home}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/backToHomeButton"
+                    style="@style/ButtonPrimary"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginEnd="48dp"
+                    android:enabled="@{viewModel.isBackToHomeButtonEnable}"
+                    android:onClick="@{() -> viewModel.navigateToPrescriptionFragmentOrHome()}"
+                    android:padding="10dp"
+                    android:text="@{isHandOffActionCancel ? @string/rx_dug_code_continue_positive_button : @string/back_to_home}"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mcvTimeSection" />
+
+
+                <TextView
+                    android:id="@+id/viewOrderSummaryText"
+                    style="@style/NunitoSansSemiBold14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onViewOrderSummaryClicked(viewModel.orderNumber)}"
+
+                    android:text="@{`Order #` + viewModel.orderNumber + ` summary`}"
+                    android:textColor="@color/cattBlue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/backToHomeButton"
+                    tools:text="@string/view_order_smummary" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/handOffLayout"

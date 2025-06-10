@@ -1957,8 +1957,12 @@
     <string name="lbl_hand_off_lbl_1">Nailed it!</string>
     <string name="lbl_hand_off_lbl_2">Your speed was impressive</string>
     <string name="handoff_complete">Handoff complete</string>
-    <string name="collect_all_items">Collect all items</string>
+    <string name="collect_all_items">No missing bag</string>
     <string name="collect_auth_code">Collect auth code</string>
     <string name="total_points">Total Points</string>
     <string name="wait_time_breakdown">Wait time breakdown</string>
+    <string name="rank">Rank</string>
+    <string name="points_earned">Points earned</string>
+    <string name="avg">Avg</string>
+    <string name="best">Best</string>
 </resources>

@@ -39,24 +39,27 @@ class MyScoreViewModel(
         getMyRewards()
     }
 
-    private fun getMyRewards() = viewModelScope.launch(dispatcherProvider.IO){
-        val result = isBlockingUi.wrap { repo.getGameRewardsPoint() }
-        when (result) {
-            is ApiResult.Success -> {
-                isDataLoading.postValue(false)
-                val basePointsRules = result.data.basePointsRules ?: arrayListOf()
-                val userOTH = result.data.userOTH ?: arrayListOf()
-                val storeOTH = result.data.storeOTH ?: arrayListOf()
-                basePoints.postValue(basePointsRules)
-                othRule5.postValue(userOTH)
-                othStore.postValue(storeOTH)
-            }
-            is ApiResult.Failure -> {
-                isDataLoading.postValue(false)
-                handleApiError(result, retryAction = {  })
-            }
-        }.exhaustive
-    }
+    private fun getMyRewards() {
+        viewModelScope.launch(dispatcherProvider.IO) {
+            val result = isBlockingUi.wrap { repo.getGameRewardsPoint() }
+            when (result) {
+                is ApiResult.Success -> {
+                    isDataLoading.postValue(false)
+                    val basePointsRules = result.data.basePointsRules ?: arrayListOf()
+                    val userOTH = result.data.userOTH ?: arrayListOf()
+                    val storeOTH = result.data.storeOTH ?: arrayListOf()
+                    basePoints.postValue(basePointsRules)
+                    othRule5.postValue(userOTH)
+                    othStore.postValue(storeOTH)
+                }
 
+                is ApiResult.Failure -> {
+                    isDataLoading.postValue(false)
+                    handleApiError(result, retryAction = { getMyRewards() })
+                }
+            }.exhaustive
+        }
+
+    }
 
 }

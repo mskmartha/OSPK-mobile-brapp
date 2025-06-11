@@ -114,7 +114,6 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="24sp"
-                        android:text="@{viewModel.totalPoints}"
                         android:includeFontPadding="false"
                         app:layout_constraintTop_toBottomOf="@id/pharmacyIcon"
                         tools:text="3" />

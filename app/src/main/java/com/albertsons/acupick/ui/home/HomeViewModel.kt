@@ -301,14 +301,14 @@ class HomeViewModel(
                  // Call api to store all points
                  // Check for last api call 10 min refresh
                 if (!apiCallTimeStamp.canMakeApiCall()){
-                    Timber.e("APiCAlled allready stored ")
+                    isDataLoading.wrap { false }
                     return@launch
                 }
 
                 val result = isBlockingUi.wrap { apsRepo.getTotalGamesPoint() }
                 when (result) {
                     is ApiResult.Success -> {
-                        load(true)
+                        load(false)
                         result.data.totalPoints?.let {
                             apiCallTimeStamp.setPoints(it.toString())
                         }

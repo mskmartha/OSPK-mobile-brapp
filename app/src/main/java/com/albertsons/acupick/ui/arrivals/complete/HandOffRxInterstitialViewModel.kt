@@ -50,7 +50,7 @@ class HandOffRxInterstitialViewModel(
     var erId: String = ""
     var scannedBags: PrescriptionReturnData? = null
     var orderSummaryParamsList: List<OrderSummaryParams> = emptyList()
-    var totalPoints :LiveData<String> = MutableLiveData()
+    var totalPoints :LiveData<String?>  = MutableLiveData("")
     // flag to make sure the api not getting called multiple times when we go to new screen and come back
     var isActive: Boolean = false
 

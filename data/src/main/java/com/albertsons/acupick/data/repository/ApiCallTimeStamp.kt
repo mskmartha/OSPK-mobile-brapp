@@ -2,6 +2,7 @@ package com.albertsons.acupick.data.repository
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import timber.log.Timber
 import java.time.Duration
 import java.time.Instant
 
@@ -26,6 +27,7 @@ class GamePointsRepositoryImpl(
     }
 
     override fun canMakeApiCall(): Boolean {
+        if (getPoints().isEmpty()) return true
         val lastTimeStampMillis = sharedPreferences.getLong(
             LAST_TIME_STAMP, -1L
         )
@@ -46,6 +48,7 @@ class GamePointsRepositoryImpl(
 
         // Check if the duration is 10 minutes or more
         return duration >= tenMinutes
+
     }
 
     override fun setPoints(points: String) {

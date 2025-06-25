@@ -305,17 +305,22 @@ class HomeViewModel(
                     return@launch
                 }
 
-                val result = isBlockingUi.wrap { apsRepo.getTotalGamesPoint() }
+                val result = apsRepo.getTotalGamesPoint()
                 when (result) {
                     is ApiResult.Success -> {
-                        load(false)
+
                         result.data.totalPoints?.let {
                             apiCallTimeStamp.setPoints(it.toString())
                         }
 
                     }
                     is ApiResult.Failure -> {
-                        handleApiError(result, retryAction = { refreshTotalGamePoints() })
+                        if (apiCallTimeStamp.getPoints().isEmpty()){
+                            handleApiError(result, retryAction = { refreshTotalGamePoints() })
+                        }else{
+                            // Do nothing
+                        }
+
                     }
                 }.exhaustive
             }
@@ -433,6 +438,7 @@ class HomeViewModel(
             loadingState.postValue(HomeLoadingState.Initial)
         }
         loadEvent.value = isRefresh
+
     }
 
     private val loadEvent = MutableStateFlow<Boolean?>(null).apply {

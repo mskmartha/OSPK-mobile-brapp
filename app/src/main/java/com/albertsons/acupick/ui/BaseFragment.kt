@@ -35,6 +35,7 @@ import com.google.firebase.perf.metrics.Trace
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 /**
  * Manages DataBinding setup and navigation observer setup, allows per fragment logic/customizations via [setupBinding]
@@ -73,6 +74,7 @@ abstract class BaseFragment<FRAGMENT_VIEW_MODEL : BaseViewModel, BINDING : ViewD
         savedInstanceState: Bundle?,
     ): View? {
         // Log screen view using fragment class name
+        Timber.e("CurrentScreenName -> ${this@BaseFragment.javaClass.simpleName}")
         Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
             param(FirebaseAnalytics.Param.SCREEN_NAME, this@BaseFragment.javaClass.simpleName)
         }

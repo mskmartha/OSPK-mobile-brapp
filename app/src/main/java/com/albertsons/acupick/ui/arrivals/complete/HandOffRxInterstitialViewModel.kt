@@ -26,6 +26,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 import java.time.ZonedDateTime
+import java.time.temporal.ChronoUnit
 
 class HandOffRxInterstitialViewModel(
     val app: Application,
@@ -132,5 +133,34 @@ class HandOffRxInterstitialViewModel(
                 )
             )
         }
+    }
+
+   private fun calculatePointsStore(){
+        if (customerArrivalTime == null) return
+        viewModelScope.launch {
+            var points = totalPoints.value ?: ""
+            val endTime = otpCapturedOrByPassTime ?: ZonedDateTime.now()
+            val totalMinutes = (ChronoUnit.SECONDS.between(customerArrivalTime, endTime) / 60).toInt()
+            var pointsToAdd = 0
+            if (otpCapturedOrByPassTime != null){
+                pointsToAdd += 1
+            }
+
+            if (handOffAction.value == HandOffAction.COMPLETE_WITH_EXCEPTION ||
+                handOffAction.value == HandOffAction.COMPLETE){
+                pointsToAdd += 1
+            }
+
+            if (totalMinutes <= 2){
+                pointsToAdd += 3
+            }
+
+            if (totalMinutes in 3..5){
+                pointsToAdd += 2
+            }
+            points += pointsToAdd
+            // Total Points logic
+        }
+
     }
 }

@@ -32,6 +32,7 @@ import com.albertsons.acupick.infrastructure.coroutine.DispatcherProvider
 import com.albertsons.acupick.infrastructure.utils.isNotNullOrEmpty
 import com.albertsons.acupick.navigation.NavigationEvent
 import com.albertsons.acupick.ui.BaseViewModel
+import com.albertsons.acupick.ui.arrivals.TimerHeaderData
 import com.albertsons.acupick.ui.arrivals.complete.COMPLETE_HANDOFF_MESSAGE_DURATION_MS
 import com.albertsons.acupick.ui.arrivals.complete.HandOffArgData
 import com.albertsons.acupick.ui.arrivals.complete.HandOffUI
@@ -66,6 +67,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.inject
+import timber.log.Timber
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 
@@ -200,7 +202,10 @@ class PrescriptionReturnViewModel(val app: Application) : BaseViewModel(app) {
                     }.collect {
                         // reset if there's any existing header text
                         changeToolbarTitleEvent.postValue("")
-                        changeToolbarSmallTitleEvent.postValue(app.getString(R.string.wait_time_countdown, it.div(60), it.rem(60)))
+                        Timber.e("TimerProgress pharmecy")
+                      //  changeToolbarSmallTitleEvent.postValue(app.getString(R.string.wait_time_countdown, it.div(60), it.rem(60)))
+                        showTimerOnToolbar.postValue(TimerHeaderData(elapsedTime = it))
+
                         val titleBackground = ContextCompat.getDrawable(app.applicationContext, R.drawable.rounded_corner_picklist_status_button) as GradientDrawable
                         titleBackground.setColor(ContextCompat.getColor(app.applicationContext, R.color.picklist_stageByTime_pastDue))
                         titleBackground.alpha = 170

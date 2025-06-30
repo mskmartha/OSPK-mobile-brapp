@@ -28,6 +28,7 @@ import com.albertsons.acupick.navigation.ExternalNavigationEvent
 import com.albertsons.acupick.navigation.ExternalNavigationObserver
 import com.albertsons.acupick.navigation.NavigationEvent
 import com.albertsons.acupick.navigation.NavigationObserver
+import com.albertsons.acupick.ui.arrivals.TimerHeaderData
 import com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetArgDataAndTag
 import com.albertsons.acupick.ui.dialog.ALREADY_ASSIGNED_PICKLIST_ARG_DATA
 import com.albertsons.acupick.ui.dialog.CANCELED_BATCH_HANDOFF_ARG_DATA
@@ -158,6 +159,8 @@ abstract class BaseViewModel(private val app: Application) : AndroidViewModel(ap
     val toolbarRightFirstImageEvent = LiveEvent<Unit>()
     val toolbarTitleTextEvent = LiveEvent<Unit>()
 
+    // Timer for progress on order
+    val showTimerOnToolbar: LiveData<TimerHeaderData?> = MutableLiveData()
     // /////////////////////////////////////////////////////////////////////////
     // Framework to allow for dialogs to be fully coded inside of ViewModel and still maintain connection across process death.
     // /////////////////////////////////////////////////////////////////////////

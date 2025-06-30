@@ -276,6 +276,9 @@ abstract class BaseFragment<FRAGMENT_VIEW_MODEL : BaseViewModel, BINDING : ViewD
                 changeToolbarRightFirstExtraImageEvent.observe(viewLifecycleOwner) { avm.setToolbarRightFirstExtraImage(it.get(requireContext())) }
                 changeToolbarExtraRightEvent.observe(viewLifecycleOwner) { avm.setToolbarRightExtra(it) }
                 changeToolbarExtraRightCtaEvent.observe(viewLifecycleOwner) { it?.let { it1 -> avm.setToolbarRightExtraCta(it1.first, it.second) } }
+                showTimerOnToolbar.observe(viewLifecycleOwner){
+                    avm.setToolBarTimer(it)
+                }
                 clearToolbarEvent.observe(viewLifecycleOwner) { avm.clearToolbar() }
 
                 // Toolbar events notifying VM

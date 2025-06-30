@@ -63,6 +63,7 @@ import com.albertsons.acupick.infrastructure.utils.toServerFormattedDob
 import com.albertsons.acupick.navigation.NavigationEvent
 import com.albertsons.acupick.ui.BaseViewModel
 import com.albertsons.acupick.ui.MainActivityViewModel
+import com.albertsons.acupick.ui.arrivals.TimerHeaderData
 import com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetArgDataAndTag
 import com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetType
 import com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetArgData
@@ -99,6 +100,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
+import timber.log.Timber
 import java.io.Serializable
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
@@ -1038,6 +1040,7 @@ class HandOffViewModel(
     fun setDugInterjectionState(dugInterjectionState: DugInterjectionState) = pushNotificationsRepository.setDugInterjectionState(dugInterjectionState)
 
     fun setUpHeader() {
+        // NEed to add logic here
         if (isShowTimer()) {
             handOffUI.value?.startTime?.let {
                 timerJob = viewModelScope.launch {
@@ -1049,7 +1052,10 @@ class HandOffViewModel(
                     }.collect {
                         // reset if there's any existing header text
                         changeToolbarTitleEvent.postValue("")
-                        changeToolbarSmallTitleEvent.postValue(app.getString(R.string.wait_time_countdown, it.div(60), it.rem(60)))
+                        Timber.e("TimerProgress Complete")
+                        showTimerOnToolbar.postValue(TimerHeaderData(elapsedTime = it))
+
+                        //  changeToolbarSmallTitleEvent.postValue(app.getString(R.string.wait_time_countdown, it.div(60), it.rem(60)))
                         val titleBackground = ContextCompat.getDrawable(app.applicationContext, R.drawable.rounded_corner_picklist_status_button) as GradientDrawable
                         titleBackground.setColor(ContextCompat.getColor(app.applicationContext, R.color.picklist_stageByTime_pastDue))
                         titleBackground.alpha = 170

@@ -1,6 +1,7 @@
 package com.albertsons.acupick.ui.bindingadapters
 
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.Typeface.BOLD
 import android.text.Spannable
 import android.text.SpannableString
@@ -32,6 +33,9 @@ import com.albertsons.acupick.data.model.CustomerType
 import com.albertsons.acupick.infrastructure.utils.isNotNullOrEmpty
 import com.albertsons.acupick.ui.arrivals.complete.HandOffUI
 import com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetType
+import com.albertsons.acupick.ui.handoff.stepsprogress.ProgressViewConfig
+import com.albertsons.acupick.ui.handoff.stepsprogress.StepProgressBarView
+import com.albertsons.acupick.ui.handoff.stepsprogress.setUp
 import com.albertsons.acupick.ui.models.QuantityParams
 import com.albertsons.acupick.ui.models.SnackBarEvent
 import com.albertsons.acupick.ui.picklistitems.PickListType
@@ -615,3 +619,24 @@ fun TextView.setCustomerWaitTime(
     val totalSeconds = ChronoUnit.SECONDS.between(customerArrivalTime, endTime)
     this.text = context.getString(R.string.timer_format, totalSeconds / 60, totalSeconds % 60)
 }
+
+/*
+@BindingAdapter(value = ["app:setUpProgressConfig"] , requireAll = false)
+fun StepProgressBarView.setUpProgressConfig(
+    icon:Boolean ?= true
+){
+    val config = ProgressViewConfig(
+        totalSteps = 5,
+        labelSuffix = "m",
+        labelTextSizeSp = 14f,
+        labelTextColor = Color.BLACK,
+        barHeightDp = 10,
+        roundRadius = 20,
+        thumbDrawable = ContextCompat.getDrawable(this.context, R.drawable.ic_progress_icon),
+        barColor = Pair(Color.BLUE, Color.LTGRAY)
+    )
+    setUp(config) { step ->
+
+    }
+}
+*/

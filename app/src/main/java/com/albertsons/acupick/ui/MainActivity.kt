@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
@@ -56,6 +57,8 @@ import com.albertsons.acupick.ui.dialog.CloseActionListener
 import com.albertsons.acupick.ui.dialog.CloseActionListenerProvider
 import com.albertsons.acupick.ui.dialog.CustomDialogArgData
 import com.albertsons.acupick.ui.dialog.showWithActivity
+import com.albertsons.acupick.ui.handoff.stepsprogress.ProgressViewConfig
+import com.albertsons.acupick.ui.handoff.stepsprogress.setUp
 import com.albertsons.acupick.ui.notification.NotificationViewModel
 import com.albertsons.acupick.ui.notification.NotificationViewModel.Companion.FLASH_ORDER_ACCEPTED_USER_ACTION
 import com.albertsons.acupick.ui.util.AnalyticsHelper
@@ -289,6 +292,7 @@ class MainActivity :
         keepScreenOn()
         permissionService = PermissionService(this)
 
+
         appDynamicsConfig.initialize()
         activityViewModel.acuPickLogger.setUserData(EventKey.DEVICE_ID, analyticsHelper.deviceId)
 
@@ -298,6 +302,7 @@ class MainActivity :
             drawer = drawerLayout
             // To show orignal icon color in navigation view menu item: https://stackoverflow.com/questions/44515664/bottomnavigationview-original-icon-color
             navView.itemIconTintList = null
+
 
             // Inflate the nav_header_view manually, add to navView, and set the viewModel/lifecycleOwner: https://stackoverflow.com/questions/33962548/how-to-data-bind-to-a-header
             DataBindingUtil.inflate<NavHeaderViewBinding>(layoutInflater, R.layout.nav_header_view, navView, false).apply {
@@ -393,6 +398,22 @@ class MainActivity :
             notificationViewModel.badgeArrivalsAction.observe(this@MainActivity) {
                 bottomNav.setupBadge(it)
             }
+
+            activityViewModel.progressTimer.observe(this@MainActivity){
+                val config = ProgressViewConfig(
+                    totalSteps = 5 * 60,
+                    labelSuffix = "m",
+                    labelTextSizeSp = 14f,
+                    labelTextColor = Color.DKGRAY,
+                    barHeightDp = 5,
+                    roundRadius = 8,
+                    thumbDrawable = ContextCompat.getDrawable(this@MainActivity, R.drawable.icon_container),
+                    barColor = Pair(Color.BLUE, Color.LTGRAY)
+                )
+                handOffTimer.setUp(config){}
+                handOffTimer.jumpToStep(it?.elapsedTime?.toFloat() ?: 0f)
+            }
+
 
             /**
              *  In order to hide the snack bar when the drawer is open, we move the drawerLayout to an elevation of 8dp.

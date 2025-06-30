@@ -20,6 +20,7 @@ import com.albertsons.acupick.data.model.response.FE_SCREEN_STATUS_STORE_NOTIFIE
 import com.albertsons.acupick.data.repository.SiteRepository
 import com.albertsons.acupick.infrastructure.utils.isNotNullOrEmpty
 import com.albertsons.acupick.ui.BaseViewModel
+import com.albertsons.acupick.ui.arrivals.TimerHeaderData
 import com.albertsons.acupick.ui.dialog.CustomDialogArgData
 import com.albertsons.acupick.ui.dialog.CustomDialogArgDataAndTag
 import com.albertsons.acupick.ui.dialog.DialogType
@@ -48,6 +49,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
+import timber.log.Timber
 import java.io.Serializable
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
@@ -323,7 +325,9 @@ class DestageOrderViewModel(val app: Application) : BaseViewModel(app) {
                     }.collect {
                         // reset if there's any existing header text
                         changeToolbarTitleEvent.postValue("")
-                        changeToolbarSmallTitleEvent.postValue(app.getString(R.string.wait_time_countdown, it.div(60), it.rem(60)))
+                        Timber.e("TimerProgress destage")
+                       // changeToolbarSmallTitleEvent.postValue(app.getString(R.string.wait_time_countdown, it.div(60), it.rem(60)))
+                        showTimerOnToolbar.postValue(TimerHeaderData(elapsedTime = it))
                         val titleBackground = ContextCompat.getDrawable(app.applicationContext, R.drawable.rounded_corner_picklist_status_button) as GradientDrawable
                         titleBackground.setColor(ContextCompat.getColor(app.applicationContext, R.color.picklist_stageByTime_pastDue))
                         titleBackground.alpha = 170

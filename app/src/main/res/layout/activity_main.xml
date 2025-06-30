@@ -28,11 +28,11 @@
                 android:layout_height="61dp"
                 android:background="@color/white"
                 android:paddingVertical="3dp"
-                app:visibilityGoneIfFalse="@{viewModel.toolBarVisibility}"
                 android:theme="@style/toolbarTheme"
                 app:layout_constraintTop_toTopOf="parent"
                 app:subtitleTextColor="@color/grey_700"
-                app:titleTextColor="@color/grey_700" />
+                app:titleTextColor="@color/grey_700"
+                app:visibilityGoneIfFalse="@{viewModel.toolBarVisibility}" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbarOverlay"
@@ -109,6 +109,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:visibilityGoneIfFalse="@{!viewModel.isStepProgressViewVisible}"
                         tools:text="Small Title"
                         tools:visibility="visible" />
 
@@ -200,13 +201,6 @@
                     tools:src="@drawable/ic_keyboard"
                     tools:visibility="visible" />
 
-                <com.albertsons.acupick.ui.handoff.stepsprogress.StepProgressBarView
-                    android:id="@+id/handOffTimer"
-                    android:layout_width="0dp"
-                    android:visibility="gone"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
-                    app:layout_constraintStart_toStartOf="@+id/guideline3" />
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline2"
                     android:layout_width="wrap_content"
@@ -283,6 +277,58 @@
                     app:menu="@menu/menu_bottom_nav" />
             </FrameLayout>
 
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/gl2"
+                app:layout_constraintStart_toStartOf="@+id/gl1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0"
+                app:visibilityGoneIfFalse="@{viewModel.isStepProgressViewVisible}">
+
+                <TextView
+                    android:id="@+id/tvTimmer"
+                    style="@style/NunitoSansBold14.Grey700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:minWidth="100dp"
+                    android:paddingTop="6dp"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:text="@{viewModel.updateTimerTime}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Small Title"
+                    tools:visibility="visible" />
+                <com.albertsons.acupick.ui.handoff.stepsprogress.StepProgressBarView
+                    android:id="@+id/handOffTimer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+            </LinearLayout>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl1"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl2"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
@@ -326,6 +372,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:showDeviceId="@{true}"
                     tools:text="Device ID" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.navigation.NavigationView>
 

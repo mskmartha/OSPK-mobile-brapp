@@ -11,6 +11,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import timber.log.Timber
 import kotlin.math.roundToInt
 
 /**
@@ -77,7 +78,7 @@ class StepProgressBarView @JvmOverloads constructor(
      * Text size of the step labels in SP (scale-independent pixels).
      * Updating this property redraws the labels.
      */
-    var labelTextSizeSp: Float = 12f
+    var labelTextSizeSp: Float = 14f
         set(value) {
             field = value
             updateLabels() // Update labels when text size changes
@@ -143,7 +144,7 @@ class StepProgressBarView @JvmOverloads constructor(
         barContainer.addView(fillView)
 
         // Setup the thumb view.
-        thumbView.layoutParams = FrameLayout.LayoutParams(24.dp, 24.dp).apply {
+        thumbView.layoutParams = FrameLayout.LayoutParams(16.dp, 16.dp).apply {
             gravity = Gravity.START or Gravity.CENTER_VERTICAL // Initially at the start, centered vertically
         }
         barContainer.addView(thumbView)
@@ -154,7 +155,7 @@ class StepProgressBarView @JvmOverloads constructor(
         // Setup the horizontal LinearLayout for labels.
         labelLayout.orientation = LinearLayout.HORIZONTAL
         labelLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
-            topMargin = 4.dp // Small margin above labels
+            topMargin = 0.dp // Small margin above labels
         }
         container.addView(labelLayout)
 
@@ -178,14 +179,14 @@ class StepProgressBarView @JvmOverloads constructor(
         if (barWidth == 0f) return // If width is not yet determined, skip
 
         // Iterate through each step to create and position labels.
-        for (i in 0..totalSteps) {
+        for (i in 0..5) {
             val label = TextView(context).apply {
                 text = "$i$labelSuffix" // Set label text (e.g., "0m", "1m", ...)
                 gravity = Gravity.CENTER // Center text within the TextView
                 textSize = labelTextSizeSp // Apply configured text size
                 setTextColor(labelTextColor) // Apply configured text color
                 typeface = labelTypeface ?: Typeface.DEFAULT // Apply configured typeface or default
-                layoutParams = if (i == 0 || i == totalSteps) {
+                layoutParams = if (i == 0 || i == 5) {
                     // For the first and last labels, use WRAP_CONTENT and align to START/END.
                     LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
                         weight = 0f // Do not distribute remaining space
@@ -200,7 +201,7 @@ class StepProgressBarView @JvmOverloads constructor(
 
             // Post a runnable to position labels after their width is measured.
             label.post {
-                val stepRatio = i.toFloat() / totalSteps // Calculate the ratio for this step
+                val stepRatio = i.toFloat() / 5 // Calculate the ratio for this step
                 val labelWidth = label.width.toFloat() // Get the measured width of the label
                 // Calculate desired X position (center of label at stepRatio * barWidth)
                 val posX = (barWidth * stepRatio) - labelWidth / 2f
@@ -235,7 +236,7 @@ class StepProgressBarView @JvmOverloads constructor(
      * @param progress The target step value.
      */
     private fun applyProgress(progress: Float) {
-        val ratio = progress / totalSteps // Calculate the ratio of current progress to total steps
+        val ratio = progress / totalSteps// Calculate the ratio of current progress to total steps
         val widthPx = width // Get the actual width of the progress bar area
 
         // Update the width of the fill view.
@@ -275,6 +276,8 @@ class StepProgressBarView @JvmOverloads constructor(
      * @param animated If true, the jump will be animated.
      */
     fun jumpToStep(step: Float, animated: Boolean = true) {
+        Timber.e("jumpToStep $step")
+        Timber.e("jumpToStep current $currentStep")
         updateProgress(step, animated)
     }
 
@@ -357,4 +360,19 @@ class StepProgressBarView @JvmOverloads constructor(
      */
     private val Int.dp: Int
         get() = (this * resources.displayMetrics.density).toInt()
+
+    /**
+     * Updates the progress based on a time value.
+     *
+     * @param timeValue Current time (in any consistent unit, e.g., seconds or milliseconds).
+     * @param totalTime Total duration (in the same unit as timeValue).
+     * @param animated True to animate the progress change.
+     */
+    fun updateTimeProgress(timeValue: Long?, totalTime: Long?, animated: Boolean = true) {
+        if (timeValue == null || totalTime == null) return
+        if (totalTime <= 0L) return
+        val stepProgress = (timeValue.toFloat() / totalTime.toFloat()) * totalSteps
+        Timber.e("CurrentProgress -> $stepProgress")
+        jumpToStep(stepProgress, animated)
+    }
 }

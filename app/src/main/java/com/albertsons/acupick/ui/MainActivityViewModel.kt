@@ -43,6 +43,7 @@ import com.albertsons.acupick.data.repository.WineShippingStageStateRepository
 import com.albertsons.acupick.infrastructure.coroutine.DispatcherProvider
 import com.albertsons.acupick.infrastructure.utils.combineOncePerChange
 import com.albertsons.acupick.infrastructure.utils.isNotNullOrEmpty
+import com.albertsons.acupick.ui.arrivals.TimerHeaderData
 import com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetArgData
 import com.albertsons.acupick.ui.dialog.CustomDialogArgData
 import com.albertsons.acupick.ui.dialog.CustomDialogArgDataAndTag
@@ -119,7 +120,8 @@ class MainActivityViewModel(
     val blockUi: LiveData<Boolean> = MutableLiveData()
     val hasSingleSiteAssigned: LiveData<Boolean> = MutableLiveData(false)
     val keyboardActive = MutableLiveData<Boolean>()
-
+    val isStepProgressViewVisible: LiveData<Boolean> = MutableLiveData()
+    val progressTimer: LiveData<TimerHeaderData?> = MutableLiveData()
     // To identify if app resumes due to notification/interjection or due to a normal flow. This is needed as in some screens we make api calls in onResume() method which is not needed in
     // notification flow. Why live data is not used here? - Because onResume() method is getting called before live data observes the value(isAppResumesFromNotifiction), but we need the value before
     // onResume to block unnecessary api calls.
@@ -150,7 +152,7 @@ class MainActivityViewModel(
     val bottomSheetBackButtonPressed: MutableLiveData<Unit> = LiveEvent() // This variable is used to post data on active fragment when back button of bottom sheet pressed
     val storeTitle: LiveData<String> = MutableLiveData()
     val acknowledgedPickerDetails: LiveData<AcknowledgedPickerDetailsDto> = LiveEvent()
-
+    val updateTimerTime: LiveData<String?> = MutableLiveData()
     val is1Pl: LiveData<Boolean> = MutableLiveData(false)
     val orderNumberFor1PlToSelect = MutableLiveData<Long>()
 
@@ -451,6 +453,7 @@ class MainActivityViewModel(
 
     fun setToolbarSmallTitle(value: String = "") {
         toolbarSmallTitle.postValue(value)
+
     }
 
     fun setToolbarLeftExtra(value: String = "") {
@@ -501,6 +504,20 @@ class MainActivityViewModel(
         acknowledgedPickerDetails.postValue(details)
     }
 
+    fun setToolBarTimer(data:TimerHeaderData?){
+        progressTimer.postValue(data)
+        data?.let {
+            val timer = app.getString(R.string.wait_time_countdown, it.elapsedTime.div(60), it.elapsedTime.rem(60))
+            Timber.e("Timer -> Long ${it.elapsedTime}")
+            Timber.e("Timer -> Minutes ${it.elapsedTime.div(60)}")
+            Timber.e("Timer -> Second ${ it.elapsedTime.rem(60)}")
+            updateTimerTime.postValue(timer)
+            isStepProgressViewVisible.postValue(true)
+        } ?: run {
+            isStepProgressViewVisible.postValue(false)
+        }
+    }
+
     val clearSnackBar: ((SnackBarEvent<Long>?) -> Unit) = {
         if (snackBarEvent.value == it) snackBarEvent.postValue(null)
     }
@@ -518,6 +535,9 @@ class MainActivityViewModel(
         toolbarRightExtraSecondImage.postValue(null)
         toolbarRightExtraFirstImage.postValue(null)
         toolbarRightExtraClickBlock = null
+        isStepProgressViewVisible.postValue(false)
+        updateTimerTime.postValue(null)
+        progressTimer.postValue(null)
     }
 
     // /////////////////////////////////////////////////////////////////////////

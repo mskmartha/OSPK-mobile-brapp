@@ -52,6 +52,7 @@ class HandOffRxInterstitialViewModel(
     var scannedBags: PrescriptionReturnData? = null
     var orderSummaryParamsList: List<OrderSummaryParams> = emptyList()
     var totalPoints :LiveData<String?>  = MutableLiveData("")
+    var earnedPoints :LiveData<Int>  = MutableLiveData(0)
     // flag to make sure the api not getting called multiple times when we go to new screen and come back
     var isActive: Boolean = false
 
@@ -98,7 +99,9 @@ class HandOffRxInterstitialViewModel(
             isBackToHomeButtonEnable.value = true
             isShowingTroubleMessage.value = !networkAvailabilityManager.isConnected.first()
         }
+        calculatePointsStore()
     }
+
 
     fun navigateToPrescriptionFragmentOrHome() {
         if (unableToPickUpOrder) {
@@ -160,6 +163,7 @@ class HandOffRxInterstitialViewModel(
             }
             points += pointsToAdd
             // Total Points logic
+            earnedPoints.postValue(pointsToAdd)
         }
 
     }

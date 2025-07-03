@@ -16,8 +16,8 @@
             android:id="@+id/ivFirstStar"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-
-            android:src="@drawable/gold_star"
+            android:padding="10dp"
+            android:src="@drawable/ic_badges"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

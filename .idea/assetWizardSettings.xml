@@ -30,8 +30,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="1b8a5f" />
-                            <entry key="outputName" value="icon_container" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../../ACU/Icon Container.svg" />
+                            <entry key="outputName" value="ic_badges" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../ACU/Task icon container.svg" />
                           </map>
                         </option>
                       </PersistentState>

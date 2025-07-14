@@ -1965,4 +1965,5 @@
     <string name="points_earned">Points earned</string>
     <string name="avg">Avg</string>
     <string name="best">Best</string>
+    <string name="waiting_time_breakdown">Waiting Time breakdown</string>
 </resources>

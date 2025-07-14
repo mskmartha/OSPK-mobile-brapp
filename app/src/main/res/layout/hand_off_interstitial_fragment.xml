@@ -194,14 +194,53 @@
                     </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvWaitingTimeBg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="@+id/lTotalPoints"
+                    app:layout_constraintStart_toStartOf="@+id/lTotalPoints"
+                    app:layout_constraintTop_toBottomOf="@+id/lTotalPoints">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:background="@color/score_card">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/lblWaitingTime"
+                            style="@style/PopinsMedium16.DarkBrown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            app:layout_constraintHorizontal_bias="0"
+                            android:drawablePadding="5dp"
+                            android:text="@string/waiting_time_breakdown"
+                            android:drawableStart="@drawable/icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@string/waiting_time_breakdown" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
                 <ScrollView
+                    android:layout_marginTop="10dp"
                     android:id="@+id/customerWaitTimeScroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
                     android:layout_marginBottom="24dp"
                     app:layout_constraintBottom_toTopOf="@+id/troubleMessage"
-                    app:layout_constraintTop_toBottomOf="@+id/lTotalPoints">
+                    app:layout_constraintTop_toBottomOf="@+id/mcvWaitingTimeBg">
 
                     <LinearLayout
                         android:layout_marginTop="10dp"

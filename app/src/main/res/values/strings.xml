@@ -1966,4 +1966,9 @@
     <string name="avg">Avg</string>
     <string name="best">Best</string>
     <string name="waiting_time_breakdown">Waiting Time breakdown</string>
+    <string name="this_order">This Order</string>
+    <string name="your_best">Your Best</string>
+    <string name="handoff_start_time">Handoff start time</string>
+    <string name="de_stage_time_spend">De-Stage time spend</string>
+    <string name="walkout_time_spend">Walkout time spend</string>
 </resources>

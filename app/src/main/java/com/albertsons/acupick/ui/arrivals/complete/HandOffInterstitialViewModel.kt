@@ -6,12 +6,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.albertsons.acupick.NavGraphDirections
 import com.albertsons.acupick.R
+import com.albertsons.acupick.data.model.ApiResult
 import com.albertsons.acupick.data.model.HandOffAction
 import com.albertsons.acupick.data.model.HandOffInterstitialParamsList
 import com.albertsons.acupick.data.model.OrderSummaryParams
 import com.albertsons.acupick.data.model.OrderSummaryParamsList
+import com.albertsons.acupick.data.model.response.PlayerWaitTimeBreakdownDto
 import com.albertsons.acupick.data.network.NetworkAvailabilityManager
+import com.albertsons.acupick.data.repository.ApsRepository
 import com.albertsons.acupick.data.repository.GamePointsRepository
+import com.albertsons.acupick.infrastructure.coroutine.DispatcherProvider
+import com.albertsons.acupick.infrastructure.utils.exhaustive
 import com.albertsons.acupick.navigation.NavigationEvent
 import com.albertsons.acupick.ui.BaseViewModel
 import com.albertsons.acupick.ui.dialog.CustomDialogArgDataAndTag
@@ -23,6 +28,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
+import timber.log.Timber
 import java.time.ZonedDateTime
 
 const val COMPLETE_HANDOFF_MESSAGE_DURATION_MS = 2000L
@@ -34,7 +40,8 @@ class HandOffInterstitialViewModel(
     private val apiCallTimeStamp: GamePointsRepository by inject()
 
     private val networkAvailabilityManager: NetworkAvailabilityManager by inject()
-
+    private val apsRepository: ApsRepository by inject()
+    val dispatcherProvider: DispatcherProvider by inject()
     val isShowingTroubleMessage = MutableStateFlow(false)
     var handOffAction: LiveData<HandOffAction> = MutableLiveData()
     private var isReassigned: Boolean = false
@@ -46,7 +53,9 @@ class HandOffInterstitialViewModel(
     var isDugOrder: Boolean = false
     // flag to make sure the api not getting called multiple times when we go to new screen and come back
     var isActive: Boolean = false
-    var totalPoints :LiveData<String> = MutableLiveData()
+    var totalPoints : LiveData<String> = MutableLiveData()
+    var pointsBreakDown : LiveData<PlayerWaitTimeBreakdownDto?> = MutableLiveData()
+
     init {
         registerCloseAction(SINGLE_ORDER_ERROR_DIALOG_TAG) {
             closeActionFactory(
@@ -65,12 +74,43 @@ class HandOffInterstitialViewModel(
             }
         }
         getTotalPoints()
+        getPointsBreakDown()
     }
+
+
     private fun getTotalPoints() {
         viewModelScope.launch {
             totalPoints.postValue(apiCallTimeStamp.getPoints())
         }
     }
+    private fun getPointsBreakDown() {
+        Timber.e("setCustomBarData getPointsBreakDown")
+        viewModelScope.launch(dispatcherProvider.IO) {
+            if (networkAvailabilityManager.isConnected.first().not()) {
+                networkAvailabilityManager.triggerOfflineError { getPointsBreakDown() }
+            } else {
+
+                val result = apsRepository.getTotalGamesPoint()
+                when (result) {
+                    is ApiResult.Success -> {
+                        handleBreakDownData( result.data.playerWaitTimeBreakdown)
+                    }
+                    is ApiResult.Failure -> {
+                        handleApiError(result, retryAction = { getPointsBreakDown() })
+
+                    }
+                }.exhaustive
+            }
+        }
+    }
+
+    private fun handleBreakDownData(playerWaitTimeBreakdown: PlayerWaitTimeBreakdownDto?) {
+        viewModelScope.launch {
+            Timber.e("setCustomBarData call from api")
+            pointsBreakDown.postValue(playerWaitTimeBreakdown)
+        }
+    }
+
     fun handleHandoffCompletion(params: HandOffInterstitialParamsList, orderSummaryParamsList: OrderSummaryParamsList, isFromNotification: Boolean = false) {
         if (isActive) return
         this.isFromNotification = isFromNotification

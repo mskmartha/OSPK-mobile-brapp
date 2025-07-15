@@ -230,10 +230,77 @@
                             tools:text="@string/waiting_time_breakdown" />
 
 
+                        <com.albertsons.acupick.ui.util.progress.VerticalTimeBarView
+                            android:id="@+id/vsbThisOrder"
+                            android:layout_width="0dp"
+                            android:layout_height="250dp"
+                            android:layout_marginTop="10dp"
+                            app:customBarData="@{viewModel.pointsBreakDown}"
+                            app:isBestTimeBar="@{false}"
+                            app:layout_constraintEnd_toStartOf="@+id/glInner"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/lblWaitingTime" />
+
+
+                        <com.albertsons.acupick.ui.util.progress.VerticalTimeBarView
+                            android:id="@+id/vsbMyBest"
+                            android:layout_width="0dp"
+                            android:layout_height="250dp"
+                            app:customBarData="@{viewModel.pointsBreakDown}"
+                            app:isBestTimeBar="@{true}"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/vsbThisOrder"
+                            app:layout_constraintTop_toBottomOf="@+id/lblWaitingTime" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/glInner"
+                            android:layout_width="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".5"
+                            android:layout_height="wrap_content"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvYourOrder"
+                            android:layout_marginTop="10dp"
+                            style="@style/PopinsMedium16.DarkBrown"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/this_order"
+                            app:layout_constraintEnd_toEndOf="@+id/vsbThisOrder"
+                            app:layout_constraintStart_toStartOf="@+id/vsbThisOrder"
+                            app:layout_constraintTop_toBottomOf="@+id/vsbThisOrder"
+                             />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvYourBest"
+                            style="@style/PopinsMedium16.DarkBrown"
+                            android:layout_width="0dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/your_best"
+                            app:layout_constraintEnd_toEndOf="@+id/vsbMyBest"
+                            app:layout_constraintStart_toStartOf="@+id/vsbMyBest"
+                            app:layout_constraintTop_toBottomOf="@+id/vsbMyBest" />
+
+
+                        <include
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="@+id/vsbMyBest"
+                            app:layout_constraintStart_toStartOf="@+id/vsbMyBest"
+                            app:layout_constraintTop_toBottomOf="@+id/tvYourBest"
+                            layout="@layout/layout_hand_off_waiting_break_down_color_pallet"/>
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
+
                 <ScrollView
                     android:layout_marginTop="10dp"
+                    android:visibility="visible"
                     android:id="@+id/customerWaitTimeScroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -487,6 +554,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/troubleMessage"
+                    android:visibility="gone"
                     style="@style/NunitoSansSemiBoldItalic20"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -502,6 +570,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/backToHomeButton"
                     style="@style/ButtonPrimary"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="48dp"

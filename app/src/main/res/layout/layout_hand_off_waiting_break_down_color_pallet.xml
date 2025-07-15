@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        app:cardBackgroundColor="@color/white"
+        app:strokeColor="@color/lightGray"
+        app:strokeWidth="1dp"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvHandOffStartTime"
+                style="@style/PopinsMedium16.DarkBrown"
+                android:layout_width="0dp"
+                android:drawableStart="@drawable/bg_circle_hand_off"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:textSize="12sp"
+                android:drawableTint="@color/hand_off_start"
+                android:text="@string/handoff_start_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".33" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDestageSpend"
+                style="@style/PopinsMedium16.DarkBrown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/bg_circle_hand_off"
+                android:drawablePadding="5dp"
+                android:textSize="12sp"
+                android:drawableTint="@color/de_stage_spend"
+                android:text="@string/de_stage_time_spend"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                app:layout_constraintStart_toEndOf="@+id/tvHandOffStartTime"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".63" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvWalkOut"
+                style="@style/PopinsMedium16.DarkBrown"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/bg_circle_hand_off"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/waiting_time_spend"
+                android:text="@string/walkout_time_spend"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvDestageSpend"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

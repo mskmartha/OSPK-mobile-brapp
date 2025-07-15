@@ -30,6 +30,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.albertsons.acupick.R
 import com.albertsons.acupick.data.model.BoxType
 import com.albertsons.acupick.data.model.CustomerType
+import com.albertsons.acupick.data.model.response.PlayerWaitTimeBreakdownDto
 import com.albertsons.acupick.infrastructure.utils.isNotNullOrEmpty
 import com.albertsons.acupick.ui.arrivals.complete.HandOffUI
 import com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetType
@@ -43,6 +44,9 @@ import com.albertsons.acupick.ui.util.BounceInterpolator
 import com.albertsons.acupick.ui.util.lifeCycleScope
 import com.albertsons.acupick.ui.util.lifecycleOwner
 import com.albertsons.acupick.ui.util.orFalse
+import com.albertsons.acupick.ui.util.progress.TimeBar
+import com.albertsons.acupick.ui.util.progress.TimeSegment
+import com.albertsons.acupick.ui.util.progress.VerticalTimeBarView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,6 +57,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 
@@ -620,23 +625,42 @@ fun TextView.setCustomerWaitTime(
     this.text = context.getString(R.string.timer_format, totalSeconds / 60, totalSeconds % 60)
 }
 
-/*
-@BindingAdapter(value = ["app:setUpProgressConfig"] , requireAll = false)
-fun StepProgressBarView.setUpProgressConfig(
-    icon:Boolean ?= true
-){
-    val config = ProgressViewConfig(
-        totalSteps = 5,
-        labelSuffix = "m",
-        labelTextSizeSp = 14f,
-        labelTextColor = Color.BLACK,
-        barHeightDp = 10,
-        roundRadius = 20,
-        thumbDrawable = ContextCompat.getDrawable(this.context, R.drawable.ic_progress_icon),
-        barColor = Pair(Color.BLUE, Color.LTGRAY)
-    )
-    setUp(config) { step ->
 
+@BindingAdapter(value = ["customBarData", "isBestTimeBar"], requireAll = false)
+fun VerticalTimeBarView.setCustomBarData(
+    customBarData: PlayerWaitTimeBreakdownDto?,
+    isBestTimeBar: Boolean = false
+) {
+    if (customBarData == null){
+        Timber.e("setCustomBarData data null")
+        return
     }
+    Timber.e("setCustomBarData data not null")
+    val data = if (isBestTimeBar) customBarData.bestWaitTimeBreakDown else customBarData.averageWaitTimeBreakDown
+
+
+    val handOfTime = (data?.handOffStartTimeDiff ?: 0).toInt()
+    val handOfTimeFormatted =  context.getString(R.string.timer_format, handOfTime / 60, handOfTime % 60)
+
+
+    val deStageTimeSpend = (data?.deStageTimeSpendDiff ?: 0).toInt()
+    val deStageTimeSpendFormatted =  context.getString(R.string.timer_format, deStageTimeSpend / 60, deStageTimeSpend % 60)
+
+    val walkOutTimeSpend = (data?.walkoutTimeSpendDiff ?: 0).toInt()
+    val walkOutTimeSpendFormatted =  context.getString(R.string.timer_format, walkOutTimeSpend / 60, walkOutTimeSpend % 60)
+
+    val segments = listOf(
+        TimeSegment(walkOutTimeSpend, walkOutTimeSpendFormatted,   context.getColor(R.color.waiting_time_spend)),
+        TimeSegment(deStageTimeSpend, deStageTimeSpendFormatted, context.getColor(R.color.de_stage_spend)),
+        TimeSegment(handOfTime, handOfTimeFormatted, context.getColor((R.color.hand_off_start)))
+    )
+
+    val totalTime = (data?.totalTimeDiff ?: 0).toInt()
+    val totalTimeFormatted =  context.getString(R.string.timer_format, totalTime / 60, totalTime % 60)
+
+    val bar = TimeBar(
+        totalLabel = totalTimeFormatted,
+        segments = segments
+    )
+    setTimeBar(bar)
 }
-*/

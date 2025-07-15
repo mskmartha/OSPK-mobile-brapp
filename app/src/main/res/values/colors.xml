@@ -129,4 +129,7 @@
 
     <color name="score_card">#FAF9F7</color>
     <color name="home_banner_bg">#E5FAFF</color>
+    <color name="hand_off_start">#B3E5FC</color>
+    <color name="de_stage_spend">#0D47A1</color>
+    <color name="waiting_time_spend">#29B6F6</color>
 </resources>

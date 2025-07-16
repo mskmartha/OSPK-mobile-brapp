@@ -1971,4 +1971,7 @@
     <string name="handoff_start_time">Handoff start time</string>
     <string name="de_stage_time_spend">De-Stage time spend</string>
     <string name="walkout_time_spend">Walkout time spend</string>
+    <string name="boost_your_handoff_spend_and_up_your_oth5_nbe_the_top_performers_to_win_prize">Boost your handoff spend and up your OTH5.\nBe the top performers to win prize!</string>
+    <string name="how_to_win">How to win</string>
+    <string name="leaderboard">Leaderboard</string>
 </resources>

@@ -2,275 +2,258 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
-        <import type="com.albertsons.acupick.R"/>
+        <import type="com.albertsons.acupick.R" />
+
         <variable
             name="viewModel"
             type="com.albertsons.acupick.ui.my_score.MyScoreViewModel" />
     </data>
 
 
-       <androidx.core.widget.NestedScrollView
-           visibilityGoneIfTrue="@{viewModel.isDataLoading}"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent">
+    <androidx.core.widget.NestedScrollView
 
-           <androidx.constraintlayout.widget.ConstraintLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:paddingHorizontal="15dp"
-               android:paddingVertical="10dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
-               <androidx.appcompat.widget.AppCompatTextView
-                   android:id="@+id/lblHeading1"
-                   style="@style/NunitoSansBold20.Black"
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:fontFamily="@font/nunito_sans_black"
-                   android:text="@string/every_effort_counts"
-                   android:textAlignment="center"
-                   android:textColor="@color/black"
-                   android:textSize="24sp"
-                   android:textStyle="bold"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp">
 
-               <androidx.appcompat.widget.AppCompatTextView
-                   android:id="@+id/lblHeading2"
-                   style="@style/NunitoSansBold20.Black"
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:text="@string/your_score_is_combined_from"
-                   android:textAlignment="center"
-                   android:textSize="14sp"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toBottomOf="@+id/lblHeading1" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView2"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:localImageRes="@{R.drawable.ic_hand_off_hero}"
+                tools:src="@drawable/ic_hand_off_hero" />
 
-               <LinearLayout
-                   android:id="@+id/llIncluded"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintHorizontal_bias="0.0"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toBottomOf="@+id/lblHeading2">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glP50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
 
-                   <include
-                       layout="@layout/layout_score_types_view"
-                       app:description="@{@string/lbl_basic_points_info}"
-                       app:itemEnd="@{@drawable/baseline_add_24}"
-                       app:itemIcon="@{@drawable/ic_basepoints}"
-                       app:itemType="@{viewModel.BASE_POINTS}"
-                       app:title="@{@string/lbl_basic_points}"
-                       app:viewModel="@{viewModel}" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTotalPlayers"
+                style="@style/NunitoSansLight.16.Grey600"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_calender"
+                android:drawablePadding="8dp"
+                android:gravity="center|center_vertical"
+                app:layout_constraintEnd_toStartOf="@+id/glP50"
+                app:layout_constraintHorizontal_bias=".95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2"
+                tools:text="600 players" />
 
-                   <include
-                       layout="@layout/layout_score_types_view"
-                       app:description="@{@string/lbl_oth5_info}"
-                       app:itemEnd="@{@drawable/baseline_add_24}"
-                       app:itemIcon="@{@drawable/user_oth5}"
-                       app:itemType="@{viewModel.OTH_RULE}"
-                       app:title="@{@string/lbl_basic_oth5}"
-                       app:viewModel="@{viewModel}" />
+            <View
+                android:id="@+id/view11"
+                android:layout_width=".5dp"
+                android:layout_height="0dp"
+                android:background="@color/grey_600"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTotalPlayers"
+                app:layout_constraintStart_toStartOf="@+id/glP50"
+                app:layout_constraintTop_toTopOf="@+id/tvTotalPlayers" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTimeLeft"
+                style="@style/NunitoSansLight.16.Grey600"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_calender"
+                android:drawablePadding="8dp"
+                android:gravity="center|center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".05"
+                app:layout_constraintStart_toStartOf="@+id/glP50"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2"
+                tools:text="Ends in 14 days" />
 
-                   <include
-                       layout="@layout/layout_score_types_view"
-                       app:description="@{@string/lbl_store_oth5_info}"
-                       app:itemEnd="@{@drawable/ic_equals}"
-                       app:itemIcon="@{@drawable/store_oth5}"
-                       app:itemType="@{viewModel.OTH_STORE}"
-                       app:title="@{@string/lbl_basic_store_oth5}"
-                       app:viewModel="@{viewModel}" />
-               </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblHandOffInfoText"
+                style="@style/NunitoSansLight.16.Grey600"
+                android:layout_width="0dp"
+                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="@string/boost_your_handoff_spend_and_up_your_oth5_nbe_the_top_performers_to_win_prize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view11" />
 
-               <androidx.appcompat.widget.AppCompatTextView
-                   android:id="@+id/lblHeading3"
-                   android:layout_marginTop="20dp"
-                   style="@style/NunitoSansBold20.Black"
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:fontFamily="@font/nunito_sans_black"
-                   android:text="@string/lbl_top_to_win"
-                   android:textAlignment="center"
-                   android:textColor="@color/black"
-                   android:textSize="24sp"
-                   android:textStyle="bold"
-                   app:layout_constraintEnd_toEndOf="@+id/llIncluded"
-                   app:layout_constraintStart_toStartOf="@+id/llIncluded"
-                   app:layout_constraintTop_toBottomOf="@+id/llIncluded" />
-
-               <androidx.appcompat.widget.AppCompatTextView
-                   android:id="@+id/lblHeading4"
-                   style="@style/NunitoSansBold20.Black"
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:text="@string/lbl_here_rewards"
-                   android:textAlignment="center"
-                   android:textSize="14sp"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toBottomOf="@+id/lblHeading3" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblHowToWin"
+                style="@style/PopinsMedium16"
+                android:layout_width="0dp"
+                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="@string/how_to_win"
+                android:textColor="@color/semiLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblHandOffInfoText" />
 
 
-               <LinearLayout
+            <LinearLayout
+                android:id="@+id/lTotalPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblHowToWin">
 
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toBottomOf="@+id/lblHeading4"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivHeader"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:elevation="10dp"
+                    app:localImageRes="@{R.drawable.win_cup}" />
 
-                   <ImageView
-                       android:id="@+id/ivHeader"
-                       android:layout_width="100dp"
-                       android:elevation="10dp"
-                       android:src="@drawable/win_cup"
-                       android:layout_gravity="center_horizontal"
-                       android:layout_height="100dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-25dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp">
 
-                   <com.google.android.material.card.MaterialCardView
-                       android:id="@+id/materialCardView"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="-50dp"
-                       app:cardCornerRadius="10dp"
-                       app:cardElevation="0dp">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/score_card"
+                        android:paddingHorizontal="10dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="10dp">
+                        <com.google.android.material.textview.MaterialTextView
 
-                       <androidx.constraintlayout.widget.ConstraintLayout
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:background="@color/score_card"
-                           android:paddingHorizontal="10dp"
-                           android:paddingTop="60dp"
-                           android:paddingBottom="10dp">
+                            style="@style/PopinsMedium16.DarkBrown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/total_points" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvPoints"
+                            android:textColor="@color/de_stage_spend"
+                            style="@style/PopinsBold30.DarkBrown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="24sp"
+                            android:text="150"
+                            android:includeFontPadding="false"
+                            app:layout_constraintTop_toBottomOf="@id/pharmacyIcon"
+                            tools:text="3" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcvLeaderBoard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="@color/score_card"
+                app:layout_constraintEnd_toEndOf="@+id/lTotalPoints"
+                app:layout_constraintStart_toStartOf="@+id/lTotalPoints"
+                app:layout_constraintTop_toBottomOf="@+id/lTotalPoints">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/glI08"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent=".08"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/glI92"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent=".92"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/glI10"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent=".1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
 
-                           <androidx.appcompat.widget.AppCompatTextView
-                               android:id="@+id/tvPriceWining1"
-                               style="@style/NunitoSansRegular10"
-                               android:layout_width="0dp"
-                               android:layout_height="wrap_content"
-                               android:text="@string/_50_gift_card"
-                               android:textAlignment="center"
-                               android:textSize="14sp"
-                               android:textStyle="bold"
-                               android:textColor="@color/black"
-                               app:layout_constraintEnd_toStartOf="@+id/guideline7"
-                               app:layout_constraintStart_toStartOf="parent"
-                               app:layout_constraintTop_toTopOf="parent" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/lblLeaderBoard"
+                        style="@style/PopinsBold30.DarkBrown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/leaderboard"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="@+id/glI08"
+                        app:layout_constraintTop_toTopOf="@+id/glI10" />
 
-                           <TextView
-                               android:id="@+id/tvFirstPriceLbl"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:background="@drawable/bg_first_price"
-                               android:paddingHorizontal="15dp"
-                               android:paddingVertical="3dp"
-                               android:text="1st"
-                               android:layout_marginTop="10dp"
-                               app:layout_constraintEnd_toEndOf="@+id/tvPriceWining1"
-                               app:layout_constraintStart_toStartOf="@+id/tvPriceWining1"
-                               app:layout_constraintTop_toBottomOf="@+id/tvPriceWining1" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvUpdatedBy"
+                        style="@style/NunitoSansLight.16.Grey600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|center_vertical"
 
-                           <androidx.constraintlayout.widget.Guideline
-                               android:id="@+id/guideline7"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:orientation="vertical"
-                               app:layout_constraintGuide_percent=".33" />
+                        android:includeFontPadding="false"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/lblLeaderBoard"
+                        app:layout_constraintEnd_toStartOf="@+id/glI92"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/lblLeaderBoard"
+                        app:layout_constraintVertical_bias="1.0"
+                        android:text="Last updated 10m ago" />
 
-                           <androidx.appcompat.widget.AppCompatTextView
-                               android:id="@+id/tvPriceWining2"
-                               style="@style/NunitoSansRegular10"
-                               android:layout_width="0dp"
-                               android:layout_height="wrap_content"
-                               android:text="@string/_25_gift_card"
-                               android:textAlignment="center"
-                               android:textColor="@color/black"
-                               android:textSize="14sp"
-                               android:textStyle="bold"
-                               app:layout_constraintEnd_toStartOf="@+id/guideline6"
-                               app:layout_constraintStart_toEndOf="@+id/tvPriceWining1"
-                               app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="15dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lblLeaderBoard" />
 
-                           <TextView
-                               android:id="@+id/tvSecondPriceLbl"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:background="@drawable/bg_second_price"
-                               android:paddingHorizontal="15dp"
-                               android:paddingVertical="3dp"
-                               android:text="2nd"
-                               android:layout_marginTop="10dp"
-                               app:layout_constraintEnd_toEndOf="@+id/tvPriceWining2"
-                               app:layout_constraintStart_toStartOf="@+id/tvPriceWining2"
-                               app:layout_constraintTop_toBottomOf="@+id/tvPriceWining2" />
-
-                           <androidx.constraintlayout.widget.Guideline
-                               android:id="@+id/guideline6"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:orientation="vertical"
-                               app:layout_constraintGuide_percent=".66" />
-
-                           <androidx.appcompat.widget.AppCompatTextView
-                               android:id="@+id/tvPriceWining3"
-                               style="@style/NunitoSansRegular10"
-                               android:layout_width="0dp"
-                               android:layout_height="wrap_content"
-                               android:text="@string/_10_gift_card"
-                               android:textAlignment="center"
-                               android:textColor="@color/black"
-                               android:textSize="14sp"
-                               android:textStyle="bold"
-                               app:layout_constraintEnd_toEndOf="parent"
-                               app:layout_constraintStart_toEndOf="@+id/tvPriceWining2"
-                               app:layout_constraintTop_toTopOf="parent" />
-
-                           <TextView
-                               android:id="@+id/tvThirdPriceLbl"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:background="@drawable/bg_third_price"
-                               android:paddingHorizontal="15dp"
-                               android:paddingVertical="3dp"
-                               android:text="3rd"
-                               android:layout_marginTop="10dp"
-                               app:layout_constraintEnd_toEndOf="@+id/tvPriceWining3"
-                               app:layout_constraintStart_toStartOf="@+id/tvPriceWining3"
-                               app:layout_constraintTop_toBottomOf="@+id/tvPriceWining3" />
-
-                       </androidx.constraintlayout.widget.ConstraintLayout>
-                   </com.google.android.material.card.MaterialCardView>
-
-                   <androidx.appcompat.widget.AppCompatTextView
-                       android:id="@+id/tvLblNote"
-                       style="@style/NunitoSansRegular10"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="start"
-                       android:text="@string/lbl_note_work"
-                       android:layout_marginHorizontal="10dp"
-                       android:textColor="@color/black"
-                       android:textSize="12sp"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/lblHeading2" />
-
-               </LinearLayout>
-           </androidx.constraintlayout.widget.ConstraintLayout>
-       </androidx.core.widget.NestedScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </layout>

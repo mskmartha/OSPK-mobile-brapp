@@ -55,7 +55,7 @@ class KoinBindingAdapters(private val picasso: Picasso) {
     @BindingAdapter("app:localImageRes")
     fun ImageView.loadLocalImageResource(@DrawableRes imageResId: Int) {
         if (imageResId != 0) { // Check if a valid resource ID is provided
-            picasso.load(imageResId).into(this)
+            picasso.load(imageResId).noFade().placeholder(imageResId).into(this)
         } else {
             // Optionally, clear the image or set a default if 0 is passed
             this.setImageDrawable(null)

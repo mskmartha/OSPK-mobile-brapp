@@ -1209,4 +1209,24 @@
         <item name="android:textColor">@color/black</item>
         <item name="fontFamily">@font/nunito_sans_black</item>
     </style>
+
+    <style name="NunitoSansLight">
+        <item name="fontFamily">@font/nunito_sans_light</item>
+    </style>
+
+    <style name="NunitoSansLight.16" parent="NunitoSansLight">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="NunitoSansLight.18" parent="NunitoSansLight">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="NunitoSansLight.16.Grey600" parent="NunitoSansLight.16">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <style name="NunitoSansLight.18.Grey600" parent="NunitoSansLight.18">
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
 </resources>

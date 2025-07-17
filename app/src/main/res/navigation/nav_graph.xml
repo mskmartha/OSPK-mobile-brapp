@@ -558,6 +558,17 @@
         android:name="com.albertsons.acupick.ui.my_score.MyScoreFragment"
         android:label=""
         tools:layout="@layout/fragment_my_score">
+        <action
+            android:id="@+id/action_myScoreFragment_to_fragmentHowToWin"
+            app:destination="@id/howToWinFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/howToWinFragment"
+        android:name="com.albertsons.acupick.ui.how_to_win.FragmentHowToWin"
+        android:label=""
+        tools:layout="@layout/fragment_my_score">
 
 
     </fragment>

@@ -58,6 +58,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                app:setItems="@{viewModel.gamesPointsData.leaderBoardDetails.players}"
+                app:setViewModel="@{viewModel}"
                 tools:itemCount="5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

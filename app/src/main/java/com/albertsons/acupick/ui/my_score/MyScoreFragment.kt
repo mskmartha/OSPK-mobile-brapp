@@ -1,5 +1,7 @@
 package com.albertsons.acupick.ui.my_score
 
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.albertsons.acupick.R
 import com.albertsons.acupick.databinding.FragmentMyScoreBinding
 import com.albertsons.acupick.ui.BaseFragment
@@ -20,5 +22,10 @@ class MyScoreFragment : BaseFragment<MyScoreViewModel, FragmentMyScoreBinding>()
         super.setupBinding(binding)
 
         activityViewModel.setToolbarTitle(getString(R.string.toolbar_title_my_game))
+
+        binding.lblHowToWin.setOnClickListener {
+            val action = MyScoreFragmentDirections.actionMyScoreFragmentToFragmentHowToWin()
+            findNavController().navigate(action)
+        }
     }
 }

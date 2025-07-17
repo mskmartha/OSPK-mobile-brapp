@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.albertsons.acupick.R
 import com.albertsons.acupick.data.model.response.DailyOTHScoreUIModel
 import com.albertsons.acupick.data.model.response.GamesPointsDto
+import com.albertsons.acupick.data.model.response.LeaderBoardPlayerDto
 import com.albertsons.acupick.data.model.response.OthRule
 import com.albertsons.acupick.data.model.response.PlayerDailyOTHScoreDto
 import com.albertsons.acupick.data.model.response.PlayerTodayTrendDto
@@ -23,6 +24,8 @@ import com.albertsons.acupick.data.model.response.toUIMappedList
 import com.albertsons.acupick.data.model.response.toUIModelListNew
 import com.albertsons.acupick.databinding.AdapterDailyScoresBinding
 import com.albertsons.acupick.databinding.AdapterGameInfoBinding
+import com.albertsons.acupick.databinding.AdapterLeaderBoardBinding
+import com.albertsons.acupick.ui.util.dpToPx
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.viewbinding.BindableItem
 import java.text.SimpleDateFormat
@@ -79,7 +82,6 @@ fun setLeaderBoardLastUpdatedAt(textView: TextView, data: GamesPointsDto?) {
 }
 
 
-
 @BindingAdapter("app:basePointsToday")
 fun setBasePointsToday(textView: TextView, data: GamesPointsDto?) {
     val trend = findTrend(data?.playerTodayTrend, "Base Points earned")
@@ -134,6 +136,7 @@ fun bindPerformanceStatValue(view: TextView, data: GamesPointsDto?, type: Int) {
 
     view.text = value
 }
+
 @BindingAdapter("app:totalPointsText")
 fun setTotalPointsText(textView: TextView, data: GamesPointsDto?) {
     val total = data
@@ -144,6 +147,7 @@ fun setTotalPointsText(textView: TextView, data: GamesPointsDto?) {
 
     textView.text = "$total"
 }
+
 @BindingAdapter("app:todayAsDateRange")
 fun setTodayAsDateRange(textView: TextView, show: Boolean) {
     if (!show) {
@@ -174,10 +178,11 @@ fun setStatIconFromType(textView: TextView, data: GamesPointsDto?) {
 
 @BindingAdapter("app:handOffCompletedPointsValue")
 fun setHandOffCompletedPointsValue(textView: TextView, data: GamesPointsDto?) {
-    val handOff = data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("HandOff Complete") ?: return
-    if (handOff.score.isNullOrBlank()){
-        textView.text =""
-    }else{
+    val handOff =
+        data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("HandOff Complete") ?: return
+    if (handOff.score.isNullOrBlank()) {
+        textView.text = ""
+    } else {
         textView.text = handOff.score
     }
 }
@@ -185,20 +190,22 @@ fun setHandOffCompletedPointsValue(textView: TextView, data: GamesPointsDto?) {
 
 @BindingAdapter("app:handOffCompletedPointsDesc")
 fun setHandOffCompletedPointsDesc(textView: TextView, data: GamesPointsDto?) {
-    val handOff = data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("HandOff Complete") ?: return
-    if (handOff.score.isNullOrBlank()){
-        textView.text =""
-    }else{
+    val handOff =
+        data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("HandOff Complete") ?: return
+    if (handOff.score.isNullOrBlank()) {
+        textView.text = ""
+    } else {
         textView.text = handOff.description
     }
 }
 
 @BindingAdapter("app:authCodeCompletedPointsValue")
 fun setAuthCodeCompletedPointsValue(textView: TextView, data: GamesPointsDto?) {
-    val handOff = data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("Auth Code Verified") ?: return
-    if (handOff.score.isNullOrBlank()){
-        textView.text =""
-    }else{
+    val handOff =
+        data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("Auth Code Verified") ?: return
+    if (handOff.score.isNullOrBlank()) {
+        textView.text = ""
+    } else {
         textView.text = handOff.score
     }
 }
@@ -206,20 +213,22 @@ fun setAuthCodeCompletedPointsValue(textView: TextView, data: GamesPointsDto?) {
 
 @BindingAdapter("app:authCodeCompletedPointsDesc")
 fun setAuthCodeCompletedPointsDesc(textView: TextView, data: GamesPointsDto?) {
-    val handOff = data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("Auth Code Verified") ?: return
-    if (handOff.score.isNullOrBlank()){
-        textView.text =""
-    }else{
+    val handOff =
+        data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("Auth Code Verified") ?: return
+    if (handOff.score.isNullOrBlank()) {
+        textView.text = ""
+    } else {
         textView.text = handOff.description
     }
 }
 
 @BindingAdapter("app:collectedCompletedPointsValue")
 fun setCollectedCCompletedPointsValue(textView: TextView, data: GamesPointsDto?) {
-    val handOff = data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("Collected All Items") ?: return
-    if (handOff.score.isNullOrBlank()){
-        textView.text =""
-    }else{
+    val handOff =
+        data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("Collected All Items") ?: return
+    if (handOff.score.isNullOrBlank()) {
+        textView.text = ""
+    } else {
         textView.text = handOff.score
     }
 }
@@ -227,10 +236,11 @@ fun setCollectedCCompletedPointsValue(textView: TextView, data: GamesPointsDto?)
 
 @BindingAdapter("app:collectedCompletedPointsDesc")
 fun setCollectedCompletedPointsDesc(textView: TextView, data: GamesPointsDto?) {
-    val handOff = data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("Collected All Items") ?: return
-    if (handOff.score.isNullOrBlank()){
-        textView.text =""
-    }else{
+    val handOff =
+        data?.playerBaseScoreDetails?.baseScoreBreakdown?.get("Collected All Items") ?: return
+    if (handOff.score.isNullOrBlank()) {
+        textView.text = ""
+    } else {
         textView.text = handOff.description
     }
 }
@@ -259,14 +269,14 @@ fun bindCollectAllItemsProgress(progressBar: ProgressBar, data: GamesPointsDto?)
 }
 
 
-
 // Helper to find a trend by name safely
 private fun findTrend(trends: List<PlayerTodayTrendDto>?, key: String): PlayerTodayTrendDto? {
     return trends?.find { it.trendName.equals(key, ignoreCase = true) }
 }
 
 
-class DailyScoreHolder(private val data: DailyOTHScoreUIModel) : BindableItem<AdapterDailyScoresBinding>() {
+class DailyScoreHolder(private val data: DailyOTHScoreUIModel) :
+    BindableItem<AdapterDailyScoresBinding>() {
 
     override fun initializeViewBinding(view: View) = AdapterDailyScoresBinding.bind(view)
     override fun getLayout() = R.layout.adapter_daily_scores
@@ -290,29 +300,18 @@ class DailyScoreHolder(private val data: DailyOTHScoreUIModel) : BindableItem<Ad
 }
 
 
-@BindingAdapter(value = ["setItems","app:itemViewType","app:setViewModel", "app:fragmentViewLifecycleOwner"], requireAll = false)
-fun RecyclerView.setDailyScoreAdapterStore(items: Map<String, StoreDailyOTHScoreDto>?, type:String?, vm:MyScoreViewModel?,
-                                      fragmentViewLifecycleOwner: LifecycleOwner? = null){
+@BindingAdapter(
+    value = ["setItems", "app:itemViewType", "app:setViewModel", "app:fragmentViewLifecycleOwner"],
+    requireAll = false
+)
+fun RecyclerView.setDailyScoreAdapterStore(
+    items: Map<String, StoreDailyOTHScoreDto>?, type: String?, vm: MyScoreViewModel?,
+    fragmentViewLifecycleOwner: LifecycleOwner? = null,
+) {
     if (vm == null || type == null) return
 
     val list = items?.toUIMappedList() ?: return
-    layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-
-     adapter =
-         GroupieAdapter().apply {
-             list.forEach {
-                 add(DailyScoreHolder(it))
-             }
-         }
-}
-
-@BindingAdapter(value = ["setItems","app:itemViewType","app:setViewModel", "app:fragmentViewLifecycleOwner"], requireAll = false)
-fun RecyclerView.setDailyScoreAdapterOTH(items: Map<String, PlayerDailyOTHScoreDto>?, type:String?, vm:MyScoreViewModel?,
-                                         fragmentViewLifecycleOwner: LifecycleOwner? = null){
-    if (vm == null || type == null) return
-
-    val list = items?.toUIModelListNew() ?: return
-    layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
     adapter =
         GroupieAdapter().apply {
@@ -321,3 +320,86 @@ fun RecyclerView.setDailyScoreAdapterOTH(items: Map<String, PlayerDailyOTHScoreD
             }
         }
 }
+
+@BindingAdapter(
+    value = ["setItems", "app:itemViewType", "app:setViewModel", "app:fragmentViewLifecycleOwner"],
+    requireAll = false
+)
+fun RecyclerView.setDailyScoreAdapterOTH(
+    items: Map<String, PlayerDailyOTHScoreDto>?, type: String?, vm: MyScoreViewModel?,
+    fragmentViewLifecycleOwner: LifecycleOwner? = null,
+) {
+    if (vm == null || type == null) return
+
+    val list = items?.toUIModelListNew() ?: return
+    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+    adapter =
+        GroupieAdapter().apply {
+            list.forEach {
+                add(DailyScoreHolder(it))
+            }
+        }
+}
+
+
+class LeaderBoard(private val data: LeaderBoardPlayerDto) :
+    BindableItem<AdapterLeaderBoardBinding>() {
+
+    override fun initializeViewBinding(view: View) = AdapterLeaderBoardBinding.bind(view)
+    override fun getLayout() = R.layout.adapter_leader_board
+
+    override fun bind(viewBinding: AdapterLeaderBoardBinding, position: Int) = with(viewBinding) {
+
+        tvInitial.setInitial(data.playerId ?: "")
+        tvRank.text = data.rank.toString()
+        tvPoints.text = "${data.totalPoints} pts"
+
+
+        val color = if (data.playerId.equals("SMAR602", true))
+            ContextCompat.getColor(mcvRoot.context, R.color.green)
+        else
+            ContextCompat.getColor(mcvRoot.context, R.color.score_card)
+
+        mcvRoot.strokeColor = color
+
+        if (data.playerId.equals("SMAR602", true)) {
+            tvName.isVisible = true
+            ivArrow.visibility = View.VISIBLE
+            tvInitial.isVisible = false
+            mcvRoot.setCardBackgroundColor(ContextCompat.getColor(mcvRoot.context, R.color.white))
+            mcvRoot.strokeWidth = 2
+        } else {
+            tvName.isVisible = false
+            ivArrow.visibility = View.INVISIBLE
+            tvInitial.isVisible = true
+            mcvRoot.strokeWidth = 2
+            mcvRoot.setCardBackgroundColor(ContextCompat.getColor(mcvRoot.context, R.color.score_card))
+        }
+    }
+}
+
+
+@BindingAdapter(
+    value = ["setItems", "app:itemViewType", "app:setViewModel", "app:fragmentViewLifecycleOwner"],
+    requireAll = false
+)
+fun RecyclerView.setLeaderBoard(
+    items: List<LeaderBoardPlayerDto>?, type: String?, vm: MyScoreViewModel?,
+    fragmentViewLifecycleOwner: LifecycleOwner? = null,
+) {
+    if (vm == null) return
+
+    val list = items?.sortedBy {
+        it.rank ?: -1
+    }
+    layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+    adapter =
+        GroupieAdapter().apply {
+            list?.forEach {
+                add(LeaderBoard(it))
+            }
+        }
+}
+

@@ -75,6 +75,7 @@ import com.albertsons.acupick.ui.home.HomeViewModel
 import com.albertsons.acupick.ui.itemdetails.ItemDetailsViewModel
 import com.albertsons.acupick.ui.itemphoto.ItemPhotoViewModel
 import com.albertsons.acupick.ui.chatImagePreview.ChatImagePreviewViewModel
+import com.albertsons.acupick.ui.how_to_win.HowToWinViewModel
 import com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffMfcViewModel
 import com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffViewModel
 import com.albertsons.acupick.ui.manualentry.handoff.ManualEntryStagingMfcViewModel
@@ -334,6 +335,7 @@ object AppModule {
         viewModel { QuickTaskOtherShoppersitemsViewModel(app = get()) }
         viewModel { QuickTaskMyItemsViewModel(app = get()) }
         viewModel { MyScoreViewModel(app = get(), repo = get(), dispatcherProvider = get()) }
+        viewModel { HowToWinViewModel(app = get(), repo = get(), dispatcherProvider = get()) }
         single { AnalyticsHelper(sharedPreferences = get(named(KoinNamedSharedPreferences.AutoLogout))) }
         single<BuildConfigProvider> { BuildConfigProviderImpl() }
         single<AutoLogoutLogic> {

@@ -1,4 +1,4 @@
-package com.albertsons.acupick.ui.my_score
+package com.albertsons.acupick.ui.how_to_win
 
 import android.view.View
 import androidx.databinding.BindingAdapter
@@ -8,11 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.albertsons.acupick.R
 import com.albertsons.acupick.data.model.response.OthRule
 import com.albertsons.acupick.databinding.AdapterGameInfoBinding
-import com.albertsons.acupick.ui.models.ToteUI
-import com.albertsons.acupick.ui.swapsubstitution.generateSwapSubItems
+import com.albertsons.acupick.ui.my_score.MyScoreViewModel
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.viewbinding.BindableItem
-import timber.log.Timber
 
 class BasePointsViewHolder(val data: OthRule?) : BindableItem<AdapterGameInfoBinding>() {
     override fun initializeViewBinding(view: View) = AdapterGameInfoBinding.bind(view)
@@ -33,14 +31,14 @@ class OTHViewHolder(val data: OthRule?) : BindableItem<AdapterGameInfoBinding>()
 }
 
 @BindingAdapter(value = ["setItems","app:itemViewType","app:setViewModel", "app:fragmentViewLifecycleOwner"], requireAll = false)
-fun RecyclerView.setGameAdapter(items: List<OthRule>?, type:String?, vm:MyScoreViewModel?,
+fun RecyclerView.setGameAdapter(items: List<OthRule>?, type:String?, vm: HowToWinViewModel?,
                                 fragmentViewLifecycleOwner: LifecycleOwner? = null){
     if (vm == null || type == null) return
 
 
     layoutManager = LinearLayoutManager(context)
 
-   /* val list = when (type) {
+    val list = when (type) {
         vm.BASE_POINTS -> {
             vm.basePoints.value ?: emptyList()
         }
@@ -65,5 +63,5 @@ fun RecyclerView.setGameAdapter(items: List<OthRule>?, type:String?, vm:MyScoreV
                     }
                 }
             }
-        }*/
+        }
 }

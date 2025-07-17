@@ -140,3 +140,44 @@ data class WaitTimeDto(
     @Json(name = "walkoutTimeSpendDiff") val walkoutTimeSpendDiff: Double?,
     @Json(name = "totalTimeDiff") val totalTimeDiff: Double?
 ) : Dto, Parcelable
+
+
+@JsonClass(generateAdapter = true)
+@Parcelize
+data class DailyOTHScoreUIModel(
+    val date: String,
+    val storeOTHPercentage: String,
+    val storeOTHScore: String,
+    val isBest: Boolean = false
+) : Parcelable
+
+
+fun Map<String, StoreDailyOTHScoreDto>.toUIMappedList(): List<DailyOTHScoreUIModel> {
+    val entries = this.map { (date, scoreDto) ->
+        DailyOTHScoreUIModel(
+            date = date,
+            storeOTHPercentage = scoreDto.storeOTHPercentage ?: "",
+            storeOTHScore = scoreDto.storeOTHScore ?: ""
+        )
+    }
+
+    val maxScore = entries.maxByOrNull { it.storeOTHScore.toIntOrNull() ?: 0 }?.storeOTHScore?.toIntOrNull()
+    return entries.map {
+        it.copy(isBest = it.storeOTHScore.toIntOrNull() == maxScore)
+    }
+}
+
+fun Map<String, PlayerDailyOTHScoreDto>.toUIModelListNew(): List<DailyOTHScoreUIModel> {
+    val entries = this.map { (date, scoreDto) ->
+        DailyOTHScoreUIModel(
+            date = date,
+            storeOTHPercentage = scoreDto.othPercentage ?: "",
+            storeOTHScore = scoreDto.othScore ?: ""
+        )
+    }
+
+    val maxScore = entries.maxByOrNull { it.storeOTHScore.toIntOrNull() ?: 0 }?.storeOTHScore?.toIntOrNull()
+    return entries.map {
+        it.copy(isBest = it.storeOTHScore.toIntOrNull() == maxScore)
+    }
+}

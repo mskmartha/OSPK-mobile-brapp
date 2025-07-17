@@ -1,15 +1,30 @@
 package com.albertsons.acupick.ui.my_score
 
 import android.graphics.drawable.Drawable
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.albertsons.acupick.R
+import com.albertsons.acupick.data.model.response.DailyOTHScoreUIModel
 import com.albertsons.acupick.data.model.response.GamesPointsDto
+import com.albertsons.acupick.data.model.response.OthRule
+import com.albertsons.acupick.data.model.response.PlayerDailyOTHScoreDto
 import com.albertsons.acupick.data.model.response.PlayerTodayTrendDto
+import com.albertsons.acupick.data.model.response.StoreDailyOTHScoreDto
+import com.albertsons.acupick.data.model.response.toUIMappedList
+import com.albertsons.acupick.data.model.response.toUIModelListNew
+import com.albertsons.acupick.databinding.AdapterDailyScoresBinding
+import com.albertsons.acupick.databinding.AdapterGameInfoBinding
+import com.xwray.groupie.GroupieAdapter
+import com.xwray.groupie.viewbinding.BindableItem
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -248,4 +263,61 @@ fun bindCollectAllItemsProgress(progressBar: ProgressBar, data: GamesPointsDto?)
 // Helper to find a trend by name safely
 private fun findTrend(trends: List<PlayerTodayTrendDto>?, key: String): PlayerTodayTrendDto? {
     return trends?.find { it.trendName.equals(key, ignoreCase = true) }
+}
+
+
+class DailyScoreHolder(private val data: DailyOTHScoreUIModel) : BindableItem<AdapterDailyScoresBinding>() {
+
+    override fun initializeViewBinding(view: View) = AdapterDailyScoresBinding.bind(view)
+    override fun getLayout() = R.layout.adapter_daily_scores
+
+    override fun bind(viewBinding: AdapterDailyScoresBinding, position: Int) = with(viewBinding) {
+
+        viewBinding.labelName = data.date
+        viewBinding.gamePercent = data.storeOTHPercentage + "%"
+        viewBinding.gamePoints = data.storeOTHScore
+
+        viewBinding.mcvBest.isVisible = data.isBest
+
+        val color = if (data.isBest)
+            ContextCompat.getColor(mcvHeading.context, R.color.gold_color)
+        else
+            ContextCompat.getColor(mcvHeading.context, R.color.transparent)
+
+        mcvHeading.strokeColor = color
+        mcvValue.strokeColor = color
+    }
+}
+
+
+@BindingAdapter(value = ["setItems","app:itemViewType","app:setViewModel", "app:fragmentViewLifecycleOwner"], requireAll = false)
+fun RecyclerView.setDailyScoreAdapterStore(items: Map<String, StoreDailyOTHScoreDto>?, type:String?, vm:MyScoreViewModel?,
+                                      fragmentViewLifecycleOwner: LifecycleOwner? = null){
+    if (vm == null || type == null) return
+
+    val list = items?.toUIMappedList() ?: return
+    layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+
+     adapter =
+         GroupieAdapter().apply {
+             list.forEach {
+                 add(DailyScoreHolder(it))
+             }
+         }
+}
+
+@BindingAdapter(value = ["setItems","app:itemViewType","app:setViewModel", "app:fragmentViewLifecycleOwner"], requireAll = false)
+fun RecyclerView.setDailyScoreAdapterOTH(items: Map<String, PlayerDailyOTHScoreDto>?, type:String?, vm:MyScoreViewModel?,
+                                         fragmentViewLifecycleOwner: LifecycleOwner? = null){
+    if (vm == null || type == null) return
+
+    val list = items?.toUIModelListNew() ?: return
+    layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+
+    adapter =
+        GroupieAdapter().apply {
+            list.forEach {
+                add(DailyScoreHolder(it))
+            }
+        }
 }

@@ -59,9 +59,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/tvDailyScores"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
+                app:itemViewType="@{`dailyScore`}"
+                app:setItems="@{viewModel.gamesPointsData.playerOTHScoreDetails.dailyPlayerOTHScore}"
+                app:setViewModel="@{viewModel}">
 
 
             </androidx.recyclerview.widget.RecyclerView>

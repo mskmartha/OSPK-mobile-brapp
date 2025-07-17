@@ -1,35 +1,111 @@
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="labelName"
+            type="java.lang.String" />
+
+        <variable
+            name="gamePercent"
+            type="java.lang.String" />
+
+        <variable
+            name="gamePoints"
+            type="java.lang.String" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcvHeading"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/gold_color"
+            android:minWidth="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/gold_color"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{labelName}"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:text="OTH"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/NunitoSansBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{gamePercent}"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcvValue"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="8dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="@+id/mcvHeading"
             app:layout_constraintStart_toStartOf="@+id/mcvHeading"
             app:layout_constraintTop_toBottomOf="@+id/mcvHeading"
             app:strokeColor="@color/gold_color"
             app:strokeWidth="1dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{gamePoints}"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_group_1000003078"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
 
@@ -37,9 +113,9 @@
             android:id="@+id/mcvBest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="@color/gold_color"
+            app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="@+id/mcvHeading"
             app:layout_constraintStart_toStartOf="@+id/mcvHeading"
             app:layout_constraintTop_toBottomOf="@+id/mcvValue"
@@ -54,10 +130,8 @@
                 android:paddingVertical="8dp"
                 android:text="Best"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                 />
+                android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

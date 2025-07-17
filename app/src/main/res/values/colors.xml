@@ -132,4 +132,5 @@
     <color name="hand_off_start">#65D2F2</color>
     <color name="de_stage_spend">#032644</color>
     <color name="waiting_time_spend">#0081C6</color>
+    <color name="gold_color">#F9CE50</color>
 </resources>

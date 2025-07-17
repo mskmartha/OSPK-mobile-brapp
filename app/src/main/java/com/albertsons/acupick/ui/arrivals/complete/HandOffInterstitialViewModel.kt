@@ -207,7 +207,7 @@ class HandOffInterstitialViewModel(
             }
             points += pointsToAdd
             // Total Points logic
-            totalPoints.postValue(pointsToAdd.toString())
+            totalPoints.postValue("3")
         }
 
     }

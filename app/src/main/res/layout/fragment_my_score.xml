@@ -171,87 +171,32 @@
 
             </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mcvLeaderBoard"
+            <LinearLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="0dp"
-                android:layout_marginTop="20dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/score_card"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="@+id/lTotalPoints"
                 app:layout_constraintStart_toStartOf="@+id/lTotalPoints"
                 app:layout_constraintTop_toBottomOf="@+id/lTotalPoints">
+                <include
+                    layout="@layout/layout_my_game_leader_board"/>
+                <include
+                    layout="@layout/layout_my_game_trends"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <include
+                    layout="@layout/layout_my_performance"/>
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/glI08"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent=".08"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                <include
+                    layout="@layout/layout_my_game_base_points"/>
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/glI92"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent=".92"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                <include
+                    layout="@layout/layout_my_game_wait_time"/>
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/glI10"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_percent=".1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                <include
+                    layout="@layout/layout_my_game_store_oth_pt"/>
+            </LinearLayout>
 
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/lblLeaderBoard"
-                        style="@style/PopinsBold30.DarkBrown"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/leaderboard"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="@+id/glI08"
-                        app:layout_constraintTop_toTopOf="@+id/glI10" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvUpdatedBy"
-                        style="@style/NunitoSansLight.16.Grey600"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center|center_vertical"
-
-                        android:includeFontPadding="false"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblLeaderBoard"
-                        app:layout_constraintEnd_toStartOf="@+id/glI92"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblLeaderBoard"
-                        app:layout_constraintVertical_bias="1.0"
-                        android:text="Last updated 10m ago" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="15dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lblLeaderBoard" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

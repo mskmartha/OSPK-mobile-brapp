@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/score_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Base Points Title Section -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_base_points_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:drawableStart="@drawable/ic_calender"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Base points: 377" />
+
+            <!-- Handoffs Completed Section -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_handoffs_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Handoffs completed"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_base_points_title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_handoffs_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_handoffs_label"
+                tools:text="168" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_handoffs_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:drawableStart="@drawable/ic_calender"
+                app:layout_constraintBottom_toBottomOf="@id/tv_handoffs_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_handoffs_label"
+                tools:text="168" />
+
+
+            <!-- Collect All Items Section -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_collect_all_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Collect all items"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_handoffs_value" />
+
+            <ProgressBar
+                android:id="@+id/progress_collect_all"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="8dp"
+                android:progressDrawable="@drawable/custom_progress_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_collect_all_label"
+                tools:progress="88" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_collect_all_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_collect_all"
+                tools:text="148/168 handoffs, 88%" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_collect_all_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:drawableStart="@drawable/ic_calender"
+                app:layout_constraintBottom_toBottomOf="@id/tv_collect_all_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_collect_all_details"
+                tools:text="148" />
+
+
+            <!-- Collect Auth Code Section -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_auth_code_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Collect auth code"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_collect_all_details" />
+
+            <ProgressBar
+                android:id="@+id/progress_auth_code"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="8dp"
+                android:progressDrawable="@drawable/custom_progress_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_auth_code_label"
+                tools:progress="26" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_auth_code_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_auth_code"
+                tools:text="43/168 handoffs, 26%" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_auth_code_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_auth_code_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:drawableStart="@drawable/ic_calender"
+                app:layout_constraintTop_toTopOf="@id/tv_auth_code_details"
+                tools:text="43" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

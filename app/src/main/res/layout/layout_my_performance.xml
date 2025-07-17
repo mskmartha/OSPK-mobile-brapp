@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/score_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_performance_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Performance summary"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Date Range Subtitle -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_date_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_performance_title"
+                tools:text="Jan 1 - Today" />
+
+            <!-- Total Points Section -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_earned_total_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="You earned total"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_date_range" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_total_points_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_earned_total_label"
+                tools:srcCompat="@tools:sample/avatars" /> <!-- Replace with your gem icon -->
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_total_points_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/iv_total_points_icon"
+                app:layout_constraintStart_toEndOf="@id/iv_total_points_icon"
+                app:layout_constraintTop_toTopOf="@id/iv_total_points_icon"
+                tools:text="624" />
+
+            <!-- Horizontal container for the three stats at the bottom -->
+            <LinearLayout
+                android:id="@+id/stats_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_total_points_icon">
+
+                <!-- Base Points Stat -->
+                <include
+
+                    android:id="@+id/base_stat"
+                    layout="@layout/include_performance_stat" />
+
+                <!-- OTH Stat -->
+                <include
+                    android:id="@+id/oth_stat"
+
+                    layout="@layout/include_performance_stat" />
+
+                <!-- Store OTH Stat -->
+                <include
+                    android:id="@+id/store_oth_stat"
+                    layout="@layout/include_performance_stat" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

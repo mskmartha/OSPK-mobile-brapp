@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!-- Add your data binding variable if needed -->
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/score_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- OTH points -->
+            <TextView
+                android:id="@+id/tv_oth_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OTH points: 107"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Daily Scores -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daily_scores_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_oth_points"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <!-- Divider -->
+            <View
+                android:id="@+id/viewDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/daily_scores_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Wait Time Breakdown -->
+            <TextView
+                android:id="@+id/tv_wait_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wait time breakdown"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/viewDivider"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Chart Bars -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/wait_chart_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_wait_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Bar 1 -->
+                <com.albertsons.acupick.ui.util.progress.VerticalTimeBarView
+                    android:id="@+id/bar_place_avg"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/bar_best_record"
+                    app:layout_constraintEnd_toStartOf="@+id/bar_best_record"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#1 place’s avg"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintTop_toBottomOf="@id/bar_place_avg"
+                    app:layout_constraintStart_toStartOf="@id/bar_place_avg"
+                    app:layout_constraintEnd_toEndOf="@id/bar_place_avg"
+
+                    android:gravity="center" />
+
+                <!-- Bar 2 -->
+                <com.albertsons.acupick.ui.util.progress.VerticalTimeBarView
+                    android:id="@+id/bar_best_record"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    app:layout_constraintVertical_bias="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/bar_game_avg"
+                    app:layout_constraintEnd_toStartOf="@+id/bar_game_avg"
+                    app:layout_constraintStart_toEndOf="@id/bar_place_avg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Bar 3 -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Your best record"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/bar_best_record"
+                    app:layout_constraintHorizontal_bias="0.55"
+                    app:layout_constraintStart_toEndOf="@+id/bar_place_avg"
+                    app:layout_constraintTop_toBottomOf="@id/bar_best_record"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <com.albertsons.acupick.ui.util.progress.VerticalTimeBarView
+                    android:id="@+id/bar_game_avg"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    app:layout_constraintStart_toEndOf="@id/bar_best_record"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Your avg in this game"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@id/bar_game_avg"
+                    app:layout_constraintStart_toStartOf="@id/bar_game_avg"
+                    app:layout_constraintTop_toBottomOf="@id/bar_game_avg" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/wait_chart_container"
+                app:layout_constraintStart_toStartOf="@+id/wait_chart_container"
+                app:layout_constraintTop_toBottomOf="@+id/wait_chart_container"
+                layout="@layout/layout_hand_off_waiting_break_down_color_pallet"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

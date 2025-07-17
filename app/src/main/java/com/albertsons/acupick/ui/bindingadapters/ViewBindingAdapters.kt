@@ -626,17 +626,16 @@ fun TextView.setCustomerWaitTime(
 }
 
 
-@BindingAdapter(value = ["customBarData", "isBestTimeBar"], requireAll = false)
+@BindingAdapter(value = ["customBarData"], requireAll = false)
 fun VerticalTimeBarView.setCustomBarData(
-    customBarData: PlayerWaitTimeBreakdownDto?,
-    isBestTimeBar: Boolean = false
+    customBarData: PlayerWaitTimeBreakdownDto?
 ) {
     if (customBarData == null){
         Timber.e("setCustomBarData data null")
         return
     }
     Timber.e("setCustomBarData data not null")
-    val data = if (isBestTimeBar) customBarData.bestWaitTimeBreakDown else customBarData.averageWaitTimeBreakDown
+    val data = customBarData.bestWaitTimeBreakDown
 
 
     val handOfTime = (data?.handOffStartTimeDiff ?: 0).toInt()

@@ -2,9 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
-        <!-- Add your data binding variable if needed -->
+        <import type="com.albertsons.acupick.R" />
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.my_score.MyScoreViewModel" />
+
+        <variable
+            name="fragmentViewLifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView

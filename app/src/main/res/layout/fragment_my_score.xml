@@ -14,7 +14,7 @@
 
 
     <androidx.core.widget.NestedScrollView
-
+        visibilityGoneIfTrue="@{viewModel.isDataLoading}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,8 +36,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:localImageRes="@{R.drawable.ic_hand_off_hero}"
-                tools:src="@drawable/ic_hand_off_hero" />
+                app:localImageRes="@{R.drawable.ic_my_score_hand_off}"
+                tools:src="@drawable/ic_my_score_hand_off" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/glP50"
@@ -51,8 +51,9 @@
                 style="@style/NunitoSansLight.16.Grey600"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_calender"
+                android:drawableStart="@drawable/ic_profile"
                 android:drawablePadding="8dp"
+                app:playersCountText="@{viewModel.gamesPointsData.totalPlayersInLeague}"
                 android:gravity="center|center_vertical"
                 app:layout_constraintEnd_toStartOf="@+id/glP50"
                 app:layout_constraintHorizontal_bias=".95"
@@ -74,8 +75,9 @@
                 style="@style/NunitoSansLight.16.Grey600"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_calender"
+                android:drawableStart="@drawable/ic_calendar"
                 android:drawablePadding="8dp"
+                app:endsInText="@{viewModel.gamesPointsData}"
                 android:gravity="center|center_vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias=".05"
@@ -126,7 +128,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:elevation="10dp"
-                    app:localImageRes="@{R.drawable.win_cup}" />
+                    app:localImageRes="@{R.drawable.ic_my_score_icon}" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/materialCardView"
@@ -162,7 +164,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="24sp"
-                            android:text="150"
+                            android:text="@{viewModel.gamesPointsData.totalPoints}"
                             android:includeFontPadding="false"
                             app:layout_constraintTop_toBottomOf="@id/pharmacyIcon"
                             tools:text="3" />
@@ -180,20 +182,26 @@
                 app:layout_constraintStart_toStartOf="@+id/lTotalPoints"
                 app:layout_constraintTop_toBottomOf="@+id/lTotalPoints">
                 <include
+                    app:viewModel="@{viewModel}"
                     layout="@layout/layout_my_game_leader_board"/>
                 <include
+                    app:viewModel="@{viewModel}"
                     layout="@layout/layout_my_game_trends"/>
 
                 <include
+                    app:viewModel="@{viewModel}"
                     layout="@layout/layout_my_performance"/>
 
                 <include
+                    app:viewModel="@{viewModel}"
                     layout="@layout/layout_my_game_base_points"/>
 
                 <include
+                    app:viewModel="@{viewModel}"
                     layout="@layout/layout_my_game_wait_time"/>
 
                 <include
+                    app:viewModel="@{viewModel}"
                     layout="@layout/layout_my_game_store_oth_pt"/>
             </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.albertsons.acupick.data.repository
 import com.albertsons.acupick.data.model.ApiResult
 import com.albertsons.acupick.data.model.ResponseToApiResultMapper
 import com.albertsons.acupick.data.model.response.GameConfigDto
+import com.albertsons.acupick.data.model.response.GamesPointsDto
 import com.albertsons.acupick.data.model.response.OnePlDto
 import com.albertsons.acupick.data.model.wrapExceptions
 import com.albertsons.acupick.data.network.ApsService
@@ -11,6 +12,7 @@ import retrofit2.Response
 interface GamesRepository : Repository {
 
     suspend fun getGameRewardsPoint(): ApiResult<GameConfigDto>
+    suspend fun getRulesData(): ApiResult<GamesPointsDto>
 }
 
 internal class GamesRepositoryImpl(
@@ -21,6 +23,12 @@ internal class GamesRepositoryImpl(
     override suspend fun getGameRewardsPoint(): ApiResult<GameConfigDto> {
         return wrapExceptions("getGameRewards") {
             apsService.getGameRewards().toResult()
+        }
+    }
+
+    override suspend fun getRulesData(): ApiResult<GamesPointsDto> {
+        return wrapExceptions("getTotalPoints") {
+            apsService.getTotalPoints().toResult()
         }
     }
 

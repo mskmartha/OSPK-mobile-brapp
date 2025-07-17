@@ -236,7 +236,6 @@
                             android:layout_height="250dp"
                             android:layout_marginTop="10dp"
                             app:customBarData="@{viewModel.pointsBreakDown}"
-                            app:isBestTimeBar="@{false}"
                             app:layout_constraintEnd_toStartOf="@+id/glInner"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/lblWaitingTime" />
@@ -247,7 +246,7 @@
                             android:layout_width="0dp"
                             android:layout_height="250dp"
                             app:customBarData="@{viewModel.pointsBreakDown}"
-                            app:isBestTimeBar="@{true}"
+
                             android:layout_marginTop="10dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/vsbThisOrder"

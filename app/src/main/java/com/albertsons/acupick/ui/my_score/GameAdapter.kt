@@ -40,7 +40,7 @@ fun RecyclerView.setGameAdapter(items: List<OthRule>?, type:String?, vm:MyScoreV
 
     layoutManager = LinearLayoutManager(context)
 
-    val list = when (type) {
+   /* val list = when (type) {
         vm.BASE_POINTS -> {
             vm.basePoints.value ?: emptyList()
         }
@@ -65,5 +65,5 @@ fun RecyclerView.setGameAdapter(items: List<OthRule>?, type:String?, vm:MyScoreV
                     }
                 }
             }
-        }
+        }*/
 }

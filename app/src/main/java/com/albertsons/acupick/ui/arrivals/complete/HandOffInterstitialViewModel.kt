@@ -8,6 +8,7 @@ import com.albertsons.acupick.NavGraphDirections
 import com.albertsons.acupick.R
 import com.albertsons.acupick.data.model.ApiResult
 import com.albertsons.acupick.data.model.HandOffAction
+import com.albertsons.acupick.data.model.HandOffInterstitialParams
 import com.albertsons.acupick.data.model.HandOffInterstitialParamsList
 import com.albertsons.acupick.data.model.OrderSummaryParams
 import com.albertsons.acupick.data.model.OrderSummaryParamsList
@@ -30,6 +31,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 import timber.log.Timber
 import java.time.ZonedDateTime
+import java.time.temporal.ChronoUnit
 
 const val COMPLETE_HANDOFF_MESSAGE_DURATION_MS = 2000L
 
@@ -115,6 +117,7 @@ class HandOffInterstitialViewModel(
         if (isActive) return
         this.isFromNotification = isFromNotification
         this.orderSummaryParamsList = orderSummaryParamsList.list
+        calculatePointsStore( params.list.firstOrNull())
         handOffCompletedItems = params.list.mapNotNull { item ->
             if (item.handOffAction != HandOffAction.CANCEL) {
                 HandOffCompletedItem(
@@ -174,6 +177,37 @@ class HandOffInterstitialViewModel(
         } else {
             _navigationEvent.postValue(NavigationEvent.Back(destinationId = R.id.destageOrderFragment, inclusive = true))
         }
+    }
+
+    private fun calculatePointsStore(data: HandOffInterstitialParams?) {
+        if (data == null) return
+        viewModelScope.launch {
+            var points = totalPoints.value ?: ""
+            val endTime = data.otpCapturedTimestamp ?: ZonedDateTime.now()
+            val totalMinutes = (ChronoUnit.SECONDS.between(data.customerArrivalTimestamp, endTime) / 60).toInt()
+            var pointsToAdd = 0
+            val otpCapturedOrByPassTime =data.otpCapturedTimestamp ?: data.otpBypassTimestamp ?: ZonedDateTime.now()
+            if (otpCapturedOrByPassTime != null){
+                pointsToAdd += 1
+            }
+
+            if (handOffAction.value == HandOffAction.COMPLETE_WITH_EXCEPTION ||
+                handOffAction.value == HandOffAction.COMPLETE){
+                pointsToAdd += 1
+            }
+
+            if (totalMinutes <= 2){
+                pointsToAdd += 3
+            }
+
+            if (totalMinutes in 3..5){
+                pointsToAdd += 2
+            }
+            points += pointsToAdd
+            // Total Points logic
+            totalPoints.postValue(pointsToAdd.toString())
+        }
+
     }
 }
 

@@ -111,7 +111,7 @@
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
                     app:setViewModel="@{viewModel}"
-                    app:setItems="@{viewModel.basePoints}"
+
                     app:fragmentViewLifecycleOwner="@{fragmentViewLifecycleOwner}"
                     app:itemViewType="@{itemType}"
                     android:nestedScrollingEnabled="false"

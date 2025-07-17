@@ -342,7 +342,7 @@ internal interface ApsService {
     ): Response<Unit>
 
 
-    @GET("https://acupickgame.free.beeceptor.com/oceg-game-services/getMyScoreInfo/v1?playerId=smar602")
+    @GET("https://acupickgame.free.beeceptor.com/oceg-game-services/gamification/player/rules/smar602")
     suspend fun getGameRewards(): Response<GameConfigDto>
 
     @GET("https://acupickgame.free.beeceptor.com/oceg-game-services/getMyScoreInfo/v1?playerId=smar602")

@@ -57,6 +57,7 @@ class HandOffInterstitialViewModel(
     var isActive: Boolean = false
     var totalPoints : LiveData<String> = MutableLiveData()
     var pointsBreakDown : LiveData<PlayerWaitTimeBreakdownDto?> = MutableLiveData()
+    var handOffTimerBar : LiveData<HandOffInterstitialParams?> = MutableLiveData()
 
     init {
         registerCloseAction(SINGLE_ORDER_ERROR_DIALOG_TAG) {
@@ -182,6 +183,7 @@ class HandOffInterstitialViewModel(
     private fun calculatePointsStore(data: HandOffInterstitialParams?) {
         if (data == null) return
         viewModelScope.launch {
+            handOffTimerBar.postValue(data)
             var points = totalPoints.value ?: ""
             val endTime = data.otpCapturedTimestamp ?: ZonedDateTime.now()
             val totalMinutes = (ChronoUnit.SECONDS.between(data.customerArrivalTimestamp, endTime) / 60).toInt()

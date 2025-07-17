@@ -43,6 +43,7 @@
                 android:drawableStart="@drawable/bg_circle_hand_off"
                 android:drawablePadding="5dp"
                 android:textSize="12sp"
+                android:paddingEnd="8dp"
                 android:drawableTint="@color/de_stage_spend"
                 android:text="@string/de_stage_time_spend"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent=".63" />
+                app:layout_constraintGuide_percent=".66" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvWalkOut"
@@ -66,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/bg_circle_hand_off"
                 android:drawablePadding="5dp"
+                android:paddingEnd="8dp"
                 android:drawableTint="@color/waiting_time_spend"
                 android:text="@string/walkout_time_spend"
                 app:layout_constraintBottom_toBottomOf="parent"

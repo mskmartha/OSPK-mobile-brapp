@@ -30,7 +30,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.albertsons.acupick.R
 import com.albertsons.acupick.data.model.BoxType
 import com.albertsons.acupick.data.model.CustomerType
+import com.albertsons.acupick.data.model.HandOffInterstitialParams
 import com.albertsons.acupick.data.model.response.PlayerWaitTimeBreakdownDto
+import com.albertsons.acupick.data.model.response.WaitTimeDto
 import com.albertsons.acupick.infrastructure.utils.isNotNullOrEmpty
 import com.albertsons.acupick.ui.arrivals.complete.HandOffUI
 import com.albertsons.acupick.ui.bottomsheetdialog.BottomSheetType
@@ -58,6 +60,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.time.Duration
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 
@@ -628,37 +631,74 @@ fun TextView.setCustomerWaitTime(
 
 @BindingAdapter(value = ["customBarData"], requireAll = false)
 fun VerticalTimeBarView.setCustomBarData(
-    customBarData: PlayerWaitTimeBreakdownDto?
+    data: WaitTimeDto?
 ) {
-    if (customBarData == null){
-        Timber.e("setCustomBarData data null")
-        return
+    fun scaleAndFormat(raw: Int?): Pair<Int, String> {
+        val rawVal = raw ?: 0
+        val seconds = if (rawVal < 600) rawVal / 10 else rawVal / 10 // 600 deciseconds = 60 seconds
+        val formatted = context.getString(R.string.timer_format, seconds / 60, seconds % 60)
+        return seconds to formatted
     }
-    Timber.e("setCustomBarData data not null")
-    val data = customBarData.bestWaitTimeBreakDown
 
-
-    val handOfTime = (data?.handOffStartTimeDiff ?: 0).toInt()
-    val handOfTimeFormatted =  context.getString(R.string.timer_format, handOfTime / 60, handOfTime % 60)
-
-
-    val deStageTimeSpend = (data?.deStageTimeSpendDiff ?: 0).toInt()
-    val deStageTimeSpendFormatted =  context.getString(R.string.timer_format, deStageTimeSpend / 60, deStageTimeSpend % 60)
-
-    val walkOutTimeSpend = (data?.walkoutTimeSpendDiff ?: 0).toInt()
-    val walkOutTimeSpendFormatted =  context.getString(R.string.timer_format, walkOutTimeSpend / 60, walkOutTimeSpend % 60)
+    val (walkOutSec, walkOutFormatted) = scaleAndFormat(data?.walkoutTimeSpendDiff?.toInt())
+    val (deStageSec, deStageFormatted) = scaleAndFormat(data?.deStageTimeSpendDiff?.toInt())
+    val (handOffSec, handOffFormatted) = scaleAndFormat(data?.handOffStartTimeDiff?.toInt())
+    val (totalSec, totalFormatted) = scaleAndFormat(data?.totalTimeDiff?.toInt())
 
     val segments = listOf(
-        TimeSegment(walkOutTimeSpend, walkOutTimeSpendFormatted,   context.getColor(R.color.waiting_time_spend)),
-        TimeSegment(deStageTimeSpend, deStageTimeSpendFormatted, context.getColor(R.color.de_stage_spend)),
-        TimeSegment(handOfTime, handOfTimeFormatted, context.getColor((R.color.hand_off_start)))
+        TimeSegment(walkOutSec, walkOutFormatted, context.getColor(R.color.waiting_time_spend)),
+        TimeSegment(deStageSec, deStageFormatted, context.getColor(R.color.de_stage_spend)),
+        TimeSegment(handOffSec, handOffFormatted, context.getColor(R.color.hand_off_start))
     )
 
-    val totalTime = (data?.totalTimeDiff ?: 0).toInt()
-    val totalTimeFormatted =  context.getString(R.string.timer_format, totalTime / 60, totalTime % 60)
+    val bar = TimeBar(
+        totalLabel = totalFormatted,
+        segments = segments
+    )
+    setTimeBar(bar)
+}
+
+
+@BindingAdapter(value = ["handoffBarData"], requireAll = false)
+fun VerticalTimeBarView.setHandOffBarData(
+    params: HandOffInterstitialParams?
+) {
+    if (params == null) {
+        Timber.e("setHandOffBarData: data null")
+        return
+    }
+
+    fun durationInSeconds(start: ZonedDateTime?, end: ZonedDateTime?): Int {
+        return if (start != null && end != null) {
+            Duration.between(start, end).seconds.toInt().coerceAtLeast(0)
+        } else 0
+    }
+
+    fun format(seconds: Int): String {
+        return context.getString(R.string.timer_format, seconds / 60, seconds % 60)
+    }
+
+    // 1. HandOff Phase Durations
+    val walkOutTimeSpend = durationInSeconds(params.customerArrivalTimestamp, params.groceryDestageStartTimestamp)
+    val deStageTimeSpend = durationInSeconds(params.groceryDestageStartTimestamp, params.groceryDestageCompleteTimestamp)
+    val handOffTime = durationInSeconds(params.groceryDestageCompleteTimestamp, params.deliveryCompleteTimestamp)
+    val totalTime = durationInSeconds(params.customerArrivalTimestamp, params.deliveryCompleteTimestamp)
+
+    // 2. Labels
+    val walkOutFormatted = format(walkOutTimeSpend)
+    val deStageFormatted = format(deStageTimeSpend)
+    val handOffFormatted = format(handOffTime)
+    val totalFormatted = format(totalTime)
+
+    // 3. Bar Segments
+    val segments = listOf(
+        TimeSegment(walkOutTimeSpend, walkOutFormatted, context.getColor(R.color.waiting_time_spend)),
+        TimeSegment(deStageTimeSpend, deStageFormatted, context.getColor(R.color.de_stage_spend)),
+        TimeSegment(handOffTime, handOffFormatted, context.getColor(R.color.hand_off_start))
+    )
 
     val bar = TimeBar(
-        totalLabel = totalTimeFormatted,
+        totalLabel = totalFormatted,
         segments = segments
     )
     setTimeBar(bar)

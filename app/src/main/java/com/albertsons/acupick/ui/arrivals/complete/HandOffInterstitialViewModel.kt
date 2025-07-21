@@ -118,6 +118,7 @@ class HandOffInterstitialViewModel(
         if (isActive) return
         this.isFromNotification = isFromNotification
         this.orderSummaryParamsList = orderSummaryParamsList.list
+        Timber.e("handleHandoffCompletion -> ${params.list}")
         calculatePointsStore( params.list.firstOrNull())
         handOffCompletedItems = params.list.mapNotNull { item ->
             if (item.handOffAction != HandOffAction.CANCEL) {
@@ -145,12 +146,13 @@ class HandOffInterstitialViewModel(
         )
 
         viewModelScope.launch {
+            isBackToHomeButtonEnable.value = true
             delay(COMPLETE_HANDOFF_MESSAGE_DURATION_MS)
             // pickRepo.clearAllData()
             isActive = true
             isShowingTroubleMessage.value = !networkAvailabilityManager.isConnected.first()
             completeHandoffUseCase()
-            isBackToHomeButtonEnable.value = true
+
             isShowingTroubleMessage.value = !networkAvailabilityManager.isConnected.first()
         }
     }

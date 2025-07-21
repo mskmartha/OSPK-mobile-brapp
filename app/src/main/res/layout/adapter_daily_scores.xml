@@ -17,6 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:padding="10dp"
+        android:clipToPadding="false"
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
@@ -75,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:cardCornerRadius="8dp"
+            android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="@+id/mcvHeading"
             app:layout_constraintStart_toStartOf="@+id/mcvHeading"
             app:layout_constraintTop_toBottomOf="@+id/mcvHeading"
@@ -116,6 +118,7 @@
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="@color/gold_color"
             app:cardCornerRadius="8dp"
+            android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="@+id/mcvHeading"
             app:layout_constraintStart_toStartOf="@+id/mcvHeading"
             app:layout_constraintTop_toBottomOf="@+id/mcvValue"
@@ -129,6 +132,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="8dp"
                 android:text="Best"
+
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>

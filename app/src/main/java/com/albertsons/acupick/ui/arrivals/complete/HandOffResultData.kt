@@ -22,5 +22,7 @@ data class HandOffResultData(
     val otpCapturedTimestamp: ZonedDateTime? = null,
     val otpByPassTimeStamp: ZonedDateTime? = null,
     val rxOrders: List<RxOrder>? = null,
-    val pickupUserInfoReq: PickUpUserRequestDto? = null
+    val pickupUserInfoReq: PickUpUserRequestDto? = null,
+    val authCodeFromApi : String? = null,
+    val authCodeFromUserInput : String? = null,
 ) : Parcelable

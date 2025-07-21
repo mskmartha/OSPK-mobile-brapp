@@ -53,7 +53,9 @@ data class HandOffInterstitialParams(
     val pickupUserInfoReq: PickUpUserRequestDto?,
     val issuesScanningBag: List<IssuesScanningBag>?,
     val isDugOrder: Boolean = false,
-    val giftLabelConfirmation: Boolean?
+    val giftLabelConfirmation: Boolean?,
+    val authCodeFromApi : String?,
+    val authCodeFromUserInput : String?,
 ) : Parcelable
 
 @JsonClass(generateAdapter = false)

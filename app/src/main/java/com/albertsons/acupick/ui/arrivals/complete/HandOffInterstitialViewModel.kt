@@ -209,6 +209,8 @@ class HandOffInterstitialViewModel(
             }
             points += pointsToAdd
             // Total Points logic
+            Timber.e("AuthCodeFromApi ${data.authCodeFromApi}")
+            Timber.e("AuthCodeFromInput ${data.authCodeFromUserInput}")
             totalPoints.postValue("3")
         }
 

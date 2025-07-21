@@ -415,7 +415,8 @@ class HandOffViewModel(
                                 otpByPassTimeStamp = otpByPassTimeStamp,
                                 isIdVerified = isIdVerified.value,
                                 userInputAuthCode = verificationCodeEntryText.value,
-                                completeOrCancelTime = ZonedDateTime.now()
+                                completeOrCancelTime = ZonedDateTime.now(),
+
                             )
                         )
                     }
@@ -630,6 +631,9 @@ class HandOffViewModel(
                     }
                 } else null
             }
+
+            val authCodeFromApi = handOffUI.value?.authenticatedPin
+            val authCodeFromUserInput = verificationCodeEntryText.value
             handOffResultFlow.emit(
                 HandOffResultData(
                     isCancel = false,
@@ -645,7 +649,9 @@ class HandOffViewModel(
                     // otpByPassTimeStamp = otpByPassTimeStamp.value,
                     rxOrders = getRxOrders(),
                     pickupUserInfoReq = userInfo,
-                    isIdVerified = userInfo != null
+                    isIdVerified = userInfo != null,
+                    authCodeFromApi = authCodeFromApi,
+                    authCodeFromUserInput = authCodeFromUserInput,
                 )
             )
         }

@@ -49,7 +49,9 @@ fun Map<HandOffUI, HandOffResultData>.toHandOffInterstitialParamsList(isFromPart
             unableToPickOrder = handOffUI.rxDeliveryFailedReason.isNotNullOrEmpty(),
             pickupUserInfoReq = resultData.pickupUserInfoReq,
             isDugOrder = handOffUI.fulfillmentType?.toFulfillmentTypeUI() == FulfillmentTypeUI.DUG,
-            giftLabelConfirmation = handOffUI.isGiftLabelPrinted
+            giftLabelConfirmation = handOffUI.isGiftLabelPrinted,
+            authCodeFromApi = resultData.authCodeFromApi,
+            authCodeFromUserInput = resultData.authCodeFromUserInput
         )
     }
 )

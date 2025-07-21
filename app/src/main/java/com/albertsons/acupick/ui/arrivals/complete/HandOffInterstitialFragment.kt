@@ -25,7 +25,8 @@ class HandOffInterstitialFragment : BaseFragment<HandOffInterstitialViewModel, H
 
     override fun setupBinding(binding: HandOffInterstitialFragmentBinding) {
         super.setupBinding(binding)
-        fragmentViewModel.handleHandoffCompletion(args.handOffInterstitialParamsList, args.orderSummaryParamsList, args.isFromNotification)
+        fragmentViewModel.handleHandoffCompletion(args.handOffInterstitialParamsList,
+            args.orderSummaryParamsList, args.isFromNotification)
         binding.isHandOffActionCancel = fragmentViewModel.handOffAction.value == HandOffAction.CANCEL
 
         val handOffItems = fragmentViewModel.handOffCompletedItems

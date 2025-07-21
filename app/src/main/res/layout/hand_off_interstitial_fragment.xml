@@ -297,6 +297,16 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+                <include
+                    android:id="@+id/layout_auth_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    layout="@layout/layout_auth_code_ui"
+                    app:layout_constraintTop_toBottomOf="@id/mcvWaitingTimeBg"
+                    app:layout_constraintStart_toStartOf="@id/mcvWaitingTimeBg"
+                    app:layout_constraintEnd_toEndOf="@id/mcvWaitingTimeBg" />
+
                 <ScrollView
                     android:layout_marginTop="10dp"
                     android:visibility="visible"
@@ -306,7 +316,7 @@
                     android:nestedScrollingEnabled="false"
                     android:layout_marginBottom="24dp"
                     app:layout_constraintBottom_toTopOf="@+id/troubleMessage"
-                    app:layout_constraintTop_toBottomOf="@+id/mcvWaitingTimeBg">
+                    app:layout_constraintTop_toBottomOf="@+id/layout_auth_code">
 
                     <LinearLayout
                         android:layout_marginTop="10dp"
@@ -561,7 +571,7 @@
                     android:layout_marginBottom="24dp"
                     android:gravity="center"
                     android:text="@string/interstitial_reconnect_wifi"
-                    app:layout_constraintTop_toBottomOf="@+id/customerWaitTimeScroll"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_auth_code"
                     app:layout_constraintBottom_toTopOf="@+id/backToHomeButton"
                     app:visibilityGoneIfFalse="@{viewModel.isShowingTroubleMessage}"
                     tools:visibility="visible" />
@@ -585,10 +595,11 @@
                     tools:text="Complete Handoff"/>
 
 
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

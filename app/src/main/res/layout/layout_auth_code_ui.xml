@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffInterstitialViewModel" />
+
+        <variable
+            name="handOffItem1"
+            type="com.albertsons.acupick.ui.arrivals.complete.HandOffCompletedItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_oth_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/score_card"
+        android:padding="16dp">
+
+        <!-- Current OTH Label -->
+        <TextView
+            android:id="@+id/tv_current_oth_label"
+            style="@style/NunitoSansBold.34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your current OTH:"
+            android:textColor="@android:color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Current OTH Percent -->
+        <TextView
+            android:id="@+id/tv_current_oth_value"
+            style="@style/NunitoSansBold.34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_current_oth_label" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tv_current_oth_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Base on your 1/1 handoffs under 5 mins"
+            android:textColor="@color/black"
+            style="@style/NunitoSansRegular10"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_current_oth_value" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_driveup_icon"
+            app:layout_constraintEnd_toStartOf="@+id/iv_driveup_icon"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/tv_current_oth_value"
+            app:layout_constraintTop_toTopOf="@+id/iv_driveup_icon"
+            app:layout_constraintVertical_bias="0.5">
+
+            <TextView
+                android:id="@+id/tv_best_from_history_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="95%"
+                style="@style/NunitoSansBold.34"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_best_from_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Your best from history"
+                android:textColor="@android:color/black"
+                style="@style/NunitoSansRegular10"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_driveup_icon"
+            android:layout_width="120dp"
+            android:layout_marginTop="8dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_current_auth_code"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_current_oth_desc" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

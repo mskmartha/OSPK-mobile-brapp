@@ -12,6 +12,7 @@ import com.albertsons.acupick.data.model.HandOffInterstitialParams
 import com.albertsons.acupick.data.model.HandOffInterstitialParamsList
 import com.albertsons.acupick.data.model.OrderSummaryParams
 import com.albertsons.acupick.data.model.OrderSummaryParamsList
+import com.albertsons.acupick.data.model.response.GamesPointsDto
 import com.albertsons.acupick.data.model.response.PlayerWaitTimeBreakdownDto
 import com.albertsons.acupick.data.network.NetworkAvailabilityManager
 import com.albertsons.acupick.data.repository.ApsRepository
@@ -53,11 +54,13 @@ class HandOffInterstitialViewModel(
     var handOffCompletedItems: List<HandOffCompletedItem> = emptyList()
     var orderNumber: String? = null
     var isDugOrder: Boolean = false
+
     // flag to make sure the api not getting called multiple times when we go to new screen and come back
     var isActive: Boolean = false
-    var totalPoints : LiveData<String> = MutableLiveData()
-    var pointsBreakDown : LiveData<PlayerWaitTimeBreakdownDto?> = MutableLiveData()
-    var handOffTimerBar : LiveData<HandOffInterstitialParams?> = MutableLiveData()
+    var totalPoints: LiveData<String> = MutableLiveData()
+    var pointsBreakDown: LiveData<PlayerWaitTimeBreakdownDto?> = MutableLiveData()
+    var othPercentCalculation: LiveData<GamesPointsDto?> = MutableLiveData()
+    var handOffTimerBar: LiveData<HandOffInterstitialParams?> = MutableLiveData()
 
     init {
         registerCloseAction(SINGLE_ORDER_ERROR_DIALOG_TAG) {
@@ -86,6 +89,7 @@ class HandOffInterstitialViewModel(
             totalPoints.postValue(apiCallTimeStamp.getPoints())
         }
     }
+
     private fun getPointsBreakDown() {
         Timber.e("setCustomBarData getPointsBreakDown")
         viewModelScope.launch(dispatcherProvider.IO) {
@@ -96,8 +100,10 @@ class HandOffInterstitialViewModel(
                 val result = apsRepository.getTotalGamesPoint()
                 when (result) {
                     is ApiResult.Success -> {
-                        handleBreakDownData( result.data.playerWaitTimeBreakdown)
+                        handleBreakDownData(result.data.playerWaitTimeBreakdown)
+                        othPercentCalculation.postValue(result.data)
                     }
+
                     is ApiResult.Failure -> {
                         handleApiError(result, retryAction = { getPointsBreakDown() })
 
@@ -114,18 +120,22 @@ class HandOffInterstitialViewModel(
         }
     }
 
-    fun handleHandoffCompletion(params: HandOffInterstitialParamsList, orderSummaryParamsList: OrderSummaryParamsList, isFromNotification: Boolean = false) {
+    fun handleHandoffCompletion(
+        params: HandOffInterstitialParamsList,
+        orderSummaryParamsList: OrderSummaryParamsList,
+        isFromNotification: Boolean = false
+    ) {
         if (isActive) return
         this.isFromNotification = isFromNotification
         this.orderSummaryParamsList = orderSummaryParamsList.list
-        Timber.e("handleHandoffCompletion -> ${params.list}")
-        calculatePointsStore( params.list.firstOrNull())
+        calculatePointsStore(params.list.firstOrNull())
         handOffCompletedItems = params.list.mapNotNull { item ->
             if (item.handOffAction != HandOffAction.CANCEL) {
                 HandOffCompletedItem(
                     orderNumber = item.orderNumber,
                     waitingTime = item.customerArrivalTimestamp,
-                    otpCapturedOrByPassTime = item.otpCapturedTimestamp ?: item.otpBypassTimestamp ?: ZonedDateTime.now(),
+                    otpCapturedOrByPassTime = item.otpCapturedTimestamp ?: item.otpBypassTimestamp
+                    ?: ZonedDateTime.now(),
                     isDugOrder = item.isDugOrder
 
                 )
@@ -178,7 +188,12 @@ class HandOffInterstitialViewModel(
         if (isFromNotification) {
             navigateToHome()
         } else {
-            _navigationEvent.postValue(NavigationEvent.Back(destinationId = R.id.destageOrderFragment, inclusive = true))
+            _navigationEvent.postValue(
+                NavigationEvent.Back(
+                    destinationId = R.id.destageOrderFragment,
+                    inclusive = true
+                )
+            )
         }
     }
 
@@ -188,23 +203,26 @@ class HandOffInterstitialViewModel(
             handOffTimerBar.postValue(data)
             var points = totalPoints.value ?: ""
             val endTime = data.otpCapturedTimestamp ?: ZonedDateTime.now()
-            val totalMinutes = (ChronoUnit.SECONDS.between(data.customerArrivalTimestamp, endTime) / 60).toInt()
+            val totalMinutes =
+                (ChronoUnit.SECONDS.between(data.customerArrivalTimestamp, endTime) / 60).toInt()
             var pointsToAdd = 0
-            val otpCapturedOrByPassTime =data.otpCapturedTimestamp ?: data.otpBypassTimestamp ?: ZonedDateTime.now()
-            if (otpCapturedOrByPassTime != null){
+            val otpCapturedOrByPassTime =
+                data.otpCapturedTimestamp ?: data.otpBypassTimestamp ?: ZonedDateTime.now()
+            if (otpCapturedOrByPassTime != null) {
                 pointsToAdd += 1
             }
 
             if (handOffAction.value == HandOffAction.COMPLETE_WITH_EXCEPTION ||
-                handOffAction.value == HandOffAction.COMPLETE){
+                handOffAction.value == HandOffAction.COMPLETE
+            ) {
                 pointsToAdd += 1
             }
 
-            if (totalMinutes <= 2){
+            if (totalMinutes <= 2) {
                 pointsToAdd += 3
             }
 
-            if (totalMinutes in 3..5){
+            if (totalMinutes in 3..5) {
                 pointsToAdd += 2
             }
             points += pointsToAdd

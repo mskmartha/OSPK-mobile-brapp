@@ -403,3 +403,46 @@ fun RecyclerView.setLeaderBoard(
         }
 }
 
+@BindingAdapter("app:currentOTHPercentage")
+fun setCurrentOTHPercentage(textView: TextView, data: GamesPointsDto?) {
+    try {
+        val playerOTH5EligibleOrder = (data?.playerOTH5EligibleOrder ?: "0").toInt()
+        val playerTotalOrder = (data?.playerTotalOrder ?: "0").toInt()
+        val denominator = playerTotalOrder + 1
+
+        // Prevent division by zero
+        if (denominator > 0) {
+            // Convert to Float to get a decimal result from the division
+            val value = (playerOTH5EligibleOrder + 1).toFloat() / denominator * 100f
+            textView.text = String.format("%.2f", value) + "%"
+        } else {
+            textView.text = "0.00%"
+        }
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+        textView.text = "N/A" // Display a fallback text on error
+    }
+}
+
+@BindingAdapter("app:myBestOTHPercentage")
+fun setMyBestOTHPercentage(textView: TextView, data: GamesPointsDto?) {
+    try {
+        val playerOTH5EligibleOrder = (data?.totalOTH5EligibleOrdersInStore ?: "0").toInt()
+        val playerTotalOrder = (data?.totalOrdersInStore ?: "0").toInt()
+
+        // Check for division by zero, since total orders could be 0
+        if (playerTotalOrder + 1 > 0) {
+            // Convert to Float before dividing to get a decimal result
+            val value = (playerOTH5EligibleOrder + 1).toFloat() / (playerTotalOrder + 1) * 100f
+            textView.text = String.format("%.2f", value) + "%"
+        } else {
+            textView.text = "0.00%"
+        }
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+        textView.text = "" // Or a default error value like "N/A"
+    }
+}
+

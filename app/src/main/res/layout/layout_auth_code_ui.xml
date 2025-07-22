@@ -47,7 +47,7 @@
             style="@style/NunitoSansBold.34"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100%"
+            app:currentOTHPercentage="@{viewModel.othPercentCalculation}"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="95%"
+                app:myBestOTHPercentage="@{viewModel.othPercentCalculation}"
                 style="@style/NunitoSansBold.34"
                 android:textColor="@android:color/black" />
 

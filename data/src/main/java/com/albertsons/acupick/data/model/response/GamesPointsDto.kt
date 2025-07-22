@@ -14,6 +14,10 @@ data class GamesPointsDto(
     @Json(name = "eventUserId") val eventUserId: String?,
     @Json(name = "totalPoints") val totalPoints: String?,
     @Json(name = "leagueId") val leagueId: String?,
+    @Json(name = "playerOTH5EligibleOrder") val playerOTH5EligibleOrder: String?,
+    @Json(name = "playerTotalOrder") val playerTotalOrder: String?,
+    @Json(name = "totalOTH5EligibleOrdersInStore") val totalOTH5EligibleOrdersInStore: String?,
+    @Json(name = "totalOrdersInStore") val totalOrdersInStore: String?,
     @Json(name = "playerBaseScoreDetails") val playerBaseScoreDetails: PlayerBaseScoreDetailsDto?,
     @Json(name = "playerOTHScoreDetails") val playerOTHScoreDetails: PlayerOTHScoreDetailsDto?,
     @Json(name = "playerWaitTimeBreakdown") val playerWaitTimeBreakdown: PlayerWaitTimeBreakdownDto?,
@@ -24,7 +28,6 @@ data class GamesPointsDto(
     @Json(name = "leaderBoardDetails") val leaderBoardDetails: LeaderBoardDetailsDto?,
     @Json(name = "totalPlayersInLeague") val totalPlayersInLeague: String?
 ) : Dto, Parcelable
-
 
 @JsonClass(generateAdapter = true)
 @Parcelize

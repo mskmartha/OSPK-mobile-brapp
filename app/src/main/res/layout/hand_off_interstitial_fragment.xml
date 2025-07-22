@@ -246,7 +246,6 @@
                             android:layout_width="0dp"
                             android:layout_height="250dp"
                             app:customBarData="@{viewModel.pointsBreakDown.bestWaitTimeBreakDown}"
-
                             android:layout_marginTop="10dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/vsbThisOrder"
@@ -303,6 +302,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     layout="@layout/layout_auth_code_ui"
+                    app:viewModel="@{viewModel}"
                     app:layout_constraintTop_toBottomOf="@id/mcvWaitingTimeBg"
                     app:layout_constraintStart_toStartOf="@id/mcvWaitingTimeBg"
                     app:layout_constraintEnd_toEndOf="@id/mcvWaitingTimeBg" />

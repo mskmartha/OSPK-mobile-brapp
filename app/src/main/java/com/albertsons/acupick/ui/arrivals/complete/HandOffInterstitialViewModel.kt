@@ -205,31 +205,44 @@ class HandOffInterstitialViewModel(
             val endTime = data.otpCapturedTimestamp ?: ZonedDateTime.now()
             val totalMinutes =
                 (ChronoUnit.SECONDS.between(data.customerArrivalTimestamp, endTime) / 60).toInt()
-            var pointsToAdd = 0
-            val otpCapturedOrByPassTime =
-                data.otpCapturedTimestamp ?: data.otpBypassTimestamp ?: ZonedDateTime.now()
-            if (otpCapturedOrByPassTime != null) {
-                pointsToAdd += 1
-            }
+            /*
+             var pointsToAdd = 0
+         val otpCapturedOrByPassTime =
+             data.otpCapturedTimestamp ?: data.otpBypassTimestamp ?: ZonedDateTime.now()
+      (otpCapturedOrByPassTime != null) {
+             pointsToAdd += 1
+         }
 
-            if (handOffAction.value == HandOffAction.COMPLETE_WITH_EXCEPTION ||
-                handOffAction.value == HandOffAction.COMPLETE
-            ) {
-                pointsToAdd += 1
-            }
+         if (handOffAction.value == HandOffAction.COMPLETE_WITH_EXCEPTION ||
+             handOffAction.value == HandOffAction.COMPLETE
+         ) {
+             pointsToAdd += 1
+         }
 
-            if (totalMinutes <= 2) {
-                pointsToAdd += 3
-            }
+         if (totalMinutes <= 2) {
+             pointsToAdd += 3
+         }
 
-            if (totalMinutes in 3..5) {
-                pointsToAdd += 2
-            }
-            points += pointsToAdd
+         if (totalMinutes in 3..5) {
+             pointsToAdd += 2
+         }
+         points += pointsToAdd
+         */
+
             // Total Points logic
             Timber.e("AuthCodeFromApi ${data.authCodeFromApi}")
             Timber.e("AuthCodeFromInput ${data.authCodeFromUserInput}")
-            totalPoints.postValue("3")
+
+            if (data.authCodeFromApi == null) {
+                totalPoints.postValue("2")
+                return@launch
+            }
+            if (data.authCodeFromApi == data.authCodeFromUserInput){
+                totalPoints.postValue("3")
+                return@launch
+            }
+
+            totalPoints.postValue("2")
         }
 
     }

@@ -78,6 +78,7 @@ class AuthCodeVerificationViewModel(
     }
 
     fun onEnterNumber(number: String, index: Int) {
+
         if (verificationCodeText.value.getOrNull(index)?.toString().isNullOrEmpty()) {
             verificationCodeText.value += number
         } else {

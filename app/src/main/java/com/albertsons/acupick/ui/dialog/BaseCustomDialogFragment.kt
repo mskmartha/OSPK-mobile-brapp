@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import com.albertsons.acupick.ui.dialog.firstlaunch.FirstLaunchDialogFragment
 import com.albertsons.acupick.ui.util.UserFeedback
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,6 +59,7 @@ enum class DialogType {
     InterjectionForALLUsers,
     InformationDialog,
     OnePlGiftingDialog,
+    FirstLaunchDialogFragment
 }
 
 enum class DialogStyle {
@@ -165,6 +167,7 @@ abstract class BaseCustomDialogFragment : DialogFragment(), BaseCustomDialogInte
                 DialogType.InterjectionForALLUsers -> InterjectionForAllUsersDialogFragment()
                 DialogType.InformationDialog -> InformationDialogFragment()
                 DialogType.OnePlGiftingDialog -> OnePlGiftingDialogFragment()
+                DialogType.FirstLaunchDialogFragment -> FirstLaunchDialogFragment()
             }.apply {
                 arguments = Bundle().apply {
                     putSerializable(BUNDLE_KEY_ARG_DATA, argData)

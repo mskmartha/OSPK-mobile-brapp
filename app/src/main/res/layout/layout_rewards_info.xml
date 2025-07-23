@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/ivFirstStar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="70dp"
             android:padding="10dp"
             android:src="@drawable/ic_badges"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{title}"
+            android:textSize="12sp"
             tools:text="@string/handoff_complete"
             app:layout_constraintEnd_toEndOf="@+id/ivFirstStar"
             app:layout_constraintStart_toStartOf="@+id/ivFirstStar"

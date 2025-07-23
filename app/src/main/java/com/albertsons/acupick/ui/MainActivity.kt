@@ -56,6 +56,7 @@ import com.albertsons.acupick.ui.dialog.CloseAction
 import com.albertsons.acupick.ui.dialog.CloseActionListener
 import com.albertsons.acupick.ui.dialog.CloseActionListenerProvider
 import com.albertsons.acupick.ui.dialog.CustomDialogArgData
+import com.albertsons.acupick.ui.dialog.DialogType
 import com.albertsons.acupick.ui.dialog.showWithActivity
 import com.albertsons.acupick.ui.handoff.stepsprogress.ProgressViewConfig
 import com.albertsons.acupick.ui.handoff.stepsprogress.setUp
@@ -725,6 +726,7 @@ class MainActivity :
                         actionBar?.setHomeButtonEnabled(true)
                         actionBar?.setDisplayShowTitleEnabled(false)
                         toolbar.visibility = View.VISIBLE
+                        showOneTimeLaunchDialog()
                     }
 
                     R.id.pickListPagerFragment -> {
@@ -832,6 +834,25 @@ class MainActivity :
                 }
             }
         }
+    }
+
+    private var isOneTimeLaunchDisplayed = false
+    private fun showOneTimeLaunchDialog() {
+        if (isOneTimeLaunchDisplayed){
+            return
+        }
+        isOneTimeLaunchDisplayed = true
+        BaseCustomDialogFragment.newInstance(
+            CustomDialogArgData(
+                titleIcon = R.drawable.ic_sign_out,
+                title = StringIdHelper.Id(R.string.logout),
+                body = StringIdHelper.Id(R.string.logout_confirmation),
+                positiveButtonText = StringIdHelper.Id(R.string.ok),
+                negativeButtonText = StringIdHelper.Id(R.string.cancel),
+                cancelOnTouchOutside = false,
+                dialogType = DialogType.FirstLaunchDialogFragment
+            )
+        ).showWithActivity(this@MainActivity, DialogType.FirstLaunchDialogFragment::class.java.simpleName)
     }
 
     private fun showLogoutConfirmationDialog() {

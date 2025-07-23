@@ -1,11 +1,16 @@
 package com.albertsons.acupick.ui.my_score
 
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.albertsons.acupick.R
 import com.albertsons.acupick.databinding.FragmentMyScoreBinding
 import com.albertsons.acupick.ui.BaseFragment
 import com.albertsons.acupick.ui.MainActivityViewModel
+import com.albertsons.acupick.ui.dialog.BaseCustomDialogFragment
+import com.albertsons.acupick.ui.dialog.CustomDialogArgData
+import com.albertsons.acupick.ui.dialog.DialogType
+import com.albertsons.acupick.ui.dialog.firstlaunch.FirstLaunchDialogFragment
+import com.albertsons.acupick.ui.dialog.showWithFragment
+import com.albertsons.acupick.ui.util.StringIdHelper
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -16,6 +21,7 @@ class MyScoreFragment : BaseFragment<MyScoreViewModel, FragmentMyScoreBinding>()
     override val fragmentViewModel: MyScoreViewModel by viewModel {
         parametersOf(getSharedViewModel<MainActivityViewModel>())
     }
+
     override fun getLayoutRes() = R.layout.fragment_my_score
 
     override fun setupBinding(binding: FragmentMyScoreBinding) {

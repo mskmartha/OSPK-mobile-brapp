@@ -1,0 +1,57 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="data"
+            type="com.albertsons.acupick.ui.dialog.firstlaunch.OnboardingPage" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="5dp"
+            style="@style/PopinsBold28"
+            android:text="@{data.title}"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            app:localImageRes="@{data.imageRes}"
+            android:layout_marginBottom="16dp" />
+
+
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_marginTop="6dp"
+            android:textSize="16sp"
+            android:gravity="center"
+            style="@style/PopinsMedium16.DarkBrown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvDescription1"
+            android:textSize="16sp"
+            android:gravity="center"
+            style="@style/PopinsMedium16"
+            android:textColor="@color/semiLightBlue"
+            android:text="@{data.description1}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>

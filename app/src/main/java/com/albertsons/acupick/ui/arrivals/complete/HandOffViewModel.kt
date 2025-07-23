@@ -1106,6 +1106,7 @@ class HandOffViewModel(
     }
 
     private fun openAuthCodeBottomSheet() {
+        Timber.e("AuthCodeFromApi ${handOffUI.value?.authenticatedPin}")
         inlineBottomSheetEvent.postValue(
             BottomSheetArgDataAndTag(
                 data = CustomBottomSheetArgData(

@@ -75,6 +75,7 @@ import com.albertsons.acupick.ui.home.HomeViewModel
 import com.albertsons.acupick.ui.itemdetails.ItemDetailsViewModel
 import com.albertsons.acupick.ui.itemphoto.ItemPhotoViewModel
 import com.albertsons.acupick.ui.chatImagePreview.ChatImagePreviewViewModel
+import com.albertsons.acupick.ui.dialog.firstlaunch.FirstLaunchDialogViewModel
 import com.albertsons.acupick.ui.how_to_win.HowToWinViewModel
 import com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffMfcViewModel
 import com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffViewModel
@@ -329,6 +330,7 @@ object AppModule {
         viewModel { SwapSubstitutionViewModel(app = get()) }
         viewModel { MissingItemLocationViewModel(app = get()) }
         viewModel { WhereToFindLocationViewModel(app = get()) }
+        viewModel { FirstLaunchDialogViewModel(app = get()) }
         viewModel { AuthCodeVerificationViewModel(app = get()) }
         viewModel { HandOffRemoveItemsViewModel(app = get()) }
         viewModel { QuickTaskPagerViewModel(app = get()) }

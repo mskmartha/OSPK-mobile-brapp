@@ -181,6 +181,7 @@ abstract class BaseFragment<FRAGMENT_VIEW_MODEL : BaseViewModel, BINDING : ViewD
      */
     private fun setupDialogObserver() {
         fragmentViewModel.inlineDialogEvent.observe(viewLifecycleOwner) { (argData, tag) ->
+            Timber.e("setupDialogObserver Called from Fragment")
             BaseCustomDialogFragment.newInstance(argData).showWithFragment(this, tag)
         }
     }

@@ -1,5 +1,6 @@
 package com.albertsons.acupick.ui.dialog.firstlaunch
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,11 +13,14 @@ import androidx.fragment.app.viewModels
 import com.albertsons.acupick.R
 import com.albertsons.acupick.databinding.FirstLaunchDialogFragmentBinding
 import com.albertsons.acupick.ui.dialog.BaseCustomDialogFragment
+import com.albertsons.acupick.ui.dialog.findDialogListener
+import com.albertsons.acupick.ui.dialog.toViewData
+import timber.log.Timber
 
 class FirstLaunchDialogFragment : BaseCustomDialogFragment() {
 
     private lateinit var binding: FirstLaunchDialogFragmentBinding
-    private val viewModel: FirstLaunchDialogViewModel by viewModels()
+    private val fragmentVm: FirstLaunchDialogViewModel by viewModels()
 
     override val shouldFillScreen
         get() = false
@@ -30,37 +34,47 @@ class FirstLaunchDialogFragment : BaseCustomDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?
     ): ViewDataBinding {
-        binding = DataBindingUtil.inflate(inflater, R.layout.first_launch_dialog_fragment, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        return binding
-    }
-
-    override fun onViewCreated(view: android.view.View, savedInstanceState: android.os.Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val adapter = OnboardingPagerAdapter(viewModel.pages)
-        binding.viewPager.adapter = adapter
-
-        setupIndicators(viewModel.pages.size)
-
-        viewModel.currentPage.observe(viewLifecycleOwner) {
-            updateIndicators(it)
-        }
-
-        binding.btnNext.setOnClickListener {
-            val current = viewModel.currentPage.value ?: 0
-            if (current < viewModel.pages.lastIndex) {
-                viewModel.currentPage.value = current + 1
-            } else {
+        return DataBindingUtil.inflate<FirstLaunchDialogFragmentBinding>(inflater, R.layout.first_launch_dialog_fragment, container, false).apply {
+            binding = this
+            binding.lifecycleOwner = viewLifecycleOwner
+            binding.viewData = argData.toViewData(requireContext())
+            binding.viewModel = fragmentVm
+            setUpViews()
+            fragmentVm.navigation.observe(viewLifecycleOwner) { closeAction ->
+                Timber.v("[setupBinding closeActionEvent] closeAction=$closeAction")
                 dismiss()
+                // Need to invoke this close action *after* the dialog has been dismissed to allow another dialog to be shown from the close action if desired.
+                findDialogListener()?.onCloseAction(closeAction.first, closeAction.second)
             }
         }
-        viewModel.currentPage.observe(viewLifecycleOwner) {
+    }
+
+    private fun setUpViews() {
+        val adapter = OnboardingPagerAdapter(fragmentVm.pages)
+        binding.viewPager.adapter = adapter
+
+        setupIndicators(fragmentVm.pages.size)
+
+
+
+        binding.btnNext.setOnClickListener {
+            val current = fragmentVm.currentPage.value ?: 0
+            if (current < fragmentVm.pages.lastIndex) {
+                fragmentVm.currentPage.value = current + 1
+            } else {
+                dismiss()
+                dismissWithResult()
+                fragmentVm.onGotItClicked()
+            }
+        }
+        fragmentVm.currentPage.observe(viewLifecycleOwner) {
+            updateIndicators(it)
+        }
+        fragmentVm.currentPage.observe(viewLifecycleOwner) {
             updateIndicators(it)
         }
     }
-
+    
     private lateinit var indicators: Array<android.widget.ImageView>
 
     private fun setupIndicators(count: Int) {
@@ -83,7 +97,17 @@ class FirstLaunchDialogFragment : BaseCustomDialogFragment() {
             )
         }
     }
+    private fun dismissWithResult() {
+        parentFragmentManager.setFragmentResult("dialog_dismissed", Bundle().apply {
+            putString("result", "dismissed_by_button")
+        })
+        dismiss()
+    }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+    }
     private val Int.dp: Int
         get() = (this * resources.displayMetrics.density).toInt()
 }

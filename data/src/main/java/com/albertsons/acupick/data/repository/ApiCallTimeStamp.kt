@@ -16,6 +16,10 @@ interface GamePointsRepository : Repository {
 
     fun storeTimeStamp()
 
+    fun isFirstTimeLaunch() : Boolean
+
+    fun updateFirstLaunchStatus(isOpen:Boolean)
+
 }
 
 class GamePointsRepositoryImpl(
@@ -60,9 +64,20 @@ class GamePointsRepositoryImpl(
         sharedPreferences.edit { putLong(LAST_TIME_STAMP, now.toEpochMilli()) }
     }
 
+    override fun isFirstTimeLaunch(): Boolean {
+        return sharedPreferences.getBoolean(IS_FIRST_LAUNCH_DIALOG, false)
+    }
+
+    override fun updateFirstLaunchStatus(isOpen: Boolean) {
+        sharedPreferences.edit{
+            putBoolean(IS_FIRST_LAUNCH_DIALOG,isOpen)
+        }
+    }
+
     private companion object {
         const val TOTAL_POINTS = "TOTAL_POINTS"
         const val LAST_TIME_STAMP = "LAST_TIME_STAMP"
+        const val IS_FIRST_LAUNCH_DIALOG = "IS_FIRST_LAUNCH_DIALOG"
 
     }
 }

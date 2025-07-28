@@ -1,7 +1,6 @@
 package com.albertsons.acupick.ui.home
 
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.albertsons.acupick.R
 import com.albertsons.acupick.data.network.NetworkAvailabilityManager
 import com.albertsons.acupick.databinding.HomeFragmentBinding
@@ -13,6 +12,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import timber.log.Timber
 
 /** Home screen for the app ([Zeplin](https://zpl.io/25WpJAW)) */
 class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
@@ -28,6 +28,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
     override fun setupBinding(binding: HomeFragmentBinding) {
         super.setupBinding(binding)
         setupRefresh()
+        callBackListener()
         binding.chatButtonView.setContent {
             ChatIconWithTooltip(onChatClicked = { orderNumber ->
                 fragmentViewModel.onChatClicked(orderNumber)
@@ -42,7 +43,17 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
             fragmentViewModel.runCardDataActions()
         }
 
+
     }
+
+    private fun callBackListener() {
+        parentFragmentManager.setFragmentResultListener("dialog_dismissed", viewLifecycleOwner) { _, bundle ->
+            Timber.e("dialog_dismissed")
+
+            // Handle dismiss here
+        }
+    }
+
 
     private fun setupRefresh() {
         viewLifecycleOwner.lifecycleScope.launch {

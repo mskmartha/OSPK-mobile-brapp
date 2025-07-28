@@ -1,12 +1,18 @@
 package com.albertsons.acupick.ui.dialog.firstlaunch
 
 import android.app.Application
+import androidx.annotation.Keep
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.albertsons.acupick.R
+import com.albertsons.acupick.ui.dialog.CloseAction
 import com.albertsons.acupick.ui.dialog.CustomDialogViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-
+@Keep
 data class OnboardingPage(
     val title: String,
     val imageRes: Int,
@@ -37,6 +43,13 @@ class FirstLaunchDialogViewModel(app: Application) : CustomDialogViewModel(app) 
     val buttonText = MediatorLiveData<String>().apply {
         addSource(currentPage) { page ->
             value = if (page == pages.lastIndex) "Got it!" else "Next"
+        }
+    }
+
+    fun onGotItClicked() {
+        viewModelScope.launch {
+            Timber.e("onGotItClicked [invoked]")
+            onCloseIconClick()
         }
     }
 }

@@ -141,6 +141,7 @@ abstract class BaseCustomDialogFragment : DialogFragment(), BaseCustomDialogInte
         private const val BUNDLE_KEY_ARG_DATA = "argData"
 
         fun newInstance(argData: CustomDialogArgData): BaseCustomDialogFragment {
+            Timber.e("newInstance ${argData.dialogType}")
             return when (argData.dialogType) {
                 DialogType.Informational -> InformationalDialogFragment()
                 DialogType.RadioButtons -> RadioButtonsDialogFragment()

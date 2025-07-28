@@ -62,14 +62,19 @@ import com.albertsons.acupick.ui.MainActivityViewModel
 import com.albertsons.acupick.ui.arrivals.ArrivalsViewModel
 import com.albertsons.acupick.ui.arrivals.SelectedActivities
 import com.albertsons.acupick.ui.arrivals.destage.DestageOrderPagerViewModel
+import com.albertsons.acupick.ui.dialog.BaseCustomDialogFragment
+import com.albertsons.acupick.ui.dialog.CustomDialogArgData
 import com.albertsons.acupick.ui.dialog.CustomDialogArgDataAndTag
+import com.albertsons.acupick.ui.dialog.DialogType
 import com.albertsons.acupick.ui.dialog.HAND_OFF_ALREADY_ASSIGNED_ARG_DATA
 import com.albertsons.acupick.ui.dialog.OF_AGE_ASSOCIATE_VERIFICATION_DATA
 import com.albertsons.acupick.ui.dialog.RELOAD_DILAOG
 import com.albertsons.acupick.ui.dialog.closeActionFactory
+import com.albertsons.acupick.ui.dialog.showWithFragment
 import com.albertsons.acupick.ui.models.CustomerArrivalStatusUI
 import com.albertsons.acupick.ui.models.FulfillmentTypeUI
 import com.albertsons.acupick.ui.staging.winestaging.BoxUiData
+import com.albertsons.acupick.ui.util.StringIdHelper
 import com.albertsons.acupick.ui.util.combineWith
 import com.albertsons.acupick.ui.util.firstInitialDotLastName
 import com.albertsons.acupick.ui.util.getOrZero
@@ -242,6 +247,7 @@ class HomeViewModel(
 
         // Use View model scope to observe so we don't have to remover observers from live data
         refreshTotalGamePoints()
+        showFirstLaunchDialog()
         viewModelScope.launch {
             completeHandoffUseCase.handOffReassigned.collect {
                 inlineDialogEvent.postValue(
@@ -288,6 +294,15 @@ class HomeViewModel(
             closeActionFactory(
                 positive = {
                     load()
+                }
+            )
+        }
+        registerCloseAction(FIRST_LAUNCH_INTRO_DIALOG) {
+            Timber.e("onGotItClicked [received]")
+            updateFlagForFirstLaunch()
+            closeActionFactory(
+                dismiss = {
+
                 }
             )
         }
@@ -1065,6 +1080,28 @@ class HomeViewModel(
         const val ARRIVING_SOON_WAIT_TIME_PLACEHOLDER = -1L
 
         const val AWAIT_TIME_INTERVAL_PRE_PICK = 10000L
+
+        const val FIRST_LAUNCH_INTRO_DIALOG = "FIRST_LAUNCH_INTRO_DIALOG"
+    }
+
+
+    private fun showFirstLaunchDialog() {
+        viewModelScope.launch {
+            /*if (apiCallTimeStamp.isFirstTimeLaunch()) {
+                return@launch
+            }*/
+            val data = CustomDialogArgData(
+                title = StringIdHelper.Raw(""),
+                positiveButtonText = StringIdHelper.Id(R.string.ok),
+                cancelOnTouchOutside = false,
+                dialogType = DialogType.FirstLaunchDialogFragment
+            )
+            inlineDialogEvent.postValue(CustomDialogArgDataAndTag(data, FIRST_LAUNCH_INTRO_DIALOG))
+        }
+    }
+    private fun updateFlagForFirstLaunch() = viewModelScope.launch{
+        Timber.e("onGotItClicked [received]")
+        apiCallTimeStamp.updateFirstLaunchStatus(true)
     }
 }
 

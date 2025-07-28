@@ -769,6 +769,7 @@ class MainActivityViewModel(
         activityDialogEvent.postValue(CustomDialogArgDataAndTag(data = args, tag = RETRY_ERROR_DIALOG_TAG))
     }
 
+
     companion object {
         const val ERROR_DIALOG_TAG = "errorDialogTag"
         const val TWILIO_ERROR_DIALOG_TAG = "twilioerrorDialogTag"

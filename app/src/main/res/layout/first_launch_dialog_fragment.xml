@@ -6,6 +6,11 @@
         <variable
             name="viewModel"
             type="com.albertsons.acupick.ui.dialog.firstlaunch.FirstLaunchDialogViewModel" />
+
+        <variable
+            name="viewData"
+            type="com.albertsons.acupick.ui.dialog.CustomDialogViewData" />
+
     </data>
 
     <FrameLayout

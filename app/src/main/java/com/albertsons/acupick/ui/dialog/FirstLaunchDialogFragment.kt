@@ -1,6 +1,5 @@
-package com.albertsons.acupick.ui.dialog.firstlaunch
+package com.albertsons.acupick.ui.dialog
 
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,33 +11,40 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import com.albertsons.acupick.R
 import com.albertsons.acupick.databinding.FirstLaunchDialogFragmentBinding
-import com.albertsons.acupick.ui.dialog.BaseCustomDialogFragment
-import com.albertsons.acupick.ui.dialog.findDialogListener
-import com.albertsons.acupick.ui.dialog.toViewData
 import timber.log.Timber
 
 class FirstLaunchDialogFragment : BaseCustomDialogFragment() {
 
     private lateinit var binding: FirstLaunchDialogFragmentBinding
+
     private val fragmentVm: FirstLaunchDialogViewModel by viewModels()
 
     override val shouldFillScreen
         get() = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun getViewDataBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): ViewDataBinding {
-        return DataBindingUtil.inflate<FirstLaunchDialogFragmentBinding>(inflater, R.layout.first_launch_dialog_fragment, container, false).apply {
+        return DataBindingUtil.inflate<FirstLaunchDialogFragmentBinding>(
+            inflater,
+            R.layout.first_launch_dialog_fragment,
+            container,
+            false
+        ).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewData = argData.toViewData(requireContext())
+            viewModel = fragmentVm
             binding = this
-            binding.lifecycleOwner = viewLifecycleOwner
-            binding.viewData = argData.toViewData(requireContext())
-            binding.viewModel = fragmentVm
             setUpViews()
             fragmentVm.navigation.observe(viewLifecycleOwner) { closeAction ->
                 Timber.v("[setupBinding closeActionEvent] closeAction=$closeAction")
@@ -62,8 +68,6 @@ class FirstLaunchDialogFragment : BaseCustomDialogFragment() {
             if (current < fragmentVm.pages.lastIndex) {
                 fragmentVm.currentPage.value = current + 1
             } else {
-                dismiss()
-                dismissWithResult()
                 fragmentVm.onGotItClicked()
             }
         }
@@ -74,7 +78,7 @@ class FirstLaunchDialogFragment : BaseCustomDialogFragment() {
             updateIndicators(it)
         }
     }
-    
+
     private lateinit var indicators: Array<android.widget.ImageView>
 
     private fun setupIndicators(count: Int) {
@@ -97,17 +101,8 @@ class FirstLaunchDialogFragment : BaseCustomDialogFragment() {
             )
         }
     }
-    private fun dismissWithResult() {
-        parentFragmentManager.setFragmentResult("dialog_dismissed", Bundle().apply {
-            putString("result", "dismissed_by_button")
-        })
-        dismiss()
-    }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
 
-    }
     private val Int.dp: Int
         get() = (this * resources.displayMetrics.density).toInt()
 }

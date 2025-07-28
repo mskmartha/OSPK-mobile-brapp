@@ -17,8 +17,6 @@ import com.albertsons.acupick.data.model.StorageType
 import com.albertsons.acupick.data.model.response.RejectedItemsByZone
 import com.albertsons.acupick.data.network.logging.LoggingDataProvider
 import com.albertsons.acupick.data.repository.ConversationsClientWrapper
-import com.albertsons.acupick.data.repository.GamePointsRepository
-import com.albertsons.acupick.data.repository.GamePointsRepositoryImpl
 import com.albertsons.acupick.data.toast.Toaster
 import com.albertsons.acupick.data.toast.ToasterImplementation
 import com.albertsons.acupick.domain.AcuPickLoggerInterface
@@ -75,7 +73,7 @@ import com.albertsons.acupick.ui.home.HomeViewModel
 import com.albertsons.acupick.ui.itemdetails.ItemDetailsViewModel
 import com.albertsons.acupick.ui.itemphoto.ItemPhotoViewModel
 import com.albertsons.acupick.ui.chatImagePreview.ChatImagePreviewViewModel
-import com.albertsons.acupick.ui.dialog.firstlaunch.FirstLaunchDialogViewModel
+import com.albertsons.acupick.ui.dialog.FirstLaunchDialogViewModel
 import com.albertsons.acupick.ui.how_to_win.HowToWinViewModel
 import com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffMfcViewModel
 import com.albertsons.acupick.ui.manualentry.handoff.ManualEntryHandOffViewModel

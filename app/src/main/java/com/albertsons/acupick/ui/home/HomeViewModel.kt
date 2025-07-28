@@ -68,6 +68,7 @@ import com.albertsons.acupick.ui.dialog.CustomDialogArgDataAndTag
 import com.albertsons.acupick.ui.dialog.DialogType
 import com.albertsons.acupick.ui.dialog.HAND_OFF_ALREADY_ASSIGNED_ARG_DATA
 import com.albertsons.acupick.ui.dialog.OF_AGE_ASSOCIATE_VERIFICATION_DATA
+import com.albertsons.acupick.ui.dialog.ONE_TIME_LAUNCH_DIALOG
 import com.albertsons.acupick.ui.dialog.RELOAD_DILAOG
 import com.albertsons.acupick.ui.dialog.closeActionFactory
 import com.albertsons.acupick.ui.dialog.showWithFragment
@@ -115,7 +116,7 @@ class HomeViewModel(
     private val completeHandoff1PLUseCase: CompleteHandoff1PLUseCase,
     private val activityViewModel: MainActivityViewModel,
 
-) : BaseViewModel(app) {
+    ) : BaseViewModel(app) {
 
     private val siteRepository: SiteRepository by inject()
     private val wineStagingStateRepo: WineShippingStageStateRepository by inject()
@@ -123,19 +124,22 @@ class HomeViewModel(
     private val conversationsRepository: ConversationsRepository by inject()
     private val idRepository: IdRepository by inject()
     private val apiCallTimeStamp: GamePointsRepository by inject()
+
     // Loading flags
     val isDataLoading: LiveData<Boolean> = MutableLiveData(true)
     val isDataRefreshing = MutableLiveData(false)
-    val showSkeletonState = combine(isDataLoading.asFlow(), isDataRefreshing.asFlow()) { loading, refreshing ->
-        loading && refreshing.not()
-    }.asLiveData()
+    val showSkeletonState =
+        combine(isDataLoading.asFlow(), isDataRefreshing.asFlow()) { loading, refreshing ->
+            loading && refreshing.not()
+        }.asLiveData()
     val showTimerPastDue = MutableLiveData(false)
 
     private var timerJob: Job? = null
 
     // Pick list item drives maps to many other UI fields.
     val cardData: LiveData<HomeCardData?> = MutableLiveData()
-    val pickListType: LiveData<PickListBatchingType> = MutableLiveData(PickListBatchingType.SingleOrder)
+    val pickListType: LiveData<PickListBatchingType> =
+        MutableLiveData(PickListBatchingType.SingleOrder)
     val orderCount: LiveData<Int> = MutableLiveData(1)
     val activityFulfillmentTypes: LiveData<Set<FulfillmentTypeUI>> = MutableLiveData(emptySet())
     val vanNumber: LiveData<String> = MutableLiveData("")
@@ -143,38 +147,51 @@ class HomeViewModel(
     private val isSnap = MutableStateFlow(false)
     private val isSubscription = MutableStateFlow(false)
     val isCattEnabled = AcuPickConfig.cattEnabled
-    val customerTypeIcon: LiveData<CustomerType?> = combine(isSnap, isSubscription) { isEbt, isFreshPass ->
-        getCustomerType(isEbt, isFreshPass)
-    }.asLiveData()
+    val customerTypeIcon: LiveData<CustomerType?> =
+        combine(isSnap, isSubscription) { isEbt, isFreshPass ->
+            getCustomerType(isEbt, isFreshPass)
+        }.asLiveData()
     val timerStillActive = MutableLiveData(true)
     val isBatchOrder = pickListType.map { it == PickListBatchingType.Batch }
     val hideTimer = MutableLiveData<Boolean>(false)
     val dueDay = MutableLiveData(0L)
     val source = cardData.map { cd ->
-        if (cd?.vanNumber.isNotNullOrEmpty()) app.getString(R.string.one_pl_van_number, cd?.vanNumber.orEmpty())
+        if (cd?.vanNumber.isNotNullOrEmpty()) app.getString(
+            R.string.one_pl_van_number,
+            cd?.vanNumber.orEmpty()
+        )
         else if (cd?.isOrderReadyToPickUp == true && cd.is3p == true) cd.source
         else ""
     }
 
     // Map item to storage type indicators
-    val ambientActive: LiveData<Boolean> = cardData.map { item -> item?.storageTypes?.any { it == StorageType.AM } ?: false }
-    val coldActive: LiveData<Boolean> = cardData.map { item -> item?.storageTypes?.any { it == StorageType.CH } ?: false }
-    val frozenActive: LiveData<Boolean> = cardData.map { item -> item?.storageTypes?.any { it == StorageType.FZ } ?: false }
-    val hotActive: LiveData<Boolean> = cardData.map { item -> item?.storageTypes?.any { it == StorageType.HT } ?: false }
+    val ambientActive: LiveData<Boolean> =
+        cardData.map { item -> item?.storageTypes?.any { it == StorageType.AM } ?: false }
+    val coldActive: LiveData<Boolean> =
+        cardData.map { item -> item?.storageTypes?.any { it == StorageType.CH } ?: false }
+    val frozenActive: LiveData<Boolean> =
+        cardData.map { item -> item?.storageTypes?.any { it == StorageType.FZ } ?: false }
+    val hotActive: LiveData<Boolean> =
+        cardData.map { item -> item?.storageTypes?.any { it == StorageType.HT } ?: false }
 
-    val associateName: LiveData<String> = userRepo.user.map { app.getString(R.string.hello_associate_name, it?.firstName.orEmpty()) }.asLiveData()
+    val associateName: LiveData<String> =
+        userRepo.user.map { app.getString(R.string.hello_associate_name, it?.firstName.orEmpty()) }
+            .asLiveData()
     val picklistIllustrationDrawable: LiveData<Int?> = combine(
         orderType.asFlow(), cardData.asFlow(), activityFulfillmentTypes.asFlow(),
         isCattEnabled, customerTypeIcon.asFlow(), ::getIllustrationDrawable
     ).asLiveData()
 
     // Map user to display name
-    val displayName: LiveData<String> = userRepo.user.map { it?.firstInitialDotLastName() ?: "" }.asLiveData()
-    val storeTitle: LiveData<String> = userRepo.user.map { it?.storeNumberTitle() ?: "" }.asLiveData()
+    val displayName: LiveData<String> =
+        userRepo.user.map { it?.firstInitialDotLastName() ?: "" }.asLiveData()
+    val storeTitle: LiveData<String> =
+        userRepo.user.map { it?.storeNumberTitle() ?: "" }.asLiveData()
 
     private val autoInitiated = siteRepository.isAutoInitiated
 
-    val loadingState: LiveData<HomeLoadingState> = MutableLiveData(if (autoInitiated) HomeLoadingState.Initial else HomeLoadingState.End)
+    val loadingState: LiveData<HomeLoadingState> =
+        MutableLiveData(if (autoInitiated) HomeLoadingState.Initial else HomeLoadingState.End)
 
     val associateCta: LiveData<String> = cardData.combineWith(loadingState) { cardData, state ->
         when {
@@ -226,16 +243,18 @@ class HomeViewModel(
         isBatch == true && data?.is1Pl != true
     }
     val hidePastDue = cardData.map {
-        if (it?.is1Pl == true) ChronoUnit.SECONDS.between(ZonedDateTime.now(), it.vanDepartureTime).let { due -> due >= 0 }
+        if (it?.is1Pl == true) ChronoUnit.SECONDS.between(ZonedDateTime.now(), it.vanDepartureTime)
+            .let { due -> due >= 0 }
         else true
     }
 
     private var intervalTimer: Job? = null
-    val emptyStateDrawable: LiveData<Drawable?> = cardData.combineWith(loadingState) { cardData, state ->
-        if (cardData == null) {
-            state?.drawableId?.get(app.applicationContext)
-        } else null
-    }
+    val emptyStateDrawable: LiveData<Drawable?> =
+        cardData.combineWith(loadingState) { cardData, state ->
+            if (cardData == null) {
+                state?.drawableId?.get(app.applicationContext)
+            } else null
+        }
 
     val emptyStateText: LiveData<String?> = cardData.combineWith(loadingState) { cardData, state ->
         if (cardData == null) {
@@ -298,11 +317,9 @@ class HomeViewModel(
             )
         }
         registerCloseAction(FIRST_LAUNCH_INTRO_DIALOG) {
-            Timber.e("onGotItClicked [received]")
-            updateFlagForFirstLaunch()
             closeActionFactory(
                 dismiss = {
-
+                    updateFlagForFirstLaunch()
                 }
             )
         }
@@ -313,9 +330,9 @@ class HomeViewModel(
             if (networkAvailabilityManager.isConnected.first().not()) {
                 networkAvailabilityManager.triggerOfflineError { refreshTotalGamePoints() }
             } else {
-                 // Call api to store all points
-                 // Check for last api call 10 min refresh
-                if (!apiCallTimeStamp.canMakeApiCall()){
+                // Call api to store all points
+                // Check for last api call 10 min refresh
+                if (!apiCallTimeStamp.canMakeApiCall()) {
                     isDataLoading.wrap { false }
                     return@launch
                 }
@@ -329,10 +346,11 @@ class HomeViewModel(
                         }
 
                     }
+
                     is ApiResult.Failure -> {
-                        if (apiCallTimeStamp.getPoints().isEmpty()){
+                        if (apiCallTimeStamp.getPoints().isEmpty()) {
                             handleApiError(result, retryAction = { refreshTotalGamePoints() })
-                        }else{
+                        } else {
                             // Do nothing
                         }
 
@@ -345,7 +363,9 @@ class HomeViewModel(
     fun runCardDataActions() {
         if (cardData.value?.isPrePickOrAdvancePick == true) {
             dueDay.value = ChronoUnit.DAYS.between(
-                ZonedDateTime.now().toLocalDate(), (cardData.value?.expectedEndTime ?: ZonedDateTime.now()).toSameZoneInstantLocalDate()
+                ZonedDateTime.now().toLocalDate(),
+                (cardData.value?.expectedEndTime
+                    ?: ZonedDateTime.now()).toSameZoneInstantLocalDate()
             )
         }
         hideTimer.value = dueDay.value != 0L
@@ -364,14 +384,22 @@ class HomeViewModel(
             (cardData.value?.customerArrivalStatusUI == CustomerArrivalStatusUI.ARRIVED || cardData.value?.customerArrivalStatusUI == CustomerArrivalStatusUI.ARRIVED_NOT_STARTED) &&
             (cardData.value?.feScreenStatus == null || cardData.value?.feScreenStatus == FE_SCREEN_STATUS_STORE_NOTIFIED)
         ) {
-            cardData.value?.customerArrivalTime?.let { customerArrivalTime -> startTimer(customerArrivalTime) }
+            cardData.value?.customerArrivalTime?.let { customerArrivalTime ->
+                startTimer(
+                    customerArrivalTime
+                )
+            }
             return
         }
         if (cardData.value?.isOrderReadyToPickUp == true) {
             when (cardData.value?.customerArrivalStatusUI) {
                 CustomerArrivalStatusUI.ARRIVED ->
                     if (cardData.value?.fulfillment?.toFulfillmentTypeUI() == FulfillmentTypeUI.THREEPL)
-                        cardData.value?.customerArrivalTime?.let { customerArrivalTime -> startTimer(customerArrivalTime) }
+                        cardData.value?.customerArrivalTime?.let { customerArrivalTime ->
+                            startTimer(
+                                customerArrivalTime
+                            )
+                        }
 
                 CustomerArrivalStatusUI.ARRIVING, CustomerArrivalStatusUI.EN_ROUTE ->
                     cardData.value?.customerArrivalTime?.let { eta -> startTimer(eta, true) }
@@ -391,7 +419,10 @@ class HomeViewModel(
     }
 
     @VisibleForTesting
-    internal fun setNextPickTitle(cardData: HomeCardData?, isCodeUnavailableEnabled: Boolean = false) {
+    internal fun setNextPickTitle(
+        cardData: HomeCardData?,
+        isCodeUnavailableEnabled: Boolean = false,
+    ) {
         nextPickTitle.postValue(
             when {
                 cardData?.isOrderReadyToPickUp == true -> app.getString(R.string.home_customer_waiting)
@@ -399,7 +430,11 @@ class HomeViewModel(
                 else -> {
                     when (cardData?.isAssignedToMe) {
                         true -> app.getString(R.string.hello_continue_pick)
-                        false -> app.getString(R.string.hello_again_next_pick, if (isCodeUnavailableEnabled) " Acupick" else "")
+                        false -> app.getString(
+                            R.string.hello_again_next_pick,
+                            if (isCodeUnavailableEnabled) " Acupick" else ""
+                        )
+
                         null -> ""
                     }
                 }
@@ -411,7 +446,7 @@ class HomeViewModel(
         viewModelScope.launch {
             pickRepository.pickList.value?.actId.toString().logError(
                 "Null Activity Id. HomeViewModel(onChatClicked)," +
-                    " User Id-${userRepo.user.value?.userId}, storeId-${userRepo.user.value?.selectedStoreId}"
+                        " User Id-${userRepo.user.value?.userId}, storeId-${userRepo.user.value?.selectedStoreId}"
             )
             pickRepository.pickList.value?.let {
                 _navigationEvent.postValue(
@@ -439,6 +474,7 @@ class HomeViewModel(
                 is ApiResult.Success -> {
                     load(true)
                 }
+
                 is ApiResult.Failure -> {
                     handleApiError(result, retryAction = { unassignPickerFromOrder() })
                 }
@@ -457,7 +493,8 @@ class HomeViewModel(
     }
 
     private val loadEvent = MutableStateFlow<Boolean?>(null).apply {
-        filterNotNull().throttleFirst(THROTTLE_TIMEOUT_MS).onEach { loadHomeData(it) }.launchIn(viewModelScope)
+        filterNotNull().throttleFirst(THROTTLE_TIMEOUT_MS).onEach { loadHomeData(it) }
+            .launchIn(viewModelScope)
     }
 
     private fun getCountAutoInitiate() =
@@ -482,13 +519,19 @@ class HomeViewModel(
                         .wrap {
                             completeHandoffUseCase()
                             completeHandoff1PLUseCase()
-                            apsRepo.getAppSummary(siteId = user.selectedStoreId ?: "", userId = user.userId, counter = getCountAutoInitiate())
+                            apsRepo.getAppSummary(
+                                siteId = user.selectedStoreId ?: "",
+                                userId = user.userId,
+                                counter = getCountAutoInitiate()
+                            )
                         }
 
                     when (result) {
                         is ApiResult.Success -> {
-                            val handOffOrders = result.data.orderCountByStore?.find { it.type == OrderByCountType.HAND_OFFS }
-                            val openOrders = result.data.orderCountByStore?.find { it.type == OrderByCountType.PENDING_TO_STAGE }
+                            val handOffOrders =
+                                result.data.orderCountByStore?.find { it.type == OrderByCountType.HAND_OFFS }
+                            val openOrders =
+                                result.data.orderCountByStore?.find { it.type == OrderByCountType.PENDING_TO_STAGE }
                             result.data.activity?.let {
                                 pickListType.postValue(it.getPickListType())
                             }
@@ -502,29 +545,39 @@ class HomeViewModel(
                             }
                             openOrderCount.postValue(openOrders?.count?.toString() ?: "0")
                             handOffOrderCount.postValue(handOffOrders?.count?.toString() ?: "0")
-                            dugCount.postValue(handOffOrders?.countFulfillmentTypes?.find { it.fulfilmentType == FulfillmentType.DUG }?.count?.toString() ?: "0")
-                            deliveryCount.postValue(handOffOrders?.countFulfillmentTypes?.find { it.fulfilmentType == FulfillmentType.DELIVERY }?.count?.toString() ?: "0")
+                            dugCount.postValue(
+                                handOffOrders?.countFulfillmentTypes?.find { it.fulfilmentType == FulfillmentType.DUG }?.count?.toString()
+                                    ?: "0"
+                            )
+                            deliveryCount.postValue(
+                                handOffOrders?.countFulfillmentTypes?.find { it.fulfilmentType == FulfillmentType.DELIVERY }?.count?.toString()
+                                    ?: "0"
+                            )
 
-                            updateAutoInitiatedLoadingState(result.data.isAutoInitiated, result.data.activity)
+                            updateAutoInitiatedLoadingState(
+                                result.data.isAutoInitiated,
+                                result.data.activity
+                            )
 
                             val activity = result.data.activity ?: return@wrap
 
-                            val isOrderAssinedToMeAndNotInStaging = result.data.activity?.assignedTo?.userId == user.userId && result.data.activity?.actType != ActivityType.DROP_OFF
+                            val isOrderAssinedToMeAndNotInStaging =
+                                result.data.activity?.assignedTo?.userId == user.userId && result.data.activity?.actType != ActivityType.DROP_OFF
                             Timber.d("Home activityDetail $isOrderAssinedToMeAndNotInStaging")
                             val activityDetail = if (isOrderAssinedToMeAndNotInStaging) {
                                 isDataLoading.wrap {
                                     pickRepository.getActivityDetails(
                                         id = (
-                                            if (activity.status == ActivityStatus.NEW && activity.actType == ActivityType.DROP_OFF)
-                                                activity.prevActivityId
-                                            else
-                                                activity.actId
-                                            ).toString().also {
-                                            it.logError(
-                                                "Null Activity Id. HomeViewModel(loadHomeData)," +
-                                                    " Order Id-${activity.customerOrderNumber}, User Id-${user.userId}, storeId-${user.selectedStoreId}"
-                                            )
-                                        },
+                                                if (activity.status == ActivityStatus.NEW && activity.actType == ActivityType.DROP_OFF)
+                                                    activity.prevActivityId
+                                                else
+                                                    activity.actId
+                                                ).toString().also {
+                                                it.logError(
+                                                    "Null Activity Id. HomeViewModel(loadHomeData)," +
+                                                            " Order Id-${activity.customerOrderNumber}, User Id-${user.userId}, storeId-${user.selectedStoreId}"
+                                                )
+                                            },
                                         true
                                     )
                                 }
@@ -532,14 +585,14 @@ class HomeViewModel(
                                 isDataLoading.wrap {
                                     pickRepository.getActivityDetails(
                                         id = (
-                                            if (activity.status == ActivityStatus.NEW && activity.actType == ActivityType.DROP_OFF) activity.prevActivityId
-                                            else activity.actId
-                                            ).toString().also {
-                                            it.logError(
-                                                "Null Activity Id. HomeViewModel(loadHomeData)," +
-                                                    " Order Id-${activity.customerOrderNumber}, User Id-${user.userId}, storeId-${user.selectedStoreId}"
-                                            )
-                                        },
+                                                if (activity.status == ActivityStatus.NEW && activity.actType == ActivityType.DROP_OFF) activity.prevActivityId
+                                                else activity.actId
+                                                ).toString().also {
+                                                it.logError(
+                                                    "Null Activity Id. HomeViewModel(loadHomeData)," +
+                                                            " Order Id-${activity.customerOrderNumber}, User Id-${user.userId}, storeId-${user.selectedStoreId}"
+                                                )
+                                            },
                                         false
                                     )
                                 }
@@ -550,19 +603,27 @@ class HomeViewModel(
                                 when (activityDetail) {
                                     is ApiResult.Success -> {
                                         // Find all unique fulfillment types and convert them to FulfillmentTypeUI
-                                        val allFulfillmentTypes = activityDetail.data.fulfillmentTypes().mapNotNull { it.toFulfillmentTypeUI() }.toSet()
+                                        val allFulfillmentTypes =
+                                            activityDetail.data.fulfillmentTypes()
+                                                .mapNotNull { it.toFulfillmentTypeUI() }.toSet()
                                         Timber.v("[loadHomeData] allFulfillmentTypes=$allFulfillmentTypes")
                                         activityFulfillmentTypes.postValue(allFulfillmentTypes)
 
                                         // FIXME Remove this to just rely on {result.data.activity?.routeVanNumber} when api is fixed not to return null for that field
-                                        val vanNumber = result.data.activity?.routeVanNumber ?: activityDetail.data.itemActivities?.firstOrNull()?.routeVanNumber
+                                        val vanNumber = result.data.activity?.routeVanNumber
+                                            ?: activityDetail.data.itemActivities?.firstOrNull()?.routeVanNumber
 
                                         this@HomeViewModel.vanNumber.postValue(vanNumber)
                                     }
-                                    is ApiResult.Failure -> handleApiError(activityDetail, retryAction = { loadHomeData() })
+
+                                    is ApiResult.Failure -> handleApiError(
+                                        activityDetail,
+                                        retryAction = { loadHomeData() })
                                 }
                             } else {
-                                val fulfillmentTypes = result.data.activity?.fulfillment?.toFulfillmentTypeUI()?.let { setOf(it) } ?: emptySet()
+                                val fulfillmentTypes =
+                                    result.data.activity?.fulfillment?.toFulfillmentTypeUI()
+                                        ?.let { setOf(it) } ?: emptySet()
                                 activityFulfillmentTypes.postValue(fulfillmentTypes)
                                 vanNumber.postValue(result.data.activity?.routeVanNumber)
                             }
@@ -579,7 +640,8 @@ class HomeViewModel(
 
                                 pickRepository.pickList.value?.orderChatDetails?.map {
                                     async {
-                                        val sid = conversationsRepository.getConversationId(it.customerOrderNumber.orEmpty())
+                                        val sid =
+                                            conversationsRepository.getConversationId(it.customerOrderNumber.orEmpty())
                                         if (sid.isNotNullOrEmpty()) {
                                             conversationsRepository.insertOrUpdateConversation(sid)
                                         }
@@ -587,6 +649,7 @@ class HomeViewModel(
                                 }?.awaitAll() ?: run { conversationsRepository.clear() }
                             }
                         }
+
                         is ApiResult.Failure -> handleApiError(result, retryAction = { load() })
                     }.exhaustive
                 }
@@ -608,9 +671,11 @@ class HomeViewModel(
                     stopTimer()
                     loadingState.postValue(HomeLoadingState.End)
                 }
+
                 isAutoInitiated == true && loadingState.value == HomeLoadingState.Initial -> {
                     startTimer { loadingState.postValue(HomeLoadingState.Intermediate) }
                 }
+
                 else -> loadingState.postValue(HomeLoadingState.End)
             }
         } else loadingState.postValue(HomeLoadingState.End)
@@ -668,6 +733,7 @@ class HomeViewModel(
                     is ApiResult.Success -> {
                         navigateToArrivalsScreen()
                     }
+
                     is ApiResult.Failure -> {
                         handle1PlResultFailure(handOffResult) { begin1PlHandOff() }
                     }
@@ -689,6 +755,7 @@ class HomeViewModel(
                         is ApiResult.Success -> {
                             navigateToPickListItems()
                         }
+
                         is ApiResult.Failure -> {
                             if (result is ApiResult.Failure.Server) {
                                 val type = result.error?.errorCode?.resolvedType
@@ -696,9 +763,15 @@ class HomeViewModel(
                                     true -> {
                                         val serverErrorType =
                                             if (type == ServerErrorCode.CANNOT_ASSIGN_COMPLETED_ACTIVITY) CannotAssignToOrderDialogTypes.PICKLIST else CannotAssignToOrderDialogTypes.REGULAR
-                                        serverErrorCannotAssignUser(serverErrorType, isBatchOrder.value == true)
+                                        serverErrorCannotAssignUser(
+                                            serverErrorType,
+                                            isBatchOrder.value == true
+                                        )
                                     }
-                                    else -> handleApiError(result, retryAction = { onPickListCardCtaClicked() })
+
+                                    else -> handleApiError(
+                                        result,
+                                        retryAction = { onPickListCardCtaClicked() })
                                 }
                             } else {
                                 handleApiError(result, retryAction = { onPickListCardCtaClicked() })
@@ -747,7 +820,12 @@ class HomeViewModel(
                                             }
                                         }
                                     }
-                                    imagePreCacher.preCacheImages(imageUrls.mapNotNull { getSizedImageUrl(it, ImageSizePreset.ItemDetails) })
+                                    imagePreCacher.preCacheImages(imageUrls.mapNotNull {
+                                        getSizedImageUrl(
+                                            it,
+                                            ImageSizePreset.ItemDetails
+                                        )
+                                    })
                                 }
                                 if (siteRepository.isDigitizeAgeVerificationEnabled) {
                                     isBlockingUi.wrap {
@@ -758,6 +836,7 @@ class HomeViewModel(
                                     navigateToPickup(detailResult.data)
                                 }
                             }
+
                             is ApiResult.Failure -> {
                                 acuPickLogger.e("onBeginHandoffClicked pickUpActivityDetails: $detailResult")
                                 handleResultFailure(detailResult) { onBeginHandoffClicked() }
@@ -766,6 +845,7 @@ class HomeViewModel(
                             else -> {}
                         }
                     }
+
                     is ApiResult.Failure -> {
                         acuPickLogger.e("onBeginHandoffClicked assignUserToHandOffs: $result")
                         handleResultFailure(result) { onBeginHandoffClicked() }
@@ -784,6 +864,7 @@ class HomeViewModel(
                         if (type == ServerErrorCode.CANNOT_ASSIGN_COMPLETED_ACTIVITY) CannotAssignToOrderDialogTypes.HANDOFF else CannotAssignToOrderDialogTypes.REGULAR
                     serverErrorCannotAssignUser(serverErrorType, isBatchOrder.value == true)
                 }
+
                 else -> handleApiError(result, retryAction = { retryAction() })
             }
         } else {
@@ -791,7 +872,10 @@ class HomeViewModel(
         }
     }
 
-    private fun handle1PlResultFailure(result: ApiResult<List<ActivityDto>>, retryAction: () -> Unit) {
+    private fun handle1PlResultFailure(
+        result: ApiResult<List<ActivityDto>>,
+        retryAction: () -> Unit,
+    ) {
         if (result is ApiResult.Failure.Server) {
             val type = result.error?.errorCode?.resolvedType
             when (type?.cannotAssignToOrder()) {
@@ -800,6 +884,7 @@ class HomeViewModel(
                         if (type == ServerErrorCode.NO_OVER_RIDE_FLAG) CannotAssignToOrderDialogTypes.HANDOFF_REASSIGN else CannotAssignToOrderDialogTypes.REGULAR
                     serverErrorCannotAssignUser(serverErrorType, isBatchOrder.value == true)
                 }
+
                 else -> handleApiError(result, retryAction = { retryAction() })
             }
         } else {
@@ -813,6 +898,7 @@ class HomeViewModel(
                 isSnap.emit(activityDetail.data.isSnap.orFalse())
                 isSubscription.emit(activityDetail.data.isSubscription.orFalse())
             }
+
             is ApiResult.Failure -> {
                 handleApiError(activityDetail, retryAction = { loadHomeData() })
             }
@@ -833,6 +919,7 @@ class HomeViewModel(
                             navigateToPickup(result.data)
                         }
                     }
+
                     is ApiResult.Failure -> handleResultFailure(result) { checkRegulated(result) }
                     else -> {}
                 }
@@ -908,7 +995,8 @@ class HomeViewModel(
                 while (stagingTime > ZonedDateTime.now()) {
                     emit(ChronoUnit.MILLIS.between(stagingTime, ZonedDateTime.now()))
                     delay(80)
-                    timeSinceOrderReleasedMs = System.currentTimeMillis().minus(releaseTime.value?.toInstant()?.toEpochMilli() ?: 0)
+                    timeSinceOrderReleasedMs = System.currentTimeMillis()
+                        .minus(releaseTime.value?.toInstant()?.toEpochMilli() ?: 0)
                 }
                 timerStillActive.postValue(false)
             }.collect {
@@ -920,7 +1008,9 @@ class HomeViewModel(
 
     fun setTimerColor() {
         when {
-            (countdownDurationMs.value ?: 0) < warningTimeMs -> timerColor.postValue(R.color.semiDarkRed)
+            (countdownDurationMs.value
+                ?: 0) < warningTimeMs -> timerColor.postValue(R.color.semiDarkRed)
+
             timeSinceOrderReleasedMs > concernTimeMs -> timerColor.postValue(R.color.semiLightOrange)
             else -> timerColor.postValue(R.color.grey_700)
         }
@@ -944,7 +1034,8 @@ class HomeViewModel(
 
         if (cardData.value?.isWineOrder.orFalse()) {
             cardData.value?.actId?.let {
-                val savedData = wineStagingStateRepo.loadStagingPartOne(cardData.value?.customerOrderNumber.orEmpty())
+                val savedData =
+                    wineStagingStateRepo.loadStagingPartOne(cardData.value?.customerOrderNumber.orEmpty())
                 Timber.d("[saveStagingOne] key2: $savedData")
 
                 val di = when (savedData?.nextActivityId) {
@@ -961,6 +1052,7 @@ class HomeViewModel(
                             )
                         )
                     }
+
                     WineStagingType.WineStaging2 -> {
                         HomeFragmentDirections.actionToWineStaging2Fragment(
                             wineStagingParams = WineStagingParams(
@@ -974,6 +1066,7 @@ class HomeViewModel(
                             )
                         )
                     }
+
                     WineStagingType.WineStaging3 -> {
                         HomeFragmentDirections.actionToWineStaging3Fragment(
                             wineStagingParams = WineStagingParams(
@@ -988,6 +1081,7 @@ class HomeViewModel(
                             boxUiData = savedData.boxInfo?.let { BoxUiData(it) }
                         )
                     }
+
                     else -> { // case when cache is cleared
                         HomeFragmentDirections.actionToWineStagingFragment(
                             wineStagingParams = WineStagingParams(
@@ -1026,7 +1120,8 @@ class HomeViewModel(
                         SelectedActivities(
                             arrayListOf(
                                 activityDto.copy(
-                                    nextActExpStartTime = activityDto.nextActExpStartTime ?: ZonedDateTime.now()
+                                    nextActExpStartTime = activityDto.nextActExpStartTime
+                                        ?: ZonedDateTime.now()
                                 )
                             )
                         )
@@ -1048,7 +1143,7 @@ class HomeViewModel(
         when {
             fulFillmentTypes.contains(FulfillmentTypeUI.DUG) -> R.drawable.ic_handoff_dug
             fulFillmentTypes.contains(FulfillmentTypeUI.ONEPL) ||
-                fulFillmentTypes.contains(FulfillmentTypeUI.THREEPL) -> R.drawable.ic_handoff_3pl
+                    fulFillmentTypes.contains(FulfillmentTypeUI.THREEPL) -> R.drawable.ic_handoff_3pl
 
             else -> null
         }
@@ -1064,7 +1159,10 @@ class HomeViewModel(
         }
     }
 
-    private fun getCustomerTypeDrawable(isCattEnabled: Boolean, customerTypeIcon: CustomerType): Int {
+    private fun getCustomerTypeDrawable(
+        isCattEnabled: Boolean,
+        customerTypeIcon: CustomerType,
+    ): Int {
         return when (customerTypeIcon) {
             CustomerType.SNAP -> if (isCattEnabled.orFalse()) R.drawable.ic_home_ebt_order else R.drawable.ic_home_ebt_order
             CustomerType.SUBSCRIPTION -> R.drawable.ic_home_freshpass_order
@@ -1081,28 +1179,30 @@ class HomeViewModel(
 
         const val AWAIT_TIME_INTERVAL_PRE_PICK = 10000L
 
-        const val FIRST_LAUNCH_INTRO_DIALOG = "FIRST_LAUNCH_INTRO_DIALOG"
+        const val FIRST_LAUNCH_INTRO_DIALOG = "firstLaunchDialog"
     }
 
 
     private fun showFirstLaunchDialog() {
         viewModelScope.launch {
-            /*if (apiCallTimeStamp.isFirstTimeLaunch()) {
+            if (apiCallTimeStamp.isFirstTimeLaunch()) {
                 return@launch
-            }*/
-            val data = CustomDialogArgData(
-                title = StringIdHelper.Raw(""),
-                positiveButtonText = StringIdHelper.Id(R.string.ok),
-                cancelOnTouchOutside = false,
-                dialogType = DialogType.FirstLaunchDialogFragment
+            }
+
+            inlineDialogEvent.postValue(
+                CustomDialogArgDataAndTag(
+                    ONE_TIME_LAUNCH_DIALOG,
+                    FIRST_LAUNCH_INTRO_DIALOG
+                )
             )
-            inlineDialogEvent.postValue(CustomDialogArgDataAndTag(data, FIRST_LAUNCH_INTRO_DIALOG))
         }
     }
-    private fun updateFlagForFirstLaunch() = viewModelScope.launch{
+
+    private fun updateFlagForFirstLaunch() = viewModelScope.launch {
         Timber.e("onGotItClicked [received]")
         apiCallTimeStamp.updateFirstLaunchStatus(true)
     }
+
 }
 
 private fun OrderType?.showTimerPastDue(): Boolean =

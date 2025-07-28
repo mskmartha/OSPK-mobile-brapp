@@ -28,7 +28,6 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
     override fun setupBinding(binding: HomeFragmentBinding) {
         super.setupBinding(binding)
         setupRefresh()
-        callBackListener()
         binding.chatButtonView.setContent {
             ChatIconWithTooltip(onChatClicked = { orderNumber ->
                 fragmentViewModel.onChatClicked(orderNumber)
@@ -44,14 +43,6 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
         }
 
 
-    }
-
-    private fun callBackListener() {
-        parentFragmentManager.setFragmentResultListener("dialog_dismissed", viewLifecycleOwner) { _, bundle ->
-            Timber.e("dialog_dismissed")
-
-            // Handle dismiss here
-        }
     }
 
 

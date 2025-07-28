@@ -1,4 +1,4 @@
-package com.albertsons.acupick.ui.dialog.firstlaunch
+package com.albertsons.acupick.ui.dialog
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

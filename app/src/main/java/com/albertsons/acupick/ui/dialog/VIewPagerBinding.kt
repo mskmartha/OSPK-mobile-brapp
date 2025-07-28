@@ -1,6 +1,5 @@
-package com.albertsons.acupick.ui.dialog.firstlaunch
+package com.albertsons.acupick.ui.dialog
 
-import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import androidx.databinding.BindingAdapter

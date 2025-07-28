@@ -602,6 +602,14 @@ val RELOAD_DILAOG: CustomDialogArgData by lazy {
     )
 }
 
+val ONE_TIME_LAUNCH_DIALOG : CustomDialogArgData by lazy {
+    CustomDialogArgData (
+        title = StringIdHelper.Raw(""),
+        positiveButtonText = StringIdHelper.Id(R.string.ok),
+        cancelOnTouchOutside = false,
+        dialogType = DialogType.FirstLaunchDialogFragment
+    )
+}
 fun getObtainSignatureDialogDialog(isDugOrder: Boolean): CustomDialogArgData {
     return CustomDialogArgData(
         dialogType = DialogType.TitleImageInfo,

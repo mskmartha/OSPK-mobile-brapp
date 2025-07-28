@@ -1,14 +1,11 @@
-package com.albertsons.acupick.ui.dialog.firstlaunch
+package com.albertsons.acupick.ui.dialog
 
 import android.app.Application
 import androidx.annotation.Keep
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.albertsons.acupick.R
-import com.albertsons.acupick.ui.dialog.CloseAction
-import com.albertsons.acupick.ui.dialog.CustomDialogViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -21,7 +18,6 @@ data class OnboardingPage(
 )
 
 class FirstLaunchDialogViewModel(app: Application) : CustomDialogViewModel(app) {
-
 
     val pages = listOf(
         OnboardingPage(
@@ -47,9 +43,7 @@ class FirstLaunchDialogViewModel(app: Application) : CustomDialogViewModel(app) 
     }
 
     fun onGotItClicked() {
-        viewModelScope.launch {
-            Timber.e("onGotItClicked [invoked]")
-            onCloseIconClick()
-        }
+        Timber.e("onGotItClicked [invoked]")
+        onCloseIconClick()
     }
 }

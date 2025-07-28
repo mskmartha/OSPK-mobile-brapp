@@ -4,7 +4,7 @@
     <data>
         <variable
             name="data"
-            type="com.albertsons.acupick.ui.dialog.firstlaunch.OnboardingPage" />
+            type="com.albertsons.acupick.ui.dialog.OnboardingPage" />
     </data>
 
     <LinearLayout

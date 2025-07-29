@@ -1974,4 +1974,7 @@
     <string name="boost_your_handoff_spend_and_up_your_oth5_nbe_the_top_performers_to_win_prize">Boost your handoff spend and up your OTH5.\nBe the top performers to win prize!</string>
     <string name="how_to_win">How to win</string>
     <string name="leaderboard">Leaderboard</string>
+    <string name="hand_off_in_under_5_minutes">Hand off in under 5 minutes</string>
+    <string name="lbl_hand_off_timer_show_case">More on-time handoffs = higher OTH = more points tomorrow!</string>
+    <string name="track_your_progress">Track your progress</string>
 </resources>

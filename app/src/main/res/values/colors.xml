@@ -133,4 +133,6 @@
     <color name="de_stage_spend">#032644</color>
     <color name="waiting_time_spend">#0081C6</color>
     <color name="gold_color">#F9CE50</color>
+    <color name="cta_got_it">#007AFF</color>
+    <color name="bg_transparent">#40000000</color>
 </resources>

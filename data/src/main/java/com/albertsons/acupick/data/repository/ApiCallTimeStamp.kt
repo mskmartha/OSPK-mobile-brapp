@@ -20,6 +20,10 @@ interface GamePointsRepository : Repository {
 
     fun updateFirstLaunchStatus(isOpen:Boolean)
 
+    fun isShowCaseOnTimerDisplayed() : Boolean
+
+    fun updateShowCaseOnTimerDisplayed(isOpen:Boolean)
+
 }
 
 class GamePointsRepositoryImpl(
@@ -74,10 +78,21 @@ class GamePointsRepositoryImpl(
         }
     }
 
+    override fun isShowCaseOnTimerDisplayed(): Boolean {
+        return sharedPreferences.getBoolean(IS_TIMER_SHOW_CASE_ALREADY_DISPLAYED, false)
+    }
+
+    override fun updateShowCaseOnTimerDisplayed(isOpen: Boolean) {
+        sharedPreferences.edit{
+            putBoolean(IS_TIMER_SHOW_CASE_ALREADY_DISPLAYED,isOpen)
+        }
+    }
+
     private companion object {
         const val TOTAL_POINTS = "TOTAL_POINTS"
         const val LAST_TIME_STAMP = "LAST_TIME_STAMP"
         const val IS_FIRST_LAUNCH_DIALOG = "IS_FIRST_LAUNCH_DIALOG"
+        const val IS_TIMER_SHOW_CASE_ALREADY_DISPLAYED = "IS_TIMER_SHOW_CASE_ALREADY_DISPLAYED"
 
     }
 }

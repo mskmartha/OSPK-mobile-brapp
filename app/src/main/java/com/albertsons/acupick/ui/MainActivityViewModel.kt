@@ -31,6 +31,7 @@ import com.albertsons.acupick.data.repository.ApsRepository
 import com.albertsons.acupick.data.repository.ArrivalsRepository
 import com.albertsons.acupick.data.repository.ConversationsClientWrapper
 import com.albertsons.acupick.data.repository.ConversationsRepository
+import com.albertsons.acupick.data.repository.GamePointsRepository
 import com.albertsons.acupick.data.repository.IdRepository
 import com.albertsons.acupick.data.repository.LoginLogoutAnalyticsRepository
 import com.albertsons.acupick.data.repository.MessagesRepository
@@ -48,6 +49,7 @@ import com.albertsons.acupick.ui.bottomsheetdialog.CustomBottomSheetArgData
 import com.albertsons.acupick.ui.dialog.CustomDialogArgData
 import com.albertsons.acupick.ui.dialog.CustomDialogArgDataAndTag
 import com.albertsons.acupick.ui.dialog.closeActionFactory
+import com.albertsons.acupick.ui.dialog.first_launch.ShowCaseEvents
 import com.albertsons.acupick.ui.home.HomeViewModel.Companion.FIRST_LAUNCH_INTRO_DIALOG
 import com.albertsons.acupick.ui.models.AcupickSnackEvent
 import com.albertsons.acupick.ui.models.SnackBarEvent
@@ -98,7 +100,7 @@ class MainActivityViewModel(
     private val pickRepository: PickRepository by inject()
     private val conversationsClient: ConversationsClientWrapper by inject()
     private val tokenizedLdapRepository: TokenizedLdapRepository by inject()
-
+    private val apiCallTimeStamp: GamePointsRepository by inject()
     // data
     val devOptionsEnabled = buildConfigProvider.isDebugOrInternalBuild
     val toolbarTitle: LiveData<String> = MutableLiveData()
@@ -157,6 +159,7 @@ class MainActivityViewModel(
     val updateTimerTime: LiveData<String?> = MutableLiveData()
     val is1Pl: LiveData<Boolean> = MutableLiveData(false)
     val orderNumberFor1PlToSelect = MutableLiveData<Long>()
+    internal val processShowCaseEvents = MutableLiveData<ShowCaseEvents>()
 
     val blockStagingHandleEvent: MutableStateFlow<Boolean> = MutableStateFlow(false)
     fun switchArrivalType() = is1Pl.value.orFalse().not().also { is1Pl.postValue(it) }
@@ -769,6 +772,24 @@ class MainActivityViewModel(
             cancelOnTouchOutside = false
         )
         activityDialogEvent.postValue(CustomDialogArgDataAndTag(data = args, tag = RETRY_ERROR_DIALOG_TAG))
+    }
+
+    private var isShowCaseDisplaying = false
+    fun displayShowCaseOnTimer() {
+        if (apiCallTimeStamp.isShowCaseOnTimerDisplayed()){
+            return
+        }
+        if (isShowCaseDisplaying){
+            return
+        }
+        isShowCaseDisplaying = true
+
+        processShowCaseEvents.postValue(ShowCaseEvents.ShowTimerShowCase)
+    }
+    fun updateFlagForTimerShowCase() = apiCallTimeStamp.updateShowCaseOnTimerDisplayed(true)
+
+    fun displayBottomNavShowCase(){
+        processShowCaseEvents.postValue(ShowCaseEvents.ShowBottomNavShowCase)
     }
 
 

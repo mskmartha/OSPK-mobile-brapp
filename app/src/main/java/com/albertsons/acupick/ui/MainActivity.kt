@@ -50,13 +50,16 @@ import com.albertsons.acupick.databinding.NavHeaderViewBinding
 import com.albertsons.acupick.infrastructure.utils.exhaustive
 import com.albertsons.acupick.ui.MainActivityViewModel.Companion.RETRY_ERROR_DIALOG_TAG
 import com.albertsons.acupick.ui.MainActivityViewModel.Companion.TWILIO_ERROR_DIALOG_TAG
+import com.albertsons.acupick.ui.arrivals.TimerHeaderData
 import com.albertsons.acupick.ui.dialog.BaseCustomDialogFragment
 import com.albertsons.acupick.ui.dialog.CANNOT_CHANGE_STORE_WITH_ACTIVE_PICK_LIST_ARG_DATA
 import com.albertsons.acupick.ui.dialog.CloseAction
 import com.albertsons.acupick.ui.dialog.CloseActionListener
 import com.albertsons.acupick.ui.dialog.CloseActionListenerProvider
 import com.albertsons.acupick.ui.dialog.CustomDialogArgData
-import com.albertsons.acupick.ui.dialog.DialogType
+import com.albertsons.acupick.ui.dialog.first_launch.ShowCaseEvents
+import com.albertsons.acupick.ui.dialog.first_launch.showBottomNavigationShowCase
+import com.albertsons.acupick.ui.dialog.first_launch.showTimerShowCase
 import com.albertsons.acupick.ui.dialog.showWithActivity
 import com.albertsons.acupick.ui.handoff.stepsprogress.ProgressViewConfig
 import com.albertsons.acupick.ui.handoff.stepsprogress.setUp
@@ -101,7 +104,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.component.inject
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 import java.util.Date
@@ -400,6 +402,26 @@ class MainActivity :
                 bottomNav.setupBadge(it)
             }
 
+            activityViewModel.processShowCaseEvents.observe(this@MainActivity){
+                when(it){
+                    ShowCaseEvents.ShowBottomNavShowCase -> {
+                        this@MainActivity.showBottomNavigationShowCase(bottomNavContainer){
+
+                        }
+                    }
+                    ShowCaseEvents.ShowTimerShowCase ->{
+                        this@MainActivity.showTimerShowCase(llTimerContainer){
+                            activityViewModel.updateFlagForTimerShowCase()
+                        }
+
+                    }
+                }.exhaustive
+            }
+            activityViewModel.isStepProgressViewVisible.observe(this@MainActivity){
+                if (it) {
+                    activityViewModel.displayShowCaseOnTimer()
+                }
+            }
             activityViewModel.progressTimer.observe(this@MainActivity){
                 val config = ProgressViewConfig(
                     totalSteps = 5 * 60,
@@ -413,6 +435,7 @@ class MainActivity :
                 )
                 handOffTimer.setUp(config){}
                 handOffTimer.jumpToStep(it?.elapsedTime?.toFloat() ?: 0f)
+
             }
 
 
@@ -486,6 +509,10 @@ class MainActivity :
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         userFeedback.initializeSoundPool()
+    }
+
+    private fun displayShowCaseView() {
+
     }
 
     private fun BottomNavigationView.setupBadge(arrivalsCountDetailsDto: ArrivalsCountDetailsDto?) {

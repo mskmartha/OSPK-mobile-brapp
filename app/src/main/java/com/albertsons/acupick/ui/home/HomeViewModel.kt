@@ -1184,26 +1184,27 @@ class HomeViewModel(
 
 
     private fun showFirstLaunchDialog() {
-        viewModelScope.launch {
-            if (apiCallTimeStamp.isFirstTimeLaunch()) {
-                return@launch
-            }
-
-            inlineDialogEvent.postValue(
-                CustomDialogArgDataAndTag(
-                    ONE_TIME_LAUNCH_DIALOG,
-                    FIRST_LAUNCH_INTRO_DIALOG
-                )
-            )
+        if (apiCallTimeStamp.isFirstTimeLaunch()) {
+            return
         }
+
+        inlineDialogEvent.postValue(
+            CustomDialogArgDataAndTag(
+                ONE_TIME_LAUNCH_DIALOG,
+                FIRST_LAUNCH_INTRO_DIALOG
+            )
+        )
     }
 
     private fun updateFlagForFirstLaunch() = viewModelScope.launch {
         Timber.e("onGotItClicked [received]")
         apiCallTimeStamp.updateFirstLaunchStatus(true)
+        activityViewModel.displayBottomNavShowCase()
     }
 
 }
+
+
 
 private fun OrderType?.showTimerPastDue(): Boolean =
     this == OrderType.FLASH || this == OrderType.FLASH3P
